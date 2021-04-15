@@ -23,3 +23,5 @@ composer create-project --prefer-dist cakephp/app:~3.8 cakeapp
 - git clone https://github.com/comee-system/bridge.git
 - git pull origin main
 
+## migrate の実行
+`C:\xampp3\htdocs\bridge\bridge\cakeapp\bin>cake migrations migrate`
