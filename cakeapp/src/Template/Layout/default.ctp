@@ -13,28 +13,33 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  * @var \App\View\AppView $this
  */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
+  <?= $this->Html->charset() ?>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 3 | <?= $this->fetch('title') ?></title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
+  <!-- Font Awesome -->
+  <?= $this->Html->css('//pro.fontawesome.com/releases/v5.10.0/css/all.css') ?>
+  <!-- Ionicons -->
+  <?= $this->Html->css('//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css') ?>
+  <!-- icheck bootstrap -->
+  <?= $this->Html->css('//cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css') ?>
+  <!-- Theme style -->
+  <?= $this->Html->css('/css/bootstrap.min.css') ?>
+  <?= $this->Html->css('/css/basic.css') ?>
+  <!-- Google Font: Source Sans Pro -->
+  <?= $this->Html->css('//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700') ?>
 
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
 </head>
-<body>
+
+<body >
+<!--
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
@@ -48,11 +53,19 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </ul>
         </div>
     </nav>
+-->
     <?= $this->Flash->render() ?>
-    <div class="container clearfix">
         <?= $this->fetch('content') ?>
-    </div>
-    <footer>
-    </footer>
+
+<!-- jQuery -->
+<?= $this->Html->script('//code.jquery.com/jquery-3.5.1.min.js') ?>
+<!-- Bootstrap 4 -->
+<?= $this->Html->script('/js/bootstrap.bundle.min.js') ?>
+<?= $this->Html->script('/js/feather.min.js') ?>
+<?= $this->Html->script('/js/Chart.min.js') ?>
+<?= $this->Html->script('/js/dashboard.js') ?>
+
+
+
 </body>
 </html>
