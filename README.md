@@ -24,7 +24,12 @@ composer create-project --prefer-dist cakephp/app:~3.8 cakeapp
 - git pull origin main
 
 ## migrate の実行
+### ローカル
 `C:\xampp3\htdocs\bridge\bridge\cakeapp\bin>cake migrations migrate`
-
+### サーバー
+`php cake.php migrations migrate`
 ## bakeの実行
+### ローカル
 `C:\xampp3\htdocs\bridge\bridge\cakeapp\bin>cake bake All テーブル名`
+### server
+`php cake.php bake All テーブル名`
