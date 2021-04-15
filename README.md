@@ -25,3 +25,6 @@ composer create-project --prefer-dist cakephp/app:~3.8 cakeapp
 
 ## migrate の実行
 `C:\xampp3\htdocs\bridge\bridge\cakeapp\bin>cake migrations migrate`
+
+## bakeの実行
+`C:\xampp3\htdocs\bridge\bridge\cakeapp\bin>cake bake All テーブル名`
