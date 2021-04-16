@@ -44,7 +44,9 @@ use Cake\Routing\Route\DashedRoute;
  *
  */
 Router::defaultRouteClass(DashedRoute::class);
-
+Router::prefix('admin', function (RouteBuilder $routes) {
+    $routes->fallbacks(DashedRoute::class);
+});
 Router::scope('/', function (RouteBuilder $routes) {
     // Register scoped middleware for in scopes.
     $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware([
@@ -56,6 +58,8 @@ Router::scope('/', function (RouteBuilder $routes) {
      * Requires middleware to be registered through `Application::routes()` with `registerMiddleware()`
      */
     $routes->applyMiddleware('csrf');
+
+
 
     /*
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
