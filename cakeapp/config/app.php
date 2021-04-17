@@ -275,7 +275,7 @@ return [
              */
             'username' => 'coa-bridge123',
             'password' => 'zp37dRJQ',
-            'database' => 'bridge',
+            'database' => 'coa-bridge123_bridge',
             /*
              * You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
              */
