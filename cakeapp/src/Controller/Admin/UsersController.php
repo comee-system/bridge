@@ -13,6 +13,13 @@ use App\Controller\Admin\AppController;
 class UsersController extends AppController
 {
 
+    public function initialize()
+    {
+      parent::initialize();
+      //レイアウトの指定
+      $this->viewBuilder()->setLayout('Admin/default');
+    }
+
     /**
      * Index method
      *

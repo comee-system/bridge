@@ -1,6 +1,7 @@
 # bridge
 ## TEST123
 
+
 ## プロジェクトの作成
 ### intlの有効化
 php.iniを開き、有効化すればインストールが可能になる。
@@ -33,3 +34,28 @@ composer create-project --prefer-dist cakephp/app:~3.8 cakeapp
 `C:\xampp3\htdocs\bridge\bridge\cakeapp\bin>cake bake All テーブル名`
 ### server
 `php cake.php bake All テーブル名`
+
+
+
+## sassの導入
+- rubyがインストールされている必要があります
+`ruby -v`
+  - バージョンが指定されればinstall済み
+  - 入ってなければinstall `https://rubyinstaller.org/`
+
+### パワーシェルでinstall
+`gem install sass`
+- バージョンの確認
+`sass -v`
+
+
+- 「sass_folder」というディレクトリを作って、そのの中にbase.scssというsassファイルを用意
+ ***PS C:\xampp3\htdocs\bridge\bridge\cakeapp\webroot\sass_folder***
+
+### コンパイルコマンド
+`` PS C:\xampp3\htdocs\bridge\bridge\cakeapp\webroot\sass_folder> sass base.sass:../css/base.css ``
+- cssフォルダにbase.cssが作成されます
+
+- 毎回コマンドを打つのが手間なのでwatchコマンドを利用
+
+`` PS C:\xampp3\htdocs\bridge\bridge\cakeapp\webroot\sass_folder> sass --watch base.scss:../css/base.css ``
