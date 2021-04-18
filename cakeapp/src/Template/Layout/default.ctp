@@ -34,7 +34,9 @@
 
   <nav id="nav01">
     <div class="container navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand mr-auto" href="index.html"><img src="img/bridge.gif" alt="サイト名" height="50"></a>
+      <a class="navbar-brand mr-auto" href="index.html">
+          <img src="img/bridge.gif" alt="サイト名" class="logo">
+        </a>
       <ul class="nav mr-3 align-self-lg-end justify-content-lg-end d-none d-lg-flex">
         <li class="nav-item"><a href="#" class="nav-link p-2"><i class="fa fa-chevron-right mr-1 small"></i>LINK01</a></li>
         <li class="nav-item"><a href="#" class="nav-link p-2"><i class="fa fa-chevron-right mr-1 small"></i>LINK02</a></li>

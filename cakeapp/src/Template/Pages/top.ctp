@@ -34,8 +34,8 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 <!----------------------------------------------->
   <div class="container">
     <div class="jumbotron_top mt-4">
-        <div class="toptext mt-3">
-            <h1 class="display-4 font-weight-bold text-white text-shadow">Hello World</h1>
+        <div class="toptext mt-md-3">
+            <h1 class="font-weight-bold text-white text-shadow">Hello World</h1>
             <p class="text-white text-shadow font-weight-bold  title">注目のコンテンツや情報に特別な注意を喚起するためのシンプルなコンポーネント。</p>
             <div class="text-right mt-3">
             <a class="btn btn-warning btn-lg text-white font-weight-bold" href="#" role="button">まずは無料登録</a>
