@@ -40,9 +40,8 @@
 </head>
 
 <body >
-    <?= $this->Flash->render() ?>
-        <?= $this->fetch('content') ?>
 
+<?= $this->fetch('content') ?>
 <!-- jQuery -->
 <?= $this->Html->script('//code.jquery.com/jquery-3.5.1.min.js') ?>
 <!-- Bootstrap 4 -->
