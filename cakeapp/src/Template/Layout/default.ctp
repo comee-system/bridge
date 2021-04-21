@@ -23,8 +23,8 @@
 <!-- スタイルシートはここから -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-<link rel="stylesheet" href="css/top.css">
-<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="/css/top.css">
+<link rel="stylesheet" href="/css/base.css">
 <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap" rel="stylesheet">
 </head>
 
@@ -35,14 +35,14 @@
   <nav id="nav01">
     <div class="container navbar navbar-expand-lg navbar-light">
       <a class="navbar-brand mr-auto" href="index.html">
-          <img src="img/bridge.gif" alt="サイト名" class="logo">
+          <img src="/img/bridge.gif" alt="サイト名" class="logo">
         </a>
       <ul class="nav mr-3 align-self-lg-end justify-content-lg-end d-none d-lg-flex">
         <li class="nav-item"><a href="#" class="nav-link p-2"><i class="fa fa-chevron-right mr-1 small"></i>LINK01</a></li>
         <li class="nav-item"><a href="#" class="nav-link p-2"><i class="fa fa-chevron-right mr-1 small"></i>LINK02</a></li>
       </ul>
 
-      <a href="contact/index.html" class="btn btn-warning mr-1  d-lg-inline-block text-white">会員登録<br />はこちら</a>
+      <a href="users/add" class="btn btn-warning mr-1  d-lg-inline-block text-white">会員登録<br />はこちら</a>
       <a href="contact/index.html" class="btn btn-primary  d-lg-inline-block">ログイン<br>はこちら</a>
 
     </div>
