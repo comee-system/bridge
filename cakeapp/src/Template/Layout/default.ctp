@@ -44,14 +44,10 @@
 
       <a href="users/add" class="btn btn-warning mr-1  d-lg-inline-block text-white">会員登録<br />はこちら</a>
       <a href="contact/index.html" class="btn btn-primary  d-lg-inline-block">ログイン<br>はこちら</a>
-
     </div>
   </nav><!-- /# nav01 -->
 
-
 </header>
-
-
 
 <?= $this->Flash->render() ?>
 <?= $this->fetch('content') ?>
@@ -84,8 +80,6 @@
           </ul>
         </li>
       </ul>
-
-
 
     </div><!-- /.footer-index -->
 
