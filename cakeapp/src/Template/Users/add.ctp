@@ -10,16 +10,20 @@
   <div class="container">
     <h3>会員登録</h3>
     <section class="mb-5">
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation">
             <div class="row">
-               <div class="col-sm">
-                   <input type="text" name="name">
-
-               </div>
-               <div class="col-sm">bbb</div>
-               <div class="col-sm">ccc</div>
+                <div class="col-sm mb-3">
+                    <div><?=__("氏名")?></div><div><?=__("必須")?></div>
+                </div>
+                <div class="col-sm mb-3">
+                    <label for="firstName">氏名</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                </div>
+                <div class="col-sm mb-3">
+                    <label for="lastName">名前</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                </div>
             </div>
-
         </form>
       <!-- <div class="d-flex flex-column flex-lg-row border border-primary rounded">
         <p class="text-center text-white bg-primary py-2 px-4 mb-0 align-self-stretch">お知らせ</p>
