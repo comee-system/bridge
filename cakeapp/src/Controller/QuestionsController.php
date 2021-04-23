@@ -33,7 +33,7 @@ class QuestionsController extends AppController
 
     public function mailSend(){
         $this->autoRender = false;
-      //  $this->mailsend->sends();
+        $this->mailsend->sends();
         $this->mailsend->regists();
     }
     /**

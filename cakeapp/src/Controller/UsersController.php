@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Core\Configure;
 /**
  * Users Controller
  *
@@ -12,7 +12,11 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
-
+    public function initialize(){
+        
+        $array_job = Configure::read("array_job");
+        $this->set('array_job', $array_job);
+    }
     /**
      * Index method
      *
@@ -74,6 +78,7 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
+        
         $this->set(compact('user'));
     }
 
