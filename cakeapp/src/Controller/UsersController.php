@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Core\Configure;
+use Cake\Event\Event;
 /**
  * Users Controller
  *
@@ -12,11 +13,13 @@ use Cake\Core\Configure;
  */
 class UsersController extends AppController
 {
-    public function initialize()
+    public function beforeFilter(Event $event)
     {
-
+        parent::beforeFilter($event);
         $array_job = Configure::read("array_job");
         $this->set('array_job', $array_job);
+
+        $this->Auth->allow(['add', 'view', 'display']);
     }
     /**
      * Index method

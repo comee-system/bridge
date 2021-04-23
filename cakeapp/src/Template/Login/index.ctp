@@ -6,15 +6,39 @@
 ?>
 <main>
   <div class="container">
-  <?=$this->Form->create($member, [
-    'type' => 'post',
-    'url' => ['controller' => 'login', 'action' => 'index'],
-  ]);?>
-    <input type="text" name="username" value="" />
-    <input type="text" name="password" value="" />
+    <section class="m-5">
+        <div class="col-md-6 mx-auto">
+            <?=$this->Form->create($member, [
+                'type' => 'post',
+                'url' => ['controller' => 'login', 'action' => 'index'],
+            ]);?>
 
+            <div class="row">
+                <?=$this->Form->input( "email", [ "type" => "text",
+                    "label" => "メールアドレス",
+                    "placeholder"=>"メールアドレスを入力してください",
+                    "class"=>"form-control"
+                ] );
+                ?>
+            </div>
+            <div class="row mt-3">
+                <?=$this->Form->input( "password", [ "type" => "text",
+                    "label" => "パスワード",
+                    "placeholder"=>"パスワードを入力してください",
+                    "class"=>"form-control"
+                ] );
+                ?>
 
-    <?=$this->Form->submit();?>
-  <?=$this->Form->end()?>
+            </div>
+            <div class="row mt-3">
+                <?=$this->Form->input("ログイン",[
+                    "type"=>"submit",
+                    "value"=>"on",
+                    'class'=>"btn btn-primary"
+                ]);?>
+            </div>
+            <?=$this->Form->end()?>
+        </div>
+    </section>
   </div>
 </main>
