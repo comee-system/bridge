@@ -201,3 +201,6 @@ Type::build('timestamp')
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
+
+// 業種の配列
+Configure::write("array_job", ["1"=>"不動産業","2"=>"飲食業"]);
