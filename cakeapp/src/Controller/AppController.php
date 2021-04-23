@@ -54,7 +54,7 @@ class AppController extends Controller
                 'action' => 'index'
             ],
             'logoutRedirect' => [
-                'controller' => 'Login',
+                'controller' => 'login',
                 'action' => 'index'
             ],
 
@@ -62,14 +62,12 @@ class AppController extends Controller
                 'Form' => [
                   'userModel' => 'Users',
                   'fields' => [
-                    'username' => 'username',
+                    'username' => 'email',
                     'password' => 'password'
                   ]
                 ]
             ],
-
         ]);
-
 
         /*
          * Enable the following component for recommended CakePHP security settings.
@@ -79,6 +77,7 @@ class AppController extends Controller
     }
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['login','top','index','add']);
+      //  $this->Auth->allow(['login','top','index','add']);
+//        $this->Auth->allow(['add']);
     }
 }
