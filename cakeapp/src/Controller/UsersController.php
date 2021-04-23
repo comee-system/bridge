@@ -75,8 +75,20 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+
+            $user->post = sprintf("%s-%s"
+                ,$this->request->getData('post1')
+                ,$this->request->getData('post2')
+            );
+
+            $user->tel = sprintf("%s-%s-%s"
+                ,$this->request->getData('tel1')
+                ,$this->request->getData('tel2')
+                ,$this->request->getData('tel3')
+            );
+
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('会員登録が完了しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -84,6 +96,25 @@ class UsersController extends AppController
         }
 
         $this->set(compact('user'));
+
+        $this->set('sei', $this->request->getData('sei'));
+        $this->set('mei', $this->request->getData('mei'));
+        $this->set('sei_kana', $this->request->getData('sei_kana'));
+        $this->set('mei_kana', $this->request->getData('mei_kana'));
+        $this->set('company', $this->request->getData('company'));
+        $this->set('post1', $this->request->getData('post1'));
+        $this->set('post2', $this->request->getData('post2'));
+        $this->set('prefecture', $this->request->getData('prefecture'));
+        $this->set('city', $this->request->getData('city'));
+        $this->set('space', $this->request->getData('space'));
+        $this->set('build', $this->request->getData('build'));
+        $this->set('busyo', $this->request->getData('busyo'));
+        $this->set('tel1', $this->request->getData('tel1'));
+        $this->set('tel2', $this->request->getData('tel2'));
+        $this->set('tel3', $this->request->getData('tel3'));
+        $this->set('email', $this->request->getData('email'));
+        $this->set('password', $this->request->getData('password'));
+
     }
 
     /**

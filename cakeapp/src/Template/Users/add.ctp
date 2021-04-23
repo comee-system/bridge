@@ -6,14 +6,16 @@
 </nav>
 
 <main>
-
   <div class="container">
-    <h3>会員登録</h3>
+    <div class="alert alert-dark" role="alert">
+        <h5>会員登録</h5>
+    </div>
     <section class="mb-5">
+    <?= $this->Flash->render() ?>
         <?= $this->Form->create(null, [
             'type'=>'post',
-            'url'=>['controller'=>'Users',
-            'action'=>'index'
+            'url'=>['controller'=>'users',
+            'action'=>'add'
         ]]) ?>
 
             <div class="row col-md-10">
@@ -26,12 +28,11 @@
                 </div>
                 <div class="col-md-4 form-inline">
                         <label><?=__("姓")?>　</label>
-                        <input type="text" name="sei" value="<?=h($sei)?>"  class="form-control" />
+                        <input type="text" name="sei" value="<?=$sei?>"  class="form-control" placeholder="姓を入力してください" />
                 </div>
                 <div class="col-md-4 form-inline">
                     <label><?=__("名")?>　</label>
-                    <input type="text" name="mei" value="<?=h($mei)?>" class="form-control" />
-
+                    <input type="text" name="mei" value="<?=$mei?>" class="form-control" placeholder="名を入力してください" />
                 </div>
             </div>
             <div class="row col-md-10 mt-3">
@@ -43,12 +44,12 @@
                     </span>
                 </div>
                 <div class="col-md-4 form-inline">
-                        <label><?=__("せい")?></label>
-                        <input type="text" name="sei_kana" value="sei_kana" class="form-control" />
+                        <label><?=__("せい")?>　</label>
+                        <input type="text" name="sei_kana" value="<?=$sei_kana?>" class="form-control" placeholder="せいを入力してください" />
                 </div>
                 <div class="col-md-4 form-inline">
-                    <label><?=__("めい")?></label>
-                    <input type="text" name="mei_kana" value="mei_kana" class="form-control" />
+                    <label><?=__("めい")?>　</label>
+                    <input type="text" name="mei_kana" value="<?=$mei_kana?>" class="form-control" placeholder="めいを入力してください" />
 
                 </div>
             </div>
@@ -61,7 +62,7 @@
                     </span>
                 </div>
                 <div class="col-md-6">
-                    <input type="text" name="company" value="company" class="form-control" />
+                    <input type="text" name="company" value="<?=$company?>" class="form-control" placeholder="企業名を入力してください" />
                 </div>
             </div>
             <div class="row col-md-10 mt-3">
@@ -73,7 +74,7 @@
                     </span>
                 </div>
                 <div class="col-md-7">
-                    <select class="form-control" id="exampleFormControlSelect1">
+                    <select class="form-control" name="job">
                         <option value="0" >業種を選択してください</option>
                     <?php foreach($array_job as $key=>$value ):  ?>
                         <option value="<?=$key?>"><?=h($value)?></option>
@@ -89,25 +90,32 @@
                         <?=__("必須")?>
                     </span>
                 </div>
-                <div class="col-md-4 form-inline">
-                        <label><?=__("郵便番号")?></label>
-                        <input type="text" name="post" value="" class="form-control" />
+                <div class="col-md-9 ">
+                    <div class="row">
+                        <div class="col-md-12 form-inline">
+                            <label><?=__("郵便番号")?></label>
+                            <input type="text" name="post1" value="<?=$post?>" class="form-control " size=3 maxlength=3 placeholder="000" />
+                        　-　
+                            <input type="text" name="post2" value="<?=$post?>" class="form-control" size=4 maxlength=4 placeholder="0000"
+                            onKeyUp="AjaxZip3.zip2addr('post1','post2','prefecture','city','city');" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mt-2"><?=__("都道府県")?>
+                            <input type="text" name="prefecture" value="<?=$prefecture?>" class="form-control" placeholder="都道府県を入力してください" />
+                        </div>
+                        <div class="col-md-12 mt-2"><?=__("市区町村")?>
+                            <input type="text" name="city" value="<?=$city?>" class="form-control" placeholder="市区町村を入力してください" />
+                        </div>
+                        <div class="col-md-12 mt-2"><?=__("番地")?>
+                            <input type="text" name="space" value="<?=$space?>" class="form-control" placeholder="番地を入力してください" />
+                        </div>
+                        <div class="col-md-12 mt-2"><?=__("ビル・マンション名")?>
+                            <input type="text" name="build" value="<?=$build?>" class="form-control" placeholder="ビル・マンション名を入力してください" />
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 form-inline">
-                    <input type="text" name="post" value="" class="form-control" />
-                </div>
-            </div>
-            <div class="col-md-4"><?=__("都道府県")?>
-                <input type="text" name="prefecture" value="" class="form-control" />
-            </div>
-            <div class="col-md-4 pull-right"><?=__("市区町村")?>
-                <input type="text" name="city" value="" class="form-control" />
-            </div>
-            <div class="col-md-4"><?=__("番地")?>
-                <input type="text" name="space" value="" class="form-control" />
-            </div>
-            <div class="col-md-4 pull-right"><?=__("ビル・マンション名")?>
-                <input type="text" name="build" value="" class="form-control" />
             </div>
             <div class="row col-md-10 mt-3">
                 <div class="col-md-2"><?=__("担当部署")?>
@@ -118,7 +126,7 @@
                     </span>
                 </div>
                 <div class="col-md-6">
-                    <input type="text" name="busho" value="" class="form-control" />
+                    <input type="text" name="busyo" value="<?=$busyo?>" class="form-control" placeholder="担当部署を入力してください" />
                 </div>
             </div>
             <div class="row col-md-10 mt-3">
@@ -129,14 +137,10 @@
                         <?=__("必須")?>
                     </span>
                 </div>
-                <div class="col-md-2 form-inline">
-                        <input type="text" name="tel" value="" class="form-control" />
-                </div>
-                <div class="col-md-2 form-inline">
-                    <input type="text" name="tel" value="" class="form-control" />
-                </div>
-                <div class="col-md-2 form-inline">
-                    <input type="text" name="tel" value="" class="form-control" />
+                <div class="col-md-9 form-inline ">
+                    <input type="text" name="tel1" value="<?=$tel?>" size=3 maxlength=3 class="form-control" placeholder="000" />　-　
+                    <input type="text" name="tel2" value="<?=$tel?>" size=4 maxlength=4 class="form-control" placeholder="0000" />　-　
+                    <input type="text" name="tel3" value="<?=$tel?>" size=4 maxlength=4 class="form-control" placeholder="0000" />
                 </div>
             </div>
             <div class="row col-md-10 mt-3">
@@ -147,13 +151,12 @@
                         <?=__("必須")?>
                     </span>
                 </div>
-                <div class="col-md-6">
-                    <input type="text" name="email" value="email" class="form-control" />
+                <div class="col-md-9">
+                    <input type="text" name="email" value="<?=$email?>" class="form-control" placeholder="メールアドレスを入力してください" />
+                    <div class="alert alert-secondary text-left col-md-12 mt-3" role="alert">
+                    受信拒否をしている場合、本人登録用のURLが届かないため、<br />（info@coa-bridge.jp）からの受信ができるように設定してください。
+                    </div>
                 </div>
-            </div>
-            <div class="row col-md-10 mt-3">
-                <p class="col-md-6 text-center">受信拒否をしている場合、本人登録用のURLが届かないため、<br />（info@coa-bridge.jp）からの受信ができるように設定してください。
-                </p>
             </div>
             <div class="row col-md-10 mt-3">
                 <div class="col-md-2"><?=__("パスワード")?>
@@ -163,15 +166,28 @@
                         <?=__("必須")?>
                     </span>
                 </div>
-                <div class="col-md-6">
-                    <input type="text" name="email" value="email" class="form-control" />
+                <div class="col-md-9">
+                    <input type="password" name="password" value="<?=$password?>" class="form-control" placeholder="パスワードを入力してください" />
+                    <div class="alert alert-secondary col-md-12 mt-3" role="alert">
+                        <p class="text-left">下記の条件でパスワードを作成してください。</p>
+                        <ul class="text-left">
+                            <li>8文字以上</li>
+                            <li>半角英数を含む</li>
+                            <li>半角英字を含む</li>
+                        </ul>
+                    </div>
+                    <div class="alert alert-danger col-md-12 form-control text-center" role="alert">
+                        <input type="checkbox" class="" >
+                        <a href="http//google.com" target=_blank class="alert-link ">登録時の規約</a>
+                        に同意する
+                    </div>
+                    <div class="text-center">
+                        <?= $this->Form->submit("登録する",[
+                            'class'=>'btn btn-warning text-white'
+                        ])?>
+                    </div>
                 </div>
             </div>
-
-
-
-            <?= $this->Form->submit("登録する") ?>
-
 
         <?= $this->Form->end(); ?>
     </section>
