@@ -37,13 +37,10 @@
       <a class="navbar-brand mr-auto" href="index.html">
           <img src="/img/bridge.gif" alt="サイト名" class="logo">
         </a>
-      <ul class="nav mr-3 align-self-lg-end justify-content-lg-end d-none d-lg-flex">
-        <li class="nav-item"><a href="#" class="nav-link p-2"><i class="fa fa-chevron-right mr-1 small"></i>LINK01</a></li>
-        <li class="nav-item"><a href="#" class="nav-link p-2"><i class="fa fa-chevron-right mr-1 small"></i>LINK02</a></li>
-      </ul>
+
 
       <a href="users/add" class="btn btn-warning mr-1  d-lg-inline-block text-white">会員登録<br />はこちら</a>
-      <a href="contact/index.html" class="btn btn-primary  d-lg-inline-block">ログイン<br>はこちら</a>
+      <a href="/login" class="btn btn-primary  d-lg-inline-block">ログイン<br>はこちら</a>
     </div>
   </nav><!-- /# nav01 -->
 
