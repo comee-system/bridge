@@ -12,8 +12,9 @@ use Cake\Core\Configure;
  */
 class UsersController extends AppController
 {
-    public function initialize(){
-        
+    public function initialize()
+    {
+
         $array_job = Configure::read("array_job");
         $this->set('array_job', $array_job);
     }
@@ -78,7 +79,7 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        
+
         $this->set(compact('user'));
     }
 
