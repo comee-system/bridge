@@ -208,11 +208,11 @@ Configure::write("array_job", ["1"=>"不動産業","2"=>"飲食業"]);
 //管理者用メールアドレス
 define("D_ADMIN_MAIL","info@coa-bridge.jp");
 //トップページURL
-define("D_HOME_URL","https://www.coa-bridge.jp");
+define("D_HOME_URL","http://dev123.tank.jp");
 define("D_SIGN","
 【発行元】
 Bridge（ブリッジ）
-公式ホームページ https://www.coa-bridge.jp/
+公式ホームページ http://dev123.tank.jp
 ");
 
 //お問い合わせフォームリンク
