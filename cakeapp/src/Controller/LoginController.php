@@ -99,7 +99,7 @@ class LoginController extends AppController
                 $repasswords = $this->repasswords->patchEntity($repasswords, $this->request->getData(),['validate'=>'PasswordEdit']);
 
                 if(!$repasswords->errors()) {
-                    $set['password'] = $this->pwd->_setPassword($this->request->getData('password'));
+                    $set['password'] = $this->request->getData('password');
                     $users = $this->Users->get($user->users_id, [
                         'contain' => [],
                     ]);
@@ -112,7 +112,7 @@ class LoginController extends AppController
                     $set = [];
                     $set[ 'status' ] = 0;
                     $repassword = $this->Users->patchEntity($user, $set);
-                    $this->repasswords->save($repassword);
+                    $this->Users->save($repassword);
                     $this->render('/Login/editComplete');
                 }else{
                     $errorpassword = (!empty($repasswords->errors()[ 'password' ]))?$repasswords->errors()[ 'password' ]:[];
