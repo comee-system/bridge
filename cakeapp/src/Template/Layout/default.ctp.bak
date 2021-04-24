@@ -34,7 +34,7 @@
 
   <nav id="nav01">
     <div class="container navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand mr-auto" href="/">
+      <a class="navbar-brand mr-auto" href="index.html">
           <img src="/img/bridge.gif" alt="サイト名" class="logo">
         </a>
 
@@ -46,6 +46,10 @@
 
 </header>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 <?= $this->fetch('content') ?>
 
 

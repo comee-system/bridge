@@ -98,7 +98,7 @@ if (Configure::read('debug')) {
  * Set the default server timezone. Using UTC makes time calculations / conversions easier.
  * Check http://php.net/manual/en/timezones.php for list of valid timezone strings.
  */
-date_default_timezone_set(Configure::read('App.defaultTimezone'));
+date_default_timezone_set('Asia/Tokyo');
 
 /*
  * Configure the mbstring extension to use the correct encoding.
@@ -204,3 +204,18 @@ Type::build('timestamp')
 
 // 業種の配列
 Configure::write("array_job", ["1"=>"不動産業","2"=>"飲食業"]);
+
+//管理者用メールアドレス
+define("D_ADMIN_MAIL","info@coa-bridge.jp");
+//トップページURL
+define("D_HOME_URL","https://www.coa-bridge.jp");
+define("D_SIGN","
+【発行元】
+Bridge（ブリッジ）
+公式ホームページ https://www.coa-bridge.jp/
+");
+
+//お問い合わせフォームリンク
+define("D_LINK_QUESTION", "/login/question/");
+//パスワード再設定
+define("D_LINK_REPASSWORD", "/login/password/");

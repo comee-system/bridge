@@ -5,7 +5,7 @@
  * @var string $message
  */
 if (!isset($params['escape']) || $params['escape'] !== false) {
-    $message = h($message);
+    $message = nl2br($message);
 }
 ?>
 <div class="row">

@@ -38,7 +38,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
             <h1 class="font-weight-bold text-white text-shadow">Hello World</h1>
             <p class="text-white text-shadow font-weight-bold  title">注目のコンテンツや情報に特別な注意を喚起するためのシンプルなコンポーネント。</p>
             <div class="text-right mt-3">
-            <a class="btn btn-warning btn-lg text-white font-weight-bold" href="#" role="button">まずは無料登録</a>
+            <a class="btn btn-warning btn-lg text-white font-weight-bold" href="/users/add" role="button">まずは無料登録</a>
             </div>
         </div>
       <video src="img/sample.mp4" autoplay loop muted>
@@ -61,7 +61,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
       <h2 class="text-center mb-3"><i class="fas fa-graduation-cap mr-3"></i>SERVICE</h2>
       <div class="text-center">
         <p>テストテストテスト</p>
-        <a class="btn btn-warning btn-lg py-3 px-5 text-white font-weight-bold" href="#" role="button">まずは無料登録</a>
+        <a class="btn btn-warning btn-lg py-3 px-5 text-white font-weight-bold" href="/users/add" role="button">まずは無料登録</a>
       </div>
     </div>
   </section>
