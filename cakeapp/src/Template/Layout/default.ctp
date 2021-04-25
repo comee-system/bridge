@@ -39,7 +39,17 @@
         </a>
 
     <?php if ($logindata): ?>
-
+        <?= $this->Html->link(
+            '<i class="fas fa-male mr-2"></i>マイページ',
+            '/mypage/',
+            ['class'=>'btn btn-success mr-1  d-lg-inline-block text-white',
+            'escape'=>false
+            ]) ?>
+        <?= $this->Html->link(
+            'ログアウト',
+            '/users/logout',
+            ['class'=>'btn btn-danger  d-lg-inline-block',
+            ]) ?>
     <?php else: ?>
         <?= $this->Html->link(
             '会員登録<br />はこちら',

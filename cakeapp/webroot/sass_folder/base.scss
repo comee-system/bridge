@@ -1,19 +1,27 @@
 .title {
     font-size: calc(1.525rem + 0.3vw);
-  }
+}
 img{
     &.logo{
         height:50px;
     }
 }
-  @media (max-width: 980px) {
+a.linkblock{
+    width:100%;
+    text-decoration: none;
+    display:block;
+    &:hover{
+        color:#cc0000;
+    }
+}
+
+@media (max-width: 980px) {
     .title {
-      font-size: 0.85rem;
+        font-size: 0.85rem;
     }
     img{
         &.logo{
             height:30px;
         }
     }
-
-  }
+}
