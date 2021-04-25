@@ -76,6 +76,9 @@ class AppController extends Controller
     }
     public function beforeFilter(Event $event)
     {
+        //ログインチェック
+        $logindata = $this->Auth->identify();
+        $this->set('logindata', $logindata);
       //  $this->Auth->allow(['login','top','index','add']);
 //        $this->Auth->allow(['add']);
     }

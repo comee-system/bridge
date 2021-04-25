@@ -38,9 +38,22 @@
           <img src="/img/bridge.gif" alt="サイト名" class="logo">
         </a>
 
+    <?php if ($logindata): ?>
 
-      <a href="users/add" class="btn btn-warning mr-1  d-lg-inline-block text-white">会員登録<br />はこちら</a>
-      <a href="/login" class="btn btn-primary  d-lg-inline-block">ログイン<br>はこちら</a>
+    <?php else: ?>
+        <?= $this->Html->link(
+            '会員登録<br />はこちら',
+            '/users/add',
+            ['class'=>'btn btn-warning mr-1  d-lg-inline-block text-white',
+            'escape'=>false
+            ]) ?>
+        <?= $this->Html->link(
+            'ログイン<br />はこちら',
+            '/login',
+            ['class'=>'btn btn-primary  d-lg-inline-block',
+            'escape'=>false
+            ]) ?>
+    <?php endif; ?>
     </div>
   </nav><!-- /# nav01 -->
 
