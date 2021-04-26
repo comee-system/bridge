@@ -87,17 +87,24 @@ class UsersTable extends Table
             ->notEmptyString('company', '企業名を入力してください');
 
         $validator
-            ->scalar('post')
-            ->maxLength('post', 7)
-            ->requirePresence('post', 'create')
-            ->notEmptyString('post', '郵便番号を入力してください')
-            ->integer('post', '数字で入力してください');
+            ->scalar('post1')
+            ->maxLength('post1', 7)
+            ->requirePresence('post1', 'create')
+            ->notEmptyString('post1', '郵便番号を入力してください')
+            ->integer('post1', '数字で入力してください');
 
         $validator
-            ->scalar('prefecture')
-            ->maxLength('prefecture', 255)
-            ->requirePresence('prefecture', 'create')
-            ->notEmptyString('prefecture', '都道府県を入力してください');
+            ->scalar('post2')
+            ->maxLength('post2', 7)
+            ->requirePresence('post2', 'create')
+            ->notEmptyString('post2', '郵便番号を入力してください')
+            ->integer('post2', '数字で入力してください');
+
+        // $validator
+        //     ->scalar('prefecture')
+        //     ->maxLength('prefecture', 255)
+        //     ->requirePresence('prefecture', 'create')
+        //     ->notEmptyString('prefecture', '都道府県を選択してください');
 
         $validator
             ->scalar('city')
@@ -122,11 +129,25 @@ class UsersTable extends Table
             ->notEmptyString('busyo', '部署名を入力してください');
 
         $validator
-            ->scalar('tel')
-            ->maxLength('tel', 255)
-            ->requirePresence('tel', 'create')
-            ->notEmptyString('tel', '電話番号を入力してください')
-            ->integer('tel', '数字で入力してください');
+            ->scalar('tel1')
+            ->maxLength('tel1', 255)
+            ->requirePresence('tel1', 'create')
+            ->notEmptyString('tel1', '電話番号を入力してください')
+            ->integer('tel1', '数字で入力してください');
+
+        $validator
+            ->scalar('tel2')
+            ->maxLength('tel2', 255)
+            ->requirePresence('tel2', 'create')
+            ->notEmptyString('tel2', '電話番号を入力してください')
+            ->integer('tel2', '数字で入力してください');
+
+        $validator
+            ->scalar('tel3')
+            ->maxLength('tel3', 255)
+            ->requirePresence('tel3', 'create')
+            ->notEmptyString('tel3', '電話番号を入力してください')
+            ->integer('tel3', '数字で入力してください');
 
         $validator
             ->scalar('email')
@@ -143,7 +164,6 @@ class UsersTable extends Table
             ->notEmptyString('password');
 
 
-
         return $validator;
     }
 
@@ -158,7 +178,6 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['username']));
-        $rules->add($rules->isUnique(['email']));
 
         return $rules;
     }

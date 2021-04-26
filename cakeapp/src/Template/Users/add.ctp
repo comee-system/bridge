@@ -98,7 +98,12 @@
 
                     <div class="row">
                         <div class="col-md-12 mt-2"><?= __("都道府県") ?>
-                            <input type="text" name="prefecture" value="<?= $prefecture ?>" class="form-control buttoncheck" placeholder="都道府県を入力してください" />
+                            <select class="form-control buttoncheck" name="prefecture">
+                                <option value="0">都道府県を選択してください</option>
+                                <?php foreach ($array_prefecture as $key => $value) :  ?>
+                                    <option value="<?= $key ?>"><?= h($value) ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="col-md-12 mt-2"><?= __("市区町村") ?>
                             <input type="text" name="city" value="<?= $city ?>" class="form-control buttoncheck" placeholder="市区町村を入力してください" />

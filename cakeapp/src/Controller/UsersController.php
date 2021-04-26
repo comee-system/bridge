@@ -109,7 +109,7 @@ class UsersController extends AppController
         }
 
         $this->set(compact('user'));
-        $this->set(compact('error'));
+
 
         foreach ($this->request->getData() as $key => $value) {
             $this->set($key, $value);
