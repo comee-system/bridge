@@ -8,7 +8,7 @@
 <main class="form-signin">
 <?= $this->Flash->render() ?>
 
-<?= $this->Form->create($user) ?>
+<?= $this->Form->create() ?>
     <img class="mb-4" src="/img/bridge.gif" alt=""  height="57">
     <h1 class="h3 mb-3 fw-normal">サインインする</h1>
 

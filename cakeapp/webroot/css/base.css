@@ -4,6 +4,13 @@
 img.logo {
   height: 50px; }
 
+a.linkblock {
+  width: 100%;
+  text-decoration: none;
+  display: block; }
+  a.linkblock:hover {
+    color: #cc0000; }
+
 @media (max-width: 980px) {
   .title {
     font-size: 0.85rem; }

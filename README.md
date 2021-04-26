@@ -1,6 +1,44 @@
 # bridge
 ## TEST123
 
+## 時刻の設定
+### app.phpの編集
+```
+   'App' => [
+        'namespace' => 'App',
+        'encoding' => env('APP_ENCODING', 'UTF-8'),
+        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'ja_JP'),
+        'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'JST'),
+```
+```
+    'Datasources' => [
+        'default' => [
+            'className' => Connection::class,
+            'driver' => Mysql::class,
+            'persistent' => false,
+            'host' => 'localhost',
+            /*
+             * CakePHP will use the default DB port based on the driver selected
+             * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
+             * the following line and set the port accordingly
+             */
+            'port' => '3306',
+            /*
+             * It is recommended to set these options through your environment or app_local.php
+             */
+            'username' => 'root',
+            'password' => '',
+            'database' => 'bridge',
+            /*
+             * You do not need to set this flag to use full utf-8 encoding (internal default since CakePHP 3.6).
+             */
+            'encoding' => 'utf8',
+            'timezone' => 'JST',
+            'flags' => [],
+            'cacheMetadata' => true,
+            'log' => false,
+```
+
 
 ## プロジェクトの作成
 ### intlの有効化
