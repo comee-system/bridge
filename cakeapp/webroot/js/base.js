@@ -37,7 +37,7 @@ $.fn.buttonCheck = function () {
     var _sei_kana = $("[name='sei_kana']").val();
     var _mei_kana = $("[name='mei_kana']").val();
     var _company = $("[name='company']").val();
-    // var _job = $("[name='job']").val();
+    var _job = $("[name='job']").val();
     var _post1 = $("[name='post1']").val();
     var _post2 = $("[name='post2']").val();
     var _prefecture = $("[name='prefecture']").val();
@@ -60,7 +60,7 @@ $.fn.buttonCheck = function () {
     if (!_sei_kana) _err += 1;
     if (!_mei_kana) _err += 1;
     if (!_company) _err += 1;
-    // if (!_job) _err += 1;
+    if (!_job) _err += 1;
     if (!_post1) _err += 1;
     if (!_post2) _err += 1;
     if (!_prefecture) _err += 1;
@@ -82,6 +82,7 @@ $.fn.buttonCheck = function () {
         $("#regist").attr("disabled", true);
     }
 };
+
 $.fn.topImageHeight = function () {
     if ($('video').length) {
         var _videoHeight = $("video").height() + 10;
