@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Core\Configure;
 use Cake\Event\Event;
+
 /**
  * Users Controller
  *
@@ -73,18 +75,26 @@ class UsersController extends AppController
     public function add()
     {
         $user = $this->Users->newEntity();
+
         if ($this->request->is('post')) {
+
+            //patchEntityに入るとvalidationが走る
             $user = $this->Users->patchEntity($user, $this->request->getData());
 
-            $user->post = sprintf("%s-%s"
-                ,$this->request->getData('post1')
-                ,$this->request->getData('post2')
+            $errors = $user->getErrors();
+            var_dump($errors);
+
+            $user->post = sprintf(
+                "%s-%s",
+                $this->request->getData('post1'),
+                $this->request->getData('post2')
             );
 
-            $user->tel = sprintf("%s-%s-%s"
-                ,$this->request->getData('tel1')
-                ,$this->request->getData('tel2')
-                ,$this->request->getData('tel3')
+            $user->tel = sprintf(
+                "%s-%s-%s",
+                $this->request->getData('tel1'),
+                $this->request->getData('tel2'),
+                $this->request->getData('tel3')
             );
 
             if ($this->Users->save($user)) {
@@ -92,29 +102,15 @@ class UsersController extends AppController
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('会員登録に失敗しました。'));
         }
 
         $this->set(compact('user'));
+        $this->set(compact('error'));
 
-        $this->set('sei', $this->request->getData('sei'));
-        $this->set('mei', $this->request->getData('mei'));
-        $this->set('sei_kana', $this->request->getData('sei_kana'));
-        $this->set('mei_kana', $this->request->getData('mei_kana'));
-        $this->set('company', $this->request->getData('company'));
-        $this->set('post1', $this->request->getData('post1'));
-        $this->set('post2', $this->request->getData('post2'));
-        $this->set('prefecture', $this->request->getData('prefecture'));
-        $this->set('city', $this->request->getData('city'));
-        $this->set('space', $this->request->getData('space'));
-        $this->set('build', $this->request->getData('build'));
-        $this->set('busyo', $this->request->getData('busyo'));
-        $this->set('tel1', $this->request->getData('tel1'));
-        $this->set('tel2', $this->request->getData('tel2'));
-        $this->set('tel3', $this->request->getData('tel3'));
-        $this->set('email', $this->request->getData('email'));
-        $this->set('password', $this->request->getData('password'));
-
+        foreach ($this->request->getData() as $key => $value) {
+            $this->set($key, $value);
+        }
     }
 
     /**
