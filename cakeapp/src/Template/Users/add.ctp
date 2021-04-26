@@ -1,9 +1,3 @@
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Bridge</a></li>
-        <li class="breadcrumb-item"><a href="#">会員登録</a></li>
-    </ol>
-</nav>
 <main>
     <div class="container">
         <div class="alert alert-dark" role="alert">

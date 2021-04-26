@@ -77,6 +77,14 @@
 
   </header>
 
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Bridge</a></li>
+      <li class="breadcrumb-item"><a href="#">会員登録</a></li>
+    </ol>
+  </nav>
+
+
   <?= $this->fetch('content') ?>
 
 
@@ -110,67 +118,30 @@
 
       </div><!-- /.footer-index -->
 
-      <div id="footer-logo" class="mt-2 mt-sm-4">
-        <div class="text-center d-sm-flex align-items-sm-center">
-          <a class="mr-4" href="../index.html"><img src="../img/bridge.gif" alt="サイト名" height="50"></a>
-          <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-        </div>
-        </nav><!-- /# nav01 -->
-
-        </header>
-
-        <?= $this->fetch('content') ?>
 
 
+      <footer id="footer" class="bg-light ">
+        <div class="container py-4 py-md-5">
 
-        <footer id="footer" class="bg-light ">
-          <div class="container py-4 py-md-5">
+          <div id="footer-logo" class="mt-2 mt-sm-4">
+            <div class="text-center d-sm-flex align-items-sm-center">
+              <a class="mr-4" href="../index.html"><img src="../img/bridge.gif" alt="サイト名" height="50"></a>
+              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+            </div>
+          </div><!-- .row -->
+        </div><!-- .container -->
+      </footer>
 
+      <div class="text-white bg-primary">
+        <p class="text-center mb-0 py-2"><small>Copyright (C) サイト名. All Rights Reserved.</small></p>
+      </div>
 
-            <div id="footer-index" class="row pt-4">
-              <ul class="col list-unstyled">
-                <li>Bridgeについて</li>
-                <li>
-                  <ul class="list-unstyled">
-                    <li><a href="#">運営会社情報</a></li>
-                    <li><a href="#">利用規約</a></li>
-                    <li><a href="#">個人情報保護方針</a></li>
-                    <li><a href="#">機密保持契約</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <ul class="col list-unstyled">
-                <li>&nbsp;</li>
-                <li>
-                  <ul class="list-unstyled">
-                    <li><a href="#">お問い合わせ</a></li>
-                    <li><a href="#">無料会員登録</a></li>
-                    <li><a href="#">ログイン</a></li>
-                  </ul>
-                </li>
-              </ul>
-
-            </div><!-- /.footer-index -->
-
-            <div id="footer-logo" class="mt-2 mt-sm-4">
-              <div class="text-center d-sm-flex align-items-sm-center">
-                <a class="mr-4" href="../index.html"><img src="../img/bridge.gif" alt="サイト名" height="50"></a>
-                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-              </div>
-            </div><!-- .row -->
-          </div><!-- .container -->
-        </footer>
-
-        <div class="text-white bg-primary">
-          <p class="text-center mb-0 py-2"><small>Copyright (C) サイト名. All Rights Reserved.</small></p>
-        </div>
-
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        <script src="/js/base.js"></script>
-        <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
-        <!----------------------------------------------->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      <script src="/js/base.js"></script>
+      <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+      <!----------------------------------------------->
 </body>
 
 </html>

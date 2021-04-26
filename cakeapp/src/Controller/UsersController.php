@@ -21,6 +21,9 @@ class UsersController extends AppController
         $array_job = Configure::read("array_job");
         $this->set('array_job', $array_job);
 
+        $array_prefecture = Configure::read("array_prefecture");
+        $this->set('array_prefecture', $array_prefecture);
+
         $this->Auth->allow(['add', 'view', 'display']);
     }
     /**
