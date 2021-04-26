@@ -3,7 +3,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Question[]|\Cake\Collection\CollectionInterface $questions
  */
+$this->Html->addCrumb('ログイン', '');
 ?>
+<?= $this->element('breadcrumbs') ?>
 <main>
   <div class="container">
     <section class="m-5">

@@ -18,6 +18,9 @@ class LoginController extends AppController
         $this->pwd = $this->loadComponent('Password');
         $this->loadModel("Users");
         $this->loadModel("repasswords");
+
+
+     //  HtmlHelper::addCrumb('Help', '/pages/help/');
     }
     public function beforeFilter(Event $event)
     {
@@ -44,8 +47,7 @@ class LoginController extends AppController
             }
             $this->Flash->error(__('Invalid username or password, try again'));
         }
-
-
+        $this->set('crumbs', "on");
     }
     public function logout()
     {

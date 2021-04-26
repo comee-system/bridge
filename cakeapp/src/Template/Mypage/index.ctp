@@ -15,7 +15,7 @@
 
 $cakeDescription = 'CakePHP: the rapid development PHP framework';
 ?>
-
+<?= $this->element('breadcrumbs') ?>
 <main>
 
   <section class="py-1 bg-yl-color">
