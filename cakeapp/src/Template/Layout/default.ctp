@@ -77,14 +77,6 @@
 
   </header>
 
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Bridge</a></li>
-      <li class="breadcrumb-item"><a href="#">会員登録</a></li>
-    </ol>
-  </nav>
-
-
   <?= $this->fetch('content') ?>
 
 
@@ -125,7 +117,7 @@
 
           <div id="footer-logo" class="mt-2 mt-sm-4">
             <div class="text-center d-sm-flex align-items-sm-center">
-              <a class="mr-4" href="../index.html"><img src="../img/bridge.gif" alt="サイト名" height="50"></a>
+              <a class="mr-4" href="../index.html"><img src="/img/bridge.gif" alt="サイト名" height="50"></a>
               <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
             </div>
           </div><!-- .row -->

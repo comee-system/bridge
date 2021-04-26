@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Question[]|\Cake\Collection\CollectionInterface $questions
  */
 ?>
+<?= $this->element('breadcrumbs') ?>
 <main>
   <div class="container">
     <section class="m-5">
