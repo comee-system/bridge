@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Core\Configure;
 use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
 
 /**
  * Users Controller
@@ -18,12 +19,17 @@ class UsersController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
+
+        //業種読み込み
         $array_job = Configure::read("array_job");
         $this->set('array_job', $array_job);
 
+        //都道府県読み込み
         $array_prefecture = Configure::read("array_prefecture");
         $this->set('array_prefecture', $array_prefecture);
 
+        //パンくず
+        $this->set('crumbs', "on");
         $this->Auth->allow(['add', 'view', 'display']);
     }
     /**
@@ -84,21 +90,28 @@ class UsersController extends AppController
             //patchEntityに入るとvalidationが走る
             $user = $this->Users->patchEntity($user, $this->request->getData());
 
-            $errors = $user->getErrors();
-            var_dump($errors);
+            var_dump($user);
+            exit();
 
+            //$errors = $user->getErrors();
+
+            //入力値を1つにする
             $user->post = sprintf(
                 "%s-%s",
                 $this->request->getData('post1'),
                 $this->request->getData('post2')
             );
 
+            //入力値を1つにする
             $user->tel = sprintf(
                 "%s-%s-%s",
                 $this->request->getData('tel1'),
                 $this->request->getData('tel2'),
                 $this->request->getData('tel3')
             );
+
+            $user->username = "username";
+            $user->role = "sample";
 
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('会員登録が完了しました。'));
@@ -109,7 +122,6 @@ class UsersController extends AppController
         }
 
         $this->set(compact('user'));
-
 
         foreach ($this->request->getData() as $key => $value) {
             $this->set($key, $value);

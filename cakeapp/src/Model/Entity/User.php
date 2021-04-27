@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -27,9 +28,21 @@ class User extends Entity
      */
     protected $_accessible = [
         'username' => true,
-        'password' => true,
         'sei' => true,
         'mei' => true,
+        'sei_kana' => true,
+        'mei_kana' => true,
+        'company' => true,
+        'job' => true,
+        'post' => true,
+        'prefecture' => true,
+        'city' => true,
+        'space' => true,
+        'build' => true,
+        'busyo' => true,
+        'tel' => true,
+        'email' => true,
+        'password' => true,
         'role' => true,
         'created' => true,
         'modified' => true,
@@ -50,5 +63,4 @@ class User extends Entity
             return (new DefaultPasswordHasher)->hash($password);
         }
     }
-
 }

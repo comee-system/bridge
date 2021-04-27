@@ -1,3 +1,7 @@
+<?php
+$this->Html->addCrumb('会員登録', '');
+?>
+<?= $this->element('breadcrumbs') ?>
 <main>
     <div class="container">
         <div class="alert alert-dark" role="alert">

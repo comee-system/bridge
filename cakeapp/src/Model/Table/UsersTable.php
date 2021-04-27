@@ -59,100 +59,84 @@ class UsersTable extends Table
         $validator
             ->scalar('sei')
             ->maxLength('sei', 255)
-            ->requirePresence('sei', 'create')
             ->notEmptyString('sei', '姓を入力してください');
 
         $validator
             ->scalar('mei')
             ->maxLength('mei', 255)
-            ->requirePresence('mei', 'create')
             ->notEmptyString('mei', '名を入力してください');
 
         $validator
             ->scalar('sei_kana')
             ->maxLength('sei_kana', 255)
-            ->requirePresence('sei_kana', 'create')
             ->notEmptyString('sei_kana', 'せいを入力してください');
 
         $validator
             ->scalar('mei_kana')
             ->maxLength('mei_kana', 255)
-            ->requirePresence('mei', 'create')
             ->notEmptyString('mei_kana', 'めいを入力してください');
 
         $validator
             ->scalar('company')
             ->maxLength('company', 255)
-            ->requirePresence('company', 'create')
             ->notEmptyString('company', '企業名を入力してください');
 
         $validator
             ->scalar('post1')
             ->maxLength('post1', 7)
-            ->requirePresence('post1', 'create')
             ->notEmptyString('post1', '郵便番号を入力してください')
             ->integer('post1', '数字で入力してください');
 
         $validator
             ->scalar('post2')
             ->maxLength('post2', 7)
-            ->requirePresence('post2', 'create')
             ->notEmptyString('post2', '郵便番号を入力してください')
             ->integer('post2', '数字で入力してください');
 
-        // $validator
-        //     ->scalar('prefecture')
-        //     ->maxLength('prefecture', 255)
-        //     ->requirePresence('prefecture', 'create')
-        //     ->notEmptyString('prefecture', '都道府県を選択してください');
+        $validator
+            ->scalar('prefecture')
+            ->maxLength('prefecture', 255)
+            ->notEmptyString('prefecture', '都道府県を選択してください');
 
         $validator
             ->scalar('city')
             ->maxLength('city', 255)
-            ->requirePresence('city', 'create')
             ->notEmptyString('city', '市区町村を入力してください');
         $validator
             ->scalar('space')
             ->maxLength('space', 255)
-            ->requirePresence('space', 'create')
             ->notEmptyString('space', '番地を入力してください');
         $validator
             ->scalar('build')
             ->maxLength('build', 255)
-            ->requirePresence('build', 'create')
             ->allowEmptyString('build');
 
         $validator
             ->scalar('busyo')
             ->maxLength('busyo', 255)
-            ->requirePresence('busyo', 'create')
             ->notEmptyString('busyo', '部署名を入力してください');
 
         $validator
             ->scalar('tel1')
             ->maxLength('tel1', 255)
-            ->requirePresence('tel1', 'create')
             ->notEmptyString('tel1', '電話番号を入力してください')
             ->integer('tel1', '数字で入力してください');
 
         $validator
             ->scalar('tel2')
             ->maxLength('tel2', 255)
-            ->requirePresence('tel2', 'create')
             ->notEmptyString('tel2', '電話番号を入力してください')
             ->integer('tel2', '数字で入力してください');
 
         $validator
             ->scalar('tel3')
             ->maxLength('tel3', 255)
-            ->requirePresence('tel3', 'create')
             ->notEmptyString('tel3', '電話番号を入力してください')
             ->integer('tel3', '数字で入力してください');
 
         $validator
             ->scalar('email')
             ->maxLength('email', 255)
-            ->requirePresence('email', 'create')
             ->notEmptyString('email', '電話番号を入力してください')
             ->email('email', 'メールアドレスの形式で入力してください');
 
@@ -160,8 +144,7 @@ class UsersTable extends Table
             ->scalar('password')
             ->maxLength('password', 255)
             ->minLength('password', 8)
-            ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->notEmptyString('password', 'パスワードを入力してください');
 
 
         return $validator;
