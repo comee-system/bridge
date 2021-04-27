@@ -271,3 +271,5 @@ Configure::write("$prefecture_array", [
     '46' => '鹿児島県',
     '47' => '沖縄県'
 ]);
+
+Configure::write("array_status", ["0"=>"非公開","1" => "交渉中", "2" => "下書き"]);

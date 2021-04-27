@@ -31,6 +31,8 @@ class MypageController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
+        $array_status = Configure::read("array_status");
+        $this->set("array_status",$array_status);
     }
 
     /**
@@ -45,6 +47,12 @@ class MypageController extends AppController
      */
     public function index(){
 
+
+    }
+    public function buildlist(){
+
+    }
+    public function buildregist(){
 
     }
 }

@@ -22,17 +22,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <div class="container p-3 rounded">
         <div class="row">
             <div class="mb-3 h2 col-md-4">商談ルーム一覧</div>
-            <div class="mb-3 col-md-8 text-right">
-                <a href="#">
-                <i class="fas fa-home"></i> 新規商談ルーム
-                </a>
-                <span class="badge badge-pill bg-danger align-text-bottom text-white">27件</span>
-
-                <a class="ml-3" href="#">
-                <i class="fas fa-mail-bulk"></i> 新着メッセージ
-                </a>
-                <span class="badge badge-pill bg-success align-text-bottom text-white">27件</span>
-            </div>
+            <?= $this->element('myinfo') ?>
         </div>
 
         <div class="row">
