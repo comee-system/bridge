@@ -11,6 +11,6 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 
 ?>
 <div class="row">
-    <div class="alert alert-danger" onclick="this.classList.add('hidden');"><?= $message ?></div>
+    <div class="alert alert-danger ml-4" onclick="this.classList.add('hidden');"><?= $message ?></div>
 </div>
 <br clear=all />

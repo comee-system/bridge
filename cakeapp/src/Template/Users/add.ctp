@@ -1,11 +1,14 @@
+<?php
+$this->Html->addCrumb('会員登録', '');
+?>
+<?= $this->element('breadcrumbs') ?>
 <main>
     <div class="container">
         <div class="alert alert-dark" role="alert">
-            <h5>会員登録</h5>
+            <h5><?= __("会員登録") ?></h5>
         </div>
 
         <section class="mb-5">
-            <?= $this->Flash->render() ?>
             <?= $this->Form->create(null, [
                 'type' => 'post',
                 'url' => [
@@ -13,7 +16,7 @@
                     'action' => 'add'
                 ]
             ]) ?>
-
+            <?= $this->Flash->render() ?>
             <div class="row col-md-10">
                 <div class="col-md-2"><?= __("氏名") ?>
                 </div>
@@ -71,9 +74,13 @@
                 </div>
                 <div class="col-md-7">
                     <select class="form-control buttoncheck" name="job">
-                        <option value="0">業種を選択してください</option>
+                        <option value=""><?= __("業種を選択してください。") ?></option>
                         <?php foreach ($array_job as $key => $value) :  ?>
-                            <option value="<?= $key ?>"><?= h($value) ?></option>
+                            <?php $selected = "";
+                            if ($key == $this->request->getData("job"))
+                                $selected = "selected";
+                            ?>
+                            <option value="<?= h($key) ?>" <?= $selected ?>><?= h($value) ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -90,15 +97,24 @@
                     <div class="row">
                         <div class="col-md-12 form-inline">
                             <label><?= __("郵便番号") ?></label>
-                            <input type="text" name="post1" value="<?= $post ?>" class="form-control buttoncheck" size=3 maxlength=3 placeholder="000" />
+                            <input type="text" name="post1" value="<?= $post1 ?>" class="form-control buttoncheck" size=3 maxlength=3 placeholder="000" />
                             　-　
-                            <input type="text" name="post2" value="<?= $post ?>" class="form-control buttoncheck" size=4 maxlength=4 placeholder="0000" onKeyUp="AjaxZip3.zip2addr('post1','post2','prefecture','city','city');" />
+                            <input type="text" name="post2" value="<?= $post2 ?>" class="form-control buttoncheck" size=4 maxlength=4 placeholder="0000" onKeyUp="AjaxZip3.zip2addr('post1','post2','prefecture','city','city');" />
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-12 mt-2"><?= __("都道府県") ?>
-                            <input type="text" name="prefecture" value="<?= $prefecture ?>" class="form-control buttoncheck" placeholder="都道府県を入力してください" />
+                            <select class="form-control buttoncheck" name="prefecture">
+                                <option value=""><?= __("都道府県を選択してください") ?></option>
+                                <?php foreach ($array_prefecture as $key => $value) :  ?>
+                                    <?php $selected = "";
+                                    if ($key == $this->request->getData("prefecture"))
+                                        $selected = "selected";
+                                    ?>
+                                    <option value="<?= h($key) ?>" <?= $selected ?>><?= h($value) ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                         <div class="col-md-12 mt-2"><?= __("市区町村") ?>
                             <input type="text" name="city" value="<?= $city ?>" class="form-control buttoncheck" placeholder="市区町村を入力してください" />
@@ -133,9 +149,9 @@
                     </span>
                 </div>
                 <div class="col-md-9 form-inline ">
-                    <input type="text" name="tel1" value="<?= $tel ?>" size=3 maxlength=3 class="form-control buttoncheck" placeholder="000" />　-　
-                    <input type="text" name="tel2" value="<?= $tel ?>" size=4 maxlength=4 class="form-control buttoncheck" placeholder="0000" />　-　
-                    <input type="text" name="tel3" value="<?= $tel ?>" size=4 maxlength=4 class="form-control buttoncheck" placeholder="0000" />
+                    <input type="text" name="tel1" value="<?= $tel1 ?>" size=3 maxlength=3 class="form-control buttoncheck" placeholder="000" />　-　
+                    <input type="text" name="tel2" value="<?= $tel2 ?>" size=4 maxlength=4 class="form-control buttoncheck" placeholder="0000" />　-　
+                    <input type="text" name="tel3" value="<?= $tel3 ?>" size=4 maxlength=4 class="form-control buttoncheck" placeholder="0000" />
                 </div>
             </div>
             <div class="row col-md-10 mt-3">
@@ -164,11 +180,11 @@
                 <div class="col-md-9">
                     <input type="password" name="password" value="<?= $password ?>" class="form-control buttoncheck" placeholder="パスワードを入力してください" />
                     <div class="alert alert-secondary col-md-12 mt-3" role="alert">
-                        <p class="text-left">下記の条件でパスワードを作成してください。</p>
+                        <p class="text-left"><?= __("下記の条件でパスワードを作成してください。") ?></p>
                         <ul class="text-left">
-                            <li>8文字以上</li>
-                            <li>半角英数を含む</li>
-                            <li>半角英字を含む</li>
+                            <li><?= __("8文字以上") ?></li>
+                            <li><?= __("半角英数を含む") ?></li>
+                            <li><?= __("半角英字を含む") ?></li>
                         </ul>
                     </div>
                     <div class="alert alert-danger col-md-12 form-control text-center" role="alert">

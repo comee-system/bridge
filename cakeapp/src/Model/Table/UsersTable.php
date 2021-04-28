@@ -3,10 +3,11 @@
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
+use Cake\ORM\Rule\IsUnique;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-
+use Psy\TabCompletion\Matcher\FunctionsMatcher;
 
 /**
  * Users Model
@@ -49,105 +50,114 @@ class UsersTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
-
-        /*        
-        $validator
-            ->integer('id')
-            ->allowEmptyString('id', null, 'create');
-*/
-
         $validator
             ->scalar('sei')
-            ->maxLength('sei', 255)
-            ->requirePresence('sei', 'create')
-            ->notEmptyString('sei', '姓を入力してください');
+            ->maxLength('sei', 128)
+            ->notEmptyString('sei', '「姓」を入力してください。');
 
         $validator
             ->scalar('mei')
             ->maxLength('mei', 255)
-            ->requirePresence('mei', 'create')
-            ->notEmptyString('mei', '名を入力してください');
+            ->notEmptyString('mei', '「名」を入力してください。');
 
         $validator
             ->scalar('sei_kana')
             ->maxLength('sei_kana', 255)
-            ->requirePresence('sei_kana', 'create')
-            ->notEmptyString('sei_kana', 'せいを入力してください');
+            ->notEmptyString('sei_kana', '「せい」を入力してください。');
 
         $validator
             ->scalar('mei_kana')
             ->maxLength('mei_kana', 255)
-            ->requirePresence('mei', 'create')
-            ->notEmptyString('mei_kana', 'めいを入力してください');
+            ->notEmptyString('mei_kana', '「めい」を入力してください。');
 
         $validator
             ->scalar('company')
             ->maxLength('company', 255)
-            ->requirePresence('company', 'create')
-            ->notEmptyString('company', '企業名を入力してください');
+            ->notEmptyString('company', '「企業名」を入力してください。');
 
         $validator
-            ->scalar('post')
-            ->maxLength('post', 7)
-            ->requirePresence('post', 'create')
-            ->notEmptyString('post', '郵便番号を入力してください')
-            ->integer('post', '数字で入力してください');
+            ->notEmptyString('job', '「業種」を選択してください。');
 
         $validator
-            ->scalar('prefecture')
-            ->maxLength('prefecture', 255)
-            ->requirePresence('prefecture', 'create')
-            ->notEmptyString('prefecture', '都道府県を入力してください');
+            ->scalar('post1')
+            ->maxLength('post1', 7)
+            ->notEmptyString('post1', '「郵便番号3桁」を入力してください。')
+            ->integer('post1', '郵便番号は数字で入力してください');
+
+        $validator
+            ->scalar('post2')
+            ->maxLength('post2', 7)
+            ->notEmptyString('post2', '「郵便番号4桁」を入力してください。')
+            ->integer('post2', '郵便番号は数字で入力してください。');
+
+        $validator
+            ->notEmptyString('prefecture', '「都道府県」を選択してください。');
 
         $validator
             ->scalar('city')
             ->maxLength('city', 255)
-            ->requirePresence('city', 'create')
-            ->notEmptyString('city', '市区町村を入力してください');
+            ->notEmptyString('city', '「市区町村」を入力してください。');
+
         $validator
             ->scalar('space')
             ->maxLength('space', 255)
-            ->requirePresence('space', 'create')
-            ->notEmptyString('space', '番地を入力してください');
+            ->notEmptyString('space', '「番地」を入力してください。');
+
         $validator
-            ->scalar('build')
             ->maxLength('build', 255)
-            ->requirePresence('build', 'create')
             ->allowEmptyString('build');
 
         $validator
             ->scalar('busyo')
             ->maxLength('busyo', 255)
-            ->requirePresence('busyo', 'create')
-            ->notEmptyString('busyo', '部署名を入力してください');
+            ->notEmptyString('busyo', '「部署名」を入力してください。');
 
         $validator
-            ->scalar('tel')
-            ->maxLength('tel', 255)
-            ->requirePresence('tel', 'create')
-            ->notEmptyString('tel', '電話番号を入力してください')
-            ->integer('tel', '数字で入力してください');
+            ->scalar('tel1')
+            ->maxLength('tel1', 4)
+            ->notEmptyString('tel1', '「電話番号1」を入力してください。')
+            ->integer('tel1', '電話番号は数字で入力してください。');
 
         $validator
-            ->scalar('email')
+            ->scalar('tel2')
+            ->maxLength('tel2', 4)
+            ->notEmptyString('tel2', '「電話番号2」を入力してください。')
+            ->integer('tel2', '電話番号は数字で入力してください。');
+
+        $validator
+            ->scalar('tel3')
+            ->maxLength('tel3', 4)
+            ->notEmptyString('tel3', '「電話番号3」を入力してください。')
+            ->integer('tel3', '電話番号は数字で入力してください。');
+
+        $validator
             ->maxLength('email', 255)
-            ->requirePresence('email', 'create')
-            ->notEmptyString('email', '電話番号を入力してください')
-            ->email('email', 'メールアドレスの形式で入力してください');
+            ->notEmptyString('email', '「メールアドレス」を入力してください。')
+            ->email('email', 'false', '「メールアドレス」の形式で入力してください。')
+            ->add('email', 'custom', [
+                'rule' => [$this, 'sameEmailCheck'],
+                'message' => '既に登録されているメールアドレスです。',
+            ]);
 
         $validator
             ->scalar('password')
             ->maxLength('password', 255)
-            ->minLength('password', 8)
-            ->requirePresence('password', 'create')
-            ->notEmptyString('password');
-
+            ->minLength('password', 8, '8文字以上で登録してください。')
+            ->notEmptyString('password', '「パスワード」を入力してください')
+            ->alphaNumeric('password', '「半角英数」で入力してください。');
 
 
         return $validator;
     }
-
-
+    public function sameEmailCheck($value, $context)
+    {
+        $data = $this->find('all')->where(['email' => $value])->first();
+        if (!empty($data)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     /**
      * Returns a rules checker object that will be used for validating
      * application integrity.
@@ -157,9 +167,6 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['username']));
-        $rules->add($rules->isUnique(['email']));
-
         return $rules;
     }
 }

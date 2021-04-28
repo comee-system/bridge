@@ -222,7 +222,7 @@ define("D_LINK_QUESTION", "/login/question/");
 //パスワード再設定
 define("D_LINK_REPASSWORD", "/login/password/");
 
-Configure::write("$prefecture_array", [
+Configure::write('array_prefecture', [
     '1' => '北海道',
     '2' => '青森県',
     '3' => '岩手県',

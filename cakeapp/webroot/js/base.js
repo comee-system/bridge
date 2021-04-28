@@ -28,8 +28,8 @@ $(function () {
 });
 $.fn.buttonCheck = function () {
     //テスト用
-    //$("#regist").attr("disabled", false);
-    //return true;
+    $("#regist").attr("disabled", false);
+    return true;
 
     var _err = 0;
     var _sei = $("[name='sei']").val();

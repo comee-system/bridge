@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
 use Cake\ORM\TableRegistry;
 use Cake\Mailer\Email;
+
 /**
  * MailSend component
  */
@@ -22,20 +24,21 @@ class MailSendComponent extends Component
         $this->email = new Email('default');
         $this->question = TableRegistry::getTableLocator()->get("questions");
         //制限時間
-        $this->limit = date("Y-m-d H:i:s",strtotime("+1 hour"));
+        $this->limit = date("Y-m-d H:i:s", strtotime("+1 hour"));
     }
-    public function sends(){
+    public function sends()
+    {
         $this->email
-        ->template('welcome', 'fancy')
-        ->emailFormat('text')
-        ->to('chiba@innovation-gate.jp')
-        ->from('app@domain.com')
-        ->subject("ssssss")
-        ->viewVars(['name' => 12345])
-        ->send();
-
+            ->template('welcome', 'fancy')
+            ->emailFormat('text')
+            ->to('chiba@innovation-gate.jp')
+            ->from('app@domain.com')
+            ->subject("ssssss")
+            ->viewVars(['name' => 12345])
+            ->send();
     }
-    public function regists(){
+    public function regists()
+    {
         $ques = $this->question->newEntity();
         //サンプルデータですrequestを渡すようにしてください
         $ques->sei = "sei";
@@ -52,37 +55,53 @@ class MailSendComponent extends Component
     /***************
      * パスワード再設定用メール
      */
-    public function rePassword($user,$token){
+    public function rePassword($user, $token)
+    {
         $email = $this->request->getData('email');
         $this->email
-        ->template('repassword')
-        ->emailFormat('text')
-        ->to($email)
-        ->from(D_ADMIN_MAIL)
-        ->subject("【Bridge】パスワードリセットのご案内")
-        ->viewVars([
-            'name' => $user->sei.' '.$user->mei,
-            'token' => $token,
-            'limit' => $this->limit
+            ->template('repassword')
+            ->emailFormat('text')
+            ->to($email)
+            ->from(D_ADMIN_MAIL)
+            ->subject("【Bridge】パスワードリセットのご案内")
+            ->viewVars([
+                'name' => $user->sei . ' ' . $user->mei,
+                'token' => $token,
+                'limit' => $this->limit
             ])
-        ->send();
+            ->send();
 
         return true;
     }
-    public function editPassword($user){
+    public function editPassword($user)
+    {
         $email = $user->email;
         $this->email
-        ->template('repasswordfin')
-        ->emailFormat('text')
-        ->to($email)
-        ->from(D_ADMIN_MAIL)
-        ->subject("【Bridge】パスワード再設定の完了")
-        ->viewVars([
-            'name' => $user->sei.' '.$user->mei,
+            ->template('repasswordfin')
+            ->emailFormat('text')
+            ->to($email)
+            ->from(D_ADMIN_MAIL)
+            ->subject("【Bridge】パスワード再設定の完了")
+            ->viewVars([
+                'name' => $user->sei . ' ' . $user->mei,
             ])
-        ->send();
+            ->send();
 
         return true;
     }
 
+    public function userRegistrationMail($user)
+    {
+        $email = $user->email;
+        $this->email
+            ->template('userfin')
+            ->emailFormat('text')
+            ->to('yamamoto@se-sendai.co.jp')
+            ->from('app@domain.com')
+            ->subject("【Bridge】会員登録完了")
+            ->viewVars([
+                'name' => $user->sei . ' ' . $user->mei,
+            ])
+            ->send();
+    }
 }
