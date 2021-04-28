@@ -149,6 +149,27 @@ class UsersTable extends Table
 
         return $validator;
     }
+
+    /**
+     * validation Update rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    /*    public function validationUpdate(Validator $id)
+    {
+        $validator
+            ->scalar('password')
+            ->maxLength('password', 255)
+            ->minLength('password', 8, '8文字以上で登録してください。')
+            ->notEmptyString('password', '「パスワード」を入力してください')
+            ->alphaNumeric('password', '「半角英数」で入力してください。');
+    } */
+
+    /**
+     * メールアドレス重複チェック
+     * 
+     */
     public function sameEmailCheck($value, $context)
     {
         $data = $this->find('all')->where(['email' => $value])->first();
