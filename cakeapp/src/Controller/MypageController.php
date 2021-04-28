@@ -55,4 +55,11 @@ class MypageController extends AppController
     public function buildregist(){
 
     }
+    public function room(){
+
+    }
+    public function staff(){
+
+        exit();
+    }
 }

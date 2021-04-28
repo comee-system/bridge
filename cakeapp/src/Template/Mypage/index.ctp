@@ -48,7 +48,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                     <dt class="col-2">募集開始日</dt>
                                     <dd class="col-4">2021/03/01</dd>
                                 </dl>
-                                <button type="button" class="btn btn-sm btn-block btn-outline-primary">商談ルーム</button>
+                                <a href="/mypage/room/1" class="btn btn-sm btn-block btn-outline-primary">商談ルーム</a>
                             </div>
                         </div>
                     </div>

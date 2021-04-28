@@ -2,12 +2,14 @@
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
+          <p>商談</p>
             <a class="nav-link active" aria-current="page" href="#">
               <span data-feather="home"></span>
-              会員一覧
+              商談ルーム一覧
             </a>
           </li>
           <li class="nav-item">
+          <p>物件</p>
             <a class="nav-link" href="#">
               <span data-feather="file"></span>
               物件一覧
@@ -15,13 +17,40 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
+              <span data-feather="file"></span>
+              物件インポート
+            </a>
+          </li>
+          <li class="nav-item">
+          <p>テナント登録</p>
+            <a class="nav-link" href="#">
               <span data-feather="shopping-cart"></span>
               テナント一覧
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
+              <span data-feather="shopping-cart"></span>
+              テナントインポート
+            </a>
+          </li>
+          <li class="nav-item">
+          <p>会員情報の確認と変更</p>
+            <a class="nav-link" href="#">
               <span data-feather="users"></span>
+              会員一覧
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="users"></span>
+              会員インポート
+            </a>
+          </li>
+          <li class="nav-item">
+          <p>お問合わせ</p>
+            <a class="nav-link" href="#">
+              <span data-feather="alert-octagon"></span>
               お問合わせ一覧
             </a>
           </li>

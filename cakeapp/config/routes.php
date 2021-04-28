@@ -67,6 +67,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'top', 'home']);
+    $routes->connect('/mypage/room/staff/*', ['controller' => 'Mypage', 'action' => 'staff', 'staff']);
 
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
