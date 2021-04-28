@@ -20,6 +20,8 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
 
+        $this->mailsend = $this->loadComponent('MailSend');
+
         //業種読み込み
         $array_job = Configure::read("array_job");
         $this->set('array_job', $array_job);
@@ -30,7 +32,7 @@ class UsersController extends AppController
 
         //パンくず
         $this->set('crumbs', "on");
-        $this->Auth->allow(['add', 'view', 'display']);
+        $this->Auth->allow(['add', 'view', 'display', 'fin']);
     }
     /**
      * Index method
@@ -81,44 +83,59 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = "")
     {
-        $user = $this->Users->newEntity();
-
+        if ($id > 0) {
+            $user = $this->Users->get($id, [
+                'contain' => [],
+            ]);
+        } else {
+            $user = $this->Users->newEntity();
+        }
+        //        var_dump($user);
         if ($this->request->is('post')) {
 
             //patchEntityに入るとvalidationが走る
             $user = $this->Users->patchEntity($user, $this->request->getData());
 
-            var_dump($user);
-            exit();
-
-            //$errors = $user->getErrors();
-
-            //入力値を1つにする
-            $user->post = sprintf(
-                "%s-%s",
-                $this->request->getData('post1'),
-                $this->request->getData('post2')
-            );
-
-            //入力値を1つにする
-            $user->tel = sprintf(
-                "%s-%s-%s",
-                $this->request->getData('tel1'),
-                $this->request->getData('tel2'),
-                $this->request->getData('tel3')
-            );
-
-            $user->username = "username";
-            $user->role = "sample";
-
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('会員登録が完了しました。'));
-
-                return $this->redirect(['action' => 'index']);
+            $errors = $user->getErrors();
+            var_dump($errors);
+            $errmsg = [];
+            if (!empty($errors)) {
+                foreach ($errors as $key => $value) {
+                    foreach ($value as $k => $val) {
+                        $errmsg[] = $val;
+                    }
+                }
+                $imp = implode("<br />", $errmsg);
             }
-            $this->Flash->error(__('会員登録に失敗しました。'));
+            if (empty($errors)) {
+                //入力値を1つにする
+                $user->post = sprintf(
+                    "%s-%s",
+                    $this->request->getData('post1'),
+                    $this->request->getData('post2')
+                );
+
+                //入力値を1つにする
+                $user->tel = sprintf(
+                    "%s-%s-%s",
+                    $this->request->getData('tel1'),
+                    $this->request->getData('tel2'),
+                    $this->request->getData('tel3')
+                );
+                $user->username = "usernameq";
+                $user->role = "sample";
+
+                if ($this->Users->save($user)) {
+                    $this->mailsend->userRegistrationMail($user);
+                    $this->Flash->success(__('会員登録が完了しました。'));
+                    return $this->redirect("/users/fin");
+                } else {
+                    $this->Flash->error(__('会員登録に失敗しました。'));
+                }
+            }
+            $this->Flash->error(__('会員登録に失敗しました。<br />' . $imp));
         }
 
         $this->set(compact('user'));
@@ -127,6 +144,15 @@ class UsersController extends AppController
             $this->set($key, $value);
         }
     }
+
+    /**
+     * 会員登録完了 fin
+     *
+     */
+    public function fin()
+    {
+    }
+
 
     /**
      * Edit method
