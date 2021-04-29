@@ -90,10 +90,21 @@ class UsersController extends AppController
             return $this->redirect("/");
         }
 
+        $columns = $this->Users->schema()->columns ();
+        foreach ($columns as $value) {
+            $this->set($value, "");
+        }
+        $this->set("post1", "");
+        $this->set("post2", "");
+        $this->set("tel1", "");
+        $this->set("tel2", "");
+        $this->set("tel3", "");
 
         $user = $this->Users->newEntity();
         $this->___regist($user);
         $this->set('actionkey', "add");
+
+
     }
 
 
