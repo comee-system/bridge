@@ -32,7 +32,11 @@ class MypageController extends AppController
     {
         parent::beforeFilter($event);
         $array_status = Configure::read("array_status");
+        $array_prefecture = Configure::read('array_prefecture');
+        $array_shop = Configure::read('array_shop');
         $this->set("array_status",$array_status);
+        $this->set("array_prefecture",$array_prefecture);
+        $this->set("array_shop",$array_shop);
     }
 
     /**
@@ -57,9 +61,14 @@ class MypageController extends AppController
     }
     public function room(){
 
+
     }
     public function staff(){
 
-        exit();
+        $this->render("room");
+    }
+    public function message($id){
+
+        $this->render("room");
     }
 }

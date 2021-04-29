@@ -96,8 +96,8 @@ class MailSendComponent extends Component
         $this->email
             ->template('userfin')
             ->emailFormat('text')
-            ->to('yamamoto@se-sendai.co.jp')
-            ->from('app@domain.com')
+            ->to($email)
+            ->from(D_ADMIN_MAIL)
             ->subject("【Bridge】会員登録完了")
             ->viewVars([
                 'name' => $user->sei . ' ' . $user->mei,

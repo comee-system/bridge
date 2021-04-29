@@ -15,6 +15,37 @@ a.linkblock{
     }
 }
 
+.scroll_box {
+    width: 100%;
+    height: 300px;
+    overflow: scroll;
+    white-space: nowrap;
+
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* スクロールの背景の設定 */
+  &::-webkit-scrollbar-track {
+    border-radius: 5px;
+    box-shadow: 0 0 4px #aaa inset;
+  }
+
+  /* スクロールのつまみ部分の設定 */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #1959A8;
+  }
+}
+ul.list-style-none{
+    list-style-type: none;
+}
+div.w-95{
+    width:95%;
+}
+
 @media (max-width: 980px) {
     .title {
         font-size: 0.85rem;

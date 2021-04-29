@@ -62,21 +62,78 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                     <div class="col-2">
                                         <span class="badge badge-danger"><?= __("必須") ?></span>
                                     </div>
-                                    <div class="col-6 row">
-                                        <div class="col-4">
-                                            <?= $this->Form->input("post1",[
-                                                "type"=>"text",
-                                                "class"=>"form-control col-12",
-                                                "label"=>false,
-                                            ]) ?>
-                                        </div><div class="col-1">-</div>
-                                        <div class="col-4">
-                                            <?= $this->Form->input("post2",[
-                                                "type"=>"text",
-                                                "class"=>"form-control col-12",
-                                                "label"=>false,
-                                            ]) ?>
+                                    <div class="col-8 ">
+                                        <div class="d-flex">
+                                            <div class="text-nowrap">郵便番号</div>
+                                            <div class="w-25 ml-2">
+                                                <?= $this->Form->input("post1",[
+                                                    "type"=>"text",
+                                                    "class"=>"form-control ",
+                                                    "label"=>false,
+                                                    "maxlength"=>3
+                                                ]) ?>
+                                            </div><div class="ml-2">-</div>
+                                            <div class="w-25 ml-2">
+                                                <?= $this->Form->input("post2",[
+                                                    "type"=>"text",
+                                                    "class"=>"form-control ",
+                                                    "label"=>false,
+                                                    "maxlength"=>4,
+                                                    "onKeyUp"=>"AjaxZip3.zip2addr('post1','post2','prefecture','city','space');"
+                                                ]) ?>
+                                            </div>
                                         </div>
+                                        <div class="row mt-2">
+                                            <div class="col-12">
+                                                <label>都道府県</label>
+                                                <select name="prefecture" class="form-control w-75" >
+                                                <?php foreach($array_prefecture as $key=>$value): ?>
+                                                    <option value="<?= $key ?>" ><?= $value ?></option>
+                                                <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-12">
+                                                <?= $this->Form->input("city",[
+                                                    "type"=>"text",
+                                                    "class"=>"form-control ",
+                                                    "label"=>"市区町村",
+                                                ]) ?>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-12">
+                                                <?= $this->Form->input("space",[
+                                                    "type"=>"text",
+                                                    "class"=>"form-control ",
+                                                    "label"=>"番地",
+                                                ]) ?>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-12">
+                                                <?= $this->Form->input("build",[
+                                                    "type"=>"text",
+                                                    "class"=>"form-control ",
+                                                    "label"=>"ビル・マンション名",
+                                                ]) ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-2"><?= __("店舗形態") ?></div>
+                                    <div class="col-2">
+                                    <span class="badge badge-danger"><?= __("必須") ?></span>
+                                    </div>
+                                    <div class="col-8">
+                                        <select name="prefecture" class="form-control w-75" >
+                                            <option value="" >店舗型選択</option>
+                                            <?php foreach($array_shop as $key=>$value): ?>
+                                                <option value="<?= $key ?>" ><?= $value ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </div>
                                 </div>
                                 <?= $this->Form->end() ?>

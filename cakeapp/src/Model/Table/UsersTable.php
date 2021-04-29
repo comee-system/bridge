@@ -42,14 +42,19 @@ class UsersTable extends Table
         $this->addBehavior('Timestamp');
     }
 
+    public function validationEdit(Validator $validator)
+    {
+       return $this->validationDefault($validator,"edit");
+    }
     /**
      * Default validation rules.
      *
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator,$type="")
     {
+
         $validator
             ->scalar('sei')
             ->maxLength('sei', 128)
@@ -139,40 +144,40 @@ class UsersTable extends Table
                 'message' => '既に登録されているメールアドレスです。',
             ]);
 
-        $validator
-            ->scalar('password')
-            ->maxLength('password', 255)
+        //エディットの時は空欄を許可する
+        if($type == "edit"){
+            $validator
+                ->allowEmpty('password', function ($context) {
+                    return empty($context['data']['password']);
+            })
             ->minLength('password', 8, '8文字以上で登録してください。')
-            ->notEmptyString('password', '「パスワード」を入力してください')
             ->alphaNumeric('password', '「半角英数」で入力してください。');
-
+        }else{
+            $validator
+                ->scalar('password')
+                ->maxLength('password', 255)
+                ->minLength('password', 8, '8文字以上で登録してください。')
+                ->notEmptyString('password', '「パスワード」を入力してください')
+                ->alphaNumeric('password', '「半角英数」で入力してください。');
+        }
 
         return $validator;
     }
 
-    /**
-     * validation Update rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    /*    public function validationUpdate(Validator $id)
-    {
-        $validator
-            ->scalar('password')
-            ->maxLength('password', 255)
-            ->minLength('password', 8, '8文字以上で登録してください。')
-            ->notEmptyString('password', '「パスワード」を入力してください')
-            ->alphaNumeric('password', '「半角英数」で入力してください。');
-    } */
+
 
     /**
      * メールアドレス重複チェック
-     * 
+     *
      */
     public function sameEmailCheck($value, $context)
     {
-        $data = $this->find('all')->where(['email' => $value])->first();
+        if($context[ 'data' ][ 'id' ]){
+            $where = [ 'email'=>$value , 'id != '=>$context[ 'data' ][ 'id' ] ];
+        }else{
+            $where = [ 'email'=>$value ];
+        }
+        $data = $this->find('all')->where($where)->first();
         if (!empty($data)) {
             return false;
         } else {

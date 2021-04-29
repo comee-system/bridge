@@ -45,7 +45,7 @@ class LoginController extends AppController
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error(__('Invalid username or password, try again'));
+            $this->Flash->error(__('メールアドレス若しくはパスワードに誤りがあります'));
         }
         $this->set('crumbs', "on");
     }

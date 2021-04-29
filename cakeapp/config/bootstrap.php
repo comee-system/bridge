@@ -273,3 +273,9 @@ Configure::write('array_prefecture', [
 ]);
 
 Configure::write("array_status", ["0"=>"非公開","1" => "交渉中", "2" => "下書き"]);
+Configure::write("array_shop", [
+        1=>"ビルイン型店舗",
+        2=>"路面店",
+        3=>"商業施設型",
+        4=>"ロードサイド型店舗",
+    ]);

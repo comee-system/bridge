@@ -54,8 +54,9 @@ class UsersController extends AppController
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error(__('Invalid username or password, try again'));
+            $this->Flash->error(__('メールアドレス若しくはパスワードに誤りがあります'));
         }
+        return $this->redirect("/");
     }
     public function logout()
     {
@@ -88,17 +89,11 @@ class UsersController extends AppController
         if (!empty($this->Auth->user())) {
             return $this->redirect("/");
         }
+
+
         $user = $this->Users->newEntity();
         $this->___regist($user);
         $this->set('actionkey', "add");
-    }
-
-    /**
-     * 会員登録完了 fin
-     *
-     */
-    public function fin()
-    {
     }
 
 
@@ -115,20 +110,16 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => [],
         ]);
-        $post = explode("-", $user->post);
         $this->___regist($user, $id);
+        $this->__setUserVariable($user);
         $this->set("actionkey", "edit");
-        $this->set("post1", $post[0]);
-        $this->set("post2", $post[1]);
+        $this->set("password", "");
+
         $this->render("add");
         $this->set(compact('user'));
-
-
-        var_dump($user);
-
-        if ($this->request->is(['patch', 'post', 'put'])) {
+        /*
+        if ($this->request->is(['post'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
-
 
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('会員情報を更新しました。'));
@@ -136,34 +127,65 @@ class UsersController extends AppController
                 return $this->redirect(['action' => 'edit']);
             }
             $this->Flash->error(__('会員情報を更新出来ませんでした。'));
-        }
-        $this->set(compact('user'));
-    }
 
+        }
+
+        $this->set(compact('user'));
+        */
+    }
+    public function __setUserVariable($user){
+        $post = explode("-", $user->post);
+        $this->set("post1", $post[0]);
+        $this->set("post2", $post[1]);
+        $tel = explode("-", $user->tel);
+        $this->set("tel1", $tel[0]);
+        $this->set("tel2", $tel[1]);
+        $this->set("tel3", $tel[2]);
+        foreach($user->toArray() as $key=>$value){
+            $this->set($key, $value);
+        }
+
+    }
     /**
      * 会員登録・編集処理
      */
     public  function ___regist($user, $id = "")
     {
+
         if ($this->request->is('post')) {
+            $ref = $this->referer(null, true);
             //patchEntityに入るとvalidationが走る
-            $user   = $this->Users->patchEntity($user, $this->request->getData());
+            if($id){
+                $user   = $this->Users->patchEntity($user, $this->request->getData(),['validate'=>"edit"]);
+            }else{
+                $user   = $this->Users->patchEntity($user, $this->request->getData());
+            }
             $errors = $user->getErrors();
             $imp    = self::__getErrorMessage($errors);
 
             if (empty($errors)) {
+
                 $this->setPostString($user);
                 $this->setTelString($user);
-                $user->username = "usernameq";
+                $user->username = "username";
                 $user->role     = "sample";
-
+                //更新の際、空欄の場合はパスワードを変更しない
+                if($id > 0 && !$this->request->getData('password') ){
+                    unset($user->password);
+                }
                 if ($this->Users->save($user)) {
                     $this->mailsend->userRegistrationMail($user);
-                    $this->Flash->success(__('会員登録が完了しました。'));
-                    return $this->redirect("/users/fin");
+                    if($this->request->getParam("action") == "edit"){
+                        $this->Flash->success(__('会員情報編集が完了しました。'));
+                        return $this->redirect("/mypage/");
+                    }else{
+                        $this->Flash->success(__('会員登録が完了しました。'));
+                        return $this->redirect("/users/fin");
+                    }
                 } else {
                     $this->Flash->error(__('会員登録に失敗しました。'));
                 }
+
             }
             $this->Flash->error(__('会員登録に失敗しました。<br />' . $imp));
             foreach ($this->request->getData() as $key => $value) {
@@ -172,6 +194,15 @@ class UsersController extends AppController
         }
 
         $this->set(compact('user'));
+
+    }
+
+    /**
+     * 会員登録完了 fin
+     *
+     */
+    public function fin()
+    {
     }
 
 

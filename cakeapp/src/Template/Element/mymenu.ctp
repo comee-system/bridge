@@ -28,7 +28,7 @@
         <h6><i class="fas fa-list"></i> 会員情報の確認と変更</h6>
         <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
-                <a href="" class="h6 my-0 linkblock"><i class="fas fa-angle-right"></i> 会員情報の確認</a>
+                <a href="/users/edit/" class="h6 my-0 linkblock"><i class="fas fa-angle-right"></i> 会員情報の確認</a>
             </li>
         </ul>
     </div>
