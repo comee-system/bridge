@@ -128,21 +128,7 @@ class UsersController extends AppController
 
         $this->render("add");
         $this->set(compact('user'));
-        /*
-        if ($this->request->is(['post'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
 
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('会員情報を更新しました。'));
-
-                return $this->redirect(['action' => 'edit']);
-            }
-            $this->Flash->error(__('会員情報を更新出来ませんでした。'));
-
-        }
-
-        $this->set(compact('user'));
-        */
     }
     public function __setUserVariable($user){
         $post = explode("-", $user->post);

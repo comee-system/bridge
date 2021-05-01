@@ -6,7 +6,7 @@
                     <div class="form-bootstrapWizard">
                         <ul class="bootstrapWizard form-wizard">
                             <li class="active" data-target="#step1"> <span class="step">1</span>
-                            <span class="title"><?= __("STEP1 <br />物件情報入力") ?></span>
+                            <span class="title"><?= __("STEP1 <br />テナント情報入力") ?></span>
                             </li>
                             <?php $act2 = ""; if($type == "conf" || $type == "fin") $act2 = "active";?>
                             <li data-target="#step2" class="<?= $act2 ?>">
@@ -15,7 +15,7 @@
                             <?php $act3 = ""; if($type == "fin") $act3 = "active";?>
                             <li data-target="#step3" class="<?= $act3 ?>">
                             <span class="step">3</span>
-                            <span class="title"><?= __("STEP3 <br />物件登録完了") ?></span>  </li>
+                            <span class="title"><?= __("STEP3 <br />テナント情報登録完了") ?></span>  </li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>

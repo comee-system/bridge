@@ -34,9 +34,27 @@ class MypageController extends AppController
         $array_status = Configure::read("array_status");
         $array_prefecture = Configure::read('array_prefecture');
         $array_shop = Configure::read('array_shop');
+        $array_agreement = Configure::read('array_agreement');
+        $array_build = Configure::read('array_build');
+        $array_constract = Configure::read('array_constract');
+        $array_floor = Configure::read('array_floor');
+        $array_rent_money = Configure::read('array_rent_money');
+        $array_space_money = Configure::read('array_space_money');
+        $array_job = Configure::read('array_job');
+        $array_sub = Configure::read('array_sub');
+        $array_job_type = Configure::read('array_job_type');
         $this->set("array_status",$array_status);
         $this->set("array_prefecture",$array_prefecture);
         $this->set("array_shop",$array_shop);
+        $this->set("array_agreement",$array_agreement);
+        $this->set("array_build",$array_build);
+        $this->set("array_constract",$array_constract);
+        $this->set("array_floor",$array_floor);
+        $this->set("array_rent_money",$array_rent_money);
+        $this->set("array_space_money",$array_space_money);
+        $this->set("array_job",$array_job);
+        $this->set("array_sub",$array_sub);
+        $this->set("array_job_type",$array_job_type);
     }
 
     /**
@@ -58,6 +76,17 @@ class MypageController extends AppController
     }
     public function buildregist(){
 
+        $type = "";
+        //確認画面
+        if($this->request->getData("conf")){
+
+            $type = "conf";
+        }
+        //登録完了
+        if($this->request->getData("regist")){
+            $type = "fin";
+        }
+        $this->set("type",$type);
     }
     public function room(){
 
@@ -70,5 +99,30 @@ class MypageController extends AppController
     public function message($id){
 
         $this->render("room");
+    }
+
+    public function tenant(){
+
+    }
+    public function tenantregist(){
+
+        $type = "";
+        $button = "確認する";
+        $buttonname = "conf";
+        //確認画面
+        if($this->request->getData("conf")){
+
+            $button = "登録する";
+            $buttonname = "regist";
+            $type = "conf";
+        }
+        //登録完了
+        if($this->request->getData("regist")){
+            $type = "fin";
+        }
+
+        $this->set("type",$type);
+        $this->set("button",$button);
+        $this->set("buttonname",$buttonname);
     }
 }

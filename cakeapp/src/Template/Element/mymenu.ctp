@@ -19,10 +19,10 @@
         <h6><i class="fas fa-list"></i> テナント登録</h6>
         <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-condensed">
-                <a href="" class="h6 my-0 linkblock"><i class="fas fa-angle-right"></i> テナント一覧</a>
+                <a href="/mypage/tenant/" class="h6 my-0 linkblock"><i class="fas fa-angle-right"></i> テナント一覧</a>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-condensed">
-                <a href="" class="h6 my-0 linkblock"><i class="fas fa-angle-right"></i> テナント登録</a>
+                <a href="/mypage/tenant/regist/" class="h6 my-0 linkblock"><i class="fas fa-angle-right"></i> テナント登録</a>
             </li>
         </ul>
         <h6><i class="fas fa-list"></i> 会員情報の確認と変更</h6>

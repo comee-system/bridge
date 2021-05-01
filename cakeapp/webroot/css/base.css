@@ -35,6 +35,38 @@ ul.list-style-none {
 div.w-95 {
   width: 95%; }
 
+.switchbutton {
+  width: 100px; }
+  .switchbutton input[type="checkbox"] {
+    display: none; }
+  .switchbutton label {
+    display: block;
+    box-sizing: border-box;
+    text-align: left;
+    border: 2px solid #78bd78;
+    border-radius: 3px;
+    line-height: 1;
+    height: 30px; }
+  .switchbutton #sample2box {
+    display: inline-block;
+    height: 26px;
+    width: 50%;
+    background: #ddd;
+    transition: .3s; }
+  .switchbutton #sample2check:checked + label #sample2box {
+    transform: translateX(100%);
+    background: #78bd78; }
+
+.cardheight {
+  min-height: 300px; }
+
+div.radio label {
+  font-size: 1.2em;
+  margin-right: 20px; }
+  div.radio label input {
+    height: 15px;
+    width: 15px; }
+
 @media (max-width: 980px) {
   .title {
     font-size: 0.85rem; }

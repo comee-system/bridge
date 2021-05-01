@@ -30,7 +30,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
             <?= $this->element('mymenu',['type'=>$type]); ?>
             <div class="col-md-8 order-md-10 mb-4">
 
-                <?= $this->element("mystep") ?>
+                <?= $this->element("mysteptenant") ?>
 
                 <div class="row mt-5">
                     <?php if($type == "fin"): ?>
@@ -43,11 +43,12 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                         </div>
                     <?php else: ?>
                     <?= $this->Form->create(null, [
-                        'url' => ['action' => '/buildregist'],
+                        'url' => ['action' => '/tenant/regist/'],
                         'type' => 'post',
-                        'enctype' => 'multipart/form-data'
+                        'enctype' => 'multipart/form-data',
+                        'class' => 'w-100'
                     ]); ?>
-                    <?= $this->element("buildingregist")?>
+                    <?= $this->element("tenantregist")?>
                     <?= $this->Form->end() ?>
                     <?php endif; ?>
                 </div>
