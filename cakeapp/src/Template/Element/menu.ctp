@@ -3,7 +3,7 @@
         <ul class="nav flex-column">
           <li class="nav-item">
           <p>商談</p>
-            <a class="nav-link active" aria-current="page" href="#">
+            <a class="nav-link active" aria-current="page" href="/admin/meeting/">
               <span data-feather="home"></span>
               商談ルーム一覧
             </a>

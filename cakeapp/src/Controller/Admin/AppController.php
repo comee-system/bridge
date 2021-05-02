@@ -67,7 +67,7 @@ class AppController extends Controller
             ],
         ]);
 
-        $this->Auth->allow(['login','add']);
+     //   $this->Auth->allow(['login','add']);
 
 
         /*

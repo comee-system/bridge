@@ -37,6 +37,10 @@
   <!-- Google Font: Source Sans Pro -->
   <?= $this->Html->css('//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700') ?>
 
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
 </head>
 
 <body >
@@ -47,7 +51,6 @@
 <!-- Bootstrap 4 -->
 <?= $this->Html->script('/js/bootstrap.bundle.min.js') ?>
 <?= $this->Html->script('/js/feather.min.js') ?>
-<?= $this->Html->script('/js/Chart.min.js') ?>
 <?= $this->Html->script('/js/dashboard.js') ?>
 
 

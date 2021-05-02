@@ -272,7 +272,14 @@ Configure::write('array_prefecture', [
     '47' => '沖縄県'
 ]);
 
-Configure::write("array_status", ["0"=>"非公開","1" => "交渉中", "2" => "下書き"]);
+Configure::write("array_status", [
+    "0"=>"非公開",
+    "1" => "交渉中",
+    "2" => "公開中",
+    "3" => "交渉中止",
+    "4" => "交渉成立",
+    "5" => "下書き",
+    ]);
 Configure::write("array_shop", [
         1=>"ビルイン型店舗",
         2=>"路面店",
