@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAEQ,8BAAE;EACE,UAAU,EAAE,MAAM;EAClB,MAAM,EAAC,cAAc;EACrB,MAAM,EAAC,GAAG;EACV,aAAa,EAAE,IAAI;EAEnB,qCAAQ;IACJ,gBAAgB,EAAC,IAAI;EAEzB,gCAAE;IACE,eAAe,EAAE,IAAI;IACrB,OAAO,EAAC,IAAI",
+"sources": ["../sass_folder/admin.scss"],
 "names": [],
 "file": "admin.css"
 }

@@ -13,9 +13,13 @@ use App\Controller\Admin\AppController;
 class UsersController extends AppController
 {
 
+    public $paginate = [
+        'limit' => 2,
+    ];
     public function initialize()
     {
       parent::initialize();
+
       //レイアウトの指定
       $this->viewBuilder()->setLayout('Admin/default');
     }
