@@ -32,7 +32,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 
                 <?= $this->element("mystep") ?>
 
-                <div class="row mt-5">
+                <div class="row mt-5 ">
                     <?php if($type == "fin"): ?>
                         <div class="card-deck col-md-12 text-left">
                             <div class="card shadow-sm cardheight">
@@ -45,9 +45,10 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                     <?= $this->Form->create(null, [
                         'url' => ['action' => '/buildregist'],
                         'type' => 'post',
-                        'enctype' => 'multipart/form-data'
+                        'enctype' => 'multipart/form-data',
+                        "class"=>"w-100"
                     ]); ?>
-                    <?= $this->element("buildingregist")?>
+                    <?= $this->element("buildingregist",['admin'=>false])?>
                     <?= $this->Form->end() ?>
                     <?php endif; ?>
                 </div>

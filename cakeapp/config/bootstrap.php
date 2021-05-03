@@ -358,7 +358,10 @@ Configure::write("array_sub", [
         4=>"サブ4",
         5=>"サブ5",
     ]);
-
+Configure::write("array_open",[
+    1=>"公開",
+    0=>"非公開"
+]);
 Configure::write("array_job_type", [
     1=>[
         1=>'その他1',

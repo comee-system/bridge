@@ -14,7 +14,7 @@ class UsersController extends AppController
 {
 
     public $paginate = [
-        'limit' => 2,
+        'limit' => 30,
     ];
     public function initialize()
     {
@@ -52,6 +52,20 @@ class UsersController extends AppController
     {
         return $this->redirect($this->Auth->logout());
     }
+
+    public function import(){
+        if ($this->request->is('post')) {
+            //CSVアップロード
+
+
+        }
+    }
+
+
+
+
+
+
 
     /**
      * View method

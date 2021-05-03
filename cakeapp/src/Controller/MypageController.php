@@ -19,6 +19,10 @@ use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 use Cake\Event\Event;
+use Cake\Datasource\ConnectionManager;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
+use RuntimeException;
 /**
  * Static content controller
  *
@@ -31,6 +35,12 @@ class MypageController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
+        $this->loadModel("Tenants");
+        $this->loadModel("TenantJob");
+        $this->loadModel("TenantHope");
+        $this->loadModel("Builds");
+        $this->upload = $this->loadComponent("Upload");
+
         $array_status = Configure::read("array_status");
         $array_prefecture = Configure::read('array_prefecture');
         $array_shop = Configure::read('array_shop');
@@ -43,6 +53,7 @@ class MypageController extends AppController
         $array_job = Configure::read('array_job');
         $array_sub = Configure::read('array_sub');
         $array_job_type = Configure::read('array_job_type');
+        $array_open = Configure::read('array_open');
         $this->set("array_status",$array_status);
         $this->set("array_prefecture",$array_prefecture);
         $this->set("array_shop",$array_shop);
@@ -55,6 +66,7 @@ class MypageController extends AppController
         $this->set("array_job",$array_job);
         $this->set("array_sub",$array_sub);
         $this->set("array_job_type",$array_job_type);
+        $this->set("array_open",$array_open);
     }
 
     /**
@@ -77,16 +89,49 @@ class MypageController extends AppController
     public function buildregist(){
 
         $type = "";
+        $error = [];
+        $uploadfile = "";
         //確認画面
-        if($this->request->getData("conf")){
+        if(
+            $this->request->getData("conf") ||
+            $this->request->getData("regist")
+        ){
+            //エラーチェック
+            $build = $this->Builds->newEntity();
+            $build = $this->Builds->patchEntity($build, $this->request->getData());
+            $error = $build->errors();
+            if(!$build->errors()){
 
-            $type = "conf";
+                $dir = realpath(WWW_ROOT . "/upload");
+                $limitFileSize = 1024 * 1024;
+                try {
+                   $uploadfile = $this->Upload->file_upload($this->request->getData('fileupload'), $dir, $limitFileSize);
+                } catch (RuntimeException $e){
+                    $this->Flash->error(__('ファイルのアップロードができませんでした.'));
+                    $this->Flash->error(__($e->getMessage()));
+                }
+
+                $type = "conf";
+                //登録完了
+                if($this->request->getData("regist")){
+                    $build->user_id = $this->Auth->user('id');
+                    $this->Builds->save($build);
+                    $type = "fin";
+                    return $this->redirect(['action' => '/buildfin']);
+                }
+            }
+
         }
-        //登録完了
-        if($this->request->getData("regist")){
-            $type = "fin";
-        }
+
         $this->set("type",$type);
+        $this->set("error",$error);
+        $this->set("uploadfile",$uploadfile);
+    }
+    public function buildfin(){
+
+        $this->set("type","fin");
+        $this->render("buildregist");
+
     }
     public function room(){
 
@@ -110,19 +155,80 @@ class MypageController extends AppController
         $button = "確認する";
         $buttonname = "conf";
         //確認画面
-        if($this->request->getData("conf")){
+        $error = [];
+        $error_hope = [];
+        $error_job = [];
 
-            $button = "登録する";
-            $buttonname = "regist";
-            $type = "conf";
+        if(
+            $this->request->getData("conf") ||
+            $this->request->getData("regist")
+        ){
+            //エラーチェック
+            $tenant = $this->Tenants->newEntity();
+            $tenant = $this->Tenants->patchEntity($tenant, $this->request->getData());
+            $TenantJob = $this->TenantJob->newEntity();
+            $TenantJob = $this->TenantJob->patchEntity($TenantJob, $this->request->getData());
+            $TenantHope = $this->TenantHope->newEntity();
+            $TenantHope = $this->TenantHope->patchEntity($TenantHope, $this->request->getData());
+            $error = $tenant->errors();
+            $error_hope = $TenantHope->errors();
+            $error_job = $TenantJob->errors();
+            if(
+                !$tenant->errors() &&
+                !$TenantJob->errors() &&
+                !$TenantHope->errors()
+            ){
+                $button = "登録する";
+                $buttonname = "regist";
+                $type = "conf";
+                //登録完了
+                if($this->request->getData("regist")){
+                    $connection = ConnectionManager::get('default');
+                    $connection->begin();
+                    try {
+                        $tenant->user_id = $this->Auth->user('id');
+                        $this->Tenants->save($tenant);
+                        foreach($this->request->getData("pref") as $key=>$value){
+                            $TenantHope = $this->TenantHope->newEntity();
+                            $TenantHope->pref = $key;
+                            $TenantHope->tenant_id = $tenant->id;
+                            $this->TenantHope->save($TenantHope);
+                        }
+                        foreach($this->request->getData("jobtype") as $key=>$value){
+                            foreach($value as $k=>$val){
+                                $TenantJob = $this->TenantJob->newEntity();
+                                $TenantJob->jobtype = $k;
+                                $TenantJob->tenant_id = $tenant->id;
+                                $this->TenantJob->save($TenantJob);
+                            }
+                        }
+                        $connection->commit();
+                        //$type = "fin";
+                        return $this->redirect(['action' => '/tenant/fin']);
+                    }catch(\Exception $e){
+                        echo "error";
+                        $connection->rollback();
+                        exit();
+                    }
+
+                }
+
+            }
         }
-        //登録完了
-        if($this->request->getData("regist")){
-            $type = "fin";
-        }
+
 
         $this->set("type",$type);
         $this->set("button",$button);
         $this->set("buttonname",$buttonname);
+        $this->set("error",$error);
+        $this->set("error_hope",$error_hope);
+        $this->set("error_job",$error_job);
+    }
+    public function tenantfin(){
+
+        $type = "fin";
+        $this->set("type",$type);
+        $this->render("tenantregist");
+
     }
 }
