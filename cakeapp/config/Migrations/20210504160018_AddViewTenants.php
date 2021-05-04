@@ -12,7 +12,7 @@ class AddViewTenants extends AbstractMigration
      */
     public function change()
     {
-        $count = $this->execute('drop view view_tenants;');
+        //$count = $this->execute('drop view view_tenants;');
 
         $count = $this->execute(
             '
