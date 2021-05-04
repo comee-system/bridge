@@ -19,6 +19,8 @@ use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 use Cake\Event\Event;
+use Cake\Routing\Router;
+
 /**
  * Static content controller
  *
@@ -31,7 +33,11 @@ class PagesController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
+        $this->loadModel("Users");
+
         $this->Auth->allow('top');
+        $this->user = $this->Auth->user();
+
     }
 
     /**
@@ -45,6 +51,14 @@ class PagesController extends AppController
      * @throws \Cake\View\Exception\MissingTemplateException In debug mode.
      */
     public function top(){
+        //ログイン済みで同意していないときは編集画面に遷移する
+        if(!empty($this->user['id'])){
+            $user = $this->Users->find('all')->select(['id','agree'])->where(['id'=>$this->user[ 'id' ]])->first();
+
+            if(!$user->agree){
+                return $this->redirect(['controller'=>"/",'action'=>'/users/edit/']);
+            }
+        }
 
 
     }

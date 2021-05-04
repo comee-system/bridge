@@ -104,4 +104,19 @@ class MailSendComponent extends Component
             ])
             ->send();
     }
+    public function userImportMail($user)
+    {
+        $email = $user['email'];
+        $this->email
+            ->template('userimport')
+            ->emailFormat('text')
+            ->to($email)
+            ->from(D_ADMIN_MAIL)
+            ->subject("【Bridge】会員仮登録のお知らせ")
+            ->viewVars([
+                'name' => $user['name'],
+                'text' => $user['text'],
+            ])
+            ->send();
+    }
 }

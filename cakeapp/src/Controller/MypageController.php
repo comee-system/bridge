@@ -32,6 +32,13 @@ use RuntimeException;
  */
 class MypageController extends AppController
 {
+    public $paginate = [
+        'limit' => 3,
+    ];
+    public $helpers = [
+        'Paginator' => ['templates' => 'paginator-templates']
+    ];
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -39,10 +46,15 @@ class MypageController extends AppController
         $this->loadModel("TenantJob");
         $this->loadModel("TenantHope");
         $this->loadModel("Builds");
+        $this->loadModel("ViewTenants");
+        $this->loadModel("Users");
+        $this->loadComponent('Paginator');
         $this->upload = $this->loadComponent("Upload");
+        $this->password = $this->loadComponent("Password");
 
         $array_status = Configure::read("array_status");
         $array_prefecture = Configure::read('array_prefecture');
+        $this->array_prefecture = $array_prefecture;
         $array_shop = Configure::read('array_shop');
         $array_agreement = Configure::read('array_agreement');
         $array_build = Configure::read('array_build');
@@ -147,9 +159,37 @@ class MypageController extends AppController
     }
 
     public function tenant(){
+        $user = $this->Auth->user();
+        $tenant = $this->ViewTenants->find()->where(['user_id'=>$user[ 'id' ]]);
+        $tenant = $this->paginate($tenant);
 
+        $tenant = $this->__setPref($tenant);
+        $tenant = $this->__setRentJp($tenant);
+
+        $this->set(compact('tenant'));
+        $this->set("compnent",$this->password);
     }
-    public function tenantregist(){
+    public function tenantedit($id){
+        $user = $this->Auth->user();
+        //テナント更新画面
+        $tenant = $this->ViewTenants->find()
+            ->where([
+                'id'=>$id,
+                'user_id'=>$user['id'],
+            ])
+            ->first();
+        $prefs = [];
+        if($tenant->prefs) $prefs = explode(",",$tenant->prefs);
+        $jobtypes = [];
+        if($tenant->jobtypes) $jobtypes = explode(",",$tenant->jobtypes);
+        $this->tenantregist($id);
+        $this->set(compact('tenant'));
+        $this->set("id",$id);
+        $this->set("prefs",$prefs);
+        $this->set("jobtypes",$jobtypes);
+        $this->render("tenantregist");
+    }
+    public function tenantregist($id = ""){
 
         $type = "";
         $button = "確認する";
@@ -164,7 +204,13 @@ class MypageController extends AppController
             $this->request->getData("regist")
         ){
             //エラーチェック
-            $tenant = $this->Tenants->newEntity();
+            if ($id >0 ) {
+                $tenant = $this->Tenants->get($id, [
+                    'contain' => [],
+                ]);
+            } else {
+                $tenant = $this->Tenants->newEntity();
+            }
             $tenant = $this->Tenants->patchEntity($tenant, $this->request->getData());
             $TenantJob = $this->TenantJob->newEntity();
             $TenantJob = $this->TenantJob->patchEntity($TenantJob, $this->request->getData());
@@ -188,6 +234,11 @@ class MypageController extends AppController
                     try {
                         $tenant->user_id = $this->Auth->user('id');
                         $this->Tenants->save($tenant);
+                        //IDがあるときはTenantHopeとTenantJobのデータを削除する
+                        if($id > 0 ){
+                            $this->TenantHope->deleteAll(['tenant_id'=>$tenant->id]);
+                            $this->TenantJob->deleteAll(['tenant_id'=>$tenant->id]);
+                        }
                         foreach($this->request->getData("pref") as $key=>$value){
                             $TenantHope = $this->TenantHope->newEntity();
                             $TenantHope->pref = $key;
@@ -202,6 +253,14 @@ class MypageController extends AppController
                                 $this->TenantJob->save($TenantJob);
                             }
                         }
+
+                        //usersのimportを0にする
+                        $user = $this->Users->get($this->Auth->user('id'));
+                        $set = [];
+                        $set['import'] = 0;
+                        $user = $this->Users->patchEntity($user, $set,['validate'=>false]);
+                        $this->Users->save($user);
+
                         $connection->commit();
                         //$type = "fin";
                         return $this->redirect(['action' => '/tenant/fin']);
@@ -223,6 +282,7 @@ class MypageController extends AppController
         $this->set("error",$error);
         $this->set("error_hope",$error_hope);
         $this->set("error_job",$error_job);
+        $this->set("id",$id);
     }
     public function tenantfin(){
 
@@ -230,5 +290,26 @@ class MypageController extends AppController
         $this->set("type",$type);
         $this->render("tenantregist");
 
+    }
+    public function __setPref($dat){
+        $data = $dat->toArray();
+        foreach($data as $key=>$value){
+            $list = [];
+            $ex = explode(",",$value[ 'prefs' ]);
+            foreach($ex as $k=>$val){
+                if(isset($this->array_prefecture[$val])){
+                    $list[] = $this->array_prefecture[$val];
+                }
+            }
+            if($list) $data[$key]['prefline'] = implode(",",$list);
+        }
+      return $data;
+    }
+    public function __setRentJp($data){
+        foreach($data as $key=>$value){
+            $data[$key]['rent_money_min_jp'] = ($value[ 'rent_money_min' ]/10000)." 万円";
+            $data[$key]['rent_money_max_jp'] = ($value[ 'rent_money_max' ]/10000)." 万円";
+        }
+      return $data;
     }
 }

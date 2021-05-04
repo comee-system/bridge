@@ -29,6 +29,7 @@ class UsersController extends AppController
         //都道府県読み込み
         $array_prefecture = Configure::read("array_prefecture");
         $this->set('array_prefecture', $array_prefecture);
+        $this->loadModel("Tenants");
 
         //パンくず
         $this->set('crumbs', "on");
@@ -131,10 +132,13 @@ class UsersController extends AppController
 
     }
     public function __setUserVariable($user){
-        $post = explode("-", $user->post);
+        $post[0] = "";
+        $post[1] = "";
+        if($user->post) $post = explode("-", $user->post);
         $this->set("post1", $post[0]);
         $this->set("post2", $post[1]);
-        $tel = explode("-", $user->tel);
+        $tel[0] = $tel[1] = $tel[2] = "";
+        if($user->tel) $tel = explode("-", $user->tel);
         $this->set("tel1", $tel[0]);
         $this->set("tel2", $tel[1]);
         $this->set("tel3", $tel[2]);
@@ -159,22 +163,29 @@ class UsersController extends AppController
             }
             $errors = $user->getErrors();
             $imp    = self::__getErrorMessage($errors);
-
             if (empty($errors)) {
 
                 $this->setPostString($user);
                 $this->setTelString($user);
-                $user->username = "username";
+                $user->username = "username1";
                 $user->role     = "sample";
                 //更新の際、空欄の場合はパスワードを変更しない
                 if($id > 0 && !$this->request->getData('password') ){
                     unset($user->password);
                 }
                 if ($this->Users->save($user)) {
-                    $this->mailsend->userRegistrationMail($user);
+                    if(!$id){
+                        $this->mailsend->userRegistrationMail($user);
+                    }
                     if($this->request->getParam("action") == "edit"){
-                        $this->Flash->success(__('会員情報編集が完了しました。'));
-                        return $this->redirect("/mypage/");
+                        //インポートされた仮登録データについては、テナントページに遷移する
+                        if($user->import == 1){
+                            $tenant = $this->Tenants->find()->where(["user_id"=>$user->id])->first();
+                            return $this->redirect("/mypage/tenantedit/".$tenant->id);
+                        }else{
+                            $this->Flash->success(__('会員情報編集が完了しました。'));
+                            return $this->redirect("/mypage/");
+                        }
                     }else{
                         $this->Flash->success(__('会員登録が完了しました。'));
                         return $this->redirect("/users/fin");

@@ -46,6 +46,19 @@ class UsersTable extends Table
     {
        return $this->validationDefault($validator,"edit");
     }
+    public function validationImport(Validator $validator)
+    {
+        $validator
+            ->maxLength('email', 255)
+            ->notEmptyString('email', '「メールアドレス」を入力してください。')
+            ->email('email', 'false', '「メールアドレス」の形式で入力してください。')
+            ->add('email', 'custom', [
+                'rule' => [$this, 'sameEmailCheck'],
+                'message' => '既に登録されているメールアドレス若しくは重複データです。',
+            ]);
+
+        return $validator;
+    }
     /**
      * Default validation rules.
      *
@@ -160,6 +173,10 @@ class UsersTable extends Table
                 ->notEmptyString('password', '「パスワード」を入力してください')
                 ->alphaNumeric('password', '「半角英数」で入力してください。');
         }
+        $validator
+            ->scalar('agree')
+            ->notEmptyString('agree', 'create','「同意する」を選択してください。');
+
 
         return $validator;
     }
@@ -172,13 +189,13 @@ class UsersTable extends Table
      */
     public function sameEmailCheck($value, $context)
     {
-        if($context[ 'data' ][ 'id' ]){
+        if(isset($context[ 'data' ][ 'id' ]) && $context[ 'data' ][ 'id' ]){
             $where = [ 'email'=>$value , 'id != '=>$context[ 'data' ][ 'id' ] ];
         }else{
             $where = [ 'email'=>$value ];
         }
         $data = $this->find('all')->where($where)->first();
-        if (!empty($data)) {
+        if ($data) {
             return false;
         } else {
             return true;

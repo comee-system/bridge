@@ -15,6 +15,10 @@ class PasswordComponent extends Component
             return (new DefaultPasswordHasher)->hash($password);
         }
     }
-
+    //IDの補正
+    public function setId($str){
+        $string = sprintf("S%08d",$str);
+        return $string;
+    }
 
 }

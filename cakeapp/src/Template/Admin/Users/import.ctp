@@ -22,11 +22,12 @@
             <div class="card-body">
                 <?= $this->Form->create("",[
                     "method"=>"post",
-                    "action"=>""
+                    "action"=>"",
+                    "enctype" => "multipart/form-data"
                 ]);?>
                 <div class="row">
                     <div class="col-md-3">
-                        <?= $this->Form->control("氏名",[
+                        <?= $this->Form->control("ファイル",[
                             "type"=>"file",
                             "name"=>"file",
                         ])?>

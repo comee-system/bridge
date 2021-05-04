@@ -48,6 +48,8 @@ class User extends Entity
         'tel3' => true,
         'email' => true,
         'password' => true,
+        'agree' => true,
+        'import' => true,
         'role' => true,
         'created' => true,
         'modified' => true,

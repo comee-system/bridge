@@ -213,7 +213,7 @@ $this->Html->addCrumb('会員登録', '');
                         </ul>
                     </div>
                     <div class="alert alert-danger col-md-12 form-control text-center" role="alert">
-                        <input type="checkbox" name="agree">
+                        <input type="checkbox" name="agree" value=1 >
                         <a href="http//google.com" target=_blank class="alert-link ">登録時の規約</a>
                         に同意する
                     </div>
