@@ -13,7 +13,7 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
-        <h1 class="h2">会員一覧</h1>
+        <h1 class="h2">テナント一覧</h1>
 
       </div>
       <?= $this->Flash->render() ?>
@@ -21,7 +21,7 @@
 
         <div class="card mt-3">
             <div class="card-body">
-                <h5>会員検索</h5>
+                <h5>テナント検索</h5>
                 <?= $this->Form->create("",[
                     "method"=>"post",
                     "action"=>"/admin/users"
@@ -56,23 +56,32 @@
           <thead>
             <tr>
               <th>機能</th>
-              <th>名前</th>
+              <th>登録者</th>
               <th>メールアドレス</th>
-              <th>企業</th>
+              <th>名前</th>
               <th>登録日</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($users as $user): ?>
+            <?php foreach ($tenant as $value): ?>
             <tr>
               <td>
-                <a href="/admin/users/delete/<?= $user->id ?>" class="btn btn-danger confirm"  >削除</a>
-                <a href="/admin/users/edit/<?= $user->id ?>" class="btn btn-primary">編集</a>
+                <a href="/admin/users/delete/<?= $value->id ?>" class="btn btn-danger confirm"  >削除</a>
+                <a href="/admin/users/edit/<?= $value->id ?>" class="btn btn-primary">編集</a>
               </td>
-              <td><?= h($user->sei) ?><?= h($user->mei) ?></td>
-              <td><?= h($user->email) ?></td>
-              <td><?= h($user->busyo) ?></td>
-              <td><?= h(date("Y/m/d H:i:s",strtotime($user->created))) ?></td>
+              <td>
+                <?= h($value->Users['sei']) ?>
+                <?= h($value->Users['mei']) ?>
+              </td>
+              <td>
+                <?= h($value->Users['email']) ?>
+              </td>
+              <td>
+                <?= h($value->name) ?>
+              </td>
+              <td>
+                <?= h(date("Y/m/d H:i:s",strtotime($value->created))) ?>
+              </td>
             </tr>
             <?php endforeach; ?>
           </tbody>

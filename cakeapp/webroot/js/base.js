@@ -1,5 +1,10 @@
 $(function () {
-
+    $(".confirm").click(function(){
+        if(confirm("削除しますよろしいですか？")){
+            return true;
+        }
+        return false;
+    });
     //トップ画像の高さ
     $(this).topImageHeight();
     $(window).resize(function () {
@@ -37,10 +42,6 @@ $(function () {
 
 });
 $.fn.buttonCheck = function () {
-    //テスト用
-    $("#regist").attr("disabled", false);
-    return true;
-
     var _err = 0;
     var _sei = $("[name='sei']").val();
     var _mei = $("[name='mei']").val();

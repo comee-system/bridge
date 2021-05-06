@@ -273,12 +273,17 @@ Configure::write('array_prefecture', [
 ]);
 
 Configure::write("array_status", [
-    "0"=>"非公開",
+    "0" => "非公開",
     "1" => "交渉中",
     "2" => "公開中",
     "3" => "交渉中止",
     "4" => "交渉成立",
     "5" => "下書き",
+    ]);
+Configure::write("array_build_status", [
+    "0" => "未設定",
+    "1" => "交渉中",
+    "2" => "マッチング中",
     ]);
 Configure::write("array_shop", [
         1=>"ビルイン型店舗",
@@ -361,6 +366,24 @@ Configure::write("array_sub", [
 Configure::write("array_open",[
     1=>"公開",
     0=>"下書き"
+]);
+Configure::write("array_comment_status",[
+    1=>"admin",
+    2=>"user",
+]);
+Configure::write("array_code",[
+    1=>"build",
+    2=>"tenant",
+]);
+Configure::write("array_read",[
+    1=>"既読",
+    0=>"未読",
+]);
+Configure::write("array_response",[
+    0=>"未設定",
+    1=>"交渉中",
+    2=>"交渉成立",
+    3=>"交渉中止",
 ]);
 Configure::write("array_job_type", [
     1=>[

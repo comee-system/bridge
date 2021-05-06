@@ -21,10 +21,10 @@ class AddViewTenants extends AbstractMigration
                 t.*,
                 GROUP_CONCAT(DISTINCT th.pref) as prefs,
                 GROUP_CONCAT(DISTINCT tj.jobtype) as jobtypes
-            FROM bridge.tenants as t
+            FROM tenants as t
             LEFT JOIN tenant_hope as th ON t.id = th.tenant_id
             LEFT JOIN tenant_job as tj ON t.id = tj.tenant_id
-            WHERE t.status = 1
+            WHERE t.status != 0
             GROUP BY t.id
             '
         );

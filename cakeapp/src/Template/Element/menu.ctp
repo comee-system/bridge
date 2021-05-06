@@ -10,7 +10,7 @@
           </li>
           <li class="nav-item">
           <p>物件</p>
-            <a class="nav-link" href="/admin/build/">
+            <a class="nav-link" href="/admin/users/build/">
               <span data-feather="file"></span>
               物件一覧
             </a>
@@ -24,7 +24,7 @@
           </li>-->
           <li class="nav-item">
           <p>テナント登録</p>
-            <a class="nav-link" href="/admin/tenant/">
+            <a class="nav-link" href="/admin/users/tenant/">
               <span data-feather="shopping-cart"></span>
               テナント一覧
             </a>

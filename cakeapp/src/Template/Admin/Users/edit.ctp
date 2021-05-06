@@ -1,31 +1,27 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\User $user
+ * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $user->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
-    <fieldset>
-        <legend><?= __('Edit User') ?></legend>
-        <?php
-            echo $this->Form->control('username');
-            echo $this->Form->control('password');
-            echo $this->Form->control('role');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+
+<?php echo $this->element('admin_head'); ?>
+
+<div class="container-fluid">
+  <div class="row">
+  <?php echo $this->element('menu'); ?>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
+        <h1 class="h2">会員登録</h1>
+      </div>
+      <?= $this->Flash->render() ?>
+
+
+      <?= $this->element("useradd")?>
+
+
+
+    </main>
+  </div>
 </div>

@@ -43,7 +43,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                         </div>
                     <?php else: ?>
                     <?= $this->Form->create(null, [
-                        'url' => ['action' => '/buildregist'],
+                        'url' => ['action' => '/buildregist/'.$id],
                         'type' => 'post',
                         'enctype' => 'multipart/form-data',
                         "class"=>"w-100"

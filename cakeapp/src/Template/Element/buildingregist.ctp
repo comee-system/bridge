@@ -17,11 +17,23 @@
                                 "value"=>$this->request->getData('name')
                         ])?>
                     <?php else: ?>
+                        <?php
+                            $name = "";
+                            if ( $this->request->getData('name')) :
+                                $name = $this->request->getData("name");
+                            else:
+                                if(isset($build[ 'name' ]) && $build[ 'name' ]){
+                                    $name = $build[ 'name' ];
+                                }
+                            endif;
+                        ?>
+
                         <?= $this->Form->input("name",[
                             "type"=>"text",
                             "class"=>"form-control",
                             "label"=>false,
-                            "placeholder"=>__("物件名を入力してください。")
+                            "placeholder"=>__("物件名を入力してください。"),
+                            "default"=>$name
                         ]) ?>
                     <?php endif; ?>
                     <?php if(!empty($error[ "name" ][ "_empty" ])): ?>
@@ -66,6 +78,20 @@
                         ])?>
                     </div>
                 <?php else: ?>
+                    <?php
+                        $post1 = "";
+                        if ( $this->request->getData('post1')) :
+                            $post1 = $this->request->getData("post1");
+                        else:
+                            if(isset($build[ 'post1' ]) && $build[ 'post1' ]) $post1 = $build[ 'post1' ];
+                        endif;
+                        $post2 = "";
+                        if ( $this->request->getData('post2')) :
+                            $post1 = $this->request->getData("post2");
+                        else:
+                            if(isset($build[ 'post2' ]) && $build[ 'post2' ]) $post2 = $build[ 'post2' ];
+                        endif;
+                    ?>
                     <div class="col-8 ">
                         <div class="d-flex">
                             <div class="text-nowrap">郵便番号</div>
@@ -74,7 +100,8 @@
                                     "type"=>"text",
                                     "class"=>"form-control ",
                                     "label"=>false,
-                                    "maxlength"=>3
+                                    "maxlength"=>3,
+                                    "default"=>$post1
                                 ]) ?>
                             </div><div class="ml-2">-</div>
                             <div class="w-25 ml-2">
@@ -83,10 +110,19 @@
                                     "class"=>"form-control ",
                                     "label"=>false,
                                     "maxlength"=>4,
+                                    "default"=>$post2,
                                     "onKeyUp"=>"AjaxZip3.zip2addr('post1','post2','pref','city','space');"
                                 ]) ?>
                             </div>
                         </div>
+                        <?php
+                            $pref = "";
+                            if ( $this->request->getData('pref')) :
+                                $pref = $this->request->getData("pref");
+                            else:
+                                if(isset($build[ 'pref' ]) && $build[ 'pref' ]) $pref = $build[ 'pref' ];
+                            endif;
+                        ?>
                         <div class="row mt-2">
                             <div class="col-12">
                                 <label>都道府県</label>
@@ -94,33 +130,61 @@
                                     "class"=>"form-control ",
                                     "label"=>false,
                                     "empty"=>"選択してください",
+                                    "default"=>$pref
                                 ]) ?>
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-12">
+                                <?php
+                                    $city = "";
+                                    if ( $this->request->getData('city')) :
+                                        $city = $this->request->getData("city");
+                                    else:
+                                        if(isset($build[ 'city' ]) && $build[ 'city' ]) $city = $build[ 'city' ];
+                                    endif;
+                                ?>
                                 <?= $this->Form->input("city",[
                                     "type"=>"text",
                                     "class"=>"form-control ",
                                     "label"=>"市区町村",
+                                    "default"=>$city
                                 ]) ?>
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-12">
+                                <?php
+                                    $space = "";
+                                    if ( $this->request->getData('space')) :
+                                        $space = $this->request->getData("space");
+                                    else:
+                                        if(isset($build[ 'space' ]) && $build[ 'space' ]) $space = $build[ 'space' ];
+                                    endif;
+                                ?>
                                 <?= $this->Form->input("space",[
                                     "type"=>"text",
                                     "class"=>"form-control ",
                                     "label"=>"番地",
+                                    "default"=>$space
                                 ]) ?>
                             </div>
                         </div>
                         <div class="row mt-2">
                             <div class="col-12">
+                                <?php
+                                    $builds = "";
+                                    if ( $this->request->getData('build')) :
+                                        $builds = $this->request->getData("build");
+                                    else:
+                                        if(isset($build[ 'build' ]) && $build[ 'build' ]) $builds = $build[ 'build' ];
+                                    endif;
+                                ?>
                                 <?= $this->Form->input("build",[
                                     "type"=>"text",
                                     "class"=>"form-control ",
                                     "label"=>"ビル・マンション名",
+                                    "default"=>$builds
                                 ]) ?>
                             </div>
                         </div>
@@ -165,10 +229,19 @@
                                 "value"=>$this->request->getData('shop_type')
                         ])?>
                     <?php else: ?>
+                        <?php
+                            $shop_type = "";
+                            if ( $this->request->getData('shop_type')) :
+                                $shop_type = $this->request->getData("shop_type");
+                            else:
+                                if(isset($build[ 'shop_type' ]) && $build[ 'shop_type' ]) $shop_type = $build[ 'shop_type' ];
+                            endif;
+                        ?>
                         <?= $this->Form->select("shop_type", $array_shop,[
                             "class"=>"form-control ",
                             "label"=>false,
                             "empty"=>"選択してください",
+                            "default"=>$shop_type
                         ]) ?>
                     <?php endif; ?>
                     <?php if(!empty($error[ 'shop_type' ][ "_empty" ])): ?>
@@ -194,10 +267,19 @@
                                     "value"=>$this->request->getData('shop_area')
                             ])?>
                         <?php else: ?>
+                            <?php
+                                $shop_area = "";
+                                if ( $this->request->getData('shop_area')) :
+                                    $shop_area = $this->request->getData("shop_area");
+                                else:
+                                    if(isset($build[ 'shop_area' ]) && $build[ 'shop_area' ]) $shop_area = $build[ 'shop_area' ];
+                                endif;
+                            ?>
                             <?= $this->Form->input("shop_area",[
                                 "type"=>"text",
                                 "class"=>"form-control ",
                                 "label"=>false,
+                                "default"=>$shop_area
                             ]) ?>
                             <div class="mt-2 ml-2">坪</div>
                         <?php endif; ?>
@@ -222,10 +304,19 @@
                                 "value"=>$this->request->getData('agreement')
                         ])?>
                     <?php else: ?>
+                        <?php
+                            $agreement = "";
+                            if ( $this->request->getData('agreement')) :
+                                $agreement = $this->request->getData("agreement");
+                            else:
+                                if(isset($build[ 'agreement' ]) && $build[ 'agreement' ]) $agreement = $build[ 'agreement' ];
+                            endif;
+                        ?>
                         <?= $this->Form->select("agreement", $array_agreement,[
                             "class"=>"form-control ",
                             "label"=>false,
                             "empty"=>"選択してください",
+                            "default"=>$agreement
                         ]) ?>
                     <?php endif; ?>
                     <?php if(!empty($error[ 'agreement' ][ "_empty" ])): ?>
@@ -249,10 +340,19 @@
                                     "value"=>$this->request->getData('security_money')
                             ])?>
                         <?php else: ?>
+                            <?php
+                                $security_money = "";
+                                if ( $this->request->getData('security_money')) :
+                                    $security_money = $this->request->getData("security_money");
+                                else:
+                                    if(isset($build[ 'security_money' ]) && $build[ 'security_money' ]) $security_money = $build[ 'security_money' ];
+                                endif;
+                            ?>
                             <?= $this->Form->input("security_money",[
                                 "type"=>"text",
                                 "class"=>"form-control ",
                                 "label"=>false,
+                                "default"=>$security_money
                             ]) ?>
                         <div class="mt-2 ml-2">円</div>
                         <?php endif; ?>
@@ -279,10 +379,19 @@
                                     "value"=>$this->request->getData('rent_money')
                             ])?>
                         <?php else: ?>
+                            <?php
+                                $rent_money = "";
+                                if ( $this->request->getData('rent_money')) :
+                                    $rent_money = $this->request->getData("rent_money");
+                                else:
+                                    if(isset($build[ 'rent_money' ]) && $build[ 'rent_money' ]) $rent_money = $build[ 'rent_money' ];
+                                endif;
+                            ?>
                             <?= $this->Form->input("rent_money",[
                                 "type"=>"text",
                                 "class"=>"form-control ",
                                 "label"=>false,
+                                "default"=>$rent_money
                             ]) ?>
                             <div class="mt-2 ml-2">円</div>
                         <?php endif; ?>
@@ -308,10 +417,19 @@
                                 "value"=>$this->request->getData('common_money')
                         ])?>
                     <?php else: ?>
+                        <?php
+                            $common_money = "";
+                            if ( $this->request->getData('common_money')) :
+                                $common_money = $this->request->getData("common_money");
+                            else:
+                                if(isset($build[ 'common_money' ]) && $build[ 'common_money' ]) $common_money = $build[ 'common_money' ];
+                            endif;
+                        ?>
                         <?= $this->Form->input("common_money",[
                             "type"=>"text",
                             "class"=>"form-control ",
                             "label"=>false,
+                            "default"=>$common_money
                         ]) ?>
                         <div class="mt-2 ml-2">円</div>
                         <div class="col-12">
@@ -340,10 +458,19 @@
                                     "value"=>$this->request->getData('parking_count')
                             ])?>
                         <?php else: ?>
+                            <?php
+                                $parking_count = "";
+                                if ( $this->request->getData('parking_count')) :
+                                    $parking_count = $this->request->getData("parking_count");
+                                else:
+                                    if(isset($build[ 'parking_count' ]) && $build[ 'parking_count' ]) $parking_count = $build[ 'parking_count' ];
+                                endif;
+                            ?>
                             <?= $this->Form->input("parking_count",[
                                 "type"=>"text",
                                 "class"=>"form-control ",
                                 "label"=>false,
+                                "default"=>$parking_count
                             ]) ?>
                             <div class="mt-2 ml-2">台</div>
                         <?php endif; ?>
@@ -368,10 +495,19 @@
                                 "value"=>$this->request->getData('build_type')
                         ])?>
                     <?php else: ?>
+                        <?php
+                            $build_type = "";
+                            if ( $this->request->getData('build_type')) :
+                                $build_type = $this->request->getData("build_type");
+                            else:
+                                if(isset($build[ 'build_type' ]) && $build[ 'build_type' ]) $build_type = $build[ 'build_type' ];
+                            endif;
+                        ?>
                         <?= $this->Form->select("build_type", $array_build,[
                             "class"=>"form-control ",
                             "label"=>false,
                             "empty"=>"選択してください",
+                            "default"=>$build_type
                         ]) ?>
                     <?php endif; ?>
 
@@ -396,10 +532,19 @@
                                 "value"=>$this->request->getData('constract_type')
                         ])?>
                     <?php else: ?>
+                        <?php
+                            $constract_type = "";
+                            if ( $this->request->getData('constract_type')) :
+                                $constract_type = $this->request->getData("constract_type");
+                            else:
+                                if(isset($build[ 'constract_type' ]) && $build[ 'constract_type' ]) $constract_type = $build[ 'constract_type' ];
+                            endif;
+                        ?>
                         <?= $this->Form->select("constract_type", $array_constract,[
                             "class"=>"form-control ",
                             "label"=>false,
                             "empty"=>"選択してください",
+                            "default"=>$constract_type
                         ]) ?>
                     <?php endif; ?>
 
@@ -429,6 +574,15 @@
                                 "value"=>$this->request->getData("fileupload.name")
                         ])?>
                     <?php else: ?>
+                        <?php
+                            $uploadfile = "";
+                            $uploadfilename = "";
+                            if ( isset($build[ 'uploadfile' ]) && $build[ 'uploadfile' ]) :
+                                $uploadfile = $build[ 'uploadfile' ];
+                                $uploadfilename = $build[ 'uploadfilename' ];
+                            endif;
+                        ?>
+                        <a href="/upload/<?=$uploadfile?>" ><?=$uploadfilename?></a>
                         <p>添付するファイルを選択してください。<br />
                         <span class="text-danger">※登録できるファイルサイズは５MB以下までです。</span></p>
                         <div class="input-group">
@@ -449,11 +603,20 @@
                                 "value"=>$this->request->getData('other')
                         ])?>
                     <?php else: ?>
+                        <?php
+                            $other = "";
+                            if ( $this->request->getData('other')) :
+                                $other = $this->request->getData("other");
+                            else:
+                                if(isset($build[ 'other' ]) && $build[ 'other' ]) $other = $build[ 'other' ];
+                            endif;
+                        ?>
                         <?= $this->Form->input("other",[
                             "type"=>"textarea",
                             "class"=>"form-control w-100",
                             "name"=>"other",
                             "label"=>false,
+                            "default"=>$other
                         ]) ?>
                     <?php endif; ?>
                 </div>
@@ -476,6 +639,22 @@
                                     "value"=>$this->request->getData('end')
                             ])?>
                         <?php else: ?>
+                            <?php
+                                $start = "";
+                                if ( $this->request->getData('start')) :
+                                    $start = $this->request->getData("start");
+                                else:
+                                    if(isset($build[ 'start' ]) && $build[ 'start' ]) $start = date("Y/m/d",strtotime($build[ 'start' ]));
+                                endif;
+                            ?>
+                            <?php
+                                $end = "";
+                                if ( $this->request->getData('end')) :
+                                    $end = $this->request->getData("end");
+                                else:
+                                    if(isset($build[ 'end' ]) && $build[ 'end' ]) $end = date("Y/m/d",strtotime($build[ 'end' ]));
+                                endif;
+                            ?>
                             <div>
                                 <?= $this->Form->input("start",[
                                     "type"=>"text",
@@ -483,6 +662,7 @@
                                     "name"=>"start",
                                     "label"=>false,
                                     "placeholder"=>"未入力は指定なしとする",
+                                    "default"=>$start
                                 ]) ?>
                             </div>
                             <div class="mt-2">～</div>
@@ -493,6 +673,7 @@
                                     "name"=>"end",
                                     "label"=>false,
                                     "placeholder"=>"未入力は指定なしとする",
+                                    "default"=>$end
                                 ]) ?>
                             </div>
                         <?php endif; ?>
@@ -516,10 +697,19 @@
                                 "value"=>$this->request->getData('open')
                         ])?>
                     <?php else: ?>
+                        <?php
+                            $open = "";
+                            if ( $this->request->getData('open')) :
+                                $open = $this->request->getData("open");
+                            else:
+                                if(isset($build[ 'open' ]) && $build[ 'open' ]) $open = $build[ 'open' ];
+                            endif;
+                        ?>
                         <div class="switchbutton" id="makeImg">
                             <?= $this->Form->checkbox("open",[
                                 "id"=>"sample2check",
-                                "value"=>1
+                                "value"=>1,
+                                "default"=>$open
                             ])?>
                             <label for="sample2check">
                             <div id="sample2box"></div>

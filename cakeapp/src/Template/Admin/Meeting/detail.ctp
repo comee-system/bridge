@@ -25,8 +25,8 @@
                 ])?>
                 <div class="row">
                     <div class="col-md-12">
-                        <p>ID : S210316</p>
-                        <p class="h5">表参道のお店</p>
+                        <p>ID : <?= $compnent->setId($builds->id) ?></p>
+                        <p class="h5"><?= h($builds->name) ?></p>
                     </div>
                     <table class="table table-bordered">
                         <tr class="text-center bg-secondary text-white">
@@ -38,33 +38,40 @@
                             <th>募集開始日</th>
                         </tr>
                         <tr>
-                            <td>〇〇企業</td>
-                            <td>東京都</td>
-                            <td>30坪</td>
-                            <td>交渉中</td>
-                            <td>2021/05/01</td>
-                            <td>2021/05/05</td>
+                            <td><?= h($builds->Users['busyo']) ?></td>
+                            <td><?= h($array_prefecture[$builds->pref]) ?></td>
+                            <td><?= h($builds->shop_area) ?>坪</td>
+                            <td><?= h($array_build_status[$builds->build_status]) ?></td>
+                            <td><?= h(date("Y/m/d",strtotime($builds->created))) ?></td>
+                            <td><?= h(date("Y/m/d",strtotime($builds->start))) ?></td>
                         </tr>
                     </table>
                 </div>
                 <?= $this->Form->end(); ?>
             </div>
         </div>
-        <div class="card mb-4 shadow-sm">
+        <div class="text-right">
+                <a href="/admin/meeting/room/build/<?=$build_id?>" class="btn btn-success text-white">担当者商談ルーム</a>
+        </div>
+        <div class="card mb-4 mt-2 shadow-sm">
             <div class="card-body">
                 <div class="row">
                     <h5>物件担当者</h5>
                     <div class="col-md-2">
-                        <span class="badge badge-warning">未読</span>
+                        <span class="badge badge-warning"><?= h($array_read[$buildcomment->readflag]) ?></span>
                     </div>
                     <div class="col-md-4">
-                        〇〇さん
-                        <p>ご案内いたします。</p>
+                        <p><?= nl2br($buildcomment->comment) ?></p>
                     </div>
                     <div class="col-md-6 text-right">
-                        2021/05/01 07:00:00
+                        <?= h(date("Y/m/d h:i:s",strtotime($buildcomment->created))) ?>
                     </div>
                 </div>
+            </div>
+            <div class="card-footer">
+                <?php if($buildcomment->file): ?>
+                <a href="<?=h($buildcomment->file)?>" class="btn btn-warning text-white" ><?=h($buildcomment->filename)?></a>
+                <?php endif; ?>
             </div>
         </div>
 

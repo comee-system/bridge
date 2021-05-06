@@ -90,6 +90,38 @@ div.radio{
         }
     }
 }
+
+blockquote {
+	position: relative;
+	z-index: 1;
+	margin: 0;
+	padding: 20px 60px;
+	border-radius: 10px;
+	background: #fff;
+}
+blockquote:before {
+	display: inline-block;
+	position: absolute;
+	top: 0px;
+	left: 20px;
+	z-index: 10;
+	content: "”";
+	color: #ddd;
+	font-size: 500%;
+}
+blockquote:after {
+	display: inline-block;
+	position: absolute;
+	top: 0px;
+	right: 20px;
+	content: "”";
+	color: #ddd;
+	font-size: 500%;
+}
+	blockquote p {
+		margin: 0;
+	}
+
 @media (max-width: 980px) {
     .title {
         font-size: 0.85rem;

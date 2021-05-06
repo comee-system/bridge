@@ -48,6 +48,7 @@ class MypageController extends AppController
         $this->loadModel("Builds");
         $this->loadModel("ViewTenants");
         $this->loadModel("Users");
+        $this->loadModel("Comments");
         $this->loadComponent('Paginator');
         $this->upload = $this->loadComponent("Upload");
         $this->password = $this->loadComponent("Password");
@@ -66,6 +67,10 @@ class MypageController extends AppController
         $array_sub = Configure::read('array_sub');
         $array_job_type = Configure::read('array_job_type');
         $array_open = Configure::read('array_open');
+        $array_build_status = Configure::read('array_build_status');
+        $this->array_response = Configure::read('array_response');
+        $this->array_code = Configure::read('array_code');
+        $this->array_read = Configure::read('array_read');
         $this->set("array_status",$array_status);
         $this->set("array_prefecture",$array_prefecture);
         $this->set("array_shop",$array_shop);
@@ -79,6 +84,10 @@ class MypageController extends AppController
         $this->set("array_sub",$array_sub);
         $this->set("array_job_type",$array_job_type);
         $this->set("array_open",$array_open);
+        $this->set("array_build_status",$array_build_status);
+        $this->set("array_code",$this->array_code);
+        $this->set("array_response",$this->array_response);
+        $this->set("array_read",$this->array_read);
     }
 
     /**
@@ -92,41 +101,73 @@ class MypageController extends AppController
      * @throws \Cake\View\Exception\MissingTemplateException In debug mode.
      */
     public function index(){
+        $user = $this->Auth->user();
+        $builds = $this->Builds->find()->where([
+            "user_id"=>$user[ 'id' ]
+        ]);
+        $builds = $this->paginate($builds);
 
+        $this->set(compact('builds'));
+        $this->set("compnent",$this->password);
 
     }
     public function buildlist(){
+        $user = $this->Auth->user();
+        $builds = $this->Builds->find()->where([
+            "user_id"=>$user[ 'id' ]
+        ]);
+        $builds = $this->paginate($builds);
+
+        $this->set(compact('builds'));
+        $this->set("compnent",$this->password);
 
     }
-    public function buildregist(){
+    public function buildregist($id = ""){
+
 
         $type = "";
         $error = [];
+        $setUploadfile = "";
+        $setUploadfilename = "";
         $uploadfile = "";
+        if($id){
+            $build = $this->Builds->get($id);
+            $setUploadfile = $build->uploadfile;
+            $setUploadfilename = $build->uploadfilename;
+        }else{
+            $build = $this->Builds->newEntity();
+        }
         //確認画面
         if(
             $this->request->getData("conf") ||
             $this->request->getData("regist")
         ){
             //エラーチェック
-            $build = $this->Builds->newEntity();
+
             $build = $this->Builds->patchEntity($build, $this->request->getData());
             $error = $build->errors();
             if(!$build->errors()){
+                if($this->request->getData('fileupload')){
+                    $dir = realpath(WWW_ROOT . "/upload");
+                    $limitFileSize = 1024 * 1024;
+                    try {
+                    $uploadfile = $this->Upload->file_upload($this->request->getData('fileupload'), $dir, $limitFileSize);
 
-                $dir = realpath(WWW_ROOT . "/upload");
-                $limitFileSize = 1024 * 1024;
-                try {
-                   $uploadfile = $this->Upload->file_upload($this->request->getData('fileupload'), $dir, $limitFileSize);
-                } catch (RuntimeException $e){
-                    $this->Flash->error(__('ファイルのアップロードができませんでした.'));
-                    $this->Flash->error(__($e->getMessage()));
+                    } catch (RuntimeException $e){
+                        $this->Flash->error(__('ファイルのアップロードができませんでした.'));
+                        $this->Flash->error(__($e->getMessage()));
+                    }
                 }
-
                 $type = "conf";
                 //登録完了
                 if($this->request->getData("regist")){
                     $build->user_id = $this->Auth->user('id');
+
+                    if(empty($this->request->getData('uploadfile'))){
+                       $build->uploadfile = $setUploadfile;
+                       $build->uploadfilename = $setUploadfilename;
+                    }
+
                     $this->Builds->save($build);
                     $type = "fin";
                     return $this->redirect(['action' => '/buildfin']);
@@ -135,6 +176,8 @@ class MypageController extends AppController
 
         }
 
+        $this->set("id",$id);
+        $this->set("build",$build);
         $this->set("type",$type);
         $this->set("error",$error);
         $this->set("uploadfile",$uploadfile);
@@ -145,7 +188,41 @@ class MypageController extends AppController
         $this->render("buildregist");
 
     }
-    public function room(){
+    public function room($id){
+
+        $user = $this->Auth->user();
+        $builds = $this->Builds->find()->where([
+            "user_id"=>$user[ 'id' ],
+            "id"=>$id
+        ])->first();
+        if ($this->request->is('post')) {
+            $comments = $this->Comments->newEntity();
+            $comments = $this->Comments->patchEntity($comments, $this->request->getData());
+            $comments->response = 2; //1:admin 2:user
+            $comments->code = 1; //1.build 2.tenant
+            $comments->build_id = $id;
+            $comments->user_id = $user[ 'id' ];
+            //ファイルのアップロード
+            if($this->request->getData('upload')){
+                $dir = realpath(WWW_ROOT . "/comment");
+                $limitFileSize = 1024 * 1024;
+                try {
+                $uploadfile = $this->Upload->file_upload($this->request->getData('upload'), $dir, $limitFileSize);
+                $comments->file = $uploadfile;
+                $comments->filename = $this->request->getData('upload')['name'];
+                } catch (RuntimeException $e){
+                    $this->Flash->error(__('ファイルのアップロードができませんでした.'));
+                    $this->Flash->error(__($e->getMessage()));
+                }
+            }
+            if ($this->Comments->save($comments)) {
+
+            }
+            return $this->redirect("/mypage/room/".$id);
+        }
+        $this->set("compnent",$this->password);
+        $this->set("builds",$builds);
+        $this->set("id",$id);
 
 
     }

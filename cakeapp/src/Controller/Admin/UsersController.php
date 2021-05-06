@@ -29,7 +29,45 @@ class UsersController extends AppController
 
       $this->mailsend = $this->loadComponent('MailSend');
 
+      $this->loadModel("ViewTenants");
+        $this->loadModel("Users");
+        $this->loadComponent('Paginator');
+        $this->upload = $this->loadComponent("Upload");
+        $this->password = $this->loadComponent("Password");
+
       $this->array_prefecture = Configure::read("array_prefecture");
+
+
+      $array_status = Configure::read("array_status");
+      $array_prefecture = Configure::read('array_prefecture');
+      $this->array_prefecture = $array_prefecture;
+      $array_shop = Configure::read('array_shop');
+      $array_agreement = Configure::read('array_agreement');
+      $array_build = Configure::read('array_build');
+      $array_constract = Configure::read('array_constract');
+      $array_floor = Configure::read('array_floor');
+      $array_rent_money = Configure::read('array_rent_money');
+      $array_space_money = Configure::read('array_space_money');
+      $array_job = Configure::read('array_job');
+      $array_sub = Configure::read('array_sub');
+      $array_job_type = Configure::read('array_job_type');
+      $array_open = Configure::read('array_open');
+      $array_build_status = Configure::read('array_build_status');
+      $this->set("array_status",$array_status);
+      $this->set("array_prefecture",$array_prefecture);
+      $this->set("array_shop",$array_shop);
+      $this->set("array_agreement",$array_agreement);
+      $this->set("array_build",$array_build);
+      $this->set("array_constract",$array_constract);
+      $this->set("array_floor",$array_floor);
+      $this->set("array_rent_money",$array_rent_money);
+      $this->set("array_space_money",$array_space_money);
+      $this->set("array_job",$array_job);
+      $this->set("array_sub",$array_sub);
+      $this->set("array_job_type",$array_job_type);
+      $this->set("array_open",$array_open);
+      $this->set("array_build_status",$array_build_status);
+
       //レイアウトの指定
       $this->viewBuilder()->setLayout('Admin/default');
     }
@@ -156,13 +194,6 @@ class UsersController extends AppController
     }
 
 
-
-
-
-
-
-
-
     /**
      * View method
      *
@@ -211,16 +242,107 @@ class UsersController extends AppController
         $user = $this->Users->get($id, [
             'contain' => [],
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
-        }
+        $this->___regist($user, $id);
+
         $this->set(compact('user'));
+        $this->set('actionkey', "edit/".$id);
+        $this->__setUserVariable($user);
+        $this->set("password", "");
+    }
+    /**
+     * 会員登録・編集処理
+     */
+    public  function ___regist($user, $id = "")
+    {
+
+        if ($this->request->is('post')) {
+            $ref = $this->referer(null, true);
+            //patchEntityに入るとvalidationが走る
+            if($id){
+                $user   = $this->Users->patchEntity($user, $this->request->getData(),['validate'=>"edit"]);
+            }else{
+                $user   = $this->Users->patchEntity($user, $this->request->getData());
+            }
+            $errors = $user->getErrors();
+            $imp    = self::__getErrorMessage($errors);
+            if (empty($errors)) {
+
+                $this->setPostString($user);
+                $this->setTelString($user);
+                $user->username = "username1";
+                $user->role     = "sample";
+                //更新の際、空欄の場合はパスワードを変更しない
+                if($id > 0 && !$this->request->getData('password') ){
+                    unset($user->password);
+                }
+                if ($this->Users->save($user)) {
+                    if($id > 0 ){
+                        $this->Flash->success(__('会員情報編集が完了しました。'));
+                    }else{
+                        $this->Flash->success(__('会員登録が完了しました。'));
+                    }
+                    return $this->redirect("/admin/users");
+                } else {
+                    $this->Flash->error(__('会員登録に失敗しました。'));
+                }
+
+            }
+            $this->Flash->error(__('会員登録に失敗しました。<br />' . $imp));
+            foreach ($this->request->getData() as $key => $value) {
+                $this->set($key, $value);
+            }
+        }
+
+        $this->set(compact('user'));
+
+    }
+    public function setPostString($user)
+    {
+        $user->post = sprintf(
+            "%s-%s",
+            $this->request->getData('post1'),
+            $this->request->getData('post2')
+        );
+    }
+    public function setTelString($user)
+    {
+        $user->tel = sprintf(
+            "%s-%s-%s",
+            $this->request->getData('tel1'),
+            $this->request->getData('tel2'),
+            $this->request->getData('tel3')
+        );
+    }
+    public static function __getErrorMessage($errors)
+    {
+        $errmsg = [];
+        $imp = "";
+        if (!empty($errors)) {
+            foreach ($errors as $key => $value) {
+                foreach ($value as $k => $val) {
+                    $errmsg[] = $val;
+                }
+            }
+            $imp = implode("<br />", $errmsg);
+        }
+        return $imp;
+    }
+
+    public function __setUserVariable($user){
+        $post[0] = "";
+        $post[1] = "";
+        if($user->post) $post = explode("-", $user->post);
+        $this->set("post1", $post[0]);
+        $this->set("post2", $post[1]);
+        $tel[0] = $tel[1] = $tel[2] = "";
+        if($user->tel) $tel = explode("-", $user->tel);
+        $this->set("tel1", $tel[0]);
+        $this->set("tel2", $tel[1]);
+        $this->set("tel3", $tel[2]);
+        foreach($user->toArray() as $key=>$value){
+            $this->set($key, $value);
+        }
     }
 
     /**
@@ -232,14 +354,181 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+     //   $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
+
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('削除に成功しました'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('削除に失敗しました'));
+        }
+        return $this->redirect(['action' => '/']);
+    }
+
+
+
+    public function tenant(){
+        $user = $this->Auth->user();
+        $tenant = $this->ViewTenants->find()->contain(['users']);
+        $tenant = $this->paginate($tenant);
+
+        $tenant = $this->__setPref($tenant);
+        $tenant = $this->__setRentJp($tenant);
+
+        $this->set(compact('tenant'));
+        $this->set("compnent",$this->password);
+    }
+
+    public function tenantedit($id){
+        $user = $this->Auth->user();
+        //テナント更新画面
+        $tenant = $this->ViewTenants->find()
+            ->where([
+                'id'=>$id,
+                'user_id'=>$user['id'],
+            ])
+            ->first();
+        $prefs = [];
+        if($tenant->prefs) $prefs = explode(",",$tenant->prefs);
+        $jobtypes = [];
+        if($tenant->jobtypes) $jobtypes = explode(",",$tenant->jobtypes);
+        $this->tenantregist($id);
+        $this->set(compact('tenant'));
+        $this->set("id",$id);
+        $this->set("prefs",$prefs);
+        $this->set("jobtypes",$jobtypes);
+        $this->render("tenantregist");
+    }
+
+    public function tenantregist($id = ""){
+
+        $type = "";
+        $button = "確認する";
+        $buttonname = "conf";
+        //確認画面
+        $error = [];
+        $error_hope = [];
+        $error_job = [];
+
+        if(
+            $this->request->getData("conf") ||
+            $this->request->getData("regist")
+        ){
+            //エラーチェック
+            if ($id >0 ) {
+                $tenant = $this->Tenants->get($id, [
+                    'contain' => [],
+                ]);
+            } else {
+                $tenant = $this->Tenants->newEntity();
+            }
+            $tenant = $this->Tenants->patchEntity($tenant, $this->request->getData());
+            $TenantJob = $this->TenantJob->newEntity();
+            $TenantJob = $this->TenantJob->patchEntity($TenantJob, $this->request->getData());
+            $TenantHope = $this->TenantHope->newEntity();
+            $TenantHope = $this->TenantHope->patchEntity($TenantHope, $this->request->getData());
+            $error = $tenant->errors();
+            $error_hope = $TenantHope->errors();
+            $error_job = $TenantJob->errors();
+            if(
+                !$tenant->errors() &&
+                !$TenantJob->errors() &&
+                !$TenantHope->errors()
+            ){
+                $button = "登録する";
+                $buttonname = "regist";
+                $type = "conf";
+                //登録完了
+                if($this->request->getData("regist")){
+                    $connection = ConnectionManager::get('default');
+                    $connection->begin();
+                    try {
+                        $tenant->user_id = $this->Auth->user('id');
+                        $this->Tenants->save($tenant);
+                        //IDがあるときはTenantHopeとTenantJobのデータを削除する
+                        if($id > 0 ){
+                            $this->TenantHope->deleteAll(['tenant_id'=>$tenant->id]);
+                            $this->TenantJob->deleteAll(['tenant_id'=>$tenant->id]);
+                        }
+                        foreach($this->request->getData("pref") as $key=>$value){
+                            $TenantHope = $this->TenantHope->newEntity();
+                            $TenantHope->pref = $key;
+                            $TenantHope->tenant_id = $tenant->id;
+                            $this->TenantHope->save($TenantHope);
+                        }
+                        foreach($this->request->getData("jobtype") as $key=>$value){
+                            foreach($value as $k=>$val){
+                                $TenantJob = $this->TenantJob->newEntity();
+                                $TenantJob->jobtype = $k;
+                                $TenantJob->tenant_id = $tenant->id;
+                                $this->TenantJob->save($TenantJob);
+                            }
+                        }
+
+                        //usersのimportを0にする
+                        $user = $this->Users->get($this->Auth->user('id'));
+                        $set = [];
+                        $set['import'] = 0;
+                        $user = $this->Users->patchEntity($user, $set,['validate'=>false]);
+                        $this->Users->save($user);
+
+                        $connection->commit();
+                        //$type = "fin";
+                        return $this->redirect(['action' => '/tenant/fin']);
+                    }catch(\Exception $e){
+                        echo "error";
+                        $connection->rollback();
+                        exit();
+                    }
+
+                }
+
+            }
         }
 
-        return $this->redirect(['action' => 'index']);
+
+        $this->set("type",$type);
+        $this->set("button",$button);
+        $this->set("buttonname",$buttonname);
+        $this->set("error",$error);
+        $this->set("error_hope",$error_hope);
+        $this->set("error_job",$error_job);
+        $this->set("id",$id);
     }
+    public function __setPref($dat){
+        $data = $dat->toArray();
+        foreach($data as $key=>$value){
+            $list = [];
+            $ex = explode(",",$value[ 'prefs' ]);
+            foreach($ex as $k=>$val){
+                if(isset($this->array_prefecture[$val])){
+                    $list[] = $this->array_prefecture[$val];
+                }
+            }
+            if($list) $data[$key]['prefline'] = implode(",",$list);
+        }
+      return $data;
+    }
+    public function __setRentJp($data){
+        foreach($data as $key=>$value){
+            $data[$key]['rent_money_min_jp'] = ($value[ 'rent_money_min' ]/10000)." 万円";
+            $data[$key]['rent_money_max_jp'] = ($value[ 'rent_money_max' ]/10000)." 万円";
+        }
+      return $data;
+    }
+
+
+    public function build(){
+        $user = $this->Auth->user();
+        $builds = $this->Builds->find()->contain(['users']);
+
+        $builds = $this->paginate($builds);
+
+        $this->set(compact('builds'));
+        $this->set("compnent",$this->password);
+
+    }
+
+
+
 }

@@ -29,31 +29,37 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
             <?= $this->element('mymenu'); ?>
             <div class="col-md-8 order-md-10 mb-4">
 
-
-                <div class="row">
+                <?php foreach($builds as $key=>$values): ?>
+                <div class="row mt-3">
                     <div class="card-deck col-md-12 text-left">
                         <div class="card shadow-sm">
                             <div class="card-header">
-                                <p class="my-0 font-weight-normal">北千住のお店</p>
-                                <small>ID : S210311</small>
+                                <p class="my-0 font-weight-normal"><?= h($values->name) ?></p>
+                                <small>ID : <?= h($compnent->setId($values->id)) ?></small>
                             </div>
                             <div class="card-body">
                                 <dl class="row">
                                     <dt class="col-2">ステータス</dt>
-                                    <dd class="col-10">マッチング中</dd>
+                                    <dd class="col-10"><?= h($array_build_status[$values->status]) ?></dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-2">案件登録日</dt>
-                                    <dd class="col-4">2021/03/01</dd>
+                                    <dd class="col-4"><?= h(date("Y/m/d",strtotime($values->created))) ?></dd>
                                     <dt class="col-2">募集開始日</dt>
-                                    <dd class="col-4">2021/03/01</dd>
+                                    <dd class="col-4">
+                                        <?php if(isset($values->start) && $values->start): ?>
+                                            <?= h(date("Y/m/d",strtotime($values->start))) ?>
+                                        <?php else: ?>
+
+                                        <?php endif; ?>
+                                    </dd>
                                 </dl>
-                                <a href="/mypage/room/1" class="btn btn-sm btn-block btn-outline-primary">商談ルーム</a>
+                                <a href="/mypage/room/<?= $values->id ?>" class="btn btn-sm btn-block btn-outline-primary">商談ルーム</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
+                <?php endforeach; ?>
             </div>
         </div>
 

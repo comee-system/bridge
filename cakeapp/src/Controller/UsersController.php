@@ -145,7 +145,6 @@ class UsersController extends AppController
         foreach($user->toArray() as $key=>$value){
             $this->set($key, $value);
         }
-
     }
     /**
      * 会員登録・編集処理

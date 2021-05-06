@@ -50,8 +50,11 @@
 <?= $this->Html->script('//code.jquery.com/jquery-3.5.1.min.js') ?>
 <!-- Bootstrap 4 -->
 <?= $this->Html->script('/js/bootstrap.bundle.min.js') ?>
+<?php  /*
 <?= $this->Html->script('/js/feather.min.js') ?>
 <?= $this->Html->script('/js/dashboard.js') ?>
+*/?>
+<?= $this->Html->script('/js/base.js') ?>
 
 
 

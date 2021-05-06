@@ -141,6 +141,7 @@
       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
 
       <script src="/js/base.js"></script>
+      <script src="/js/comment.js"></script>
       <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
       <!----------------------------------------------->
 </body>
