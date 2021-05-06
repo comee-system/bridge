@@ -17,7 +17,7 @@ class AddFileTocomments extends AbstractMigration
             'default' => null,
             'limit' => 512,
             'null' => true,
-            'after'=> 'read'
+            'after'=> 'readflag'
         ]);
         $table->addColumn('filename', 'string', [
             'default' => null,
