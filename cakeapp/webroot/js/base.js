@@ -37,11 +37,28 @@ $(function () {
         label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
         input.parent().parent().next(':text').val(label);
     });
-
+    try{
     $(".calendar").datepicker();
+    }catch(e){}
+    //ステータスの変更
+    $(document).on("change",'[name="build_status"]',function(){
+        var _sel = $(this).val();
+        var _url = location.href+"/"+_sel;
+        $.ajax({
+            url: _url,
+            type: "GET",
+            datatype:'JSON',
+         }).done(function (response) {
+             console.log(response);
+         });
+
+        return false;
+    });
 
 });
 $.fn.buttonCheck = function () {
+    $("#regist").attr("disabled", false);
+    return true;
     var _err = 0;
     var _sei = $("[name='sei']").val();
     var _mei = $("[name='mei']").val();

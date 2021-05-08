@@ -40,7 +40,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                             <div class="card-body">
                                 <dl class="row">
                                     <dt class="col-2">ステータス</dt>
-                                    <dd class="col-10"><?= h($array_build_status[$values->status]) ?></dd>
+                                    <dd class="col-10"><?= h($array_build_status[$values->build_status]) ?></dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-2">案件登録日</dt>
@@ -54,7 +54,16 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                         <?php endif; ?>
                                     </dd>
                                 </dl>
-                                <a href="/mypage/room/<?= $values->id ?>" class="btn btn-sm btn-block btn-outline-primary">商談ルーム</a>
+                                <a href="/mypage/room/build/<?= $values->id ?>" class="btn btn-sm btn-block btn-outline-primary">商談ルーム</a>
+                                <?php
+                                if(!empty($tenantlist[$values->id])):
+                                    foreach($tenantlist[$values->id] as $k=>$val):
+                                    ?>
+                                        <a href="/mypage/room/tenant/<?= $val->build_id?>/<?= $val->tenant_id ?>" class="btn btn-sm btn-block btn-outline-success"><?= h($val->tenant['name']) ?>商談ルーム</a>
+                                <?php
+                                    endforeach;
+                                endif;
+                                ?>
                             </div>
                         </div>
                     </div>

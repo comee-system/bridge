@@ -21,7 +21,8 @@
             <div class="card-body">
                 <?= $this->Form->create("",[
                     'action'=>"",
-                    'method'=>"POST"
+                    'method'=>"POST",
+                    'enctype' => 'multipart/form-data'
                 ])?>
                 <div class="row ">
                     <h5>宛先検索</h5>
@@ -59,51 +60,63 @@
                 <?= $this->Form->end(); ?>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 text-right">
-                <div class="d-flex flex-row-reverse" >
-                    <a href="" class="btn btn-secondary">戻る</a>
-                    <a href="/admin/meeting/message/1" class="btn btn-primary mr-3">メッセージ作成</a>
+
+        <?= $this->Form->create("",[
+                    'action'=>"message/".$build_id,
+                    'method'=>"POST"
+            ])?>
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <div class="d-flex flex-row-reverse" >
+                        <a href="/admin/meeting/detail/<?= h($build_id) ?>" class="btn btn-secondary">戻る</a>
+                        <?= $this->Form->button("メッセージ作成",[
+                            "class"=>"btn btn-primary mr-3",
+                            "name"=>"create",
+                            "type"=>"submit"
+                        ])?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-12 ">
-                <table class="table table-bordered">
-                    <tr class="text-center bg-secondary text-white ">
-                        <th>氏名</th>
-                        <th>企業名</th>
-                        <th>業種</th>
-                        <th>テナント名</th>
-                        <th>選択</th>
-                    </tr>
-                    <tr>
-                        <td>伊野太郎</td>
-                        <td>〇〇会社</td>
-                        <td>飲食</td>
-                        <td>餃子店</td>
-                        <td class="text-center">
-                            <?= $this->Form->checkbox("select",[
-                                "class"=>"",
-                                "value"=>1
-                            ])?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>伊野太郎</td>
-                        <td>〇〇会社</td>
-                        <td>飲食</td>
-                        <td>餃子店</td>
-                        <td class="text-center">
-                            <?= $this->Form->checkbox("select",[
-                                "class"=>"",
-                                "value"=>1
-                            ])?>
-                        </td>
-                    </tr>
-                </table>
+            <div class="row mt-3">
+                <div class="paginator">
+                    <ul class="pagination">
+                        <?= $this->Paginator->numbers() ?>
+                    </ul>
+                </div>
+
+                <div class="col-md-12 ">
+                    <table class="table table-bordered">
+                        <tr class="text-center bg-secondary text-white ">
+                            <th>氏名</th>
+                            <th>企業名</th>
+                            <th>業種</th>
+                            <th>テナント名</th>
+                            <th>選択</th>
+                        </tr>
+                        <?php foreach($tenants as $value): ?>
+                        <tr>
+                            <td><?= h($value->Users[ 'sei' ]) ?><?= h($value->Users[ 'mei' ]) ?></td>
+                            <td><?= h($value->Users[ 'company' ])?></td>
+                            <td>
+                                <?php if($value->Users[ 'job' ]): ?>
+                                <?= h($array_job[$value->Users[ 'job' ]]) ?>
+                                <?php endif; ?>
+                            </td>
+                            <td><?= $value->name ?></td>
+                            <td class="text-center">
+                                <?= $this->Form->checkbox("select[]",[
+                                    "class"=>"",
+                                    "value"=>$value->id,
+                                    "hiddenField"=>false
+                                ])?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+
+                    </table>
+                </div>
             </div>
-        </div>
+        <?= $this->Form->end(); ?>
     </main>
   </div>
 </div>

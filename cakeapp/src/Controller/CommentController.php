@@ -19,13 +19,14 @@ class CommentController extends AppController
         parent::beforeFilter($event);
         $this->loadModel("Comments");
         $this->array_read = Configure::read("array_read");
+        $this->array_code = Configure::read("array_code");
     }
     /**
      * Index method
      *
      * @return \Cake\Http\Response|null
      */
-    public function list($id)
+    public function list($code,$id,$tenant_id=0)
     {
         $this->autoRender = false;
         $user = $this->Auth->user();
@@ -33,14 +34,24 @@ class CommentController extends AppController
             $comments = $this->Comments->find()->where([
                 'user_id'=>$user['id'],
                 'build_id'=>$id,
-                'code'=>1,
+                'code'=>array_keys($this->array_code,$code)[0],
                 'status'=>1
-            ])->order(['id'=>'DESC']);
+            ]);
+            if($tenant_id > 0 ){
+                $comments = $comments->where([
+                    'tenant_id'=>$tenant_id
+                ]);
+            }
+
+            $comments = $comments->order(['id'=>'DESC']);
             $comment = [];
             foreach($comments as $key=>$value){
                 $comment[$key]=$value;
                 $comment[$key]['readjp'] = $this->array_read[$value['readflag']];
                 $comment[$key]['commentsub'] = mb_substr($value['comment'],0,20,"utf-8");
+                $ten = "";
+                if(strlen($value['filename']) > 10) $ten = "…";
+                $comment[$key]['filenamesub'] = mb_substr($value['filename'],0,10,"utf-8").$ten;
             }
             header('content-type: application/json; charset=utf-8');
             header('Access-Control-Allow-Origin: *');
@@ -51,15 +62,15 @@ class CommentController extends AppController
     public function detail($id)
     {
 
-
         $this->autoRender = false;
         $user = $this->Auth->user();
         if($this->request->is('ajax')) {
-
             $comment = $this->Comments->find()->where([
-                'user_id != '=>$user['id'],
+               // 'user_id != '=>$user['id'],
+               'response' =>1,
                 'id'=>$id,
             ])->first();
+
             if(!empty($comment)){
                 $comment->readflag = 1;
                 $this->Comments->save($comment);

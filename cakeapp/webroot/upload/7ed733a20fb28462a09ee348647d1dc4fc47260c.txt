@@ -1,0 +1,127 @@
+～北杜学園定常更新　接続情報～
+
+
+【URL】
+	
+　〈フロント〉
+
+	・学校法人　北杜学園					https://hokuto.ac.jp
+	・仙台医療福祉専門学校					https://sif.ac.jp
+	・仙台医療福祉専門学校　言語聴覚学科			https://st.sif.ac.jp
+	・仙台医療福祉専門学校　社会福祉士養成通信課程		https://sw.sif.ac.jp
+	・仙台大原簿記情報公務員専門学校			https://obs-sendai.ac.jp
+	・仙台デザイン専門学校　絵師・イラストレーター通信講座	https://sds.ac.jp/tsushin
+	・仙台医療福祉専門学校 国際総合ビジネス学科（留学生LP）	https://sif.ac.jp/kokusai
+	・仙台工科専門学校					https://sks.ac.jp/
+	・仙台青葉学院短期大学					https://seiyogakuin.ac.jp
+	・バスチケット(common/bus)					https://form.hokuto.ac.jp/bus/
+	・学校共通(common/form)						https://form.hokuto.ac.jp/form/
+
+　〈管理画面〉
+
+	開発者ログイン	shikebon / password
+
+	・学校法人　北杜学園
+		https://hokuto.ac.jp/index.php?/bmeawrqj/hokuto-login
+		officeadmin  /  n8zdjnZiDmAk
+
+	・仙台医療福祉専門学校
+		https://sif.ac.jp/jpuzdtng/sif-login
+		sifadmin  /  aJz8yBJG8aVr
+
+	・仙台医療福祉専門学校　社会福祉士養成通信課程
+		https://sw.sif.ac.jp/swuyhijz/sw-login
+		swadmin  /  SnjiCysWZRH4
+
+	・仙台大原簿記情報公務員専門学校
+		https://obs-sendai.ac.jp/xgqevfib/obs-login
+		obsadmin  /  XCTiEA2CL8dU
+
+	・仙台デザイン専門学校　絵師・イラストレーター通信講座
+		https://sds.ac.jp/fghucwer/sds-login
+		sdsadmin  /  7PsuUB5Avucc
+
+	・仙台工科専門学校
+		https://sks.ac.jp/xgqevfib/sks-login
+		sksadmin  /  8ZxZeUK5a7Fd
+
+	・バスチケット
+		https://form.hokuto.ac.jp/bus/admin/hokuto-login
+		support@comee.jp /　ZsVEmJK6NRCN
+
+	・学校共通(form)
+		https://form.hokuto.ac.jp/form/eiyuaqkd/common-login
+		localhost/eiyuaqkd/common-login
+		commonadmin  /  gXqkA8pSW8VY
+
+
+【FTP】
+
+	・バスチケット(common)
+		Protocol	FTP
+		Host		hokuto-form.sakura.ne.jp
+		User		hokuto-form
+		Password	r94sh53rrk
+
+	・common以外
+		Protocol	FTP
+		Host		hokutogakuen.sakura.ne.jp
+		User		hokutogakuen
+		Password	x9vyvb8ghy
+
+	・青葉学院短期大学
+		Protocol	SFTP
+		Host		52.156.45.167
+		User		Seiyowebadministrator
+		Password	uz3,{#60vNLB
+				(root / Kierr*98'6&zzTp)
+		
+
+【DB】
+
+	・バスチケット(common)
+		phpMyAdmin	https://secure.sakura.ad.jp/rs/db/mysql5/?server=mysql1014.db.sakura.ne.jp
+		Host		mysql1014.db.sakura.ne.jp
+		User		hokuto-form
+		Password	8uyJPNzcy4Ch
+		DB		hokuto-form_ci3
+
+	・common以外
+		phpMyAdmin	https://secure.sakura.ad.jp/rs/db/mysql5/?server=mysql652.db.sakura.ne.jp
+		Host		mysql652.db.sakura.ne.jp
+		User		hokutogakuen
+		Password	rkHF92R5MeZV
+		DB		okutogakuen_XXX  (XXX は学校略称)
+
+	・仙台青葉学院短期大学
+		* DBサーバー
+			OS		CentOs-Based 7.7
+			プライベートIP	10.0.0.6 / 24
+			マシン名	seiyoweb-db
+			User		seiyoweb-administrator
+			Password	B[iUJVNV3%1-LgVRpGST
+					(root / io8B:93e6CE3:6-8oE)
+		* DB
+			Service		Postgresql ver.9.2.24
+			Database	senyogakuin
+			Owner		seiyoweb-administrator
+
+
+【sakuraコントロールパネル】
+	https://secure.sakura.ad.jp/rscontrol/
+
+	・バスチケット(common)
+		ドメイン名	hokuto-form.sakura.ne.jp
+		password	r94sh53rrk
+
+	・common以外
+		ドメイン名	hokutogakuen.sakura.ne.jp
+		password	x9vyvb8ghy
+
+
+【更新管理シート】
+	https://docs.google.com/spreadsheets/d/1O7TGLYFa5lreKp0xrTRW8cKZ7nUnbJ4Wn2ptqBuN2MI/edit#gid=0
+
+
+【画像加工作業依頼シート】
+	https://docs.google.com/spreadsheets/d/1UqL4hlNH6iwQpW-wvwcmFCuTwxx-yekpP_owKSyb5jk/edit#gid=1712174071

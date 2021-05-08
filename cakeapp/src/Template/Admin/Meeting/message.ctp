@@ -15,7 +15,7 @@
 
       <?= $this->Flash->render() ?>
         <?= $this->Form->create("",[
-                    'action'=>"",
+                    'action'=>"/message/".$build_id,
                     'method'=>"POST",
                     'enctype' => 'multipart/form-data'
         ])?>
@@ -32,16 +32,27 @@
         </div>
         <div class="card mb-4 shadow-sm mt-3">
             <div class="card-body">
-
                 <div class="row">
-                    <div class="col-md-2">1. 佐藤太郎</div>
-                    <div class="col-md-2">2. 鈴木花子</div>
+                    <?php
+                        $num = 1;
+                        foreach($tenants as $key=>$value ):?>
+                        <div class="col-md-2">
+                            <?=$num?>.
+                            <?= h($value->Users['sei']) ?>
+                            <?= h($value->Users['mei']) ?>
+                            <?= $this->Form->hidden("tenant_id[]",[
+                                'value'=>$value->id
+                            ])?>
+                        </div>
+                    <?php
+                        $num++;
+                        endforeach; ?>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <?= $this->Form->control("message",[
+                <?= $this->Form->control("comment",[
                     "type"=>"textarea",
                     "class"=>"form-control",
                     "label"=>"メッセージ"
@@ -50,7 +61,7 @@
             <div class="col-md-12 mt-3">
                 <p>添付するファイルを選択してください。</p>
                 <p class="text-danger">※登録できるファイルサイズは５MB以下までです。</p>
-                <?= $this->Form->control('field', [
+                <?= $this->Form->control('fileupload', [
                     "type" => "file",
                     "label" => false
 
@@ -60,10 +71,14 @@
         </div>
         <div class="row mt-3">
             <div class="col-md-2">
-                <a href="" class="btn btn-secondary w-100 text-white">戻る</a>
+                <a href="/admin/meeting/address/<?=$build_id?>" class="btn btn-secondary w-100 text-white">戻る</a>
             </div>
             <div class="col-md-2">
-                <a href="" class="btn btn-warning w-100 text-white">送信</a>
+                <?= $this->Form->button("送信",[
+                    "class"=>"btn btn-primary",
+                    "name"=>"regist",
+                    "value"=>"send"
+                ]) ?>
             </div>
         </div>
         <?= $this->Form->end() ?>

@@ -1,0 +1,39 @@
+《 ご契約サービスの情報 》
+
+     サービス名      ： さくらのレンタルサーバ スタンダード
+     サービスコード  ： 113201319946
+     お申込み日      ： 2020年08月26日
+     お試し期間      ： 2020年09月09日まで
+
+     初期ドメイン    ： hokutokousei.sakura.ne.jp
+     ホームページ    ： http://hokutokousei.sakura.ne.jp
+
+《 契約サービスの接続情報 》
+
+     FTPサーバ名     ： hokutokousei.sakura.ne.jp
+     FTPアカウント   ： hokutokousei
+     FTP初期フォルダ ： www
+     サーバパスワード： w.VpuPuT6vUJ
+
+     POP3(受信)サーバ： hokutokousei.sakura.ne.jp
+     SMTP(送信)サーバ： hokutokousei.sakura.ne.jp
+
+《 サーバコントロールパネル ログイン情報 》
+     サーバコントロールパネルではメールアドレスの作成やドメイン設定等
+     を行っていただけます。
+
+     URL             ： https://secure.sakura.ad.jp/rs/cp/
+     ドメイン名      ： hokutokousei.sakura.ne.jp
+     サーバパスワード： w.VpuPuT6vUJ
+
+《 マニュアル 》
+     ご不明な点がありましたら『マニュアル』をご覧ください。
+     初めてサービスをご利用いただく場合は『スタートアップ』や
+     『まりなの超初心者講座』をご活用ください。
+
+     マニュアル：
+     https://help.sakura.ad.jp/hc/ja/categories/202549398
+     スタートアップ：
+     https://help.sakura.ad.jp/hc/ja/articles/206106542
+     まりなの超初心者講座：
+     http://marina127.sakura.ne.jp/blog/

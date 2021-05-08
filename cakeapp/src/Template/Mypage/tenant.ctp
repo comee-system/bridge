@@ -80,7 +80,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                             <small>ID : <?= h($compnent->setId($value->id)) ?></small>
                                         </div>
                                         <div class="col-6 text-right ">
-                                            <a  class="btn-sm btn-warning text-white" href="/mypage/tenantedit/<?= $value[ 'id' ]?>">詳細・編集</a>
+                                            <a class="btn-sm btn-warning text-white" href="/mypage/tenantedit/<?= $value[ 'id' ]?>">詳細・編集</a>
                                         </div>
                                     </div>
                                 </div>
@@ -121,86 +121,8 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                             </div>
                         </div>
                     </div>
-                    <?php endforeach; ?>
-<!--
-                <div class="row mt-5">
-                    <div class="card-deck col-md-12 text-left">
-                        <div class="card shadow-sm">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p class="my-0 font-weight-normal">北千住のお店</p>
-                                        <small>ID : S210311</small>
-                                    </div>
-                                    <div class="col-6 text-right ">
-                                        <a  class="btn-sm btn-warning text-white" href="/mypage/buildedit/">詳細・編集</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <table class="table-bordered w-100 text-center">
-                                    <tr class="bg-secondary text-white">
-                                        <th>希望地</th>
-                                        <th>希望坪数</th>
-                                        <th>希望賃料</th>
-                                        <th>ステータス</th>
-                                        <th>物件登録日</th>
-                                        <th>募集開始日</th>
-                                    </tr>
-                                    <tr>
-                                        <td>東京都</td>
-                                        <td>30坪～50坪</td>
-                                        <td>30万～50万</td>
-                                        <td>下書き</td>
-                                        <td>2021/04/16</td>
-                                        <td>無し</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
 
-
-                <div class="row mt-5">
-                    <div class="card-deck col-md-12 text-left">
-                        <div class="card shadow-sm">
-                            <div class="card-header">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <p class="my-0 font-weight-normal">北千住のお店</p>
-                                        <small>ID : S210311</small>
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <a class="btn-sm btn-warning text-white" href="/mypage/buildedit/">商談ルーム</a>
-                                        <a class="btn-sm btn-warning text-white" href="/mypage/buildedit/">詳細・編集</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <table class="table-bordered w-100 text-center">
-                                    <tr class="bg-secondary text-white">
-                                        <th>希望地</th>
-                                        <th>希望坪数</th>
-                                        <th>希望賃料</th>
-                                        <th>ステータス</th>
-                                        <th>物件登録日</th>
-                                        <th>募集開始日</th>
-                                    </tr>
-                                    <tr>
-                                        <td>東京都</td>
-                                        <td>30坪～50坪</td>
-                                        <td>30万～50万</td>
-                                        <td>下書き</td>
-                                        <td>2021/04/16</td>
-                                        <td>無し</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
--->
             </div>
         </div>
 

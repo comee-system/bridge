@@ -36,7 +36,7 @@ class MeetingController extends AppController
         $this->password = $this->loadComponent("Password");
 
         $this->array_prefecture = Configure::read("array_prefecture");
-
+        $this->uploadfile = "";
 
         $array_status = Configure::read("array_status");
         $array_prefecture = Configure::read('array_prefecture');
@@ -83,7 +83,6 @@ class MeetingController extends AppController
     {
         $user = $this->Auth->user();
         $builds = $this->Builds->find()->contain(['users']);
-
         $builds = $this->paginate($builds);
 
         $this->set(compact('builds'));
@@ -91,27 +90,78 @@ class MeetingController extends AppController
 
     }
 
-    public function detail($id = "")
+    public function detail($id = "",$sel = "")
     {
         $builds = $this->Builds->find()->contain(['users'])->where(['Builds.id'=>$id])->first();
 
+        if($this->request->is('ajax')){
+            //ステータスの変更
+            $build = $this->Builds->find()->where(['id'=>$id])->first();
+            $build->build_status = $sel;
+            $this->Builds->save($build);
+            exit();
+        }
+
         //物件コメント取得
-        $buildcomment = $this->Comments->find()->order(["id"=>"DESC"])->first();
+        $buildcomment = $this->Comments->find()->where([
+            'build_id'=>$builds['id'],
+            'code'=>1,
+            'status'=>1
+            ])->order(["id"=>"DESC"])->first();
+
+        //テナント用コメント
+        $query = $this->Comments->find();
+        $query
+            ->select(['role_max' =>  $query->func()->max('id')])
+            ->where([
+            'build_id'=>$builds['id'],
+            'code'=>2,
+            'status'=>1
+            ])
+            ->group(["tenant_id"]);
+        $tenantcomment = $this->Comments->find()
+            ->contain(['users','tenants'])
+            ->where([
+            'Comments.id IN '=>$query
+            ]);
         $this->set(compact('builds'));
         $this->set(compact('buildcomment'));
+        $this->set(compact('tenantcomment'));
         $this->set("compnent",$this->password);
         $this->set("build_id",$id);
     }
     public function address($id = ""){
+        $tenants = $this->Tenants->find()->contain(['users'])->order(["tenants.id"=>"DESC"]);
+        $tenants = $this->paginate($tenants);
+        $this->set(compact('tenants'));
+        $this->set("build_id",$id);
 
     }
     public function message($id = ""){
+        //登録処理
+        if($this->request->getData("regist")){
+            $cnt = 0;
+            foreach($this->request->getData('tenant_id') as $value){
+                $this->regist("tenant",$id,$value,$cnt,false);
+                $cnt++;
+            }
+            $this->Flash->success(__('コメントを登録しました'));
+            return $this->redirect(['action' => 'detail/'.$id]);
+            exit();
+        }
+
+        if(empty($this->request->getData("select"))){
+            return $this->redirect(['action' => "../meeting/address/".$id]);
+        }
+        $tenants = $this->Tenants->find()->contain(['users'])->where(['Tenants.id IN' => $this->request->getData("select")]);
+
+        $this->set(compact('tenants'));
+        $this->set("build_id",$id);
 
     }
     //id=build_id or tenant_id
-    public function room($code = "",$id=""){
-        $builds = $this->Builds->find()->contain(['users'])->where(['Builds.id'=>$id])->first();
-
+    public function room($code = "",$id="",$tenant_id=""){
+        $builds = [];
         if($code == "build"){
             //物件コメント取得
             $comment = $this->Comments->find()
@@ -120,33 +170,54 @@ class MeetingController extends AppController
                     'build_id'=>$id
                 ])
                 ->order(["id"=>"DESC"]);
+            $toArray = $comment->toArray();
+            if(empty($toArray)) $toArray[0][ 'build_id' ] = $id;
+
         }else{
             //テナントコメント取得
             $comment = $this->Comments->find()
+            ->contain(['builds'])
             ->where([
                 'code'=>array_keys($this->array_code,$code)[0],
-                'tenant_id'=>$id
+                'tenant_id'=>$tenant_id,
+                'build_id'=>$id
             ])
-            ->order(["id"=>"DESC"]);
+            ->order(["Comments.id"=>"DESC"]);
+            $toArray = $comment->toArray();
+            if(empty($toArray)) $toArray[0][ 'build_id' ] = $id;
         }
         $comment = $this->paginate($comment);
+        $builds = $this->Builds->find()->contain(['users'])->where(['Builds.id'=>$id])->first();
+        //管理者以外のコメントを既読
+        foreach($comment as $key=>$value){
+            if($value->response == 2){
+                $com = $this->Comments->get($value->id, [
+                    'contain' => [],
+                ]);
+                $com->readflag = 1;
+                $this->Comments->save($com);
+            }
+        }
 
         $this->set(compact('builds'));
         $this->set(compact('comment'));
         $this->set("compnent",$this->password);
         $this->set("id",$id);
+        $this->set("tenant_id",$tenant_id);
         $this->set("code",$code);
 
     }
-    public function regist($code = "",$id=""){
+    public function regist($code = "",$id="",$tenant_id = 0,$cnt = 0,$redirect = true){
         $this->autoRender = false;
+
         $builds = $this->Builds->find()->contain(['users'])->where(['Builds.id'=>$id])->first();
         if($this->request->getData("regist")){
-            if($this->request->getData('fileupload')){
+
+            if($this->request->getData('fileupload.name') && $cnt == 0){
                 $dir = realpath(WWW_ROOT . "/upload");
                 $limitFileSize = 1024 * 1024;
                 try {
-                $uploadfile = $this->Upload->file_upload($this->request->getData('fileupload'), $dir, $limitFileSize);
+                    $this->uploadfile = $this->Upload->file_upload($this->request->getData('fileupload'), $dir, $limitFileSize);
 
                 } catch (RuntimeException $e){
                     $this->Flash->error(__('ファイルのアップロードができませんでした.'));
@@ -155,20 +226,27 @@ class MeetingController extends AppController
             }
 
             $comments = $this->Comments->newEntity();
-            $comments = $this->Comments->patchEntity($comments, $this->request->getData());
+            $comments = $this->Comments->patchEntity($comments, $this->request->getData(),['validate'=>false]);
+
             $comments->response = 1; //1:admin 2:user
             $comments->code = array_keys($this->array_code,$code)[0]; //1.build 2.tenant
-            if($code == "build"){
-                $comments->build_id = $id;
-            }else{
-                $comments->tenant_id = $id;
-            }
+            $comments->build_id = $id;
+            if($tenant_id > 0) $comments->tenant_id = $tenant_id;
             $comments->user_id = $builds->user_id;
-            $comments->file = $uploadfile;
+            $comments->file = $this->uploadfile;
             $comments->filename = $this->request->getData('fileupload')['name'];
+
             $this->Comments->save($comments);
-            $this->Flash->success(__('コメントを登録しました'));
-            return $this->redirect(['action' => 'room/'.$code."/".$id]);
+
+            if($redirect && $tenant_id){
+                $this->Flash->success(__('コメントを登録しました'));
+                return $this->redirect(['action' => 'room/'.$code."/".$id."/".$tenant_id]);
+            }
+            if($redirect){
+                $this->Flash->success(__('コメントを登録しました'));
+                return $this->redirect(['action' => 'room/'.$code."/".$id]);
+            }
+
         }
 
     }

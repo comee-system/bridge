@@ -47,7 +47,7 @@ $.fn.getModalData = function(_id){
         $("#modal_body").html($(this).nl2br($(this).h(response.comment)));
         if(response.file){
             $("a#modal_download").show();
-            $("#modal_download").attr("href","/comment/"+response.file);
+            $("#modal_download").attr("href","/upload/"+response.file);
             $("#modal_download").text(response.filename);
         }
     }).fail(function (response) {
@@ -59,8 +59,13 @@ $.fn.getModalData = function(_id){
 
 $.fn.getComment = function(){
     var _id = $("[name='id']").val();
+    if(!_id){
+        return false;
+    }
+    var _code = $("[name='code']").val();
+    var _tenant_id = $("[name='tenant_id']").val();
     $.ajax({
-        url: '/comment/list/'+_id,
+        url: '/comment/list/'+_code+'/'+_id+"/"+_tenant_id,
         type: "GET",
         datatype:'JSON',
      }).done(function (response) {
@@ -99,8 +104,8 @@ $.fn.getComment = function(){
             _div += "<div class='row'>";
             _div += "<div class='col-6'>";
             if(value.filename){
-                _div += "<a href='/comment/"+value.file+"' class='btn-sm btn-warning text-white'>ダウンロード</a> ";
-                _div += $(this).h(value.filename);
+                _div += "<a href='/upload/"+value.file+"' class='btn-sm btn-warning text-white'>ダウンロード</a> ";
+                _div += $(this).h(value.filenamesub);
             }else{
                 _div += "";
             }

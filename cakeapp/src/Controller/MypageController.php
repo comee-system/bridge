@@ -102,13 +102,39 @@ class MypageController extends AppController
      */
     public function index(){
         $user = $this->Auth->user();
-        $builds = $this->Builds->find()->where([
-            "user_id"=>$user[ 'id' ]
+        $builds = $this->Builds->find()
+        ->where([
+            "Builds.user_id"=>$user[ 'id' ]
         ]);
         $builds = $this->paginate($builds);
 
+        //テナント用コメント
+        $tenant = $this->Comments->find();
+        $tenant
+            ->select([
+                'tenant_id',
+                'build_id',
+                'tenants.name'
+                ])
+            ->contain(['tenants'])
+            ->where([
+            'Comments.user_id'=>$user[ 'id' ],
+            'Comments.status'=>1,
+            'Comments.code'=>2
+            ])
+            ->group(["build_id","tenant_id"]);
+        $tenantlist = [];
+        foreach($tenant as $key=>$value){
+            $tenantlist[$value['build_id']][] = $value;
+        }
+
+      //  var_dump($tenant->toArray());
+      //  exit();
+
         $this->set(compact('builds'));
+      //  $this->set(compact('tenant'));
         $this->set("compnent",$this->password);
+        $this->set("tenantlist",$tenantlist);
 
     }
     public function buildlist(){
@@ -188,7 +214,7 @@ class MypageController extends AppController
         $this->render("buildregist");
 
     }
-    public function room($id){
+    public function room($code="", $id,$tenant_id=""){
 
         $user = $this->Auth->user();
         $builds = $this->Builds->find()->where([
@@ -199,30 +225,33 @@ class MypageController extends AppController
             $comments = $this->Comments->newEntity();
             $comments = $this->Comments->patchEntity($comments, $this->request->getData());
             $comments->response = 2; //1:admin 2:user
-            $comments->code = 1; //1.build 2.tenant
+            $comments->code = array_keys($this->array_code,$code)[0]; //1.build 2.tenant
             $comments->build_id = $id;
+            if($tenant_id > 0) $comments->tenant_id = $tenant_id;
             $comments->user_id = $user[ 'id' ];
             //ファイルのアップロード
             if($this->request->getData('upload')){
-                $dir = realpath(WWW_ROOT . "/comment");
+                $dir = realpath(WWW_ROOT . "/upload");
                 $limitFileSize = 1024 * 1024;
                 try {
-                $uploadfile = $this->Upload->file_upload($this->request->getData('upload'), $dir, $limitFileSize);
-                $comments->file = $uploadfile;
-                $comments->filename = $this->request->getData('upload')['name'];
+                    $uploadfile = $this->Upload->file_upload($this->request->getData('upload'), $dir, $limitFileSize);
+                    $comments->file = $uploadfile;
+                    $comments->filename = $this->request->getData('upload')['name'];
                 } catch (RuntimeException $e){
-                    $this->Flash->error(__('ファイルのアップロードができませんでした.'));
-                    $this->Flash->error(__($e->getMessage()));
+                    //$this->Flash->error(__('ファイルのアップロードができませんでした.'));
+                    //$this->Flash->error(__($e->getMessage()));
                 }
             }
             if ($this->Comments->save($comments)) {
 
             }
-            return $this->redirect("/mypage/room/".$id);
+            return $this->redirect("/mypage/room/".$code."/".$id."/".$tenant_id);
         }
         $this->set("compnent",$this->password);
         $this->set("builds",$builds);
         $this->set("id",$id);
+        $this->set("code",$code);
+        $this->set("tenant_id",$tenant_id);
 
 
     }

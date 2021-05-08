@@ -27,6 +27,12 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         <?= $this->Form->hidden('id',[
             'value'=>$id
         ])?>
+        <?= $this->Form->hidden('code',[
+            'value'=>$code
+        ])?>
+        <?= $this->Form->hidden('tenant_id',[
+            'value'=>$tenant_id
+        ])?>
         <div class="row">
             <?= $this->element('mymenu'); ?>
             <div class="col-md-8 order-md-10 mb-4">
@@ -47,7 +53,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                             <div class="card-body">
                                 <dl class="row">
                                     <dt class="col-2">ステータス</dt>
-                                    <dd class="col-10"><?= h($array_build_status[$builds->status]) ?></dd>
+                                    <dd class="col-10"><?= h($array_build_status[$builds->build_status]) ?></dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-2">案件登録日</dt>
@@ -66,26 +72,14 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                 </div>
 
                 <div class="mt-3">
-                    <nav>
-                        <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                            <?php
-                                $active1 = $active2 = "";
-                                if($this->request->getParam('action') === "room" ) $active1 = "active";
-                                if($this->request->getParam('action') === "staff" ) $active2 = "active";
-                            ?>
-                            <a class="nav-link <?= $active1 ?>" data-bs-toggle="tab" href="/mypage/room/1" role="tab" aria-controls="nav-home" aria-selected="true">管理者</a>
-                            <!--
-                            <a class="nav-link <?= $active2 ?>" data-bs-toggle="tab" href="/mypage/room/staff/1" role="tab" aria-controls="nav-profile" aria-selected="false">担当者</a>
-                            -->
-                        </div>
-                    </nav>
+                    <?= $this->element("nav") ?>
+
                 </div>
                 <?php if($this->request->getParam('action') === "room" ): ?>
                     <div class="scroll_box" id="messagearea" >
                     </div>
-
                     <?= $this->Form->create(null, [
-                        'url' => ['action' => '/room/'.$id],
+                        'url' => ['action' => '/room/'.$code.'/'.$id.'/'.$tenant_id],
                         'type' => 'post',
                         'enctype' => 'multipart/form-data',
                     ]); ?>
@@ -175,8 +169,8 @@ dd
       </div>
       <div class="modal-footer">
 
-        <a href="" id="modal_download" class="btn btn-warning text-white"></a>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="" id="modal_download" class="btn-sm btn-warning text-white"></a>
+        <button type="button" class="btn-sm btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

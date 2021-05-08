@@ -47,12 +47,20 @@
 
             </div>
         </div>
-        <?= $this->Form->create("",[
-                    'action'=>"/regist/".$code."/".$id,
+        <?php if($code == "tenant"): ?>
+            <?= $this->Form->create("",[
+                    'action'=>"/regist/".$code."/".$id."/".$tenant_id,
                     'method'=>"POST",
                     'enctype' => 'multipart/form-data'
                 ])?>
 
+        <?php else: ?>
+            <?= $this->Form->create("",[
+                    'action'=>"/regist/".$code."/".$id,
+                    'method'=>"POST",
+                    'enctype' => 'multipart/form-data'
+                ])?>
+        <?php endif; ?>
         <div class="row">
             <div class="col-md-12">
                 <?= $this->Form->textarea("comment",[
@@ -68,6 +76,7 @@
                     ]); ?>
             </div>
             <div class="col-md-12 mt-2">
+                <a href="/admin/meeting/detail/<?=$builds->id?>" class="btn btn-secondary">戻る</a>
                 <?= $this->Form->button("送信",[
                     "type"=>"submit",
                     "class"=>"btn btn-primary",
@@ -94,26 +103,39 @@
                 $bg = "bg-light";
             }
         ?>
-        <div class="row mt-3 w-75 <?=$float?> ">
+        <div class=" mt-3 w-75 <?=$float?> ">
             <div class="card mb-4 shadow-sm <?=$bg?>">
                 <div class="card-body">
                     <div class="row">
-                        <h5>〇〇さん</h5>
                         <div class="col-md-2">
-                            <span class="badge badge-secondary">既読</span>
+                            <?php if($value->readflag == 1):?>
+                                <span class="badge badge-secondary"><?= h($array_read[$value->readflag]) ?></span>
+                            <?php else: ?>
+                                <span class="badge badge-success text-white"><?= h($array_read[$value->readflag]) ?></span>
+                            <?php endif; ?>
                         </div>
                         <div class="col-md-4">
-                            〇〇さん
-                            <p>ご案内いたします。</p>
+                            <p><?= nl2br($value->comment) ?></p>
                         </div>
                         <div class="col-md-6 text-right mt-1">
-                            2021/05/01 07:00:00
-                            <p><span class="bg-secondary text-white p-1">ステータス</span>：交渉中</p>
+                            <?= date(date("Y/m/d H:i:s",strtotime($value->created))) ?>
                         </div>
                     </div>
                 </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <?php if(isset($value->file) && $value->file): ?>
+                                <a href="/upload/<?=h($value->file)?>" class="btn-sm btn-warning text-white w-auto" ><?= h($value->filename) ?></a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
+        <br clear=all />
         <?php endforeach; ?>
 
     </main>

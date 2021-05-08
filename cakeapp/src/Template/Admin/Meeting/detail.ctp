@@ -41,7 +41,13 @@
                             <td><?= h($builds->Users['busyo']) ?></td>
                             <td><?= h($array_prefecture[$builds->pref]) ?></td>
                             <td><?= h($builds->shop_area) ?>坪</td>
-                            <td><?= h($array_build_status[$builds->build_status]) ?></td>
+                            <td>
+                                <?= $this->Form->select('build_status',$array_build_status,[
+                                    'class'=>'form-control',
+                                    'default'=>$builds->build_status
+                                ])?>
+
+                            </td>
                             <td><?= h(date("Y/m/d",strtotime($builds->created))) ?></td>
                             <td><?= h(date("Y/m/d",strtotime($builds->start))) ?></td>
                         </tr>
@@ -53,132 +59,83 @@
         <div class="text-right">
                 <a href="/admin/meeting/room/build/<?=$build_id?>" class="btn btn-success text-white">担当者商談ルーム</a>
         </div>
-        <div class="card mb-4 mt-2 shadow-sm">
-            <div class="card-body">
-                <div class="row">
-                    <h5>物件担当者</h5>
-                    <div class="col-md-2">
-                        <span class="badge badge-warning"><?= h($array_read[$buildcomment->readflag]) ?></span>
-                    </div>
-                    <div class="col-md-4">
-                        <p><?= nl2br($buildcomment->comment) ?></p>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <?= h(date("Y/m/d h:i:s",strtotime($buildcomment->created))) ?>
+        <?php if(!empty($buildcomment)):?>
+            <div class="card mb-4 mt-2 shadow-sm">
+                <div class="card-body">
+                    <div class="row">
+                        <h5>
+                        <?= h($builds->Users[ 'sei' ])?>
+                        <?= h($builds->Users[ 'mei' ])?>
+                        </h5>
+                        <div class="col-md-2">
+                            <?php if($buildcomment->readflag == 1):?>
+                                <span class="badge badge-secondary"><?= h($array_read[$buildcomment->readflag]) ?></span>
+                            <?php else: ?>
+                                <span class="badge badge-success text-white"><?= h($array_read[$buildcomment->readflag]) ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="col-md-4">
+                            <p><?= nl2br($buildcomment->comment) ?></p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <?= h(date("Y/m/d h:i:s",strtotime($buildcomment->created))) ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <?php if($buildcomment->file): ?>
-                <a href="<?=h($buildcomment->file)?>" class="btn btn-warning text-white" ><?=h($buildcomment->filename)?></a>
+                <?php if(isset($buildcomment->file) && $buildcomment->file): ?>
+                    <div class="card-footer">
+                        <a href="/upload/<?=h($buildcomment->file)?>" class="btn btn-warning text-white" ><?=h($buildcomment->filename)?></a>
+                    </div>
                 <?php endif; ?>
             </div>
-        </div>
-
+        <?php endif; ?>
         <hr size=2 />
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-md-6">
                 <h5>テナント登録者</h5>
             </div>
             <div class="col-md-6 text-right">
-                <a href="/admin/meeting/address/1" class="btn btn-primary text-white">新規メッセージ</a>
+                <a href="/admin/meeting/address/<?= h($builds->id) ?>" class="btn btn-primary text-white">新規メッセージ</a>
             </div>
         </div>
 
-        <div class="row mt-3">
+        <?php foreach($tenantcomment as $key=>$value): ?>
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">
                     <div class="row">
-                        <h5>〇〇さん</h5>
+                        <h5>
+                            <?= h($value->Users[ 'sei' ]) ?>
+                            <?= h($value->Users[ 'mei' ]) ?>
+                        </h5>
                         <div class="col-md-2">
-                            <span class="badge badge-secondary">既読</span>
+                            <span class="badge badge-secondary">
+                            <?= $array_read[$value->readflag] ?>
+                            </span>
                         </div>
                         <div class="col-md-4">
-                            〇〇さん
-                            <p>ご案内いたします。</p>
+                            <?= nl2br($value->comment) ?>
                         </div>
                         <div class="col-md-6 text-right mt-1">
-                            2021/05/01 07:00:00
-                            <p><span class="bg-secondary text-white p-1">ステータス</span>：交渉中</p>
+                            <?= h(date("Y/m/d H:i:s",strtotime($value->created))) ?>
+                            <div class="mt-2"><span class="bg-secondary text-white p-1">テナント名</span>：
+                                <?= h($value->Tenants[ 'name' ])?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6 text-right">
+                            <a href="/admin/meeting/room/tenant/<?= h($value->build_id) ?>/<?= h($value->tenant_id) ?>" class="btn btn-danger">商談ルーム</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-3">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                    <div class="row">
-                        <h5>▼▼さん</h5>
-                        <div class="col-md-2">
-                            <span class="badge badge-secondary">既読</span>
-                        </div>
-                        <div class="col-md-4">
-                            〇〇さん
-                            <p>ご案内いたします。</p>
-                        </div>
-                        <div class="col-md-6 text-right mt-1">
-                            2021/05/01 07:00:00
-                            <p><span class="bg-secondary text-white p-1">ステータス</span>：交渉中</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php endforeach; ?>
+
 
     </main>
   </div>
 </div>
 
-
-<?php /*
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="users index large-9 medium-8 columns content">
-    <h3><?= __('Users') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('username') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('role') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $this->Number->format($user->id) ?></td>
-                <td><?= h($user->username) ?></td>
-                <td><?= h($user->password) ?></td>
-                <td><?= h($user->role) ?></td>
-                <td><?= h($user->created) ?></td>
-                <td><?= h($user->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
-</div>
-*/?>
