@@ -129,10 +129,6 @@ class MypageController extends AppController
                 $tenantlist[$value['build_id']][] = $value;
             }
         }
-
-      //  var_dump($tenant->toArray());
-      //  exit();
-
         $this->set(compact('builds'));
       //  $this->set(compact('tenant'));
         $this->set("compnent",$this->password);
