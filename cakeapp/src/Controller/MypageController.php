@@ -114,7 +114,7 @@ class MypageController extends AppController
             ->select([
                 'tenant_id',
                 'build_id',
-                'tenants.name'
+                'Tenants.name'
                 ])
             ->contain(['tenants'])
             ->where([
