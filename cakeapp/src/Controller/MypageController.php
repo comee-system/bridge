@@ -124,8 +124,10 @@ class MypageController extends AppController
             ])
             ->group(["build_id","tenant_id"]);
         $tenantlist = [];
-        foreach($tenant as $key=>$value){
-            $tenantlist[$value['build_id']][] = $value;
+        if(!empty($tenant)){
+            foreach($tenant as $key=>$value){
+                $tenantlist[$value['build_id']][] = $value;
+            }
         }
 
       //  var_dump($tenant->toArray());
