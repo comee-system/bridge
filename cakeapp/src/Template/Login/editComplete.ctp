@@ -12,7 +12,6 @@
         <div class="col-md-6 mx-auto">
             <?= $this->Flash->render() ?>
 
-
             <div class="card mb-4 shadow-sm">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">パスワード再設定完了</h4>

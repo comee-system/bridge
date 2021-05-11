@@ -1,7 +1,12 @@
 <div class="card-deck col-md-12 text-left w-100">
     <div class="card shadow-sm ">
         <div class="card-header">
-            <p class="my-0 font-weight-normal"><?= __("注意事項") ?></p>
+            <p class="my-0 font-weight-normal"><b><?= __("注意事項") ?></b></p>
+            <p>
+            物件登録にあたり、以下の内容をご確認ください。<br />
+            当社は、当サイトにコンテンツを掲載するにあたって、その内容、機能等について<span class="text-danger">細心の注意を払っておりますが、コンテンツの内容が正確であるかどうか、最新のものであるかどうか、安全なものであるか等について保証をするものではなく、何らの責任を負うものではありません。</span>また、当社は通知することなく当サイトに掲載した情報の訂正、修正、追加、中断、削除等をいつでも行うことができるものとします。また、当サイト、または<span class="text-danger">コンテンツのご利用により、万一、ご利用者様に何らかの不都合や損害が発生したとしても、当社は何らの責任を負うものではありません。</span>
+
+            </p>
         </div>
         <div class="card-body">
 

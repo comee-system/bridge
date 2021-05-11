@@ -55,36 +55,36 @@ class QuestionsTable extends Table
             ->scalar('sei')
             ->maxLength('sei', 255)
             ->requirePresence('sei', 'create')
-            ->notEmptyString('sei');
+            ->notEmptyString('sei',__("姓を入力してください。"));
 
         $validator
             ->scalar('mei')
             ->maxLength('mei', 255)
             ->requirePresence('mei', 'create')
-            ->notEmptyString('mei');
+            ->notEmptyString('mei',__("名を入力してください。"));
 
         $validator
             ->scalar('campany')
             ->maxLength('campany', 255)
             ->requirePresence('campany', 'create')
-            ->notEmptyString('campany');
+            ->notEmptyString('campany',__("企業名を入力してください。"));
 
         $validator
             ->scalar('mail')
             ->maxLength('mail', 255)
             ->requirePresence('mail', 'create')
-            ->notEmptyString('mail');
+            ->notEmptyString('mail',__("メールアドレスを入力してください。"));
 
         $validator
             ->scalar('tel')
             ->maxLength('tel', 255)
             ->requirePresence('tel', 'create')
-            ->notEmptyString('tel');
+            ->notEmptyString('tel',__("電話番号を入力してください。"));
 
         $validator
             ->scalar('note')
             ->requirePresence('note', 'create')
-            ->notEmptyString('note');
+            ->notEmptyString('note',__("問合せ内容を入力してください。"));
 
         return $validator;
     }

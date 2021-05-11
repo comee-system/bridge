@@ -66,8 +66,8 @@
             <?php foreach ($builds as $value): ?>
             <tr>
               <td>
-                <a href="/admin/users/delete/<?= $value->id ?>" class="btn btn-danger confirm"  >削除</a>
-                <a href="/admin/users/edit/<?= $value->id ?>" class="btn btn-primary">編集</a>
+                <a href="/admin/users/delete/<?= $value->id ?>" class="btn-sm btn-danger confirm"  >削除</a>
+                <a href="/admin/users/edit/<?= $value->id ?>" class="btn-sm btn-primary">編集</a>
               </td>
               <td>
                 <?= h($value->Users['sei']) ?>

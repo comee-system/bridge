@@ -66,8 +66,8 @@
             <?php foreach ($users as $user): ?>
             <tr>
               <td>
-                <a href="/admin/users/delete/<?= $user->id ?>" class="btn btn-danger confirm"  >削除</a>
-                <a href="/admin/users/edit/<?= $user->id ?>" class="btn btn-primary">編集</a>
+                <a href="/admin/users/delete/<?= $user->id ?>" class="btn-sm btn-danger confirm"  >削除</a>
+                <a href="/admin/users/edit/<?= $user->id ?>" class="btn-sm btn-primary">編集</a>
               </td>
               <td><?= h($user->sei) ?><?= h($user->mei) ?></td>
               <td><?= h($user->email) ?></td>

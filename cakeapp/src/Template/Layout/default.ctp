@@ -93,7 +93,7 @@
           <li>Bridgeについて</li>
           <li>
             <ul class="list-unstyled">
-              <li><a href="#">運営会社情報</a></li>
+              <li><a href="http://www.area-design.co.jp/">運営会社情報</a></li>
               <li><a href="#">利用規約</a></li>
               <li><a href="#">個人情報保護方針</a></li>
               <li><a href="#">機密保持契約</a></li>
@@ -104,9 +104,9 @@
           <li>&nbsp;</li>
           <li>
             <ul class="list-unstyled">
-              <li><a href="#">お問い合わせ</a></li>
-              <li><a href="#">無料会員登録</a></li>
-              <li><a href="#">ログイン</a></li>
+              <li><a href="/questions/">お問い合わせ</a></li>
+              <li><a href="/users/add/">無料会員登録</a></li>
+              <li><a href="/login">ログイン</a></li>
             </ul>
           </li>
         </ul>
@@ -120,7 +120,7 @@
 
           <div id="footer-logo" class="mt-2 mt-sm-4">
             <div class="text-center d-sm-flex align-items-sm-center">
-              <a class="mr-4" href="../index.html"><img src="/img/bridge.gif" alt="サイト名" height="50"></a>
+              <a class="mr-4" href="/"><img src="/img/bridge.gif" alt="Bridge" height="50"></a>
               <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
             </div>
           </div><!-- .row -->
@@ -128,7 +128,7 @@
       </footer>
 
       <div class="text-white bg-primary">
-        <p class="text-center mb-0 py-2"><small>Copyright (C) サイト名. All Rights Reserved.</small></p>
+        <p class="text-center mb-0 py-2"><small>Copyright (C) bridge. All Rights Reserved.</small></p>
       </div>
 
 

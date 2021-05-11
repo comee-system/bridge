@@ -119,4 +119,34 @@ class MailSendComponent extends Component
             ])
             ->send();
     }
+    public function setQuestionMail($request){
+        $mail = $request['mail'];
+        $this->email
+            ->template('question')
+            ->emailFormat('text')
+            ->to($mail)
+            ->from(D_ADMIN_MAIL)
+            ->subject("【Bridge】会員仮登録のお知らせ")
+            ->viewVars([
+                'name' => $request[ 'sei' ].$request[ 'mei' ],
+                'campany' => $request['campany'],
+                'mail' => $request['mail'],
+                'tel' => $request['tel'],
+                'note' => $request['note'],
+            ])
+            ->send();
+    }
+    public function setCommentMail($user){
+        $mail = $user['email'];
+        $this->email
+            ->template('comment')
+            ->emailFormat('text')
+            ->to($mail)
+            ->from(D_ADMIN_MAIL)
+            ->subject("【Bridge】新着メッセージが届いております。")
+            ->viewVars([
+                'name' => $user[ 'sei' ].$user['mei'],
+            ])
+            ->send();
+    }
 }

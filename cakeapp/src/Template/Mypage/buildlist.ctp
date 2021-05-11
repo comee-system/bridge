@@ -79,7 +79,6 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                             <small>ID : <?= h($compnent->setId($values->id)) ?></small>
                                         </div>
                                         <div class="col-6 text-right ">
-                                            <a class="btn-sm btn-success text-white" href="/mypage/room/<?= $values->id ?>">商談ルーム</a>
                                             <a class="btn-sm btn-warning text-white" href="/mypage/buildregist/<?= $values->id ?>">詳細・編集</a>
                                         </div>
                                     </div>

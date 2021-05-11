@@ -51,6 +51,9 @@ class TenantsTable extends Table
         $this->hasMany('TenantJob', [
             'foreignKey' => 'tenant_id',
         ]);
+        $this->hasMany('Comments', [
+            'foreignKey' => 'tenant_id',
+        ]);
     }
 
     /**

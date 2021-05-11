@@ -4,56 +4,159 @@
  * @var \App\Model\Entity\Question[]|\Cake\Collection\CollectionInterface $questions
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Question'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="questions index large-9 medium-8 columns content">
-    <h3><?= __('Questions') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('sei') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('mei') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('campany') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('mail') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('tel') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($questions as $question): ?>
-            <tr>
-                <td><?= $this->Number->format($question->id) ?></td>
-                <td><?= h($question->sei) ?></td>
-                <td><?= h($question->mei) ?></td>
-                <td><?= h($question->campany) ?></td>
-                <td><?= h($question->mail) ?></td>
-                <td><?= h($question->tel) ?></td>
-                <td><?= h($question->created) ?></td>
-                <td><?= h($question->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $question->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $question->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $question->id], ['confirm' => __('Are you sure you want to delete # {0}?', $question->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
-</div>
+<?= $this->element('breadcrumbs') ?>
+<main>
+  <div class="container">
+    <section class="m-5">
+        <div class="card">
+            <div class="card-header">
+                お問い合わせフォーム
+            </div>
+            <div class="card-body">
+                <div class="col-md-12 mx-auto">
+                    <?= $this->Flash->render() ?>
+
+                    <?= $this->Form->create("", [
+                        'type' => 'post',
+                        'url' => ['controller' => 'Questions', 'action' => 'conf'],
+                    ]);?>
+                        <div class="row">
+                            <div class="col-md-5">
+                            <label>姓</label>
+                            <span class="badge badge-danger"><?= __("必須") ?></span>
+                            <?php
+                                $param = [
+                                    "type"=>"text",
+                                    "label"=>false,
+                                    "class"=>"form-control",
+                                ];
+                                if(!empty($sei)) $param['value'] = $sei;
+                            ?>
+                            <?= $this->Form->control("sei",$param);?>
+                            </div>
+                            <div class="col-md-5">
+                            <label>名</label>
+                            <?php
+                                $param = [
+                                    "type"=>"text",
+                                    "label"=>false,
+                                    "class"=>"form-control",
+                                ];
+                                if(!empty($mei)) $param['value'] = $mei;
+                            ?>
+                            <?= $this->Form->control("mei",$param);?>
+                            </div>
+                            <div class="col-md-12">
+                                <?php if(!empty($question->getErrors()[ 'sei' ][ '_empty' ])): ?>
+                                <span class="text-danger"><?= $question->getErrors()[ 'sei' ][ '_empty' ] ?></span>
+                                <?php endif; ?>
+                                <?php if(!empty($question->getErrors()[ 'mei' ][ '_empty' ])): ?>
+                                <span class="text-danger"><?= $question->getErrors()[ 'mei' ][ '_empty' ] ?></span>
+                                <?php endif; ?>
+                            </div>
+
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                            <label>企業名</label>
+                            <span class="badge badge-danger"><?= __("必須") ?></span>
+
+                            <?php
+                                $param = [
+                                    "type"=>"text",
+                                    "label"=>false,
+                                    "class"=>"form-control",
+                                ];
+                                if(!empty($campany)) $param['value'] = $campany;
+                            ?>
+                            <?= $this->Form->control("campany",$param);?>
+
+                            </div>
+                            <div class="col-md-12">
+                                <?php if(!empty($question->getErrors()[ 'campany' ][ '_empty' ])): ?>
+                                <span class="text-danger"><?= $question->getErrors()[ 'campany' ][ '_empty' ] ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                            <label>メールアドレス</label>
+                            <span class="badge badge-danger"><?= __("必須") ?></span>
+
+                            <?php
+                                $param = [
+                                    "type"=>"text",
+                                    "label"=>false,
+                                    "class"=>"form-control",
+                                ];
+                                if(!empty($mail)) $param['value'] = $mail;
+                            ?>
+                            <?= $this->Form->control("mail",$param);?>
+
+                            </div>
+                            <div class="col-md-12">
+                                <?php if(!empty($question->getErrors()[ 'mail' ][ '_empty' ])): ?>
+                                <span class="text-danger"><?= $question->getErrors()[ 'mail' ][ '_empty' ] ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                            <label>電話番号</label>
+                            <span class="badge badge-danger"><?= __("必須") ?></span>
+
+                            <?php
+                                $param = [
+                                    "type"=>"text",
+                                    "label"=>false,
+                                    "class"=>"form-control",
+                                ];
+                                if(!empty($tel)) $param['value'] = $tel;
+                            ?>
+                            <?= $this->Form->control("tel",$param);?>
+
+                            </div>
+                            <div class="col-md-12">
+                                <?php if(!empty($question->getErrors()[ 'tel' ][ '_empty' ])): ?>
+                                <span class="text-danger"><?= $question->getErrors()[ 'tel' ][ '_empty' ] ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                            <label>問合せ内容</label>
+                            <span class="badge badge-danger"><?= __("必須") ?></span>
+
+                            <?php
+                                $param = [
+                                    "type"=>"textarea",
+                                    "label"=>false,
+                                    "class"=>"form-control",
+                                ];
+                                if(!empty($note)) $param['value'] = $note;
+                            ?>
+                            <?= $this->Form->control("note",$param);?>
+
+                            </div>
+                            <div class="col-md-12">
+                                <?php if(!empty($question->getErrors()[ 'note' ][ '_empty' ])): ?>
+                                <span class="text-danger"><?= $question->getErrors()[ 'note' ][ '_empty' ] ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-3 m-auto">
+                                <?= $this->Form->submit("確認",
+                                [
+                                    'name'=>"conf",
+                                    'class'=>"btn btn-success form-control"
+                                ])?>
+                            </div>
+                        </div>
+                    <?= $this->Form->end()?>
+                </div>
+            </div>
+        </div>
+    </section>
+  </div>
+</main>

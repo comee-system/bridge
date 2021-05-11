@@ -42,6 +42,7 @@ $this->Html->addCrumb('ログイン', '');
                 <?= $this->Form->input( 'open', array(
                     'type' => 'checkbox',
                     'label' => ' パスワードを表示する',
+                    'checked' => false
                     ));?>
             </div>
             <div class="row mt-3">

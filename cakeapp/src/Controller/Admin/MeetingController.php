@@ -131,7 +131,10 @@ class MeetingController extends AppController
         $this->set("build_id",$id);
     }
     public function address($id = ""){
-        $tenants = $this->Tenants->find()->contain(['users'])->order(["tenants.id"=>"DESC"]);
+        $tenants = $this->Tenants->find();
+        $tenants = $tenants
+            ->contain(['users','comments'])
+            ->order(["tenants.id"=>"DESC"]);
         $tenants = $this->paginate($tenants);
         $this->set(compact('tenants'));
         $this->set("build_id",$id);
@@ -238,12 +241,17 @@ class MeetingController extends AppController
 
             $this->Comments->save($comments);
 
+            //メール配信
+            $user = $builds->Users;
+            $this->mailsend->setCommentMail($user);
+
+
+            $this->Flash->success(__('コメントを登録しました'));
+
             if($redirect && $tenant_id){
-                $this->Flash->success(__('コメントを登録しました'));
                 return $this->redirect(['action' => 'room/'.$code."/".$id."/".$tenant_id]);
             }
             if($redirect){
-                $this->Flash->success(__('コメントを登録しました'));
                 return $this->redirect(['action' => 'room/'.$code."/".$id]);
             }
 

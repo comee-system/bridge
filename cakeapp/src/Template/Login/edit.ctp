@@ -33,6 +33,7 @@
                 <?= $this->Form->input( "open", array(
                     "type" => "checkbox",
                     "label" => __("パスワードを表示する"),
+                    "checked" => false
                     ));?>
             </div>
             <div class="row mt-3">

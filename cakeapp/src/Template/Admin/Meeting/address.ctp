@@ -98,16 +98,23 @@
                             <td><?= h($value->Users[ 'sei' ]) ?><?= h($value->Users[ 'mei' ]) ?></td>
                             <td><?= h($value->Users[ 'company' ])?></td>
                             <td>
-                                <?php if($value->Users[ 'job' ]): ?>
-                                <?= h($array_job[$value->Users[ 'job' ]]) ?>
+                                <?php if($value->job): ?>
+                                <?= h($array_job[$value->job]) ?>
                                 <?php endif; ?>
                             </td>
                             <td><?= $value->name ?></td>
                             <td class="text-center">
+                                <?php
+                                    $disabled = false;
+                                    if(count($value->comments) > 0 ){
+                                        $disabled = true;
+                                    }
+                                ?>
                                 <?= $this->Form->checkbox("select[]",[
                                     "class"=>"",
                                     "value"=>$value->id,
-                                    "hiddenField"=>false
+                                    "hiddenField"=>false,
+                                    "disabled"=>$disabled
                                 ])?>
                             </td>
                         </tr>

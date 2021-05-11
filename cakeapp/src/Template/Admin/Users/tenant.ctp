@@ -56,9 +56,10 @@
           <thead>
             <tr>
               <th>機能</th>
-              <th>登録者</th>
-              <th>メールアドレス</th>
-              <th>名前</th>
+              <th>氏名</th>
+              <th>企業名</th>
+              <th>業種</th>
+              <th>テナント名</th>
               <th>登録日</th>
             </tr>
           </thead>
@@ -66,15 +67,18 @@
             <?php foreach ($tenant as $value): ?>
             <tr>
               <td>
-                <a href="/admin/users/delete/<?= $value->id ?>" class="btn btn-danger confirm"  >削除</a>
-                <a href="/admin/users/edit/<?= $value->id ?>" class="btn btn-primary">編集</a>
+                <a href="/admin/users/delete/<?= $value->id ?>" class="btn-sm btn-danger confirm"  >削除</a>
+                <a href="/admin/users/edit/<?= $value->id ?>" class="btn-sm btn-primary">編集</a>
               </td>
               <td>
                 <?= h($value->Users['sei']) ?>
                 <?= h($value->Users['mei']) ?>
               </td>
               <td>
-                <?= h($value->Users['email']) ?>
+                <?= h($value->Users['company']) ?>
+              </td>
+              <td>
+                <?= h($array_job[$value->job]) ?>
               </td>
               <td>
                 <?= h($value->name) ?>

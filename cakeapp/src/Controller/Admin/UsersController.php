@@ -369,7 +369,7 @@ class UsersController extends AppController
 
     public function tenant(){
         $user = $this->Auth->user();
-        $tenant = $this->ViewTenants->find()->contain(['users']);
+        $tenant = $this->ViewTenants->find()->contain(['users'])->order(['ViewTenants.id'=>'desc']);
         $tenant = $this->paginate($tenant);
 
         $tenant = $this->__setPref($tenant);

@@ -59,7 +59,17 @@
         <div class="text-right">
                 <a href="/admin/meeting/room/build/<?=$build_id?>" class="btn btn-success text-white">担当者商談ルーム</a>
         </div>
-        <?php if(!empty($buildcomment)):?>
+        <?php if(empty($buildcomment)):?>
+            <div class="card mb-4 mt-2 shadow-sm">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            メッセージなし
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php else: ?>
             <div class="card mb-4 mt-2 shadow-sm">
                 <div class="card-body">
                     <div class="row">
@@ -92,7 +102,7 @@
         <hr size=2 />
         <div class="row mb-3">
             <div class="col-md-6">
-                <h5>テナント登録者</h5>
+                <h5>宛先一覧</h5>
             </div>
             <div class="col-md-6 text-right">
                 <a href="/admin/meeting/address/<?= h($builds->id) ?>" class="btn btn-primary text-white">新規メッセージ</a>

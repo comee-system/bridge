@@ -100,24 +100,19 @@ $.fn.getComment = function(){
             _div += "</div>";
             _div += "</div>";
             _div += "</div>";
-            _div += "<div class='card-footer text-muted'>";
-            _div += "<div class='row'>";
-            _div += "<div class='col-6'>";
+
             if(value.filename){
+                _div += "<div class='card-footer text-muted'>";
+                _div += "<div class='row'>";
+                _div += "<div class='col-6'>";
+
                 _div += "<a href='/upload/"+value.file+"' class='btn-sm btn-warning text-white'>ダウンロード</a> ";
                 _div += $(this).h(value.filenamesub);
-            }else{
-                _div += "";
+
+                _div += "</div>";
+                _div += "</div>";
+                _div += "</div>";
             }
-            _div += "</div>";
-            _div += "<div class='col-6 text-right'>";
-            _div += "<a href='#message' class='btn-sm btn-primary' >";
-            _div += "<i class='far fa-paper-plane'></i> ";
-            _div += "返信";
-            _div += "</a>";
-            _div += "</div>";
-            _div += "</div>";
-            _div += "</div>";
             _div += "</div>";
 
             $("#messagearea").append(_div);

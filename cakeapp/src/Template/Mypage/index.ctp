@@ -58,8 +58,8 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                 <?php
                                 if(!empty($tenantlist[$values->id])):
                                     foreach($tenantlist[$values->id] as $k=>$val):
-                                    ?>
-                                        <a href="/mypage/room/tenant/<?= $val->build_id?>/<?= $val->tenant_id ?>" class="btn btn-sm btn-block btn-outline-success"><?= h($val->tenant['name']) ?>商談ルーム</a>
+                                ?>
+                                        <a href="/mypage/room/tenant/<?= $val->build_id?>/<?= $val->tenant_id ?>" class="btn btn-sm btn-block btn-outline-success">商談ルーム【<?= h($val->Tenants['name']) ?>】</a>
                                 <?php
                                     endforeach;
                                 endif;

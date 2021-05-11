@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Event\Event;
 /**
  * Questions Controller
  *
@@ -19,23 +19,68 @@ class QuestionsController extends AppController
      * @return \Cake\Http\Response|null
      */
     public $components = ["Mailsend"];
-    public function initialize()
+    public $questions = [];
+    public function beforeFilter(Event $event)
     {
+        parent::beforeFilter($event);
+        $this->loadModel("Users");
         $this->mailsend = $this->loadComponent('MailSend');
+        $this->Auth->allow(['index','conf','fin']);
+        $this->user = $this->Auth->user();
     }
 
     public function index()
     {
-        $questions = $this->paginate($this->Questions);
+        $question = $this->Questions->newEntity();
+        if ($this->request->is('post')) {
+            if($this->request->getData('back')){
+                $question = $this->Questions->patchEntity($question, $this->request->getData());
+            }
+            if($this->request->getData('send')){
+                $question = $this->Questions->patchEntity($question, $this->request->getData());
+                if(!$question->hasErrors()){
+                    if ($this->Questions->save($question)) {
+                        $this->mailsend->setQuestionMail($this->request->getData());
+                        return $this->redirect(['action' => 'fin']);
+                    }
+                }
+            }
+        }else{
+            $this->set("sei",$this->user[ 'sei' ]);
+            $this->set("mei",$this->user[ 'mei' ]);
+            $this->set("campany",$this->user[ 'company' ]);
+            $this->set("mail",$this->user[ 'email' ]);
+            $this->set("tel",$this->user[ 'tel' ]);
+        }
+        $this->set("question",$question);
+    }
+    public function conf(){
+        if($this->request->is('post')){
 
-        $this->set(compact('questions'));
+            $question = $this->Questions->newEntity();
+            if ($this->request->is('post')) {
+                $question = $this->Questions->patchEntity($question, $this->request->getData());
+                if($question->hasErrors()){
+                    $this->set(compact('question'));
+                    $this->render("index");
+                }
+            }
+            $this->set(compact('question'));
+        }
+    }
+    public function fin(){
+
+
     }
 
+
+    /*
     public function mailSend(){
         $this->autoRender = false;
         $this->mailsend->sends();
         $this->mailsend->regists();
     }
+    */
     /**
      * View method
      *

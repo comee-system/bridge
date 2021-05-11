@@ -9,6 +9,7 @@ $this->Html->addCrumb('会員登録完了', '');
         </div>
 
         <section class="mb-5 text-center">
+        <?= $this->Flash->render() ?>
             <div class="border">
                 <p class="mt-3">会員登録ありがとうございます。</p>
 
