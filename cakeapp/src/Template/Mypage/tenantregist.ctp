@@ -22,7 +22,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <div class="container p-3 rounded">
         <div class="row">
 
-            <div class="mb-3 h2 col-md-4"><?= __("物件登録") ?></div>
+            <div class="mb-3 h2 col-md-4"><?= __("テナント登録") ?></div>
             <?= $this->element('myinfo') ?>
         </div>
 

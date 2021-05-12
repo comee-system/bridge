@@ -22,7 +22,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <div class="container p-3 rounded">
         <div class="row">
 
-            <div class="mb-3 h2 col-md-4">物件一覧</div>
+            <div class="mb-3 h2 col-md-4"><?=__("テナント一覧")?></div>
             <?= $this->element('myinfo') ?>
         </div>
 
@@ -31,7 +31,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
             <div class="col-md-8 order-md-10 mb-4">
                 <div class="card w-100">
                     <div class="card-body">
-                        <h5>物件検索</h5>
+                        <h5><?=__("テナント検索")?></h5>
                         <?= $this->Form->create(null, [
                             'url' => ['action' => '/mypage/buildlist'],
                             'type' => 'post',
