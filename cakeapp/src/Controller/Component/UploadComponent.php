@@ -22,7 +22,6 @@ class UploadComponent extends Component
             } else {
                 throw new RuntimeException('ディレクトリの指定がありません。');
             }
-
             // 未定義、複数ファイル、破損攻撃のいずれかの場合は無効処理
             if (!isset($file['error']) || is_array($file['error'])){
                 throw new RuntimeException('Invalid parameters.');

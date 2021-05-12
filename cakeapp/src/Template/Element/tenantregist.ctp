@@ -507,24 +507,31 @@
                     <?php endif; ?>
                 </div>
             </div>
-            <?php if($type == "conf"): ?>
+            <?php if(isset($role) && $role == "admin"): ?>
                 <?= $this->Form->hidden("agree",[
-                    "value"=>$this->request->getData('agree')
+                    "value"=>1
                 ])?>
             <?php else: ?>
-            <div class="row mt-3">
-                <div class="col-12">
-                    <div class="alert-primary text-center" >
-                        <label>
-                        <input type="checkbox" name="agree" value="on" />
-                         規約に同意する</label>
+                <?php if($type == "conf"): ?>
+                    <?= $this->Form->hidden("agree",[
+                        "value"=>$this->request->getData('agree')
+                    ])?>
+                <?php else: ?>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="alert-primary text-center" >
+                            <label>
+                            <input type="checkbox" name="agree" value="on" />
+                            規約に同意する</label>
+                        </div>
+                        <?php if(!empty($error[ "agree" ][ "_required" ])): ?>
+                            <small class="text-danger"><?= h($error[ "agree" ]["_required"]) ?></small>
+                        <?php endif; ?>
                     </div>
-                    <?php if(!empty($error[ "agree" ][ "_required" ])): ?>
-                        <small class="text-danger"><?= h($error[ "agree" ]["_required"]) ?></small>
-                    <?php endif; ?>
                 </div>
-            </div>
+                <?php endif; ?>
             <?php endif; ?>
+
             <div class="row mt-3">
             <?php if($type == "conf"): ?>
                 <div class="col-6">

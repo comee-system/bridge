@@ -733,11 +733,20 @@
                                     "value"=>$this->request->getData('message')
                             ])?>
                         <?php else: ?>
+                            <?php
+                                $message = "";
+                                if ( $this->request->getData('message')) :
+                                    $message = $this->request->getData("message");
+                                else:
+                                    if(isset($build[ 'message' ]) && $build[ 'message' ]) $message = $build[ 'message' ];
+                                endif;
+                            ?>
                             <?= $this->Form->input("message",[
                                 "type"=>"textarea",
                                 "class"=>"form-control w-100",
-                                "name"=>"other",
+                                "name"=>"message",
                                 "label"=>false,
+                                "value"=>$message
                             ]) ?>
                         <?php endif; ?>
                     </div>

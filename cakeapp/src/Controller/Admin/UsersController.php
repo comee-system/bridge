@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AppController;
 use Cake\Core\Configure;
 use Cake\Datasource\ConnectionManager;
-
+use RuntimeException;
 
 /**
  * Users Controller
@@ -375,6 +375,30 @@ class UsersController extends AppController
         return $this->redirect(['action' => '/']);
     }
 
+    public function tenantdelete($id = null)
+    {
+        $tenant = $this->Tenants->get($id);
+        if ($this->Tenants->delete($tenant)) {
+            $this->Flash->success(__('削除に成功しました'));
+        } else {
+            $this->Flash->error(__('削除に失敗しました'));
+        }
+        return $this->redirect(['action' => '/tenant']);
+    }
+
+    public function builddelete($id = null)
+    {
+        $build = $this->Builds->get($id);
+        if ($this->Builds->delete($build)) {
+            $this->Flash->success(__('削除に成功しました'));
+        } else {
+            $this->Flash->error(__('削除に失敗しました'));
+        }
+        return $this->redirect(['action' => '/build']);
+    }
+
+
+
 
 
     public function tenant(){
@@ -390,12 +414,10 @@ class UsersController extends AppController
     }
 
     public function tenantedit($id){
-        $user = $this->Auth->user();
         //テナント更新画面
         $tenant = $this->ViewTenants->find()
             ->where([
                 'id'=>$id,
-                'user_id'=>$user['id'],
             ])
             ->first();
         $prefs = [];
@@ -496,7 +518,6 @@ class UsersController extends AppController
             }
         }
 
-
         $this->set("type",$type);
         $this->set("button",$button);
         $this->set("buttonname",$buttonname);
@@ -539,6 +560,71 @@ class UsersController extends AppController
 
     }
 
+
+    public function buildregist($id = ""){
+        $type = "";
+        $error = [];
+        $setUploadfile = "";
+        $setUploadfilename = "";
+        $uploadfile = "";
+        if($id){
+            $build = $this->Builds->get($id);
+            $setUploadfile = $build->uploadfile;
+            $setUploadfilename = $build->uploadfilename;
+        }else{
+            $build = $this->Builds->newEntity();
+        }
+
+        //確認画面
+        if(
+            $this->request->getData("conf") ||
+            $this->request->getData("regist")
+        ){
+            //エラーチェック
+
+            $build = $this->Builds->patchEntity($build, $this->request->getData());
+            $error = $build->errors();
+
+            if(!$build->errors()){
+                if($this->request->getData('fileupload.name')){
+                    $dir = realpath(WWW_ROOT . "/upload");
+                    $limitFileSize = 1024 * 1024;
+                    try {
+                        $uploadfile = $this->Upload->file_upload($this->request->getData('fileupload'), $dir, $limitFileSize);
+                    } catch (RuntimeException $e){
+                        $this->Flash->error(__('ファイルのアップロードができませんでした.'));
+                    }
+                }
+                $type = "conf";
+                //登録完了
+                if($this->request->getData("regist")){
+                    $build->user_id = $this->Auth->user('id');
+
+                    if(empty($this->request->getData('uploadfile'))){
+                       $build->uploadfile = $setUploadfile;
+                       $build->uploadfilename = $setUploadfilename;
+                    }
+
+                    $this->Builds->save($build);
+                    $type = "fin";
+                    return $this->redirect(['action' => '/buildfin']);
+                }
+            }
+
+        }
+
+        $this->set("id",$id);
+        $this->set("build",$build);
+        $this->set("type",$type);
+        $this->set("error",$error);
+        $this->set("uploadfile",$uploadfile);
+    }
+
+    public function buildfin(){
+        $this->autoRender = false;
+        $this->Flash->success(__('更新作業を行いました。'));
+        return $this->redirect(['action' => '/build']);
+    }
 
 
 }

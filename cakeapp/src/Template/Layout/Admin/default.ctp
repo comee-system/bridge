@@ -32,7 +32,7 @@
   <?= $this->Html->css('//cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css') ?>
   <!-- Theme style -->
   <?= $this->Html->css('/css/bootstrap.min.css') ?>
-  <?= $this->Html->css('/css/basic.css') ?>
+  <?= $this->Html->css('/css/base.css') ?>
   <?= $this->Html->css('/css/admin.css') ?>
   <!-- Google Font: Source Sans Pro -->
   <?= $this->Html->css('//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700') ?>

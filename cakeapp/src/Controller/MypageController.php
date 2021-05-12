@@ -184,7 +184,7 @@ class MypageController extends AppController
             $build = $this->Builds->patchEntity($build, $this->request->getData());
             $error = $build->errors();
             if(!$build->errors()){
-                if($this->request->getData('fileupload')){
+                if($this->request->getData('fileupload.name')){
                     $dir = realpath(WWW_ROOT . "/upload");
                     $limitFileSize = 1024 * 1024;
                     try {
@@ -192,7 +192,6 @@ class MypageController extends AppController
 
                     } catch (RuntimeException $e){
                         $this->Flash->error(__('ファイルのアップロードができませんでした.'));
-                        $this->Flash->error(__($e->getMessage()));
                     }
                 }
                 $type = "conf";
@@ -250,7 +249,6 @@ class MypageController extends AppController
                     $comments->filename = $this->request->getData('upload')['name'];
                 } catch (RuntimeException $e){
                     //$this->Flash->error(__('ファイルのアップロードができませんでした.'));
-                    //$this->Flash->error(__($e->getMessage()));
                 }
             }
             if ($this->Comments->save($comments)) {
