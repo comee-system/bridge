@@ -134,7 +134,7 @@ class MeetingController extends AppController
         $tenants = $this->Tenants->find();
         $tenants = $tenants
             ->contain(['users','comments'])
-            ->order(["tenants.id"=>"DESC"]);
+            ->order(["Tenants.id"=>"DESC"]);
         $tenants = $this->paginate($tenants);
         $this->set(compact('tenants'));
         $this->set("build_id",$id);
