@@ -59,6 +59,7 @@
               <th>名前</th>
               <th>メールアドレス</th>
               <th>企業</th>
+              <th>ステータス</th>
               <th>登録日</th>
             </tr>
           </thead>
@@ -72,6 +73,7 @@
               <td><?= h($user->sei) ?><?= h($user->mei) ?></td>
               <td><?= h($user->email) ?></td>
               <td><?= h($user->busyo) ?></td>
+              <td><?= h($array_agreement_status[$user->agree]) ?></td>
               <td><?= h(date("Y/m/d H:i:s",strtotime($user->created))) ?></td>
             </tr>
             <?php endforeach; ?>

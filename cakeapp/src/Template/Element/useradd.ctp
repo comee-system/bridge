@@ -201,14 +201,30 @@
                             <li><?= __("半角英字を含む") ?></li>
                         </ul>
                     </div>
-                    <div class="alert alert-danger col-md-12 form-control text-center" role="alert">
-                        <input type="checkbox" name="agree" value=1 >
-                        <a href="http//google.com" target=_blank class="alert-link ">登録時の規約</a>
-                        に同意する
-                    </div>
+                    <?php if (
+                        (empty($role) || $role != "admin" ) &&
+                        !$id
+                    ): ?>
+                        <div class="alert alert-danger col-md-12 form-control text-center" role="alert">
+                            <?= $this->Form->checkbox("agree",[
+                                'required'=>true
+                            ])?>
+                            <a href="#" target=_blank class="alert-link">登録時の規約</a>
+                            に同意する
+                        </div>
+                    <?php else: ?>
+                        <input type="hidden" name="agree" value=1 >
+                    <?php endif; ?>
                     <div class="text-center">
-                        <?= $this->Form->submit("登録する", [
-                            'class' => 'btn btn-warning text-white', 'disabled' => 'disabled', 'id' => 'regist'
+                        <?php
+                            $button = __("登録確認");
+                            if($id > 0 ) $button = __("更新確認");
+                        ?>
+                        <?= $this->Form->submit($button, [
+                            'class' => 'btn btn-warning text-white',
+                            'disabled' => 'disabled',
+                            'id' => 'regist',
+                            'name'=> 'editconf'
                         ]) ?>
                     </div>
                 </div>

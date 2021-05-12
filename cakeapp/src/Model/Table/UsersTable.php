@@ -173,10 +173,11 @@ class UsersTable extends Table
                 ->notEmptyString('password', '「パスワード」を入力してください')
                 ->alphaNumeric('password', '「半角英数」で入力してください。');
         }
-        $validator
-            ->scalar('agree')
-            ->notEmptyString('agree', 'create','「同意する」を選択してください。');
-
+        if($type != "admin"){
+            $validator
+                ->scalar('agree')
+                ->notEmptyString('agree', 'create','「同意する」を選択してください。');
+        }
 
         return $validator;
     }

@@ -16,12 +16,7 @@
         <h1 class="h2">会員情報更新</h1>
       </div>
       <?= $this->Flash->render() ?>
-
-
-      <?= $this->element("useradd",['role'=>"admin"])?>
-
-
-
+      <?= $this->element("useraddconf",['role'=>"admin"])?>
     </main>
   </div>
 </div>

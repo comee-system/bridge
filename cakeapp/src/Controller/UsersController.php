@@ -16,6 +16,7 @@ use Cake\ORM\TableRegistry;
  */
 class UsersController extends AppController
 {
+    public $render="";
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -103,6 +104,7 @@ class UsersController extends AppController
 
         $user = $this->Users->newEntity();
         $this->___regist($user);
+
         $this->set('actionkey', "add");
 
 
@@ -127,7 +129,11 @@ class UsersController extends AppController
         $this->set("actionkey", "edit");
         $this->set("password", "");
 
-        $this->render("add");
+        if($this->render){
+            $this->render($this->render);
+        }else{
+            $this->render("add");
+        }
         $this->set(compact('user'));
 
     }
@@ -151,56 +157,67 @@ class UsersController extends AppController
      */
     public  function ___regist($user, $id = "")
     {
-
+        $this->render = "";
         if ($this->request->is('post')) {
             $ref = $this->referer(null, true);
             //patchEntityに入るとvalidationが走る
-            if($id){
-                $user   = $this->Users->patchEntity($user, $this->request->getData(),['validate'=>"edit"]);
-            }else{
-                $user   = $this->Users->patchEntity($user, $this->request->getData());
-            }
-            $errors = $user->getErrors();
-            $imp    = self::__getErrorMessage($errors);
-            if (empty($errors)) {
-
-                $this->setPostString($user);
-                $this->setTelString($user);
-                $user->username = "username1";
-                $user->role     = "sample";
-                //更新の際、空欄の場合はパスワードを変更しない
-                if($id > 0 && !$this->request->getData('password') ){
-                    unset($user->password);
+            if(!$this->request->getData("back")){
+                if($id){
+                    $user   = $this->Users->patchEntity($user, $this->request->getData(),['validate'=>"edit"]);
+                }else{
+                    $user   = $this->Users->patchEntity($user, $this->request->getData());
                 }
-                if ($this->Users->save($user)) {
-                    if(!$id){
-                        $this->mailsend->userRegistrationMail($user);
-                    }
-                    if($this->request->getParam("action") == "edit"){
-                        //インポートされた仮登録データについては、テナントページに遷移する
-                        if($user->import == 1){
-                            $tenant = $this->Tenants->find()->where(["user_id"=>$user->id])->first();
-                            return $this->redirect("/mypage/tenantedit/".$tenant->id);
-                        }else{
-                            $this->Flash->success(__('会員情報編集が完了しました。'));
-                            return $this->redirect("/mypage/");
-                        }
+            }
+            if(!$this->request->getData("back")) {
+                $errors = $user->getErrors();
+                $imp    = self::__getErrorMessage($errors);
+                if (empty($errors)) {
+                    if($this->request->getData("editconf")){
+                        $this->render = "addconf";
+                        $this->set('actionkey', $this->request->getParam("action")."/".$id);
+                        $this->set("id",$id);
                     }else{
-                        $this->Flash->success(__('会員登録が完了しました。'));
-                        return $this->redirect("/users/fin");
+                        $this->setPostString($user);
+                        $this->setTelString($user);
+                        $user->username = "username1";
+                        $user->role     = "sample";
+                        //更新の際、空欄の場合はパスワードを変更しない
+                        if($id > 0 && !$this->request->getData('password') ){
+                            unset($user->password);
+                        }
+                        if ($this->Users->save($user)) {
+                            if(!$id){
+                                $this->mailsend->userRegistrationMail($user);
+                            }
+                            if($this->request->getParam("action") == "edit"){
+                                //インポートされた仮登録データについては、テナントページに遷移する
+                                if($user->import == 1){
+                                    $tenant = $this->Tenants->find()->where(["user_id"=>$user->id])->first();
+                                    return $this->redirect("/mypage/tenantedit/".$tenant->id);
+                                }else{
+                                    $this->Flash->success(__('会員情報編集が完了しました。'));
+                                    return $this->redirect("/mypage/");
+                                    exit();
+                                }
+                            }else{
+                                $this->Flash->success(__('会員登録が完了しました。'));
+                                return $this->redirect("/users/fin");
+                            }
+                        } else {
+                            $this->Flash->error(__('会員登録に失敗しました。'));
+                        }
                     }
-                } else {
-                    $this->Flash->error(__('会員登録に失敗しました。'));
+                }else{
+                    $this->Flash->error(__('会員登録に失敗しました。<br />' . $imp));
                 }
-
             }
-            $this->Flash->error(__('会員登録に失敗しました。<br />' . $imp));
             foreach ($this->request->getData() as $key => $value) {
                 $this->set($key, $value);
             }
         }
 
         $this->set(compact('user'));
+        if($this->render) $this->render($this->render);
 
     }
 

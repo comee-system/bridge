@@ -405,3 +405,7 @@ Configure::write("array_job_type", [
 
         ],
 ]);
+Configure::write("array_agreement_status", [
+    1=>"会員",
+    0=>"仮会員",
+]);

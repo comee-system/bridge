@@ -53,6 +53,7 @@ class UsersController extends AppController
       $array_job_type = Configure::read('array_job_type');
       $array_open = Configure::read('array_open');
       $array_build_status = Configure::read('array_build_status');
+      $array_agreement_status = Configure::read('array_agreement_status');
       $this->set("array_status",$array_status);
       $this->set("array_prefecture",$array_prefecture);
       $this->set("array_shop",$array_shop);
@@ -67,6 +68,7 @@ class UsersController extends AppController
       $this->set("array_job_type",$array_job_type);
       $this->set("array_open",$array_open);
       $this->set("array_build_status",$array_build_status);
+      $this->set("array_agreement_status",$array_agreement_status);
 
       //レイアウトの指定
       $this->viewBuilder()->setLayout('Admin/default');
@@ -143,6 +145,7 @@ class UsersController extends AppController
                         $mail[$key]['text'] = $value[11];
                         $mail[$key]['email'] = $value[9];
                         $mail[$key]['name'] = $value[0];
+                        $mail[$key]['pw'] = $value[10];
 
                         $user   = $this->Users->patchEntity($user, $data,["validate"=>"import"]);
                         //var_dump($user->getErrors()[ 'email' ]);
@@ -255,47 +258,54 @@ class UsersController extends AppController
      */
     public  function ___regist($user, $id = "")
     {
-
-        if ($this->request->is('post')) {
+        $render = "";
+        if ($this->request->is('post') ) {
             $ref = $this->referer(null, true);
             //patchEntityに入るとvalidationが走る
-            if($id){
+            if($id && !$this->request->getData("back")){
                 $user   = $this->Users->patchEntity($user, $this->request->getData(),['validate'=>"edit"]);
             }else{
                 $user   = $this->Users->patchEntity($user, $this->request->getData());
             }
             $errors = $user->getErrors();
             $imp    = self::__getErrorMessage($errors);
-            if (empty($errors)) {
-
-                $this->setPostString($user);
-                $this->setTelString($user);
-                $user->username = "username1";
-                $user->role     = "sample";
-                //更新の際、空欄の場合はパスワードを変更しない
-                if($id > 0 && !$this->request->getData('password') ){
-                    unset($user->password);
-                }
-                if ($this->Users->save($user)) {
-                    if($id > 0 ){
-                        $this->Flash->success(__('会員情報編集が完了しました。'));
+            if(!$this->request->getData("back")) {
+                if (empty($errors) ) {
+                    if($this->request->getData("editconf")){
+                        $render = "editconf";
+                        $this->set('actionkey', "edit/".$id);
+                        $this->set("id",$id);
                     }else{
-                        $this->Flash->success(__('会員登録が完了しました。'));
+                        $this->setPostString($user);
+                        $this->setTelString($user);
+                        $user->username = "username1";
+                        $user->role     = "sample";
+                        //更新の際、空欄の場合はパスワードを変更しない
+                        if($id > 0 && !$this->request->getData('password') ){
+                            unset($user->password);
+                        }
+                        if ($this->Users->save($user)) {
+                            if($id > 0 ){
+                                $this->Flash->success(__('会員情報編集が完了しました。'));
+                            }else{
+                                $this->Flash->success(__('会員登録が完了しました。'));
+                            }
+                            return $this->redirect("/admin/users");
+                        } else {
+                            $this->Flash->error(__('会員登録に失敗しました。'));
+                        }
                     }
-                    return $this->redirect("/admin/users");
-                } else {
-                    $this->Flash->error(__('会員登録に失敗しました。'));
+                }else{
+                    $this->Flash->error(__('会員登録に失敗しました。<br />' . $imp));
                 }
-
             }
-            $this->Flash->error(__('会員登録に失敗しました。<br />' . $imp));
             foreach ($this->request->getData() as $key => $value) {
                 $this->set($key, $value);
             }
         }
 
         $this->set(compact('user'));
-
+        if($render) $this->render($render);
     }
     public function setPostString($user)
     {

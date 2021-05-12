@@ -112,10 +112,12 @@ class MailSendComponent extends Component
             ->emailFormat('text')
             ->to($email)
             ->from(D_ADMIN_MAIL)
-            ->subject("【Bridge】会員仮登録のお知らせ")
+            ->subject("【Bridge】リリースのお知らせ")
             ->viewVars([
                 'name' => $user['name'],
                 'text' => $user['text'],
+                'id' => $user['id'],
+                'pw' => $user['id'],
             ])
             ->send();
     }

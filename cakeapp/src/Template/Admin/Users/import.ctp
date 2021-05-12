@@ -41,7 +41,7 @@
                         ])?>
                     </div>
                     <div class="ml-3">
-                        <a href="/csv/format.csv" class="btn btn-success text-white" >CSVフォーマット</a>
+                        <a href="/csv/temporary_member_import_format.csv" class="btn btn-success text-white" >CSVフォーマット</a>
                     </div>
 
                 </div>
