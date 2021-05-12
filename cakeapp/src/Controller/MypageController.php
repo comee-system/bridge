@@ -71,6 +71,18 @@ class MypageController extends AppController
         $this->array_response = Configure::read('array_response');
         $this->array_code = Configure::read('array_code');
         $this->array_read = Configure::read('array_read');
+
+
+        $user = $this->Auth->user();
+        //ログイン済みで同意していないときは編集画面に遷移する
+        if(!empty($user['id'])){
+            $user = $this->Users->find('all')->select(['id','agree'])->where(['id'=>$user[ 'id' ]])->first();
+            if(!$user->agree){
+                return $this->redirect(['controller'=>"/",'action'=>'/users/edit/']);
+            }
+        }
+
+
         $this->set("array_status",$array_status);
         $this->set("array_prefecture",$array_prefecture);
         $this->set("array_shop",$array_shop);
@@ -102,6 +114,7 @@ class MypageController extends AppController
      */
     public function index(){
         $user = $this->Auth->user();
+
         $builds = $this->Builds->find()
         ->where([
             "Builds.user_id"=>$user[ 'id' ]
