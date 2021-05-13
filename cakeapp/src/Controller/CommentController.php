@@ -193,7 +193,7 @@ class CommentController extends AppController
                 "table" => "builds",
                 "alias" => "b",
                 "type" => "LEFT",
-                "conditions" => "b.id=comments.build_id"
+                "conditions" => "b.id=Comments.build_id"
             ])
             ->where([
             "Comments.user_id" =>$user[ 'id' ],
