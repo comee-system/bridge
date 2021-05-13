@@ -24,14 +24,18 @@
                 <h5>物件検索</h5>
                 <?= $this->Form->create("",[
                     "method"=>"post",
-                    "action"=>"/admin/users"
+                    "url"=>[
+                        "action"=>"build",
+                        "controller"=>"users"
+                    ]
                 ]);?>
                 <div class="row">
                     <div class="col-md-3">
-                        <?= $this->Form->control("氏名",[
+                        <?= $this->Form->control("物件名",[
                             "type"=>"text",
                             "name"=>"name",
-                            "class"=>"form-control"
+                            "class"=>"form-control",
+                            "value"=> $this->request->getData("name")
                         ])?>
                     </div>
                 </div>
@@ -58,7 +62,7 @@
               <th>機能</th>
               <th>登録者</th>
               <th>メールアドレス</th>
-              <th>名前</th>
+              <th>物件名</th>
               <th>登録日</th>
             </tr>
           </thead>

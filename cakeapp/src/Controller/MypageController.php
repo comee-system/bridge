@@ -120,7 +120,6 @@ class MypageController extends AppController
             "Builds.user_id"=>$user[ 'id' ]
         ]);
         $builds = $this->paginate($builds);
-
         //テナント用コメント
         $tenant = $this->Comments->find();
         $tenant
@@ -427,4 +426,6 @@ class MypageController extends AppController
         }
       return $data;
     }
+
+
 }

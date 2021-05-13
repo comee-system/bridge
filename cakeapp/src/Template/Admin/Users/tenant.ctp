@@ -24,14 +24,18 @@
                 <h5>テナント検索</h5>
                 <?= $this->Form->create("",[
                     "method"=>"post",
-                    "action"=>"/admin/users"
+                    "url"=>[
+                        'action'=>"tenant",
+                        "controller"=>"users"
+                    ]
                 ]);?>
                 <div class="row">
                     <div class="col-md-3">
-                        <?= $this->Form->control("氏名",[
+                        <?= $this->Form->control("テナント名",[
                             "type"=>"text",
-                            "name"=>"name",
-                            "class"=>"form-control"
+                            "name"=>"tenantname",
+                            "class"=>"form-control",
+                            "value"=>$this->request->getData("tenantname")
                         ])?>
                     </div>
                 </div>

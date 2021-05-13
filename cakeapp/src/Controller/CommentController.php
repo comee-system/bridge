@@ -18,6 +18,7 @@ class CommentController extends AppController
     {
         parent::beforeFilter($event);
         $this->loadModel("Comments");
+        $this->loadModel("Builds");
         $this->array_read = Configure::read("array_read");
         $this->array_code = Configure::read("array_code");
     }
@@ -167,4 +168,48 @@ class CommentController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function getCommentCount(){
+        $this->autoRender = false;
+        $user = $this->Auth->user();
+        $comment = $this->Comments->find();
+        $buildcomment = $comment
+            ->select([
+                "count"=>$comment->func()->count('id')
+                ])
+            ->where([
+            "user_id" =>$user[ 'id' ],
+            "response"=>1,
+            "readflag"=>0,
+            "code"=>1
+            ])->first();
+
+        $comment = $this->Comments->find();
+        $tenantcomment = $comment
+            ->select([
+                "count"=>$comment->func()->count('Comments.id')
+                ])
+            ->join([
+                "table" => "builds",
+                "alias" => "b",
+                "type" => "LEFT",
+                "conditions" => "b.id=comments.build_id"
+            ])
+            ->where([
+            "Comments.user_id" =>$user[ 'id' ],
+            "Comments.response"=>1,
+            "Comments.readflag"=>0,
+            "Comments.code"=>2,
+            "b.build_status !="=>0
+            ])->first();
+
+        $return[1] = (!empty($buildcomment[ 'count' ]))?$buildcomment[ 'count' ]:"0";
+        $return[2] = (!empty($tenantcomment[ 'count' ]))?$tenantcomment[ 'count' ]:"0";
+
+        header('content-type: application/json; charset=utf-8');
+        header('Access-Control-Allow-Origin: *');
+        echo json_encode($return, JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+
 }

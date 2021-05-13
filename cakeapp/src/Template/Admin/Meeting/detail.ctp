@@ -38,7 +38,7 @@
                             <th>募集開始日</th>
                         </tr>
                         <tr>
-                            <td><?= h($builds->Users['busyo']) ?></td>
+                            <td><?= h($builds->Users['company']) ?></td>
                             <td><?= h($array_prefecture[$builds->pref]) ?></td>
                             <td><?= h($builds->shop_area) ?>坪</td>
                             <td>
@@ -63,6 +63,10 @@
             <div class="card mb-4 mt-2 shadow-sm">
                 <div class="card-body">
                     <div class="row">
+                        <h5>
+                            <?= h($builds->Users[ 'sei' ])?>
+                            <?= h($builds->Users[ 'mei' ])?>
+                        </h5>
                         <div class="col-md-12 text-center">
                             メッセージなし
                         </div>
@@ -112,20 +116,27 @@
         <?php foreach($tenantcomment as $key=>$value): ?>
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">
+                    <h6 class="mt-1"><?= h($value->Users[ 'company' ])?></h6>
+
+                    <span class="lead">
+                        <?= h($value->Users[ 'sei' ]) ?>
+                        <?= h($value->Users[ 'mei' ]) ?>
+                    </span>
+                    <!--
+                    <span class="small badge badge-primary"><?= $array_comment_reply_status[$value->comment_status] ?></span>
+                    -->
                     <div class="row">
-                        <h5>
-                            <?= h($value->Users[ 'sei' ]) ?>
-                            <?= h($value->Users[ 'mei' ]) ?>
-                        </h5>
-                        <div class="col-md-2">
+
+
+                        <div class="col-md-2 mt-3">
                             <span class="badge badge-secondary">
                             <?= $array_read[$value->readflag] ?>
                             </span>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-3">
                             <?= nl2br($value->comment) ?>
                         </div>
-                        <div class="col-md-6 text-right mt-1">
+                        <div class="col-md-6 text-right mt-1 mt-3">
                             <?= h(date("Y/m/d H:i:s",strtotime($value->created))) ?>
                             <div class="mt-2"><span class="bg-secondary text-white p-1">テナント名</span>：
                                 <?= h($value->Tenants[ 'name' ])?>

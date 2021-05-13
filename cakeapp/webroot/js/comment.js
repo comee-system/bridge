@@ -10,8 +10,28 @@ $(function () {
         $(this).getModalData(_href);
         return false;
     });
+
+    $(this).getCommentCount();
+    setInterval(function(){
+        $(this).getCommentCount();
+    },10000);
+
 });
 
+$.fn.getCommentCount = function(){
+
+    $.ajax({
+        url: '/comment/getCommentCount/',
+        type: "GET",
+        datatype:'JSON',
+    }).done(function (response) {
+        $("#build_comment").html(response[1]);
+        $("#tenant_comment").html(response[2]);
+    }).fail(function (response) {
+        //   $("#messagearea").html(response);
+    });
+
+};
 
 $.fn.nl2br = function(str) {
     str = str.replace(/\r\n/g, "<br />");

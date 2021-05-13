@@ -56,7 +56,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                 </dl>
                                 <a href="/mypage/room/build/<?= $values->id ?>" class="btn btn-sm btn-block btn-outline-primary">商談ルーム</a>
                                 <?php
-                                if(!empty($tenantlist[$values->id])):
+                                if(!empty($tenantlist[$values->id] && $values[ 'build_status' ] != 0 )):
                                     foreach($tenantlist[$values->id] as $k=>$val):
                                 ?>
                                         <a href="/mypage/room/tenant/<?= $val->build_id?>/<?= $val->tenant_id ?>" class="btn btn-sm btn-block btn-outline-success">商談ルーム【<?= h($val->Tenants['name']) ?>】</a>

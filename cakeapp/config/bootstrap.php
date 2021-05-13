@@ -281,9 +281,9 @@ Configure::write("array_status", [
     "5" => "下書き",
     ]);
 Configure::write("array_build_status", [
-    "0" => "未設定",
+    "0" => "交渉中止",
     "1" => "交渉中",
-    "2" => "マッチング中",
+    "2" => "交渉成立",
     ]);
 Configure::write("array_shop", [
         1=>"ビルイン型店舗",
@@ -408,4 +408,8 @@ Configure::write("array_job_type", [
 Configure::write("array_agreement_status", [
     1=>"会員",
     0=>"仮会員",
+]);
+Configure::write("array_comment_reply_status", [
+    1=>"紹介済み",
+    2=>"交渉開始",
 ]);

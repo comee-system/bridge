@@ -19,27 +19,35 @@
       <?= $this->Flash->render() ?>
         <div class="card mb-4 shadow-sm">
             <div class="card-body">
-                <?= $this->Form->create("",[
-                    'action'=>"",
+                <?= $this->Form->create($builds,[
+                    "url"=>[
+                        'action'=>"index",
+                        'controller'=>"meeting",
+                    ],
                     'method'=>"POST"
                 ])?>
                 <div class="row">
                     <div class="col-md-3">
                         <label>物件名</label><br />
-                        <input type="text" name="name" value="" class="form-control" />
+                        <?= $this->Form->text("name",[
+                            'class'=>"form-control",
+                            "required"=>false
+                        ])?>
                     </div>
                     <div class="col-md-3">
                         <label>企業名</label><br />
-                        <input type="text" name="company" value="" class="form-control" />
+                        <?= $this->Form->text("company",[
+                            'class'=>"form-control",
+                            "required"=>false
+                        ])?>
                     </div>
                     <div class="col-md-3">
-                        <label>ステータス</label><br />
-                        <select name="status" class="form-control" >
-                        <option value="">-</option>
-                        <?php foreach($array_status as $key=>$value): ?>
-                            <option value="<?= $key ?>" ><?= $value ?></option>
-                        <?php endforeach; ?>
-                        </select>
+                        <label>ステータス</label>
+                        <?= $this->Form->select("build_status",$array_build_status,[
+                            'class'=>"form-control",
+                            'empty'=>'-',
+                            "required"=>false
+                        ])?>
                     </div>
                 </div>
                 <div class="row mt-3">
@@ -76,13 +84,13 @@
             <?php foreach($builds as $value): ?>
                 <tr>
                 <td><a href="/admin/meeting/detail/<?=$value->id?>"><?= h($value->name) ?></a></td>
-                <td><?= h($value->Users['busyo']) ?></td>
+                <td><?= h($value->Users['company']) ?></td>
                 <td><?= h($array_shop[$value->shop_type]) ?></td>
                 <td>
                     <?= h($array_prefecture[$value->pref]) ?>
                 </td>
                 <td><?= h(number_format($value->shop_area)) ?>坪</td>
-                <td>-</td>
+                <td><?= h($array_build_status[ $value->build_status ]) ?></td>
                 <td><?= date("Y/m/d",strtotime($value->created))?></td>
                 <td>
                     <?php if($value->start): ?>

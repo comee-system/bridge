@@ -27,7 +27,13 @@ class QuestionController extends AppController
     }
     public function index()
     {
-        $questions = $this->Questions->find()->order(["id"=>"desc"]);
+        $questions = $this->Questions->find();
+        if($this->request->getData("date")){
+            $questions = $questions->where([
+                "created LIKE " => preg_replace("/\//","-",$this->request->getData("date"))."%"
+            ]);
+        }
+        $questions = $questions->order(["id"=>"desc"]);
         $questions = $this->paginate($questions);
 
         $this->set(compact('questions'));

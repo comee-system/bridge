@@ -22,16 +22,20 @@
         <div class="card mt-3">
             <div class="card-body">
                 <h5>お問い合わせ検索</h5>
-                <?= $this->Form->create("",[
+                <?= $this->Form->create(null,[
                     "method"=>"post",
-                    "action"=>"/admin/question"
+                    "url"=>[
+                        "action"=>"question",
+                        "controller"=>"../admin"
+                    ]
                 ]);?>
                 <div class="row">
                     <div class="col-md-3">
-                        <?= $this->Form->control("",[
+                        <?= $this->Form->control("date",[
                             "type"=>"text",
-                            "name"=>"name",
-                            "class"=>"form-control"
+                            "name"=>"date",
+                            "class"=>"form-control calendar",
+                            "label"=>"受信日"
                         ])?>
                     </div>
                 </div>

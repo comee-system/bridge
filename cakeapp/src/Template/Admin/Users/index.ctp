@@ -24,14 +24,18 @@
                 <h5>会員検索</h5>
                 <?= $this->Form->create("",[
                     "method"=>"post",
-                    "action"=>"/admin/users"
+                    "url"=>[
+                        "action"=>"index",
+                        "controller"=>"users"
+                    ]
                 ]);?>
                 <div class="row">
                     <div class="col-md-3">
                         <?= $this->Form->control("氏名",[
                             "type"=>"text",
                             "name"=>"name",
-                            "class"=>"form-control"
+                            "class"=>"form-control",
+                            "value"=>$this->request->getData("name")
                         ])?>
                     </div>
                 </div>

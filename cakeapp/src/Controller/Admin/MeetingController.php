@@ -55,6 +55,7 @@ class MeetingController extends AppController
         $array_build_status = Configure::read('array_build_status');
         $this->array_read = Configure::read("array_read");
         $this->array_code = Configure::read("array_code");
+        $this->array_comment_reply_status = Configure::read("array_comment_reply_status");
 
         $this->set("array_status",$array_status);
         $this->set("array_prefecture",$array_prefecture);
@@ -71,6 +72,7 @@ class MeetingController extends AppController
         $this->set("array_open",$array_open);
         $this->set("array_build_status",$array_build_status);
         $this->set("array_read",$this->array_read);
+        $this->set("array_comment_reply_status",$this->array_comment_reply_status);
 
     }
 
@@ -83,6 +85,9 @@ class MeetingController extends AppController
     {
         $user = $this->Auth->user();
         $builds = $this->Builds->find()->contain(['users']);
+        if($this->request->getData("name")) $builds = $builds->where(['name LIKE'=>'%'.$this->request->getData("name").'%']);
+        if($this->request->getData("company")) $builds = $builds->where(['company LIKE'=>'%'.$this->request->getData("company").'%']);
+        if(strlen($this->request->getData("build_status")) > 0) $builds = $builds->where(['build_status LIKE'=>$this->request->getData("build_status")]);
         $builds = $this->paginate($builds);
 
         $this->set(compact('builds'));
@@ -124,6 +129,7 @@ class MeetingController extends AppController
             ->where([
             'Comments.id IN '=>$query
             ]);
+
         $this->set(compact('builds'));
         $this->set(compact('buildcomment'));
         $this->set(compact('tenantcomment'));
@@ -133,14 +139,36 @@ class MeetingController extends AppController
     public function address($id = ""){
         $tenants = $this->Tenants->find();
         $tenants = $tenants
-            ->contain(['users','comments'])
+            ->contain(['users'])
             ->order(["Tenants.id"=>"DESC"]);
         $tenants = $this->paginate($tenants);
+        //コメント情報取得
+        $comment = $this->Comments->find();
+        $comment = $comment
+            ->select([
+                'count'=>$comment->func()->count('Comments.id'),
+                'tenant_id'
+                ])
+            ->where(['build_id'=>$id,'status'=>1])
+            ->group(['tenant_id'])->toArray();
         $this->set(compact('tenants'));
         $this->set("build_id",$id);
+        $this->set("commentCount",self::_getCommentCount($comment));
 
     }
+    public static function _getCommentCount($comment=[]){
+        $list = [];
+        if(count($comment) > 0 ){
+            foreach($comment as $key=>$value){
+                $list[$value['tenant_id']]['count'] = $value[ 'count' ];
+            }
+        }
+        return $list;
+    }
     public function message($id = ""){
+        //物件情報
+        $builds = $this->Builds->find()->contain(['users'])->where(['Builds.id'=>$id])->first();
+
         //登録処理
         if($this->request->getData("regist")){
             $cnt = 0;
@@ -148,7 +176,6 @@ class MeetingController extends AppController
                 $this->regist("tenant",$id,$value,$cnt,false);
                 $cnt++;
             }
-            $this->Flash->success(__('コメントを登録しました'));
             return $this->redirect(['action' => 'detail/'.$id]);
             exit();
         }
@@ -159,6 +186,7 @@ class MeetingController extends AppController
         $tenants = $this->Tenants->find()->contain(['users'])->where(['Tenants.id IN' => $this->request->getData("select")]);
 
         $this->set(compact('tenants'));
+        $this->set(compact('builds'));
         $this->set("build_id",$id);
 
     }

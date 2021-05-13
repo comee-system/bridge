@@ -50,10 +50,14 @@
 <?= $this->Html->script('//code.jquery.com/jquery-3.5.1.min.js') ?>
 <!-- Bootstrap 4 -->
 <?= $this->Html->script('/js/bootstrap.bundle.min.js') ?>
-<?php  /*
-<?= $this->Html->script('/js/feather.min.js') ?>
-<?= $this->Html->script('/js/dashboard.js') ?>
-*/?>
+
+<?php /*$this->Html->script('/js/feather.min.js') */?>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+
+
 <?= $this->Html->script('/js/base.js') ?>
 
 

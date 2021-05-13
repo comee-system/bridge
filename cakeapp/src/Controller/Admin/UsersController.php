@@ -82,7 +82,16 @@ class UsersController extends AppController
     public function index()
     {
 
-        $users = $this->paginate($this->Users);
+        $query = $this->Users->find();
+        if($this->request->getData('name')){
+            $query = $query->where([
+                "OR"=>[
+                    'sei  LIKE '=>'%'.$this->request->getData( 'name' ).'%',
+                    'mei  LIKE '=>'%'.$this->request->getData( 'name' ).'%'
+                ]
+            ]);
+        }
+        $users = $this->paginate($query);
 
         $this->set(compact('users'));
     }
@@ -403,7 +412,12 @@ class UsersController extends AppController
 
     public function tenant(){
         $user = $this->Auth->user();
-        $tenant = $this->ViewTenants->find()->contain(['users'])->order(['ViewTenants.id'=>'desc']);
+        $tenant = $this->ViewTenants->find()->contain(['users']);
+        if($this->request->getData("tenantname")){
+            $tenant = $tenant->where(["name LIKE " => "%".$this->request->getData( 'tenantname' )."%"]);
+        }
+
+        $tenant = $tenant->order(['ViewTenants.id'=>'desc']);
         $tenant = $this->paginate($tenant);
 
         $tenant = $this->__setPref($tenant);
@@ -552,7 +566,11 @@ class UsersController extends AppController
     public function build(){
         $user = $this->Auth->user();
         $builds = $this->Builds->find()->contain(['users']);
-
+        if($this->request->getData("name")){
+            $builds = $builds->where([
+                "name LIKE "=>"%".$this->request->getData('name')."%"
+            ]);
+        }
         $builds = $this->paginate($builds);
 
         $this->set(compact('builds'));

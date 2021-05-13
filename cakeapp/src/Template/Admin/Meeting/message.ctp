@@ -24,8 +24,8 @@
 
                 <div class="row">
                     <div class="col-md-12 d-flex">
-                        <h5>表参道のお店</h5>
-                        <small class="mt-1 ml-3">東京都</small>
+                        <h5><?= h($builds->name) ?></h5>
+                        <small class="mt-1 ml-3"><?= h($array_prefecture[$builds->pref]) ?></small>
                     </div>
                 </div>
             </div>

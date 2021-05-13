@@ -93,7 +93,10 @@
                             <th>テナント名</th>
                             <th>選択</th>
                         </tr>
-                        <?php foreach($tenants as $value): ?>
+                        <?php foreach($tenants as $value):
+                            $disabled = false;
+                            if(isset($commentCount[$value->id]) && $commentCount[$value->id]) $disabled = true;
+                            ?>
                         <tr>
                             <td><?= h($value->Users[ 'sei' ]) ?><?= h($value->Users[ 'mei' ]) ?></td>
                             <td><?= h($value->Users[ 'company' ])?></td>
@@ -104,12 +107,6 @@
                             </td>
                             <td><?= $value->name ?></td>
                             <td class="text-center">
-                                <?php
-                                    $disabled = false;
-                                    if(count($value->comments) > 0 ){
-                                        $disabled = true;
-                                    }
-                                ?>
                                 <?= $this->Form->checkbox("select[]",[
                                     "class"=>"",
                                     "value"=>$value->id,
