@@ -54,7 +54,12 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                         <?php endif; ?>
                                     </dd>
                                 </dl>
-                                <a href="/mypage/room/build/<?= $values->id ?>" class="btn btn-sm btn-block btn-outline-primary">商談ルーム</a>
+                                <?php if($values['c']['code'] == "1"): ?>
+                                    <a href="/mypage/room/build/<?= $values->id ?>" class="btn btn-sm btn-block btn-outline-primary">商談ルーム</a>
+                                <?php else: ?>
+                                    <a href="/mypage/room/tenant/<?= $values['c']['build_id']?>/<?= $values[ 'c' ]['tenant_id'] ?>" class="btn btn-sm btn-block btn-outline-success">商談ルーム</a>
+                                <?php endif;?>
+<?php /* ?>
                                 <?php
                                 if(!empty($tenantlist[$values->id] && $values[ 'build_status' ] != 0 )):
                                     foreach($tenantlist[$values->id] as $k=>$val):
@@ -64,6 +69,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                     endforeach;
                                 endif;
                                 ?>
+<?php */ ?>
                             </div>
                         </div>
                     </div>

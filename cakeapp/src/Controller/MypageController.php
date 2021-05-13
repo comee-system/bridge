@@ -115,36 +115,33 @@ class MypageController extends AppController
     public function index(){
         $user = $this->Auth->user();
 
-        $builds = $this->Builds->find()
-        ->where([
-            "Builds.user_id"=>$user[ 'id' ]
+        $builds = $this->Builds->find();
+        $builds = $builds->select([
+            'Builds.id',
+            'Builds.name',
+            'Builds.build_status',
+            'Builds.created',
+            'Builds.start',
+            'c.comment',
+            'c.build_id',
+            'c.tenant_id',
+            'c.code',
         ]);
+        $builds = $builds->join([
+            'table' => 'comments',
+            'alias' => 'c',
+            'type' => 'INNER',
+            'conditions' => 'c.build_id=Builds.id'
+        ]);
+        $builds = $builds->where([
+            "c.user_id"=>$user[ 'id' ]
+        ]);
+        $builds = $builds->group(["c.build_id","c.tenant_id"]);
         $builds = $this->paginate($builds);
-        //テナント用コメント
-        $tenant = $this->Comments->find();
-        $tenant
-            ->select([
-                'tenant_id',
-                'build_id',
-                'Tenants.name'
-                ])
-            ->contain(['tenants'])
-            ->where([
-            'Comments.user_id'=>$user[ 'id' ],
-            'Comments.status'=>1,
-            'Comments.code'=>2
-            ])
-            ->group(["build_id","tenant_id"]);
-        $tenantlist = [];
-        if(!empty($tenant)){
-            foreach($tenant as $key=>$value){
-                $tenantlist[$value['build_id']][] = $value;
-            }
-        }
+
+
         $this->set(compact('builds'));
-      //  $this->set(compact('tenant'));
         $this->set("compnent",$this->password);
-        $this->set("tenantlist",$tenantlist);
 
     }
     public function buildlist(){
@@ -227,7 +224,6 @@ class MypageController extends AppController
 
         $user = $this->Auth->user();
         $builds = $this->Builds->find()->where([
-            "user_id"=>$user[ 'id' ],
             "id"=>$id
         ])->first();
         if ($this->request->is('post')) {

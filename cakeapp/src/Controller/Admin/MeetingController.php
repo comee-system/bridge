@@ -115,6 +115,8 @@ class MeetingController extends AppController
             ])->order(["id"=>"DESC"])->first();
 
         //テナント用コメント
+
+
         $query = $this->Comments->find();
         $query
             ->select(['role_max' =>  $query->func()->max('id')])
@@ -125,11 +127,34 @@ class MeetingController extends AppController
             ])
             ->group(["tenant_id"]);
         $tenantcomment = $this->Comments->find()
-            ->contain(['users','tenants'])
+            ->contain(['tenants'])
             ->where([
             'Comments.id IN '=>$query
-            ]);
-
+            ])->toArray();
+        $tenantlist = [];
+        foreach($tenantcomment as $key=>$value){
+            $tenantlist[] = $value['Tenants']['user_id'];
+        }
+        if(count($tenantlist)){
+            $user = $this->Users->find()
+                ->select([
+                    'id',
+                    'sei',
+                    'mei',
+                    'company'
+                    ])
+                ->where([
+            'id IN '=> $tenantlist])->toArray();
+            $userlist = [];
+            foreach($user as $value){
+                $userlist[$value->id]['company'] = $value['company'];
+                $userlist[$value->id]['name'] = $value['sei'].$value['mei'];
+            }
+            foreach($tenantcomment as $key=>$value){
+                $tenantcomment[$key][ 'usercompany' ]= $userlist[$value['Tenants']['user_id']]['company'];
+                $tenantcomment[$key][ 'username' ]= $userlist[$value['Tenants']['user_id']]['name'];
+            }
+        }
         $this->set(compact('builds'));
         $this->set(compact('buildcomment'));
         $this->set(compact('tenantcomment'));
@@ -172,8 +197,9 @@ class MeetingController extends AppController
         //登録処理
         if($this->request->getData("regist")){
             $cnt = 0;
-            foreach($this->request->getData('tenant_id') as $value){
-                $this->regist("tenant",$id,$value,$cnt,false);
+            foreach($this->request->getData('tenant_id') as $key=>$value){
+                $user_id = $this->request->getData("user_id")[$key];
+                $this->regist("tenant",$id,$value,$cnt,$user_id,false);
                 $cnt++;
             }
             return $this->redirect(['action' => 'detail/'.$id]);
@@ -238,10 +264,16 @@ class MeetingController extends AppController
         $this->set("code",$code);
 
     }
-    public function regist($code = "",$id="",$tenant_id = 0,$cnt = 0,$redirect = true){
+    public function regist($code = "",$id="",$tenant_id = 0,$cnt = 0,$user_id=0,$redirect = true){
         $this->autoRender = false;
-
-        $builds = $this->Builds->find()->contain(['users'])->where(['Builds.id'=>$id])->first();
+        $user = [];
+        if($user_id){
+            $user = $this->Users->find()->where(["id"=>$user_id])->first();
+        }else{
+            $builds = $this->Builds->find()->contain(['users'])->where(['Builds.id'=>$id])->first();
+            $user_id = $builds['user_id'];
+            $user = $this->Users->find()->where(["id"=>$user_id])->first();
+        }
         if($this->request->getData("regist")){
 
             if($this->request->getData('fileupload.name') && $cnt == 0){
@@ -263,19 +295,18 @@ class MeetingController extends AppController
             $comments->code = array_keys($this->array_code,$code)[0]; //1.build 2.tenant
             $comments->build_id = $id;
             if($tenant_id > 0) $comments->tenant_id = $tenant_id;
-            $comments->user_id = $builds->user_id;
+            $comments->user_id = $user_id;
             $comments->file = $this->uploadfile;
             $comments->filename = $this->request->getData('fileupload')['name'];
 
             $this->Comments->save($comments);
 
             //メール配信
-            $user = $builds->Users;
             $this->mailsend->setCommentMail($user);
 
-
-            $this->Flash->success(__('コメントを登録しました'));
-
+            if($cnt == 0){
+                $this->Flash->success(__('コメントを登録しました'));
+            }
             if($redirect && $tenant_id){
                 return $this->redirect(['action' => 'room/'.$code."/".$id."/".$tenant_id]);
             }

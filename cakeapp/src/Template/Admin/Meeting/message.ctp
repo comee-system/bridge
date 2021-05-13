@@ -43,6 +43,9 @@
                             <?= $this->Form->hidden("tenant_id[]",[
                                 'value'=>$value->id
                             ])?>
+                            <?= $this->Form->hidden("user_id[]",[
+                                'value'=>$value->user_id
+                            ])?>
                         </div>
                     <?php
                         $num++;

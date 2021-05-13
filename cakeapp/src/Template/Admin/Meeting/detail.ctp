@@ -116,12 +116,8 @@
         <?php foreach($tenantcomment as $key=>$value): ?>
             <div class="card mb-4 shadow-sm">
                 <div class="card-body">
-                    <h6 class="mt-1"><?= h($value->Users[ 'company' ])?></h6>
-
-                    <span class="lead">
-                        <?= h($value->Users[ 'sei' ]) ?>
-                        <?= h($value->Users[ 'mei' ]) ?>
-                    </span>
+                    <h6 class="mt-1"><?= h($value->usercompany)?></h6>
+                    <h6 class="mt-1"><?= h($value->username)?></h6>
                     <!--
                     <span class="small badge badge-primary"><?= $array_comment_reply_status[$value->comment_status] ?></span>
                     -->

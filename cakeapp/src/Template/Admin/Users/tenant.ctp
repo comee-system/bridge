@@ -82,7 +82,9 @@
                 <?= h($value->Users['company']) ?>
               </td>
               <td>
+                <?php if(!empty($array_job[$value->job])): ?>
                 <?= h($array_job[$value->job]) ?>
+                <?php endif; ?>
               </td>
               <td>
                 <?= h($value->name) ?>
