@@ -106,10 +106,11 @@ class BuildsTable extends Table
         $validator
             ->integer('rent_money',__("賃料の形式に謝りがあります。"))
             ->notEmptyString('rent_money',__("賃料を入力してください。"));
-
+/*
         $validator
             ->integer('common_money',__("共益費の形式に謝りがあります。"))
             ->notEmptyString('common_money',__("共益費を入力してください。"));
+*/
 
         $validator
             ->integer('parking_count',__("駐車場台数の形式に謝りがあります。"))

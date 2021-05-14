@@ -413,11 +413,10 @@
             <div class="row mt-2">
                 <div class="col-2"><?= __("共益費") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
                 </div>
                 <div class="col-8 input-group">
                     <?php if($type == "conf" ): ?>
-                        <?= number_format($this->request->getData('common_money')); ?>円
+                        <?= h($this->request->getData('common_money')); ?>円
                         <?= $this->Form->hidden("common_money",[
                                 "value"=>$this->request->getData('common_money')
                         ])?>
