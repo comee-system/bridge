@@ -33,7 +33,7 @@ class CommentController extends AppController
         $user = $this->Auth->user();
         if($this->request->is('ajax')) {
             $comments = $this->Comments->find()->where([
-                'user_id'=>$user['id'],
+           //     'user_id'=>$user['id'],
                 'build_id'=>$id,
                 'code'=>array_keys($this->array_code,$code)[0],
                 'status'=>1
