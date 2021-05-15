@@ -100,6 +100,8 @@ class MypageController extends AppController
         $this->set("array_code",$this->array_code);
         $this->set("array_response",$this->array_response);
         $this->set("array_read",$this->array_read);
+
+        $this->set("editflag",true);
     }
 
     /**
@@ -157,14 +159,19 @@ class MypageController extends AppController
     }
     public function buildregist($id = ""){
 
-
+        $user = $this->Auth->user();
         $type = "";
         $error = [];
         $setUploadfile = "";
         $setUploadfilename = "";
         $uploadfile = "";
+        $editflag = true;
         if($id){
             $build = $this->Builds->get($id);
+            //データが自分の物件ではないときに修正不可とする
+            if($build[ 'user_id' ] != $user[ 'id' ]){
+                $editflag = false;
+            }
             $setUploadfile = $build->uploadfile;
             $setUploadfilename = $build->uploadfilename;
         }else{
@@ -213,6 +220,7 @@ class MypageController extends AppController
         $this->set("type",$type);
         $this->set("error",$error);
         $this->set("uploadfile",$uploadfile);
+        $this->set("editflag",$editflag);
     }
     public function buildfin(){
 

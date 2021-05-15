@@ -47,6 +47,38 @@
 
             </div>
         </div>
+
+
+        <div class="card mb-4 mt-2 shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5><?= h($builds->Users[ 'company' ]) ?></h5>
+                        <p>
+                            <?= h($builds->Users[ 'sei' ])?>
+                            <?= h($builds->Users[ 'mei' ])?>
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex">
+                            <?=$this->Form->select("status",[],[
+                                "class"=>"form-control w-50",
+                                "empty"=>"-"
+                            ])?>
+                            <?= $this->Form->control("ステータス更新",[
+                                "class"=>"btn-sm btn-warning text-white ml-2 text-center w-100",
+                                "name"=>"status_edit",
+                                "label"=>false,
+                                "value"=>"ステータス更新",
+                                "type"=>"button"
+                            ])?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <?php if($code == "tenant"): ?>
             <?= $this->Form->create("",[
                     'action'=>"/regist/".$code."/".$id."/".$tenant_id,

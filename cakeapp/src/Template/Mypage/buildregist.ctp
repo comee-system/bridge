@@ -30,7 +30,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
             <?= $this->element('mymenu',['type'=>$type]); ?>
             <div class="col-md-8 order-md-10 mb-4">
 
-                <?= $this->element("mystep") ?>
+                <?= $this->element("mystep",["editflag"=>$editflag]) ?>
 
                 <div class="row mt-5 ">
                     <?php if($type == "fin"): ?>
@@ -48,7 +48,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                         'enctype' => 'multipart/form-data',
                         "class"=>"w-100"
                     ]); ?>
-                    <?= $this->element("buildingregist",['admin'=>false])?>
+                    <?= $this->element("buildingregist",['admin'=>false,"editflag"=>$editflag])?>
                     <?= $this->Form->end() ?>
                     <?php endif; ?>
                 </div>

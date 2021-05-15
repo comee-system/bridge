@@ -1,3 +1,4 @@
+<?php if($editflag != false):?>
 <div role="content">
     <div class="widget-body">
         <div class="row ">
@@ -25,3 +26,4 @@
         </div>
     </div>
 </div>
+<?php endif; ?>

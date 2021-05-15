@@ -1,5 +1,6 @@
 <div class="card-deck col-md-12 text-left w-100">
     <div class="card shadow-sm ">
+    <?php if($editflag != false):?>
         <div class="card-header">
             <p class="my-0 font-weight-normal"><b><?= __("注意事項") ?></b></p>
             <p>
@@ -8,12 +9,22 @@
 
             </p>
         </div>
+    <?php endif; ?>
+    <?php
+    $noborder = "";
+    $none = "";
+    //詳細ページのようにする
+    if($editflag == false):
+        $noborder = "noborder";
+        $none = "d-none";
+    endif;
+    ?>
         <div class="card-body">
 
             <div class="row">
-                <div class="col-2"><?= __("物件名称") ?></div>
+                <div class="col-2 "><?= __("物件名称") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
+                <span class="badge badge-danger <?=$none?>"><?= __("必須") ?></span>
                 </div>
                 <div class="col-8">
                     <?php if($type == "conf"):?>
@@ -35,7 +46,7 @@
 
                         <?= $this->Form->input("name",[
                             "type"=>"text",
-                            "class"=>"form-control",
+                            "class"=>"form-control ".$noborder,
                             "label"=>false,
                             "placeholder"=>__("物件名を入力してください。"),
                             "default"=>$name
@@ -52,7 +63,7 @@
             <div class="row mt-2">
                 <div class="col-2"><?= __("所在地") ?></div>
                 <div class="col-2">
-                    <span class="badge badge-danger"><?= __("必須") ?></span>
+                    <span class="badge badge-danger <?=$none?>"><?= __("必須") ?></span>
                 </div>
                 <?php if($type == "conf"):?>
                     <div class="col-8 ">
@@ -99,6 +110,10 @@
                     ?>
                     <div class="col-8 ">
                         <div class="d-flex">
+                            <?php if($editflag == false): ?>
+                            <?= $build[ 'post1' ] ?> -
+                            <?= $build[ 'post2' ] ?>
+                            <?php else: ?>
                             <div class="text-nowrap">郵便番号</div>
                             <div class="w-25 ml-2">
                                 <?= $this->Form->input("post1",[
@@ -119,6 +134,7 @@
                                     "onKeyUp"=>"AjaxZip3.zip2addr('post1','post2','pref','city','space');"
                                 ]) ?>
                             </div>
+                            <?php  endif; ?>
                         </div>
                         <?php
                             $pref = "";
@@ -130,9 +146,9 @@
                         ?>
                         <div class="row mt-2">
                             <div class="col-12">
-                                <label>都道府県</label>
+                                <label class="<?= $none ?>">都道府県</label>
                                 <?= $this->Form->select("pref", $array_prefecture,[
-                                    "class"=>"form-control ",
+                                    "class"=>"form-control ".$noborder,
                                     "label"=>false,
                                     "empty"=>"選択してください",
                                     "default"=>$pref
@@ -149,10 +165,11 @@
                                         if(isset($build[ 'city' ]) && $build[ 'city' ]) $city = $build[ 'city' ];
                                     endif;
                                 ?>
+                                <label class="<?= $none ?>"><?= __("市区町村") ?> </label>
                                 <?= $this->Form->input("city",[
                                     "type"=>"text",
-                                    "class"=>"form-control ",
-                                    "label"=>"市区町村",
+                                    "class"=>"form-control ".$noborder,
+                                    "label"=>false,
                                     "default"=>$city
                                 ]) ?>
                             </div>
@@ -167,10 +184,11 @@
                                         if(isset($build[ 'space' ]) && $build[ 'space' ]) $space = $build[ 'space' ];
                                     endif;
                                 ?>
+                                <label class="<?= $none ?>"><?= __("番地") ?> </label>
                                 <?= $this->Form->input("space",[
                                     "type"=>"text",
-                                    "class"=>"form-control ",
-                                    "label"=>"番地",
+                                    "class"=>"form-control ".$noborder,
+                                    "label"=>false,
                                     "default"=>$space
                                 ]) ?>
                             </div>
@@ -185,10 +203,11 @@
                                         if(isset($build[ 'build' ]) && $build[ 'build' ]) $builds = $build[ 'build' ];
                                     endif;
                                 ?>
+                                <label class="<?= $none ?>"><?= __("ビル・マンション名") ?> </label>
                                 <?= $this->Form->input("build",[
                                     "type"=>"text",
-                                    "class"=>"form-control ",
-                                    "label"=>"ビル・マンション名",
+                                    "class"=>"form-control ".$noborder,
+                                    "label"=>false,
                                     "default"=>$builds
                                 ]) ?>
                             </div>
@@ -225,7 +244,7 @@
             <div class="row mt-2">
                 <div class="col-2"><?= __("店舗形態") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
+                <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
                 </div>
                 <div class="col-8">
                     <?php if($type == "conf"): ?>
@@ -243,7 +262,7 @@
                             endif;
                         ?>
                         <?= $this->Form->select("shop_type", $array_shop,[
-                            "class"=>"form-control ",
+                            "class"=>"form-control ".$noborder,
                             "label"=>false,
                             "empty"=>"選択してください",
                             "default"=>$shop_type
@@ -261,7 +280,7 @@
             <div class="row mt-2">
                 <div class="col-2"><?= __("店舗面積") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
+                <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
                 </div>
                 <div class="col-8 ">
                     <div class="input-group">
@@ -282,7 +301,7 @@
                             ?>
                             <?= $this->Form->input("shop_area",[
                                 "type"=>"text",
-                                "class"=>"form-control ",
+                                "class"=>"form-control ".$noborder,
                                 "label"=>false,
                                 "default"=>$shop_area
                             ]) ?>
@@ -300,7 +319,7 @@
             <div class="row mt-2">
                 <div class="col-2"><?= __("契約形態") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
+                <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
                 </div>
                 <div class="col-8 input-group">
                     <?php if($type == "conf" ): ?>
@@ -318,7 +337,7 @@
                             endif;
                         ?>
                         <?= $this->Form->select("agreement", $array_agreement,[
-                            "class"=>"form-control ",
+                            "class"=>"form-control ".$noborder,
                             "label"=>false,
                             "empty"=>"選択してください",
                             "default"=>$agreement
@@ -335,7 +354,7 @@
             <div class="row mt-2">
                 <div class="col-2"><?= __("保証金") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
+                <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
                 </div>
                 <div class="col-8 ">
                     <div class="input-group">
@@ -355,7 +374,7 @@
                             ?>
                             <?= $this->Form->input("security_money",[
                                 "type"=>"text",
-                                "class"=>"form-control ",
+                                "class"=>"form-control ".$noborder,
                                 "label"=>false,
                                 "default"=>$security_money
                             ]) ?>
@@ -374,7 +393,7 @@
             <div class="row mt-2">
                 <div class="col-2"><?= __("賃料") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
+                <span class="badge badge-danger <?= $none ?> "><?= __("必須") ?></span>
                 </div>
                 <div class="col-8 ">
                     <div class="input-group">
@@ -394,7 +413,7 @@
                             ?>
                             <?= $this->Form->input("rent_money",[
                                 "type"=>"text",
-                                "class"=>"form-control ",
+                                "class"=>"form-control ".$noborder,
                                 "label"=>false,
                                 "default"=>$rent_money
                             ]) ?>
@@ -431,12 +450,12 @@
                         ?>
                         <?= $this->Form->input("common_money",[
                             "type"=>"text",
-                            "class"=>"form-control ",
+                            "class"=>"form-control ".$noborder,
                             "label"=>false,
                             "default"=>$common_money
                         ]) ?>
                         <div class="mt-2 ml-2">円</div>
-                        <div class="col-12">
+                        <div class="col-12 <?= $none ?>">
                             <small>共益費がない場合は０を入力してください。</small>
                         </div>
                     <?php endif; ?>
@@ -452,7 +471,7 @@
             <div class="row mt-2">
                 <div class="col-2"><?= __("駐車場台数") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
+                <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
                 </div>
                 <div class="col-8 ">
                     <div class="input-group">
@@ -472,7 +491,7 @@
                             ?>
                             <?= $this->Form->input("parking_count",[
                                 "type"=>"text",
-                                "class"=>"form-control ",
+                                "class"=>"form-control ".$noborder,
                                 "label"=>false,
                                 "default"=>$parking_count
                             ]) ?>
@@ -490,7 +509,7 @@
             <div class="row mt-2">
                 <div class="col-2"><?= __("建物の形態") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
+                <span class="badge badge-danger <?=$none?> "><?= __("必須") ?></span>
                 </div>
                 <div class="col-8 ">
                     <?php if($type == "conf" ): ?>
@@ -508,7 +527,7 @@
                             endif;
                         ?>
                         <?= $this->Form->select("build_type", $array_build,[
-                            "class"=>"form-control ",
+                            "class"=>"form-control ".$noborder,
                             "label"=>false,
                             "empty"=>"選択してください",
                             "default"=>$build_type
@@ -527,7 +546,7 @@
             <div class="row mt-2">
                 <div class="col-2"><?= __("建物の構造") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
+                <span class="badge badge-danger <?=$none?> "><?= __("必須") ?></span>
                 </div>
                 <div class="col-8 ">
                     <?php if($type == "conf" ): ?>
@@ -545,7 +564,7 @@
                             endif;
                         ?>
                         <?= $this->Form->select("constract_type", $array_constract,[
-                            "class"=>"form-control ",
+                            "class"=>"form-control ".$noborder,
                             "label"=>false,
                             "empty"=>"選択してください",
                             "default"=>$constract_type
@@ -569,8 +588,21 @@
                 </div>
                 <div class="col-8 ">
                     <?php
-                    if($type == "conf" ): ?>
-                        ファイル名<p><?= $this->request->getData("fileupload.name") ?></p>
+                    if($type == "conf" || $editflag == false ): ?>
+                        ファイル名
+                        <?php
+                        $uploadfile = "";
+                        $uploadfilename = "";
+                        if ( isset($build[ 'uploadfile' ]) && $build[ 'uploadfile' ]) :
+                            $uploadfile = $build[ 'uploadfile' ];
+                            $uploadfilename = $build[ 'uploadfilename' ];
+                        endif;
+                        ?>
+                        <?php if($uploadfile && $uploadfilename ): ?>
+                        <a href="/upload/<?=$uploadfile?>" ><?=$uploadfilename?></a>
+                        <?php endif; ?>
+                        <p>
+                        <?= $this->request->getData("fileupload.name") ?></p>
                         <?= $this->Form->hidden("uploadfile",[
                                 "value"=>$uploadfile
                         ])?>
@@ -617,7 +649,7 @@
                         ?>
                         <?= $this->Form->input("other",[
                             "type"=>"textarea",
-                            "class"=>"form-control w-100",
+                            "class"=>"form-control w-100 ".$noborder,
                             "name"=>"other",
                             "label"=>false,
                             "default"=>$other
@@ -629,7 +661,7 @@
             <div class="row mt-2">
                 <div class="col-2"><?= __("掲載期間") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
+                <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
                 </div>
                 <div class="col-8">
                     <div class="d-flex">
@@ -662,7 +694,7 @@
                             <div>
                                 <?= $this->Form->input("start",[
                                     "type"=>"text",
-                                    "class"=>"form-control calendar",
+                                    "class"=>"form-control calendar ".$noborder,
                                     "name"=>"start",
                                     "label"=>false,
                                     "placeholder"=>"未入力は指定なしとする",
@@ -673,7 +705,7 @@
                             <div>
                                 <?= $this->Form->input("end",[
                                     "type"=>"text",
-                                    "class"=>"form-control calendar",
+                                    "class"=>"form-control calendar ".$noborder,
                                     "name"=>"end",
                                     "label"=>false,
                                     "placeholder"=>"未入力は指定なしとする",
@@ -688,7 +720,7 @@
 
                 </div>
             </div>
-
+            <?php if($editflag != false):?>
             <div class="row mt-2">
                 <div class="col-2"><?= __("公開設定") ?></div>
                 <div class="col-2">
@@ -722,6 +754,7 @@
                     <?php endif; ?>
                 </div>
             </div>
+            <?php endif; ?>
             <?php if ($admin): ?>
                 <div class="row mt-2">
                     <div class="col-4"><?= __("物件紹介メッセージ") ?></div>
@@ -752,6 +785,7 @@
                 </div>
             <?php endif; ?>
 
+            <?php if($editflag != false):?>
 
             <div class="row mt-3">
                 <?php if($type == "conf"): ?>
@@ -783,7 +817,7 @@
 
                 <?php endif; ?>
             </div>
-
+            <?php endif; ?>
         </div>
     </div>
 </div>

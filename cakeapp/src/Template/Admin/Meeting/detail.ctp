@@ -56,6 +56,34 @@
                 <?= $this->Form->end(); ?>
             </div>
         </div>
+        <div class="card mb-4 mt-2 shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5><?= h($builds->Users[ 'company' ]) ?></h5>
+                        <p>
+                            <?= h($builds->Users[ 'sei' ])?>
+                            <?= h($builds->Users[ 'mei' ])?>
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex">
+                            <?=$this->Form->select("status",[],[
+                                "class"=>"form-control w-50",
+                                "empty"=>"-"
+                            ])?>
+                            <?= $this->Form->control("ステータス更新",[
+                                "class"=>"btn-sm btn-warning text-white ml-2 text-center w-100",
+                                "name"=>"status_edit",
+                                "label"=>false,
+                                "value"=>"ステータス更新",
+                                "type"=>"button"
+                            ])?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="text-right">
                 <a href="/admin/meeting/room/build/<?=$build_id?>" class="btn btn-success text-white">担当者商談ルーム</a>
         </div>
@@ -110,7 +138,6 @@
             </div>
             <div class="col-md-6 text-right">
                 <a href="/admin/meeting/address/<?= h($builds->id) ?>" class="btn btn-primary text-white">新規メッセージ</a>
-                <p>ステータス：交渉中</p>
             </div>
         </div>
 
@@ -124,7 +151,7 @@
                     -->
                     <div class="row">
 
-
+                        <p class="text-right">ステータス：交渉中</p>
                         <div class="col-md-2 mt-3">
                             <span class="badge badge-secondary">
                             <?= $array_read[$value->readflag] ?>
@@ -138,6 +165,7 @@
                             <div class="mt-2"><span class="bg-secondary text-white p-1">テナント名</span>：
                                 <?= h($value->Tenants[ 'name' ])?>
                             </div>
+
                         </div>
                     </div>
                 </div>

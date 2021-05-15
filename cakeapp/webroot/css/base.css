@@ -97,6 +97,15 @@ blockquote:after {
 blockquote p {
   margin: 0; }
 
+.form-control.noborder {
+  border: none;
+  outline: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: inline; }
+
 @media (max-width: 980px) {
   .title {
     font-size: 0.85rem; }
