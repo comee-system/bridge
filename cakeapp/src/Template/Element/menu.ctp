@@ -46,7 +46,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/admin/users/import/">
               <span data-feather="users"></span>
-              会員インポート
+              仮会員インポート
             </a>
           </li>
           <li class="nav-item">

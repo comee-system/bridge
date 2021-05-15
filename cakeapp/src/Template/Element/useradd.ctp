@@ -201,7 +201,9 @@
                             <li><?= __("半角英字を含む") ?></li>
                         </ul>
                     </div>
-                    <?php if (
+                    <?php
+                    if (
+                        $user->agree == 0 ||
                         (empty($role) || $role != "admin" ) &&
                         !$id
                     ): ?>

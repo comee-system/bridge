@@ -116,8 +116,8 @@ class MailSendComponent extends Component
             ->viewVars([
                 'name' => $user['name'],
                 'text' => $user['text'],
-                'id' => $user['id'],
-                'pw' => $user['id'],
+               // 'id' => $user['id'],
+                'pw' => $user['pw'],
             ])
             ->send();
     }

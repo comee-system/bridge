@@ -38,6 +38,14 @@
                             "value"=>$this->request->getData("name")
                         ])?>
                     </div>
+                    <div class="col-md-3">
+                        <?= $this->Form->control("企業名",[
+                            "type"=>"text",
+                            "name"=>"company",
+                            "class"=>"form-control",
+                            "value"=>$this->request->getData("company")
+                        ])?>
+                    </div>
                 </div>
                 <div class="mt-3">
                 <?= $this->Form->submit("検索",[
@@ -76,7 +84,7 @@
               </td>
               <td><?= h($user->sei) ?><?= h($user->mei) ?></td>
               <td><?= h($user->email) ?></td>
-              <td><?= h($user->busyo) ?></td>
+              <td><?= h($user->company) ?></td>
               <td><?= h($array_agreement_status[$user->agree]) ?></td>
               <td><?= h(date("Y/m/d H:i:s",strtotime($user->created))) ?></td>
             </tr>

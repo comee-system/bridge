@@ -91,6 +91,12 @@ class UsersController extends AppController
                 ]
             ]);
         }
+        if($this->request->getData('company')){
+            $query = $query->where([
+                'company  LIKE '=>'%'.$this->request->getData( 'company' ).'%'
+            ]);
+        }
+
         $users = $this->paginate($query);
 
         $this->set(compact('users'));

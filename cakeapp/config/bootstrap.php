@@ -215,6 +215,9 @@ define("D_SIGN", "
 【発行元】
 Bridge（ブリッジ）
 公式ホームページ http://dev123.tank.jp
+【運営企業】
+　株式会社エリアデザイン
+公式ホームページ https://www.area-design.co.jp/
 ");
 
 //お問い合わせフォームリンク

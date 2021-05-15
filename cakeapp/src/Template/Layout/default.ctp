@@ -106,7 +106,7 @@
             <ul class="list-unstyled">
               <li><a href="/questions/">お問い合わせ</a></li>
               <?php if ($logindata) : ?>
-                <li><a href="/logout">ログアウト</a></li>
+                <li><a href="/users/logout">ログアウト</a></li>
               <?php else: ?>
                 <li><a href="/users/add/">無料会員登録</a></li>
                 <li><a href="/login">ログイン</a></li>
