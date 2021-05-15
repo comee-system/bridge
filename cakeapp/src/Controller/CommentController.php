@@ -68,7 +68,7 @@ class CommentController extends AppController
         if($this->request->is('ajax')) {
             $comment = $this->Comments->find()->where([
                // 'user_id != '=>$user['id'],
-               'response' =>1,
+               //'response' =>1,
                 'id'=>$id,
             ])->first();
 
@@ -77,7 +77,7 @@ class CommentController extends AppController
                 $this->Comments->save($comment);
             }
             $comments = $this->Comments->find()->where([
-                'user_id'=>$user['id'],
+               // 'user_id'=>$user['id'],
                 'id'=>$id,
             ])->first();
             $comments['readjp'] = $this->array_read[$comments['readflag']];

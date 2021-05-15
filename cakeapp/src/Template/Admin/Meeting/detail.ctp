@@ -110,6 +110,7 @@
             </div>
             <div class="col-md-6 text-right">
                 <a href="/admin/meeting/address/<?= h($builds->id) ?>" class="btn btn-primary text-white">新規メッセージ</a>
+                <p>ステータス：交渉中</p>
             </div>
         </div>
 
