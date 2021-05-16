@@ -22,7 +22,13 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <div class="container p-3 rounded">
         <div class="row">
 
-            <div class="mb-3 h2 col-md-4"><?= __("物件登録") ?></div>
+            <div class="mb-3 h2 col-md-4">
+                <?php if(!$editflag): ?>
+                    <?= __("物件確認") ?>
+                <?php else: ?>
+                    <?= __("物件登録") ?>
+                <?php endif; ?>
+            </div>
             <?= $this->element('myinfo') ?>
         </div>
 

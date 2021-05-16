@@ -35,7 +35,7 @@
                             <th>募集開始日</th>
                         </tr>
                         <tr>
-                            <td><?= h($builds->Users['busyo']) ?></td>
+                            <td><?= h($builds->Users['company']) ?></td>
                             <td><?= h($array_prefecture[$builds->pref]) ?></td>
                             <td><?= h($builds->shop_area) ?>坪</td>
                             <td><?= h($array_build_status[$builds->build_status]) ?></td>
@@ -47,21 +47,21 @@
 
             </div>
         </div>
-
-
         <div class="card mb-4 mt-2 shadow-sm">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-8">
-                        <h5><?= h($builds->Users[ 'company' ]) ?></h5>
+
+                        <h5><?= h($comment->first()[ 'Users' ]["company"]) ?></h5>
                         <p>
-                            <?= h($builds->Users[ 'sei' ])?>
-                            <?= h($builds->Users[ 'mei' ])?>
+                            <?= h($comment->first()[ 'Users' ][ 'sei' ])?>
+                            <?= h($comment->first()[ 'Users' ][ 'mei' ])?>
                         </p>
                     </div>
+                    <?php if($code == "tenant"): ?>
                     <div class="col-md-4">
                         <div class="d-flex">
-                            <?=$this->Form->select("status",[],[
+                            <?=$this->Form->select("status",$array_build_status,[
                                 "class"=>"form-control w-50",
                                 "empty"=>"-"
                             ])?>
@@ -74,6 +74,7 @@
                             ])?>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

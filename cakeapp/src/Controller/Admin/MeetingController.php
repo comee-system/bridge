@@ -233,7 +233,7 @@ class MeetingController extends AppController
         }else{
             //テナントコメント取得
             $comment = $this->Comments->find()
-            ->contain(['builds'])
+            ->contain(['builds','users'])
             ->where([
                 'code'=>array_keys($this->array_code,$code)[0],
                 'tenant_id'=>$tenant_id,
@@ -245,6 +245,7 @@ class MeetingController extends AppController
         }
         $comment = $this->paginate($comment);
         $builds = $this->Builds->find()->contain(['users'])->where(['Builds.id'=>$id])->first();
+
         //管理者以外のコメントを既読
         foreach($comment as $key=>$value){
             if($value->response == 2){
@@ -255,7 +256,6 @@ class MeetingController extends AppController
                 $this->Comments->save($com);
             }
         }
-
         $this->set(compact('builds'));
         $this->set(compact('comment'));
         $this->set("compnent",$this->password);
@@ -270,8 +270,8 @@ class MeetingController extends AppController
         if($user_id){
             $user = $this->Users->find()->where(["id"=>$user_id])->first();
         }else{
-            $builds = $this->Builds->find()->contain(['users'])->where(['Builds.id'=>$id])->first();
-            $user_id = $builds['user_id'];
+            $comment = $this->Comments->find()->where(['build_id'=>$id,'tenant_id'=>$tenant_id])->first();
+            $user_id = $comment->user_id;
             $user = $this->Users->find()->where(["id"=>$user_id])->first();
         }
         if($this->request->getData("regist")){

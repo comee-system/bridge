@@ -157,7 +157,8 @@ class MypageController extends AppController
         $this->set("compnent",$this->password);
 
     }
-    public function buildregist($id = ""){
+    //$edittypeがdetailの時は編集を行わない
+    public function buildregist($id = "",$edittype = ""){
 
         $user = $this->Auth->user();
         $type = "";
@@ -169,7 +170,7 @@ class MypageController extends AppController
         if($id){
             $build = $this->Builds->get($id);
             //データが自分の物件ではないときに修正不可とする
-            if($build[ 'user_id' ] != $user[ 'id' ]){
+            if($build[ 'user_id' ] != $user[ 'id' ] || $edittype == "detail"){
                 $editflag = false;
             }
             $setUploadfile = $build->uploadfile;

@@ -46,7 +46,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                         <small>ID : <?= h($compnent->setId($builds->id)) ?></small>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <a href="/mypage/buildregist/<?=$builds->id?>" class="btn-sm btn-warning text-white" >案件詳細</a>
+                                        <a href="/mypage/buildregist/<?=$builds->id?>/detail" class="btn-sm btn-warning text-white" >案件詳細</a>
                                     </div>
                                 </div>
                             </div>

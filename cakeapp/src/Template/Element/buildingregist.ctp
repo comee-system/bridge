@@ -371,6 +371,7 @@
                                 else:
                                     if(isset($build[ 'security_money' ]) && $build[ 'security_money' ]) $security_money = $build[ 'security_money' ];
                                 endif;
+                                if($noborder) $security_money = number_format($security_money);
                             ?>
                             <?= $this->Form->input("security_money",[
                                 "type"=>"text",
@@ -410,6 +411,7 @@
                                 else:
                                     if(isset($build[ 'rent_money' ]) && $build[ 'rent_money' ]) $rent_money = $build[ 'rent_money' ];
                                 endif;
+                                if($noborder) $rent_money = number_format($rent_money);
                             ?>
                             <?= $this->Form->input("rent_money",[
                                 "type"=>"text",
@@ -447,6 +449,7 @@
                             else:
                                 if(isset($build[ 'common_money' ]) && $build[ 'common_money' ]) $common_money = $build[ 'common_money' ];
                             endif;
+                            if($noborder) $common_money = number_format((int)$common_money);
                         ?>
                         <?= $this->Form->input("common_money",[
                             "type"=>"text",
