@@ -254,7 +254,6 @@ class MeetingController extends AppController
         }
         $comment = $this->paginate($comment);
         $builds = $this->Builds->find()->contain(['users'])->where(['Builds.id'=>$id])->first();
-
         //管理者以外のコメントを既読
         foreach($comment as $key=>$value){
             if($value->response == 2){

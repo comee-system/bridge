@@ -52,11 +52,18 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-8">
-                        <h5><?= h($comment->last()[ 'Users' ]["company"]) ?></h5>
-                        <p>
-                            <?= h($comment->last()[ 'Users' ][ 'sei' ])?>
-                            <?= h($comment->last()[ 'Users' ][ 'mei' ])?>
-                        </p>
+                        <?php if($code == "build"): ?>
+                            <p>
+                                <?= h($builds[ 'Users' ][ 'sei' ])?>
+                                <?= h($builds[ 'Users' ][ 'mei' ])?>
+                            </p>
+                        <?php else: ?>
+                            <h5><?= h($comment->last()[ 'Users' ]["company"]) ?></h5>
+                            <p>
+                                <?= h($comment->last()[ 'Users' ][ 'sei' ])?>
+                                <?= h($comment->last()[ 'Users' ][ 'mei' ])?>
+                            </p>
+                        <?php endif; ?>
                     </div>
                     <?php if($code == "tenant"): ?>
                     <div class="col-md-4">
