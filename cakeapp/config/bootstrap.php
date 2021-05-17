@@ -418,6 +418,6 @@ Configure::write("array_comment_reply_status", [
 ]);
 Configure::write("array_role", [
     "admin"=>"管理者",
-    "sample"=>"一般",
+    "popular"=>"一般",
     ""=>"その他",
 ]);
