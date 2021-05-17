@@ -115,8 +115,6 @@ class MeetingController extends AppController
             ])->order(["id"=>"DESC"])->first();
 
         //テナント用コメント
-
-
         $query = $this->Comments->find();
         $query
             ->select(['role_max' =>  $query->func()->max('id')])
@@ -218,6 +216,17 @@ class MeetingController extends AppController
     }
     //id=build_id or tenant_id
     public function room($code = "",$id="",$tenant_id=""){
+
+        if($this->request->is('ajax')){
+            //ステータスの変更
+            $id = $this->request->getData("comment_id");
+            $comment = $this->Comments->get($id);
+            $comment->comment_status = $this->request->getData('comment_status');
+            $this->Comments->save($comment);
+
+            exit();
+        }
+
         $builds = [];
         if($code == "build"){
             //物件コメント取得

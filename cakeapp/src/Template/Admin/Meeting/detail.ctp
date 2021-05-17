@@ -123,7 +123,7 @@
                     -->
                     <div class="row">
 
-                        <p class="text-right">ステータス：交渉中</p>
+                        <p class="text-right">ステータス：<?=$array_build_status[$value->comment_status]?></p>
                         <div class="col-md-2 mt-3">
                             <span class="badge badge-secondary">
                             <?= $array_read[$value->readflag] ?>

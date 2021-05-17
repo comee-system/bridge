@@ -179,8 +179,7 @@ class UsersController extends AppController
                     }else{
                         $this->setPostString($user);
                         $this->setTelString($user);
-                        $user->username = "username1";
-                        $user->role     = "sample";
+
                         //更新の際、空欄の場合はパスワードを変更しない
                         if($id > 0 && !$this->request->getData('password') ){
                             unset($user->password);

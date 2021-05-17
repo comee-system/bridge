@@ -47,32 +47,39 @@
 
             </div>
         </div>
+
         <div class="card mb-4 mt-2 shadow-sm">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-8">
-
-                        <h5><?= h($comment->first()[ 'Users' ]["company"]) ?></h5>
+                        <h5><?= h($comment->last()[ 'Users' ]["company"]) ?></h5>
                         <p>
-                            <?= h($comment->first()[ 'Users' ][ 'sei' ])?>
-                            <?= h($comment->first()[ 'Users' ][ 'mei' ])?>
+                            <?= h($comment->last()[ 'Users' ][ 'sei' ])?>
+                            <?= h($comment->last()[ 'Users' ][ 'mei' ])?>
                         </p>
                     </div>
                     <?php if($code == "tenant"): ?>
                     <div class="col-md-4">
                         <div class="d-flex">
-                            <?=$this->Form->select("status",$array_build_status,[
+                            <?=$this->Form->select("select_tenant_status",$array_build_status,[
                                 "class"=>"form-control w-50",
-                                "empty"=>"-"
+                                "empty"=>"-",
+                                "id"=>"select_tenant_status",
+                                "default"=>$comment->first()[ 'comment_status' ]
                             ])?>
                             <?= $this->Form->control("ステータス更新",[
                                 "class"=>"btn-sm btn-warning text-white ml-2 text-center w-100",
-                                "name"=>"status_edit",
+                                "name"=>"tenant_status",
                                 "label"=>false,
                                 "value"=>"ステータス更新",
                                 "type"=>"button"
                             ])?>
+                            <?= $this->Form->hidden("comment_id",[
+                                "value"=>$comment->first()[ 'id' ],
+                                "id"=>"comment_id"
+                            ])?>
                         </div>
+                        <p class="text-danger"  id="comment_status_text" style="display:none;">ステータス更新しました。</p>
                     </div>
                     <?php endif; ?>
                 </div>

@@ -76,4 +76,13 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
     }
+
+    public function beforeFilter(Event $event) {
+        $user = $this->Auth->user();
+        if($user['role'] != "admin"){
+            $this->Auth->logout();
+
+            //return $this->redirect($this->Auth->logout());
+        }
+    }
 }

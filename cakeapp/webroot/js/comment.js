@@ -15,7 +15,6 @@ $(function () {
     setInterval(function(){
         $(this).getCommentCount();
     },10000);
-
 });
 
 $.fn.getCommentCount = function(){

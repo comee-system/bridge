@@ -54,6 +54,28 @@ $(function () {
 
         return false;
     });
+    //テナントのステータス更新
+    $("button[name='tenant_status']").on("click",function(){
+        $("#comment_status_text").hide();
+        var _sel = $("#select_tenant_status").val();
+        var _url = location.href;
+        var _comment_id = $("#comment_id").val();
+        var _data ={
+            "comment_status":_sel,
+            "comment_id":_comment_id
+        };
+        $.ajax({
+            url: _url,
+            type: "POST",
+            data:_data
+         }).done(function (response) {
+             $("p#comment_status_text").show();
+         });
+
+        return true;
+
+    });
+
 
 });
 $.fn.buttonCheck = function () {
