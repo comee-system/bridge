@@ -51,7 +51,7 @@ class UsersTable extends Table
         $validator
             ->maxLength('email', 255)
             ->notEmptyString('email', '「メールアドレス」を入力してください。')
-            ->email('email', 'false', '「メールアドレス」の形式で入力してください。')
+        //    ->email('email', 'false', '「メールアドレス」の形式で入力してください。')
             ->add('email', 'custom', [
                 'rule' => [$this, 'sameEmailCheck'],
                 'message' => '既に登録されているメールアドレス若しくは重複データです。',
@@ -151,7 +151,7 @@ class UsersTable extends Table
         $validator
             ->maxLength('email', 255)
             ->notEmptyString('email', '「メールアドレス」を入力してください。')
-            ->email('email', 'false', '「メールアドレス」の形式で入力してください。')
+           // ->email('email', 'false', '「メールアドレス」の形式で入力してください。')
             ->add('email', 'custom', [
                 'rule' => [$this, 'sameEmailCheck'],
                 'message' => '既に登録されているメールアドレスです。',
