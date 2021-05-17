@@ -279,7 +279,13 @@ class MeetingController extends AppController
             $user = $this->Users->find()->where(["id"=>$user_id])->first();
         }else{
             $comment = $this->Comments->find()->where(['build_id'=>$id,'tenant_id'=>$tenant_id])->first();
-            $user_id = $comment->user_id;
+            if(!$comment){
+                //初回の時はコメントがないのでUSERIDが撮れない
+                $builds = $this->Builds->find()->where(['Builds.id'=>$id])->first();
+                $user_id = $builds->user_id;
+            }else{
+                $user_id = $comment->user_id;
+            }
             $user = $this->Users->find()->where(["id"=>$user_id])->first();
         }
         if($this->request->getData("regist")){
