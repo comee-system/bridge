@@ -54,6 +54,7 @@ class UsersController extends AppController
       $array_open = Configure::read('array_open');
       $array_build_status = Configure::read('array_build_status');
       $array_agreement_status = Configure::read('array_agreement_status');
+      $array_role = Configure::read('array_role');
       $this->set("array_status",$array_status);
       $this->set("array_prefecture",$array_prefecture);
       $this->set("array_shop",$array_shop);
@@ -69,6 +70,7 @@ class UsersController extends AppController
       $this->set("array_open",$array_open);
       $this->set("array_build_status",$array_build_status);
       $this->set("array_agreement_status",$array_agreement_status);
+      $this->set("array_role",$array_role);
 
       //レイアウトの指定
       $this->viewBuilder()->setLayout('Admin/default');

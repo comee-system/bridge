@@ -67,18 +67,19 @@
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th>機能</th>
-              <th>名前</th>
-              <th>メールアドレス</th>
-              <th>企業</th>
-              <th>ステータス</th>
-              <th>登録日</th>
+              <th><?= __("機能") ?></th>
+              <th><?= __("名前") ?></th>
+              <th><?= __("メールアドレス") ?></th>
+              <th><?= __("企業") ?></th>
+              <th><?= __("ステータス") ?></th>
+              <th><?= __("権限") ?></th>
+              <th><?= __("登録日") ?></th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($users as $user): ?>
             <tr>
-              <td>
+              <td style="width:120px;">
                 <a href="/admin/users/delete/<?= $user->id ?>" class="btn-sm btn-danger confirm"  >削除</a>
                 <a href="/admin/users/edit/<?= $user->id ?>" class="btn-sm btn-primary">編集</a>
               </td>
@@ -86,6 +87,7 @@
               <td><?= h($user->email) ?></td>
               <td><?= h($user->company) ?></td>
               <td><?= h($array_agreement_status[$user->agree]) ?></td>
+              <td><?= h($array_role[$user->role]) ?></td>
               <td><?= h(date("Y/m/d H:i:s",strtotime($user->created))) ?></td>
             </tr>
             <?php endforeach; ?>

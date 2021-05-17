@@ -416,3 +416,8 @@ Configure::write("array_comment_reply_status", [
     1=>"紹介済み",
     2=>"交渉開始",
 ]);
+Configure::write("array_role", [
+    "admin"=>"管理者",
+    "sample"=>"一般",
+    ""=>"その他",
+]);
