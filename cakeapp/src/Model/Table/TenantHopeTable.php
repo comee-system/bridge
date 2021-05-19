@@ -57,10 +57,10 @@ class TenantHopeTable extends Table
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
-*/
+
         $validator
             ->requirePresence('pref',"create",__("少なくとも一つ以上入力してください。"));
-
+*/
 
 
         return $validator;

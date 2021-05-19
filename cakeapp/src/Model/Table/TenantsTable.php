@@ -118,7 +118,7 @@ class TenantsTable extends Table
         $validator
             ->integer('job')
             ->notEmptyString('job',__("業種を選択してください。"));
-
+/*
         $validator
             ->integer('sub')
             ->notEmptyString('sub',__("サブカテゴリを選択してください。"));
@@ -145,6 +145,7 @@ class TenantsTable extends Table
         $validator
             ->integer('open')
             ->allowEmptyString('open');
+*/
 
         $validator
             ->requirePresence('agree',"create","同意するにチェックしてください");

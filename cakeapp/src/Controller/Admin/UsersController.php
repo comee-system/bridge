@@ -71,6 +71,7 @@ class UsersController extends AppController
       $this->set("array_build_status",$array_build_status);
       $this->set("array_agreement_status",$array_agreement_status);
       $this->set("array_role",$array_role);
+      $this->set("editflag",true);
 
       //レイアウトの指定
       $this->viewBuilder()->setLayout('Admin/default');

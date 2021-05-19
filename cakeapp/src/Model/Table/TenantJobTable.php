@@ -53,13 +53,14 @@ class TenantJobTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
+        /*
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
 
         $validator
         ->requirePresence('jobtype',"create",__("少なくとも一つ以上入力してください。"));
-
+*/
         return $validator;
     }
 

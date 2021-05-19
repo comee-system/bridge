@@ -33,7 +33,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                     <div class="card-body">
                         <h5><?=__("テナント検索")?></h5>
                         <?= $this->Form->create(null, [
-                            'url' => ['action' => '/mypage/buildlist'],
+                            'url' => ['action' => '/tenant'],
                             'type' => 'post',
                             ]); ?>
                         <div class="row">
@@ -41,16 +41,17 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                 <?= $this->Form->input("name",[
                                     "label"=>"テナント名",
                                     "class"=>"form-control",
-                                    "value"=>""
+                                    "value"=>$this->request->getData("name")
                                 ]) ?>
                             </div>
+                            <!--
                             <div class="col-4">
                                 <label>ステータス</label>
                                 <?= $this->Form->select("status", $array_status,[
                                     "class"=>"form-control",
                                     "empty"=>true
                                 ]) ?>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="row ">
                             <div class="col-md-12 text-right">
@@ -99,7 +100,6 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                             <th><?= __("希望賃料") ?></th>
                                             <th><?= __("ステータス") ?></th>
                                             <th><?= __("物件登録日") ?></th>
-                                            <th><?= __("募集開始日") ?></th>
                                         </tr>
                                         <tr>
                                             <td><?= h(number_format($value['min_floor'])) ?>坪～
@@ -110,11 +110,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                             </td>
                                             <td><?= h($array_open[$value[ 'open' ]]) ?></td>
                                             <td><?= h(date_format($value[ 'created' ],'Y/m/d ')) ?></td>
-                                            <td>
-                                                <?php if($value[ 'start' ]):?>
-                                                <?= h(date("Y/m/d",strtotime($value[ 'start' ]))) ?>
-                                                <?php endif; ?>
-                                            </td>
+
                                         </tr>
                                     </table>
                                 </div>

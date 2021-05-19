@@ -280,6 +280,9 @@ class MypageController extends AppController
     public function tenant(){
         $user = $this->Auth->user();
         $tenant = $this->ViewTenants->find()->where(['user_id'=>$user[ 'id' ]]);
+        if($this->request->getData("name")){
+            $tenant = $tenant->where(["name"=>$this->request->getData( "name" ) ]);
+        }
         $tenant = $this->paginate($tenant);
 
         $tenant = $this->__setPref($tenant);
@@ -298,9 +301,14 @@ class MypageController extends AppController
             ])
             ->first();
         $prefs = [];
+        $jobtypes = [];
+        /*
+        $prefs = [];
         if($tenant->prefs) $prefs = explode(",",$tenant->prefs);
         $jobtypes = [];
         if($tenant->jobtypes) $jobtypes = explode(",",$tenant->jobtypes);
+        */
+
         $this->tenantregist($id);
         $this->set(compact('tenant'));
         $this->set("id",$id);
@@ -338,6 +346,7 @@ class MypageController extends AppController
             $error = $tenant->errors();
             $error_hope = $TenantHope->errors();
             $error_job = $TenantJob->errors();
+
             if(
                 !$tenant->errors() &&
                 !$TenantJob->errors() &&
@@ -358,12 +367,16 @@ class MypageController extends AppController
                             $this->TenantHope->deleteAll(['tenant_id'=>$tenant->id]);
                             $this->TenantJob->deleteAll(['tenant_id'=>$tenant->id]);
                         }
+                        $num = 1;
                         foreach($this->request->getData("pref") as $key=>$value){
                             $TenantHope = $this->TenantHope->newEntity();
-                            $TenantHope->pref = $key;
+                            $TenantHope->pref = $value;
                             $TenantHope->tenant_id = $tenant->id;
+                            $TenantHope->Number = $num;
+                            $num++;
                             $this->TenantHope->save($TenantHope);
                         }
+                        /*
                         foreach($this->request->getData("jobtype") as $key=>$value){
                             foreach($value as $k=>$val){
                                 $TenantJob = $this->TenantJob->newEntity();
@@ -372,7 +385,7 @@ class MypageController extends AppController
                                 $this->TenantJob->save($TenantJob);
                             }
                         }
-
+                        */
                         //usersのimportを0にする
                         $user = $this->Users->get($this->Auth->user('id'));
                         $set = [];
@@ -412,6 +425,7 @@ class MypageController extends AppController
     }
     public function __setPref($dat){
         $data = $dat->toArray();
+
         foreach($data as $key=>$value){
             $list = [];
             $ex = explode(",",$value[ 'prefs' ]);
@@ -422,12 +436,15 @@ class MypageController extends AppController
             }
             if($list) $data[$key]['prefline'] = implode(",",$list);
         }
+
       return $data;
     }
     public function __setRentJp($data){
         foreach($data as $key=>$value){
-            $data[$key]['rent_money_min_jp'] = ($value[ 'rent_money_min' ]/10000)." 万円";
-            $data[$key]['rent_money_max_jp'] = ($value[ 'rent_money_max' ]/10000)." 万円";
+            //$data[$key]['rent_money_min_jp'] = ($value[ 'rent_money_min' ]/10000)." 万円";
+            //$data[$key]['rent_money_max_jp'] = ($value[ 'rent_money_max' ]/10000)." 万円";
+            $data[$key]['rent_money_min_jp'] = number_format($value[ 'rent_money_min' ])." 円";
+            $data[$key]['rent_money_max_jp'] = number_format($value[ 'rent_money_max' ])." 円";
         }
       return $data;
     }

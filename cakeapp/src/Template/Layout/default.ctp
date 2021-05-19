@@ -95,8 +95,8 @@
             <ul class="list-unstyled">
               <li><a href="http://www.area-design.co.jp/">運営会社情報</a></li>
               <li><a href="/pdf/termofuse.pdf" target=_blank>利用規約</a></li>
-              <li><a href="#">個人情報保護方針</a></li>
-              <li><a href="#">機密保持契約</a></li>
+              <li><a href="/pdf/person.pdf">個人情報保護方針</a></li>
+              <li><a href="/pdf/secret.pdf">機密保持契約</a></li>
             </ul>
           </li>
         </ul>

@@ -48,46 +48,58 @@
             <div class="row mt-2">
                 <div class="col-3"><?= __("希望地") ?></div>
                 <div class="col-1">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
+                    <span class="badge badge-secondary"><?= __("任意") ?></span>
                 </div>
                 <div class="col-8">
-                    <?php if ($type == "conf"): ?>
-                        <div class="row">
-                        <?php foreach($this->request->getData("pref") as $key=>$value): ?>
-                            <div class="col-3"><?= h($array_prefecture[$key]) ?></div>
-                            <?= $this->Form->hidden("pref[".$key."]",[
-                                "value"=>$value
-                            ])?>
-                        <?php endforeach; ?>
-                        </div>
+                    <label>第1希望</label>
+                    <?php if ($type == "conf"):?>
+                        <?= h($array_prefecture[$this->request->getData('pref')[1]]) ?>
+                        <?= $this->Form->hidden("pref[1]",[
+                            "value"=>$this->request->getData("pref")[1]
+                        ])?>
+                        <br />
                     <?php else: ?>
-                        <div class="row">
                         <?php
-                        foreach($array_prefecture as $key=>$value): ?>
-                            <div class="col-md-3">
-                            <?php
-                                $chk = "";
-                                if( isset($this->request->getData("pref")[$key]) && $this->request->getData("pref")[$key] > 0) :
-                                    $chk = "checked";
-                                else:
-                                    if(!empty($prefs) && in_array($key,$prefs)){
-                                        $chk = "checked";
-                                    }
-                                endif;
-                            ?>
-                            <?= $this->Form->control("pref[".$key."]",[
-                                "type"=>"checkbox",
-                                "label"=> $value,
-                                "hiddenField"=>false,
-                                "checked"=>$chk
-                            ]) ?>
-                            </div>
-                        <?php endforeach;?>
-                        <?php if(!empty($error_hope[ 'pref' ][ "_required" ])): ?>
-                        <small class="text-danger"><?= h($error_hope[ 'pref' ]["_required"]) ?></small>
-                        <?php endif; ?>
-                        </div>
+                            $prefs = (!empty($tenant['prefs']))?explode(",",$tenant['prefs']):[];
+                            $pref1 = ($this->request->getData("pref")[1])?$this->request->getData("pref")[1]:(!empty($prefs[0]))?$prefs[0]:"";
+                            $pref2 = ($this->request->getData("pref")[2])?$this->request->getData("pref")[2]:(!empty($prefs[1]))?$prefs[1]:"";
+                            $pref3 = ($this->request->getData("pref")[2])?$this->request->getData("pref")[3]:(!empty($prefs[2]))?$prefs[2]:"";
+                        ?>
 
+                        <?= $this->Form->select("pref[1]",$array_prefecture,[
+                            "class" => "form-control",
+                            "empty" => "-",
+                            "default"=>$pref1
+                        ]) ?>
+                    <?php endif; ?>
+                    <label class="mt-3">第2希望</label>
+                    <?php if ($type == "conf"):?>
+                        <?= h($array_prefecture[$this->request->getData('pref')[2]]) ?>
+                        <?= $this->Form->hidden("pref[2]",[
+                            "value"=>$this->request->getData("pref")[2]
+                        ])?>
+                        <br />
+                    <?php else: ?>
+                        <?= $this->Form->select("pref[2]",$array_prefecture,[
+                            "class" => "form-control",
+                            "empty" => "-",
+                            "default"=>$pref2
+                        ]) ?>
+                    <?php endif; ?>
+
+                    <label class="mt-3">第3希望</label>
+                    <?php if ($type == "conf"):?>
+                        <?= h($array_prefecture[$this->request->getData('pref')[3]]) ?>
+                        <?= $this->Form->hidden("pref[3]",[
+                            "value"=>$this->request->getData("pref")[3]
+                        ])?>
+                        <br />
+                    <?php else: ?>
+                        <?= $this->Form->select("pref[3]",$array_prefecture,[
+                            "class" => "form-control",
+                            "empty" => "-",
+                            "default"=>$pref3
+                        ]) ?>
                     <?php endif; ?>
                 </div>
             </div>
@@ -131,36 +143,25 @@
                         ]) ?>
                     <div class="row d-flex">
                         <div class="col-md-5">
-                            <select name="min_floor" class="form-control">
-                            <option value="1">未制限</option>
-                            <?php for($i=10;$i<=200;$i+=10):
-                                $sel = "";
-                                if($this->request->getData( 'min_floor' )){
-                                    if($this->request->getData("min_floor") == $i) $sel = "selected";
-                                } else {
-                                    if(isset($tenant[ 'min_floor' ]) && $tenant[ 'min_floor' ] == $i ) $sel = "selected";
-                                }
-                            ?>
-
-                                <option value="<?=$i?>" <?= $sel ?>><?=$i?></option>
-                            <?php endfor; ?>
-                            </select>
+                            <div class="d-flex">
+                            <?= $this->Form->number("min_floor",[
+                                "class"=>"form-control",
+                                "label"=>false,
+                                "value"=>($this->request->getData("min_floor"))?$this->request->getData("min_floor"):(!empty($tenant[ 'min_floor' ]))?$tenant[ 'min_floor' ]:""
+                            ]) ?>
+                            <span class="mt-3 ml-2">坪</span>
+                            </div>
                         </div>
                         <div class="col-md-1 text-center mt-2">～</div>
                         <div class="col-md-5">
-                            <select name="max_floor" class="form-control">
-                            <option value="999">未制限</option>
-                            <?php for($i=200;$i>=10;$i-=10):
-                                $sel = "";
-                                if($this->request->getData( 'max_floor' )){
-                                    if($this->request->getData("max_floor") == $i) $sel = "selected";
-                                } else {
-                                    if(isset($tenant[ 'max_floor' ]) && $tenant[ 'max_floor' ] == $i ) $sel = "selected";
-                                }
-                            ?>
-                                <option value="<?=$i?>" <?= $sel ?> ><?=$i?></option>
-                            <?php endfor; ?>
-                            </select>
+                            <div class="d-flex">
+                                <?= $this->Form->number("max_floor",[
+                                    "class"=>"form-control",
+                                    "label"=>false,
+                                    "value"=>($this->request->getData("max_floor"))?$this->request->getData("max_floor"):(!empty($tenant[ 'max_floor' ]))?$tenant[ 'max_floor' ]:""
+                                ]) ?>
+                            <span class="mt-3 ml-2">坪</span>
+                            </div>
                         </div>
                     </div>
                     <small>一坪は訳3.31平米です。</small>
@@ -183,8 +184,8 @@
                 </div>
                 <div class="col-8 ">
                 <?php if ($type == "conf"): ?>
-                    <?= h($array_rent_money[$this->request->getData("rent_money_min")]) ?>円～
-                    <?= h($array_rent_money[$this->request->getData("rent_money_max")]) ?>円
+                    <?= h(number_format($this->request->getData("rent_money_min"))) ?>円～
+                    <?= h(number_format($this->request->getData("rent_money_max"))) ?>円
                     <?= $this->Form->hidden("rent_money_min",[
                         "value"=>$this->request->getData('rent_money_min')
                     ])?>
@@ -193,7 +194,7 @@
                     ])?>
                 <?php else: ?>
                     <div class="row">
-                        <div class="col-md-5 input-group">
+                        <div class="col-md-5 ">
                         <?php
                             $rent_money_min = "";
                             if($this->request->getData( 'rent_money_min' )){
@@ -202,17 +203,18 @@
                                 if(isset($tenant[ 'rent_money_min' ]) && $tenant[ 'rent_money_min' ]) $rent_money_min = $tenant["rent_money_min"];
                             }
                         ?>
-
-                            <?= $this->Form->select("rent_money_min", $array_rent_money,[
-                                "class"=>"form-control ",
-                                "label"=>false,
-                                "empty"=>"選択してください",
-                                "default"=>$rent_money_min
-                            ]) ?><span class=" ml-2 mt-2">円</span>
+                            <div class="d-flex">
+                                <?= $this->Form->number("rent_money_min",[
+                                    "class"=>"form-control w-75",
+                                    "label"=>false,
+                                    "value"=>$rent_money_min
+                                ]) ?>
+                                <span class=" ml-2 mt-2">円</span>
+                            </div>
                         </div>
                         <div class="col-md-1 mt-2">～</div>
-                        <div class="col-md-5 input-group">
-                            <?php krsort($array_rent_money); ?>
+                        <div class="col-md-5">
+
                             <?php
                                 $rent_money_max = "";
                                 if($this->request->getData( 'rent_money_max' )){
@@ -221,12 +223,16 @@
                                     if(isset($tenant[ 'rent_money_max' ]) && $tenant[ 'rent_money_max' ]) $rent_money_max = $tenant["rent_money_max"];
                                 }
                             ?>
-                            <?= $this->Form->select("rent_money_max", $array_rent_money,[
-                                "class"=>"form-control",
-                                "label"=>false,
-                                "empty"=>"選択してください",
-                                "default"=>$rent_money_max
-                            ]) ?><span class=" ml-2 mt-2">円</span>
+
+                            <div class="d-flex">
+                                <?= $this->Form->number("rent_money_max",[
+                                    "class"=>"form-control w-75",
+                                    "label"=>false,
+                                    "value"=>$rent_money_max
+                                ]) ?>
+                                <span class=" ml-2 mt-2">円</span>
+                            </div>
+
                         </div>
                         <?php if(!empty($error[ 'rent_money_min' ][ "_empty" ])): ?>
                             <br /><small class="text-danger"><?= h($error[ 'rent_money_min' ]["_empty"]) ?></small>
@@ -245,8 +251,8 @@
                 </div>
                 <div class="col-8 input-group">
                     <?php if ($type == "conf"): ?>
-                        <?=$this->request->getData("space_money_min")?>～
-                        <?=$this->request->getData("space_money_max")?>
+                        <?=number_format($this->request->getData("space_money_min"))?> 円～
+                        <?=number_format($this->request->getData("space_money_max"))?> 円
                         <?= $this->Form->hidden("space_money_max",[
                             "value"=>$this->request->getData('space_money_max')
                         ])?>
@@ -264,16 +270,19 @@
                                         if(isset($tenant[ 'space_money_min' ]) && $tenant[ 'space_money_min' ]) $space_money_min = $tenant["space_money_min"];
                                     }
                                 ?>
-                                <?= $this->Form->select("space_money_min", $array_space_money,[
-                                    "class"=>"form-control ",
-                                    "label"=>false,
-                                    "empty"=>"選択してください",
-                                    "default"=>$space_money_min
-                                ]) ?><span class=" ml-2 mt-2">円</span>
+
+                                <div class="d-flex">
+                                    <?= $this->Form->number("space_money_min",[
+                                        "class"=>"form-control w-75",
+                                        "label"=>false,
+                                        "value"=>$space_money_min
+                                    ]) ?>
+                                    <span class=" ml-2 mt-2">円</span>
+                                </div>
+
                             </div>
                             <div class="col-md-1 mt-2">～</div>
                             <div class="col-md-5 input-group">
-                                <?php krsort($array_space_money); ?>
                                 <?php
                                     $space_money_max = "";
                                     if($this->request->getData( 'space_money_max' )){
@@ -282,12 +291,17 @@
                                         if(isset($tenant[ 'space_money_max' ]) && $tenant[ 'space_money_max' ]) $space_money_max = $tenant["space_money_max"];
                                     }
                                 ?>
-                                <?= $this->Form->select("space_money_max", $array_space_money,[
-                                    "class"=>"form-control",
-                                    "label"=>false,
-                                    "empty"=>"選択してください",
-                                    "default"=>$space_money_max
-                                ]) ?><span class=" ml-2 mt-2">円</span>
+
+
+                                <div class="d-flex">
+                                    <?= $this->Form->number("space_money_max",[
+                                        "class"=>"form-control w-75",
+                                        "label"=>false,
+                                        "value"=>$space_money_max
+                                    ]) ?>
+                                    <span class=" ml-2 mt-2">円</span>
+                                </div>
+
                             </div>
                         </div>
                     <?php endif; ?>
@@ -325,188 +339,8 @@
                     <?php endif; ?>
                 </div>
             </div>
-            <div class="row mt-2">
-                <div class="col-3"><?= __("サブカテゴリ") ?></div>
-                <div class="col-1">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
-                </div>
-                <div class="col-8 ">
-                    <?php if ($type == "conf" ): ?>
-                        <?= $array_sub[$this->request->getData('sub')]; ?>
-                        <?= $this->Form->hidden("sub",[
-                            "value"=>$this->request->getData('sub')
-                        ])?>
-                    <?php else: ?>
-                        <?php
-                            $sub = "";
-                            if($this->request->getData( 'sub' )){
-                                $sub = $this->request->getData("sub");
-                            } else {
-                                if(isset($tenant[ 'sub' ]) && $tenant[ 'sub' ]) $sub = $tenant["sub"];
-                            }
-                        ?>
-                        <?= $this->Form->select("sub", $array_sub,[
-                            "class"=>"form-control",
-                            "label"=>false,
-                            "empty"=>"選択してください",
-                            "default"=>$sub
-                        ]) ?>
-                    <?php endif; ?>
-                    <?php if(!empty($error[ 'sub' ][ "_empty" ])): ?>
-                        <small class="text-danger"><?= h($error[ 'sub' ]["_empty"]) ?></small>
-                    <?php endif; ?>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="col-3"><?= __("業態") ?></div>
-                <div class="col-1">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
-                </div>
-                <div class="col-8 ">
-                    <?php if ($type == "conf" ): ?>
-                        <div class="row">
-                            <?php
-                                $jobtype = $this->request->getData("jobtype");
-                                foreach ($jobtype as $key=>$value):
-                                foreach ($value as $k=>$val):
-                            ?>
-                            <div class="col-md-6">
-                                <?= h($array_job_type[$key][$k]) ?>
-                            </div>
-                            <?= $this->Form->hidden("jobtype[".$key."][".$k."]",[
-                                "value"=>"on"
-                            ])?>
-                            <?php
-                                endforeach;
-                                endforeach;
-                            ?>
-                        </div>
-                    <?php else: ?>
-                        <div class="row">
-                        <?php foreach ($array_job_type as $key=>$value): ?>
-                        <?php foreach ($value as $k=>$val):
-                                $chk = "";
-                                if($this->request->getData("jobtype")){
-                                    $jobtype = $this->request->getData("jobtype");
-                                    if(!empty($jobtype[$key][$k])) $chk = "checked";
-                                }else{
-                                    if(!empty($jobtypes) && in_array($k,$jobtypes)){
-                                        $chk = "checked";
-                                    }
-                                }
-                            ?>
-                            <div class="col-md-6">
-                            <label class="jobtype-<?= $key ?>">
-                                <input type="checkbox" <?=$chk?> name="jobtype[<?= $key ?>][<?= $k ?>]" value="on" />
-                                <?=h($val)?>
-                            </label>
-                            </div>
-                        <?php endforeach; ?>
-                        <?php endforeach; ?>
-                        </div>
-                        <?php if(!empty($error_job[ "jobtype" ][ "_required" ])): ?>
-                            <small class="text-danger"><?= h($error_job[ "jobtype" ]["_required"]) ?></small>
-                        <?php endif; ?>
 
 
-                    <?php endif; ?>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="col-3"><?= __("掲載期間") ?></div>
-                <div class="col-1">
-                    <span class="badge badge-danger"><?= __("必須") ?></span>
-                </div>
-                <div class="col-8 ">
-                    <?php if($type == "conf"): ?>
-                        <?= $this->request->getData("start") ?>～
-                        <?= $this->request->getData("end") ?>
-                        <?= $this->Form->hidden("start",[
-                            "value"=>$this->request->getData('start')
-                        ])?>
-                        <?= $this->Form->hidden("end",[
-                            "value"=>$this->request->getData('end')
-                        ])?>
-                    <?php else: ?>
-                        <?php
-                            $start = "";
-                            if($this->request->getData( 'start' )){
-                                $start = $this->request->getData("start");
-                            } else {
-                                if(isset($tenant[ 'start' ]) && $tenant[ 'start' ]) $start = date("Y/m/d",strtotime($tenant["start"]));
-                            }
-                            $end = "";
-                            if($this->request->getData( 'end' )){
-                                $end = $this->request->getData("end");
-                            } else {
-                                if(isset($tenant[ 'end' ]) && $tenant[ 'end' ]) $end = date("Y/m/d",strtotime($tenant["end"]));
-                            }
-                        ?>
-                        <div class="d-flex">
-                            <div>
-                                <?= $this->Form->input("start",[
-                                    "type"=>"text",
-                                    "class"=>"form-control calendar",
-                                    "name"=>"start",
-                                    "label"=>false,
-                                    "placeholder"=>"未入力は指定なしとする",
-                                    "default"=>$start
-                                ]) ?>
-                            </div>
-                            <div class="mt-2">～</div>
-                            <div>
-                                <?= $this->Form->input("end",[
-                                    "type"=>"text",
-                                    "class"=>"form-control calendar",
-                                    "name"=>"end",
-                                    "label"=>false,
-                                    "placeholder"=>"未入力は指定なしとする",
-                                    "default"=>$end
-                                ]) ?>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                    <?php if(!empty($error[ "start" ][ "end" ])): ?>
-                        <small class="text-danger"><?= h($error[ "start" ]["end"]) ?></small>
-                    <?php endif; ?>
-                </div>
-
-
-            </div>
-
-            <div class="row mt-2">
-                <div class="col-3"><?= __("公開設定") ?></div>
-                <div class="col-1">
-                <span class="badge badge-danger"><?= __("必須") ?></span>
-                </div>
-                <div class="col-8">
-                    <?php if($type == "conf"): ?>
-                        <?= h($array_open[$this->request->getData("open")]) ?>
-                        <?= $this->Form->hidden("open",[
-                            "value"=>$this->request->getData('open')
-                        ])?>
-                    <?php else: ?>
-                        <?php
-                            $open = "";
-                            if($this->request->getData( 'open' )){
-                                $open = $this->request->getData("open");
-                            } else {
-                                if(isset($tenant[ 'open' ]) && $tenant[ 'open' ]) $open = $tenant["open"];
-                            }
-                        ?>
-                        <div class="switchbutton" id="makeImg">
-                            <?= $this->Form->checkbox("open",[
-                                "id"=>"sample2check",
-                                "value"=>1,
-                                "default"=>$open
-                            ])?>
-                            <label for="sample2check">
-                            <div id="sample2box"></div>
-                            </label>
-                        </div>
-                    <?php endif; ?>
-                </div>
-            </div>
             <?php if(isset($role) && $role == "admin"): ?>
                 <?= $this->Form->hidden("agree",[
                     "value"=>1
