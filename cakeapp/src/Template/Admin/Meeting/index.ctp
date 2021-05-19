@@ -85,9 +85,15 @@
                 <tr>
                 <td><a href="/admin/meeting/detail/<?=$value->id?>"><?= h($value->name) ?></a></td>
                 <td><?= h($value->Users['company']) ?></td>
-                <td><?= h($array_shop[$value->shop_type]) ?></td>
+                <?php
+                    $shop_type = (isset($array_shop[$value->shop_type]))?$array_shop[$value->shop_type]:"";
+                ?>
+                <td><?= h($shop_type) ?></td>
+                <?php
+                    $pref = (isset($array_prefecture[$value->pref]))?$array_prefecture[$value->pref]:"";
+                ?>
                 <td>
-                    <?= h($array_prefecture[$value->pref]) ?>
+                    <?= h($pref) ?>
                 </td>
                 <td><?= h(number_format($value->shop_area)) ?>坪</td>
                 <td><?= h($array_build_status[ $value->build_status ]) ?></td>

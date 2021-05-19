@@ -29,6 +29,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         <div class="row">
             <?= $this->element('mymenu'); ?>
             <div class="col-md-8 order-md-10 mb-4">
+            <?= $this->Flash->render() ?>
                 <div class="card w-100">
                     <div class="card-body">
                         <h5>物件検索</h5>
@@ -75,7 +76,11 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-6">
-                                            <p class="my-0 font-weight-normal"><?= h($values->name) ?></p>
+                                            <?php
+                                            $status = "";
+                                            if($values->status == 0) $status = '<span class="badge badge-secondary">一時保存</span>';
+                                            ?>
+                                            <p class="my-0 font-weight-normal"><?= $status ?> <?= h($values->name) ?></p>
                                             <small>ID : <?= h($compnent->setId($values->id)) ?></small>
                                         </div>
                                         <div class="col-6 text-right ">
@@ -83,7 +88,11 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-body">
+                                <?php
+                                    $bg = "";
+                                    if($values->status == 0 ) $bg = "bg-secondary";
+                                ?>
+                                <div class="card-body <?=$bg?> ">
                                     <table class="table-bordered w-100 text-center">
                                         <tr class="bg-secondary text-white">
                                             <th><?= __("所在地") ?></th>
@@ -93,7 +102,10 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                             <th><?= __("募集開始日") ?></th>
                                         </tr>
                                         <tr>
-                                            <td><?= h($array_prefecture[$values->pref]) ?></td>
+                                            <?php
+                                            $pref = (isset($array_prefecture[$values->pref]))?$array_prefecture[$values->pref]:"";
+                                            ?>
+                                            <td><?= h($pref) ?></td>
                                             <td><?= h(number_format($values->shop_area)) ?>坪</td>
                                             <td><?= h($array_open[$values->open]) ?></td>
                                             <td><?= date("Y/m/d",strtotime($values->created) )?></td>

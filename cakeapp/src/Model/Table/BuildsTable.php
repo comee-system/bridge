@@ -87,14 +87,15 @@ class BuildsTable extends Table
             ->maxLength('build', 512)
             ->notEmptyString('build');
 */
+/*
         $validator
             ->integer('shop_type',__("店舗形態の形式に謝りがあります。"))
             ->notEmptyString('shop_type',__("店舗形態を入力してください。"));
-
+*/
         $validator
             ->integer('shop_area',__("店舗面積の形式に謝りがあります。"))
             ->notEmptyString('shop_area',__("店舗面積を入力してください。"));
-
+/*
         $validator
             ->integer('agreement',__("契約形態の形式に謝りがあります。"))
             ->notEmptyString('agreement',__("契約形態を入力してください。"));
@@ -102,7 +103,7 @@ class BuildsTable extends Table
         $validator
             ->integer('security_money',__("保証金の形式に謝りがあります。"))
             ->notEmptyString('security_money',__("保証金を入力してください。"));
-
+*/
         $validator
             ->integer('rent_money',__("賃料の形式に謝りがあります。"))
             ->notEmptyString('rent_money',__("賃料を入力してください。"));
@@ -115,15 +116,16 @@ class BuildsTable extends Table
         $validator
             ->integer('parking_count',__("駐車場台数の形式に謝りがあります。"))
             ->notEmptyString('parking_count',__("駐車場台数を入力してください。"));
-
+/*
         $validator
             ->integer('build_type',__("建物の形態の形式に謝りがあります。"))
             ->notEmptyString('build_type',__("建物の形態を選択してください。"));
-
+*/
+/*
         $validator
             ->integer('constract_type',__("建物の構造の形式に謝りがあります。"))
             ->notEmptyString('constract_type',__("建物の構造を選択してください。"));
-
+*/
         $validator
             ->scalar('uploadfile')
             ->maxLength('uploadfile', 512)
@@ -134,6 +136,7 @@ class BuildsTable extends Table
             ->notEmptyString('other');
 */
 
+/*
         $validator
         ->date('start')
         ->allowEmptyString('start')
@@ -152,7 +155,7 @@ class BuildsTable extends Table
         $validator
         ->date('end')
         ->allowEmptyString('end');
-
+*/
         $validator
         ->integer('open')
         ->allowEmptyString('open');

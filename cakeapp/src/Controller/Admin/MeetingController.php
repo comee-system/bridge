@@ -84,7 +84,7 @@ class MeetingController extends AppController
     public function index()
     {
         $user = $this->Auth->user();
-        $builds = $this->Builds->find()->contain(['users']);
+        $builds = $this->Builds->find()->contain(['users'])->where(['Builds.status'=>1]);
         if($this->request->getData("name")) $builds = $builds->where(['name LIKE'=>'%'.$this->request->getData("name").'%']);
         if($this->request->getData("company")) $builds = $builds->where(['company LIKE'=>'%'.$this->request->getData("company").'%']);
         if(strlen($this->request->getData("build_status")) > 0) $builds = $builds->where(['build_status LIKE'=>$this->request->getData("build_status")]);

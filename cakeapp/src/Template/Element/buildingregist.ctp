@@ -241,42 +241,6 @@
                 <?php endif; ?>
             </div>
             <div class="row mt-2">
-                <div class="col-2"><?= __("店舗形態") ?></div>
-                <div class="col-2">
-                <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
-                </div>
-                <div class="col-8">
-                    <?php if($type == "conf"): ?>
-                        <?= h($array_shop[$this->request->getData('shop_type')]) ?>
-                        <?= $this->Form->hidden("shop_type",[
-                                "value"=>$this->request->getData('shop_type')
-                        ])?>
-                    <?php else: ?>
-                        <?php
-                            $shop_type = "";
-                            if ( $this->request->getData('shop_type')) :
-                                $shop_type = $this->request->getData("shop_type");
-                            else:
-                                if(isset($build[ 'shop_type' ]) && $build[ 'shop_type' ]) $shop_type = $build[ 'shop_type' ];
-                            endif;
-                        ?>
-                        <?= $this->Form->select("shop_type", $array_shop,[
-                            "class"=>"form-control ".$noborder,
-                            "label"=>false,
-                            "empty"=>"選択してください",
-                            "default"=>$shop_type
-                        ]) ?>
-                    <?php endif; ?>
-                    <?php if(!empty($error[ 'shop_type' ][ "_empty" ])): ?>
-                        <small class="text-danger"><?= h($error[ 'shop_type' ]["_empty"]) ?></small><br />
-                    <?php endif; ?>
-                    <?php if(!empty($error[ 'shop_type' ][ "integer" ])): ?>
-                        <small class="text-danger"><?= h($error[ 'shop_type' ]["integer"]) ?></small><br />
-                    <?php endif; ?>
-
-                </div>
-            </div>
-            <div class="row mt-2">
                 <div class="col-2"><?= __("店舗面積") ?></div>
                 <div class="col-2">
                 <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
@@ -313,81 +277,6 @@
                     <?php if(!empty($error[ 'shop_area' ][ "integer" ])): ?>
                         <small class="text-danger"><?= h($error[ 'shop_area' ]["integer"]) ?></small><br />
                     <?php endif; ?>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="col-2"><?= __("契約形態") ?></div>
-                <div class="col-2">
-                <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
-                </div>
-                <div class="col-8 input-group">
-                    <?php if($type == "conf" ): ?>
-                        <?= $array_agreement[$this->request->getData('agreement')]; ?>
-                        <?= $this->Form->hidden("agreement",[
-                                "value"=>$this->request->getData('agreement')
-                        ])?>
-                    <?php else: ?>
-                        <?php
-                            $agreement = "";
-                            if ( $this->request->getData('agreement')) :
-                                $agreement = $this->request->getData("agreement");
-                            else:
-                                if(isset($build[ 'agreement' ]) && $build[ 'agreement' ]) $agreement = $build[ 'agreement' ];
-                            endif;
-                        ?>
-                        <?= $this->Form->select("agreement", $array_agreement,[
-                            "class"=>"form-control ".$noborder,
-                            "label"=>false,
-                            "empty"=>"選択してください",
-                            "default"=>$agreement
-                        ]) ?>
-                    <?php endif; ?>
-                    <?php if(!empty($error[ 'agreement' ][ "_empty" ])): ?>
-                        <small class="text-danger"><?= h($error[ 'agreement' ]["_empty"]) ?></small><br />
-                    <?php endif; ?>
-                    <?php if(!empty($error[ 'agreement' ][ "integer" ])): ?>
-                        <small class="text-danger"><?= h($error[ 'agreement' ]["integer"]) ?></small><br />
-                    <?php endif; ?>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="col-2"><?= __("保証金") ?></div>
-                <div class="col-2">
-                <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
-                </div>
-                <div class="col-8 ">
-                    <div class="input-group">
-                        <?php if($type == "conf" ): ?>
-                            <?= number_format($this->request->getData('security_money')); ?>円
-                            <?= $this->Form->hidden("security_money",[
-                                    "value"=>$this->request->getData('security_money')
-                            ])?>
-                        <?php else: ?>
-                            <?php
-                                $security_money = "";
-                                if ( $this->request->getData('security_money')) :
-                                    $security_money = $this->request->getData("security_money");
-                                else:
-                                    if(isset($build[ 'security_money' ]) && $build[ 'security_money' ]) $security_money = $build[ 'security_money' ];
-                                endif;
-                                if($noborder) $security_money = number_format($security_money);
-                            ?>
-                            <?= $this->Form->input("security_money",[
-                                "type"=>"text",
-                                "class"=>"form-control ".$noborder,
-                                "label"=>false,
-                                "default"=>$security_money
-                            ]) ?>
-                        <div class="mt-2 ml-2">円</div>
-                        <?php endif; ?>
-                    </div>
-                    <?php if(!empty($error[ 'security_money' ][ "_empty" ])): ?>
-                        <small class="text-danger"><?= h($error[ 'security_money' ]["_empty"]) ?></small><br />
-                    <?php endif; ?>
-                    <?php if(!empty($error[ 'security_money' ][ "integer" ])): ?>
-                        <small class="text-danger"><?= h($error[ 'security_money' ]["integer"]) ?></small><br />
-                    <?php endif; ?>
-
                 </div>
             </div>
             <div class="row mt-2">
@@ -431,46 +320,6 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-2"><?= __("共益費") ?></div>
-                <div class="col-2">
-                </div>
-                <div class="col-8 input-group">
-                    <?php if($type == "conf" ): ?>
-                        <?= h($this->request->getData('common_money')); ?>円
-                        <?= $this->Form->hidden("common_money",[
-                                "value"=>$this->request->getData('common_money')
-                        ])?>
-                    <?php else: ?>
-                        <?php
-                            $common_money = "";
-                            if ( $this->request->getData('common_money')) :
-                                $common_money = $this->request->getData("common_money");
-                            else:
-                                if(isset($build[ 'common_money' ]) && $build[ 'common_money' ]) $common_money = $build[ 'common_money' ];
-                            endif;
-                            if($noborder) $common_money = number_format((int)$common_money);
-                        ?>
-                        <?= $this->Form->input("common_money",[
-                            "type"=>"text",
-                            "class"=>"form-control ".$noborder,
-                            "label"=>false,
-                            "default"=>$common_money
-                        ]) ?>
-                        <div class="mt-2 ml-2">円</div>
-                        <div class="col-12 <?= $none ?>">
-                            <small>共益費がない場合は０を入力してください。</small>
-                        </div>
-                    <?php endif; ?>
-                    <?php if(!empty($error[ 'common_money' ][ "_empty" ])): ?>
-                        <small class="text-danger"><?= h($error[ 'common_money' ]["_empty"]) ?></small><br />
-                    <?php endif; ?>
-                    <?php if(!empty($error[ 'common_money' ][ "integer" ])): ?>
-                        <small class="text-danger"><?= h($error[ 'common_money' ]["integer"]) ?></small><br />
-                    <?php endif; ?>
-
-                </div>
-            </div>
-            <div class="row mt-2">
                 <div class="col-2"><?= __("駐車場台数") ?></div>
                 <div class="col-2">
                 <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
@@ -509,46 +358,165 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-2"><?= __("建物の形態") ?></div>
+                <div class="col-2"><?= __("店舗形態") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger <?=$none?> "><?= __("必須") ?></span>
+                <span class="badge badge-secondary <?= $none ?>"><?= __("任意") ?></span>
                 </div>
-                <div class="col-8 ">
-                    <?php if($type == "conf" ): ?>
-                        <?= $array_build[$this->request->getData('build_type')]; ?>
-                        <?= $this->Form->hidden("build_type",[
-                                "value"=>$this->request->getData('build_type')
+                <div class="col-8">
+                    <?php if($type == "conf"): ?>
+                        <?= h($array_shop[$this->request->getData('shop_type')]) ?>
+                        <?= $this->Form->hidden("shop_type",[
+                                "value"=>$this->request->getData('shop_type')
                         ])?>
                     <?php else: ?>
                         <?php
-                            $build_type = "";
-                            if ( $this->request->getData('build_type')) :
-                                $build_type = $this->request->getData("build_type");
+                            $shop_type = "";
+                            if ( $this->request->getData('shop_type')) :
+                                $shop_type = $this->request->getData("shop_type");
                             else:
-                                if(isset($build[ 'build_type' ]) && $build[ 'build_type' ]) $build_type = $build[ 'build_type' ];
+                                if(isset($build[ 'shop_type' ]) && $build[ 'shop_type' ]) $shop_type = $build[ 'shop_type' ];
                             endif;
                         ?>
-                        <?= $this->Form->select("build_type", $array_build,[
+                        <?= $this->Form->select("shop_type", $array_shop,[
                             "class"=>"form-control ".$noborder,
                             "label"=>false,
                             "empty"=>"選択してください",
-                            "default"=>$build_type
+                            "default"=>$shop_type
                         ]) ?>
                     <?php endif; ?>
-
-                    <?php if(!empty($error[ 'build_type' ][ "_empty" ])): ?>
-                        <small class="text-danger"><?= h($error[ 'build_type' ]["_empty"]) ?></small><br />
+                    <?php if(!empty($error[ 'shop_type' ][ "_empty" ])): ?>
+                        <small class="text-danger"><?= h($error[ 'shop_type' ]["_empty"]) ?></small><br />
                     <?php endif; ?>
-                    <?php if(!empty($error[ 'build_type' ][ "integer" ])): ?>
-                        <small class="text-danger"><?= h($error[ 'build_type' ]["integer"]) ?></small><br />
+                    <?php if(!empty($error[ 'shop_type' ][ "integer" ])): ?>
+                        <small class="text-danger"><?= h($error[ 'shop_type' ]["integer"]) ?></small><br />
                     <?php endif; ?>
 
                 </div>
             </div>
+
+            <div class="row mt-2">
+                <div class="col-2"><?= __("契約形態") ?></div>
+                <div class="col-2">
+                    <span class="badge badge-secondary <?= $none ?>"><?= __("任意") ?></span>
+                </div>
+                <div class="col-8 input-group">
+                    <?php if($type == "conf" ): ?>
+                        <?= $array_agreement[$this->request->getData('agreement')]; ?>
+                        <?= $this->Form->hidden("agreement",[
+                                "value"=>$this->request->getData('agreement')
+                        ])?>
+                    <?php else: ?>
+                        <?php
+                            $agreement = "";
+                            if ( $this->request->getData('agreement')) :
+                                $agreement = $this->request->getData("agreement");
+                            else:
+                                if(isset($build[ 'agreement' ]) && $build[ 'agreement' ]) $agreement = $build[ 'agreement' ];
+                            endif;
+                        ?>
+                        <?= $this->Form->select("agreement", $array_agreement,[
+                            "class"=>"form-control ".$noborder,
+                            "label"=>false,
+                            "empty"=>"選択してください",
+                            "default"=>$agreement
+                        ]) ?>
+                    <?php endif; ?>
+                    <?php if(!empty($error[ 'agreement' ][ "_empty" ])): ?>
+                        <small class="text-danger"><?= h($error[ 'agreement' ]["_empty"]) ?></small><br />
+                    <?php endif; ?>
+                    <?php if(!empty($error[ 'agreement' ][ "integer" ])): ?>
+                        <small class="text-danger"><?= h($error[ 'agreement' ]["integer"]) ?></small><br />
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-2"><?= __("保証金") ?></div>
+                <div class="col-2">
+                <span class="badge badge-secondary <?= $none ?>"><?= __("任意") ?></span>
+                </div>
+                <div class="col-8 ">
+                    <div class="input-group">
+                        <?php if($type == "conf" ): ?>
+                            <?= number_format($this->request->getData('security_money')); ?>円
+                            <?= $this->Form->hidden("security_money",[
+                                    "value"=>$this->request->getData('security_money')
+                            ])?>
+                        <?php else: ?>
+                            <?php
+                                $security_money = "";
+                                if ( $this->request->getData('security_money')) :
+                                    $security_money = $this->request->getData("security_money");
+                                else:
+                                    if(isset($build[ 'security_money' ]) && $build[ 'security_money' ]) $security_money = $build[ 'security_money' ];
+                                endif;
+                                if($noborder) $security_money = number_format($security_money);
+                            ?>
+                            <?= $this->Form->input("security_money",[
+                                "type"=>"text",
+                                "class"=>"form-control ".$noborder,
+                                "label"=>false,
+                                "default"=>$security_money
+                            ]) ?>
+                        <div class="mt-2 ml-2">円</div>
+                        <?php endif; ?>
+                    </div>
+                    <?php if(!empty($error[ 'security_money' ][ "_empty" ])): ?>
+                        <small class="text-danger"><?= h($error[ 'security_money' ]["_empty"]) ?></small><br />
+                    <?php endif; ?>
+                    <?php if(!empty($error[ 'security_money' ][ "integer" ])): ?>
+                        <small class="text-danger"><?= h($error[ 'security_money' ]["integer"]) ?></small><br />
+                    <?php endif; ?>
+
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-2"><?= __("共益費") ?></div>
+                <div class="col-2">
+                <span class="badge badge-secondary <?= $none ?>"><?= __("任意") ?></span>
+                </div>
+                <div class="col-8 input-group">
+                    <?php if($type == "conf" ): ?>
+                        <?= h($this->request->getData('common_money')); ?>円
+                        <?= $this->Form->hidden("common_money",[
+                                "value"=>$this->request->getData('common_money')
+                        ])?>
+                    <?php else: ?>
+                        <?php
+                            $common_money = "";
+                            if ( $this->request->getData('common_money')) :
+                                $common_money = $this->request->getData("common_money");
+                            else:
+                                if(isset($build[ 'common_money' ]) && $build[ 'common_money' ]) $common_money = $build[ 'common_money' ];
+                            endif;
+                            if($noborder) $common_money = number_format((int)$common_money);
+                        ?>
+                        <?= $this->Form->input("common_money",[
+                            "type"=>"text",
+                            "class"=>"form-control ".$noborder,
+                            "label"=>false,
+                            "default"=>$common_money
+                        ]) ?>
+                        <div class="mt-2 ml-2">円</div>
+                        <div class="col-12 <?= $none ?>">
+                            <small>共益費がない場合は０を入力してください。</small>
+                        </div>
+                    <?php endif; ?>
+                    <?php if(!empty($error[ 'common_money' ][ "_empty" ])): ?>
+                        <small class="text-danger"><?= h($error[ 'common_money' ]["_empty"]) ?></small><br />
+                    <?php endif; ?>
+                    <?php if(!empty($error[ 'common_money' ][ "integer" ])): ?>
+                        <small class="text-danger"><?= h($error[ 'common_money' ]["integer"]) ?></small><br />
+                    <?php endif; ?>
+
+                </div>
+            </div>
+
+
             <div class="row mt-2">
                 <div class="col-2"><?= __("建物の構造") ?></div>
                 <div class="col-2">
-                <span class="badge badge-danger <?=$none?> "><?= __("必須") ?></span>
+                <span class="badge badge-secondary <?= $none ?>"><?= __("任意") ?></span>
                 </div>
                 <div class="col-8 ">
                     <?php if($type == "conf" ): ?>
@@ -630,7 +598,7 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-2"><?= __("備考") ?></div>
+                <div class="col-2"><?= __("その他要望事項") ?></div>
                 <div class="col-2">
                     &nbsp;
                 </div>
@@ -660,68 +628,7 @@
                 </div>
             </div>
 
-            <div class="row mt-2">
-                <div class="col-2"><?= __("掲載期間") ?></div>
-                <div class="col-2">
-                <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
-                </div>
-                <div class="col-8">
-                    <div class="d-flex">
-                        <?php if($type == "conf"): ?>
-                            <?= $this->request->getData("start") ?>～
-                            <?= $this->request->getData("end") ?>
-                            <?= $this->Form->hidden("start",[
-                                    "value"=>$this->request->getData('start')
-                            ])?>
-                            <?= $this->Form->hidden("end",[
-                                    "value"=>$this->request->getData('end')
-                            ])?>
-                        <?php else: ?>
-                            <?php
-                                $start = "";
-                                if ( $this->request->getData('start')) :
-                                    $start = $this->request->getData("start");
-                                else:
-                                    if(isset($build[ 'start' ]) && $build[ 'start' ]) $start = date("Y/m/d",strtotime($build[ 'start' ]));
-                                endif;
-                            ?>
-                            <?php
-                                $end = "";
-                                if ( $this->request->getData('end')) :
-                                    $end = $this->request->getData("end");
-                                else:
-                                    if(isset($build[ 'end' ]) && $build[ 'end' ]) $end = date("Y/m/d",strtotime($build[ 'end' ]));
-                                endif;
-                            ?>
-                            <div>
-                                <?= $this->Form->input("start",[
-                                    "type"=>"text",
-                                    "class"=>"form-control calendar ".$noborder,
-                                    "name"=>"start",
-                                    "label"=>false,
-                                    "placeholder"=>"未入力は指定なしとする",
-                                    "default"=>$start
-                                ]) ?>
-                            </div>
-                            <div class="mt-2">～</div>
-                            <div>
-                                <?= $this->Form->input("end",[
-                                    "type"=>"text",
-                                    "class"=>"form-control calendar ".$noborder,
-                                    "name"=>"end",
-                                    "label"=>false,
-                                    "placeholder"=>"未入力は指定なしとする",
-                                    "default"=>$end
-                                ]) ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    <?php if(!empty($error[ "start" ][ "end" ])): ?>
-                        <small class="text-danger"><?= h($error[ "start" ]["end"]) ?></small>
-                    <?php endif; ?>
 
-                </div>
-            </div>
             <?php if($editflag != false):?>
             <div class="row mt-2">
                 <div class="col-2"><?= __("公開設定") ?></div>
@@ -793,6 +700,30 @@
 
                 </div>
             </div>
+
+
+            <?php if(isset($role) && $role == "admin"): ?>
+                <?= $this->Form->hidden("agree",[
+                    "value"=>1
+                ])?>
+            <?php else: ?>
+                <?php if($type == "conf"): ?>
+                    <?= $this->Form->hidden("agree",[
+                        "value"=>$this->request->getData('agree')
+                    ])?>
+                <?php else: ?>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="alert-primary text-center" >
+                            <label>
+                            <input type="checkbox" name="agree" value="on" required/>
+                            <a href="">物件登録規約</a>に同意する</label>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
+            <?php endif; ?>
+
             <?php if($editflag != false):?>
 
             <div class="row mt-3">
@@ -815,7 +746,15 @@
                     </div>
                 <?php else: ?>
                     <div class="col-4 mx-auto">
-                        <?= $this->Form->input("確認",[
+                        <?= $this->Form->input("一時保存して終了",[
+                            "type"=>"submit",
+                            "value"=>"on",
+                            "name"=>"onetime",
+                            "class"=>"btn btn-secondary w-100 text-white"
+                        ]) ?>
+                    </div>
+                    <div class="col-4 mx-auto">
+                        <?= $this->Form->input("入力内容を確認する",[
                             "type"=>"submit",
                             "value"=>"on",
                             "name"=>"conf",

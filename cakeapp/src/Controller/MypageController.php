@@ -178,14 +178,25 @@ class MypageController extends AppController
         }else{
             $build = $this->Builds->newEntity();
         }
+
+
+
+
+
+
+
         //確認画面
         if(
             $this->request->getData("conf") ||
-            $this->request->getData("regist")
+            $this->request->getData("regist") ||
+            $this->request->getData("onetime")
         ){
             //エラーチェック
-
-            $build = $this->Builds->patchEntity($build, $this->request->getData());
+            if($this->request->getData("onetime")){
+                $build = $this->Builds->patchEntity($build, $this->request->getData(),['validate'=>false]);
+            }else{
+                $build = $this->Builds->patchEntity($build, $this->request->getData());
+            }
             $error = $build->errors();
             if(!$build->errors()){
                 if($this->request->getData('fileupload.name')){
@@ -199,16 +210,32 @@ class MypageController extends AppController
                     }
                 }
                 $type = "conf";
+
+
+
                 //登録完了
-                if($this->request->getData("regist")){
+                if(
+                    $this->request->getData("regist") ||
+                    $this->request->getData("onetime")
+                ){
                     $build->user_id = $this->Auth->user('id');
 
                     if(empty($this->request->getData('uploadfile'))){
                        $build->uploadfile = $setUploadfile;
                        $build->uploadfilename = $setUploadfilename;
                     }
-
+                    if($this->request->getData("onetime")){
+                        $build->status = 0;
+                    }else{
+                        $build->status = 0;
+                    }
                     $this->Builds->save($build);
+
+                    if($this->request->getData("onetime")){
+                        $this->Flash->success(__('一時保存を行いました。'));
+                        return $this->redirect(['action' => '/buildlist']);
+                    }
+
                     $type = "fin";
                     return $this->redirect(['action' => '/buildfin']);
                 }
