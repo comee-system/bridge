@@ -53,9 +53,11 @@
 
 <?php /*$this->Html->script('/js/feather.min.js') */?>
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+
+<?= $this->Html->script('/js/jquery.min.js') ?>
+<?= $this->Html->script('/js/jquery-ui.min.js') ?>
+<?= $this->Html->script('/js/jquery.ui.datepicker-ja.min.js') ?>
+
 
 
 <?= $this->Html->script('/js/base.js') ?>
