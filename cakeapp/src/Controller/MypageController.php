@@ -227,7 +227,7 @@ class MypageController extends AppController
                     if($this->request->getData("onetime")){
                         $build->status = 0;
                     }else{
-                        $build->status = 0;
+                        $build->status = 1;
                     }
                     $this->Builds->save($build);
 

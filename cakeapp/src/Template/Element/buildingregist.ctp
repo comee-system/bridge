@@ -364,10 +364,12 @@
                 </div>
                 <div class="col-8">
                     <?php if($type == "conf"): ?>
+                        <?php if(isset( $array_shop[$this->request->getData('shop_type')] ) ): ?>
                         <?= h($array_shop[$this->request->getData('shop_type')]) ?>
                         <?= $this->Form->hidden("shop_type",[
                                 "value"=>$this->request->getData('shop_type')
                         ])?>
+                        <?php endif; ?>
                     <?php else: ?>
                         <?php
                             $shop_type = "";
@@ -401,10 +403,12 @@
                 </div>
                 <div class="col-8 input-group">
                     <?php if($type == "conf" ): ?>
+                        <?php if(isset( $array_agreement[$this->request->getData('agreement')] ) ): ?>
                         <?= $array_agreement[$this->request->getData('agreement')]; ?>
                         <?= $this->Form->hidden("agreement",[
                                 "value"=>$this->request->getData('agreement')
                         ])?>
+                        <?php endif; ?>
                     <?php else: ?>
                         <?php
                             $agreement = "";
@@ -437,7 +441,7 @@
                 <div class="col-8 ">
                     <div class="input-group">
                         <?php if($type == "conf" ): ?>
-                            <?= number_format($this->request->getData('security_money')); ?>円
+                            <?= number_format((int)$this->request->getData('security_money')); ?>円
                             <?= $this->Form->hidden("security_money",[
                                     "value"=>$this->request->getData('security_money')
                             ])?>
@@ -477,7 +481,7 @@
                 </div>
                 <div class="col-8 input-group">
                     <?php if($type == "conf" ): ?>
-                        <?= h($this->request->getData('common_money')); ?>円
+                        <?= h((int)$this->request->getData('common_money')); ?>円
                         <?= $this->Form->hidden("common_money",[
                                 "value"=>$this->request->getData('common_money')
                         ])?>
@@ -520,10 +524,13 @@
                 </div>
                 <div class="col-8 ">
                     <?php if($type == "conf" ): ?>
+
+                        <?php if(isset($array_constract[$this->request->getData('constract_type')])): ?>
                         <?= $array_constract[$this->request->getData('constract_type')]; ?>
                         <?= $this->Form->hidden("constract_type",[
                                 "value"=>$this->request->getData('constract_type')
                         ])?>
+                        <?php endif; ?>
                     <?php else: ?>
                         <?php
                             $constract_type = "";
