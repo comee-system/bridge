@@ -148,22 +148,25 @@ class UsersController extends AppController
                         $user = $this->Users->newEntity();
                         $data = [];
                         $data['sei'  ] = $value[0];
-                        $data['company'  ] = $value[1];
-                        $data['post'  ] = $value[2];
-                        $data['prefecture'  ] = array_search($value['3'],$this->array_prefecture);
-                        $data['city'] = $value[4];
-                        $data['space'] = $value[5];
-                        $data['build'] = $value[6];
-                        $data['busyo'] = $value[7];
-                        $data['tel'] = $value[8];
-                        $data['email'] = $value[9];
-                        $data['password'] = $value[10];
+                        $data['mei'  ] = $value[1];
+                        $data['sei_kana'  ] = $value[2];
+                        $data['mei_kana'  ] = $value[3];
+                        $data['company'  ] = $value[4];
+                        $data['post'  ] = $value[5];
+                        $data['prefecture'  ] = array_search($value[6],$this->array_prefecture);
+                        $data['city'] = $value[7];
+                        $data['space'] = $value[8];
+                        $data['build'] = $value[9];
+                        $data['busyo'] = $value[10];
+                        $data['tel'] = $value[11];
+                        $data['email'] = $value[12];
+                        $data['password'] = $value[13];
                         $data['import'] = 1;
                         //メール送信データ
-                        $mail[$key]['text'] = $value[11];
-                        $mail[$key]['email'] = $value[9];
-                        $mail[$key]['name'] = $value[0];
-                        $mail[$key]['pw'] = $value[10];
+                        $mail[$key]['text'] = $value[14];
+                        $mail[$key]['email'] = $value[12];
+                        $mail[$key]['name'] = $value[0].$value[1];
+                        $mail[$key]['pw'] = $value[13];
 
                         $user   = $this->Users->patchEntity($user, $data,["validate"=>"import"]);
                         //var_dump($user->getErrors()[ 'email' ]);
@@ -177,12 +180,12 @@ class UsersController extends AppController
                             $this->Users->save($user);
                             $tenant = $this->Tenants->newEntity();
                             $tenant->user_id = $user->id;
-                            $tenant->name = $value[12];
-                            $tenant->floor = $value[13];
-                            $tenant->min_floor = $value[14];
-                            $tenant->max_floor = $value[15];
-                            $tenant->rent_money_min = $value[16];
-                            $tenant->rent_money_max = $value[17];
+                            $tenant->name = $value[15];
+                            $tenant->floor = $value[16];
+                            $tenant->min_floor = $value[17];
+                            $tenant->max_floor = $value[18];
+                            $tenant->rent_money_min = $value[19];
+                            $tenant->rent_money_max = $value[20];
                             $this->Tenants->save($tenant);
                             $err_row[] = 0;
                         }
