@@ -42,9 +42,9 @@
                             <td><?= h($array_prefecture[$builds->pref]) ?></td>
                             <td><?= h($builds->shop_area) ?>坪</td>
                             <td>
-                                <?= $this->Form->select('build_status',$array_build_status,[
+                                <?= $this->Form->select('build_status',$array_status,[
                                     'class'=>'form-control',
-                                    'default'=>$builds->build_status
+                                    'default'=>$builds->status
                                 ])?>
 
                             </td>
@@ -118,12 +118,10 @@
                 <div class="card-body">
                     <h6 class="mt-1"><?= h($value->usercompany)?></h6>
                     <h6 class="mt-1"><?= h($value->username)?></h6>
-                    <!--
-                    <span class="small badge badge-primary"><?= $array_comment_reply_status[$value->comment_status] ?></span>
-                    -->
+
                     <div class="row">
 
-                        <p class="text-right">ステータス：<?=$array_build_status[$value->comment_status]?></p>
+                        <p class="text-right">ステータス：<?=$array_status[$value->status]?></p>
                         <div class="col-md-2 mt-3">
                             <span class="badge badge-secondary">
                             <?= $array_read[$value->readflag] ?>

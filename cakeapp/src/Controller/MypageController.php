@@ -124,6 +124,7 @@ class MypageController extends AppController
             'Builds.build_status',
             'Builds.created',
             'Builds.start',
+            'Builds.status',
             'c.comment',
             'c.build_id',
             'c.tenant_id',
@@ -136,7 +137,8 @@ class MypageController extends AppController
             'conditions' => 'c.build_id=Builds.id'
         ]);
         $builds = $builds->where([
-            "c.user_id"=>$user[ 'id' ]
+            "c.user_id"=>$user[ 'id' ],
+            "Builds.status !="=>5
         ]);
         $builds = $builds->group(["c.build_id","c.tenant_id"]);
         $builds = $this->paginate($builds);
@@ -149,8 +151,17 @@ class MypageController extends AppController
     public function buildlist(){
         $user = $this->Auth->user();
         $builds = $this->Builds->find()->where([
-            "user_id"=>$user[ 'id' ]
+            "user_id"=>$user[ 'id' ],
+            "status != "=> 5 //交渉中止は出さない
         ]);
+
+        if($this->request->is('post')){
+            if(strlen($this->request->getData('status'))){
+                $builds = $builds->where([
+                    'status'=>$this->request->getData("status")
+                ]);
+            }
+        }
         $builds = $this->paginate($builds);
 
         $this->set(compact('builds'));

@@ -40,7 +40,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                             <div class="card-body">
                                 <dl class="row">
                                     <dt class="col-2">ステータス</dt>
-                                    <dd class="col-10"><?= h($array_build_status[$values->build_status]) ?></dd>
+                                    <dd class="col-10"><?= h($array_status[$values->status]) ?></dd>
                                 </dl>
                                 <dl class="row">
                                     <dt class="col-2">案件登録日</dt>

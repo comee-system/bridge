@@ -34,7 +34,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                     <div class="card-body">
                         <h5>物件検索</h5>
                         <?= $this->Form->create(null, [
-                            'url' => ['action' => '/mypage/buildlist'],
+                            'url' => ['controller'=>'mypage','action' => 'buildlist'],
                             'type' => 'post',
                             ]); ?>
                         <div class="row">
@@ -47,8 +47,12 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                             </div>
                             <div class="col-">
                                 <label>ステータス</label>
+                                <?php //交渉中止をけす
+                                    unset($array_status[5]);
+                                ?>
                                 <?= $this->Form->select("status", $array_status,[
                                     "class"=>"form-control",
+                                    "empty"=>"-"
                                 ]) ?>
                             </div>
                         </div>
@@ -107,7 +111,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                             ?>
                                             <td><?= h($pref) ?></td>
                                             <td><?= h(number_format($values->shop_area)) ?>坪</td>
-                                            <td><?= h($array_open[$values->open]) ?></td>
+                                            <td><?= h($array_status[$values->status]) ?></td>
                                             <td><?= date("Y/m/d",strtotime($values->created) )?></td>
                                             <td>
                                                 <?php if(!$values->start): ?>

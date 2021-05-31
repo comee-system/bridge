@@ -68,11 +68,11 @@
                     <?php if($code == "tenant"): ?>
                     <div class="col-md-4">
                         <div class="d-flex">
-                            <?=$this->Form->select("select_tenant_status",$array_build_status,[
+                            <?=$this->Form->select("select_tenant_status",$array_tenant_status,[
                                 "class"=>"form-control w-50",
                                 "empty"=>"-",
                                 "id"=>"select_tenant_status",
-                                "default"=>$comment->first()[ 'comment_status' ]
+                                "default"=>$comment->first()[ 'status' ]
                             ])?>
                             <?= $this->Form->control("ステータス更新",[
                                 "class"=>"btn-sm btn-warning text-white ml-2 text-center w-100",

@@ -53,6 +53,8 @@ class MeetingController extends AppController
         $array_job_type = Configure::read('array_job_type');
         $array_open = Configure::read('array_open');
         $array_build_status = Configure::read('array_build_status');
+        $array_tenant_status = Configure::read('array_tenant_status');
+
         $this->array_read = Configure::read("array_read");
         $this->array_code = Configure::read("array_code");
         $this->array_comment_reply_status = Configure::read("array_comment_reply_status");
@@ -71,6 +73,7 @@ class MeetingController extends AppController
         $this->set("array_job_type",$array_job_type);
         $this->set("array_open",$array_open);
         $this->set("array_build_status",$array_build_status);
+        $this->set("array_tenant_status",$array_tenant_status);
         $this->set("array_read",$this->array_read);
         $this->set("array_comment_reply_status",$this->array_comment_reply_status);
 
@@ -84,10 +87,11 @@ class MeetingController extends AppController
     public function index()
     {
         $user = $this->Auth->user();
-        $builds = $this->Builds->find()->contain(['users'])->where(['Builds.status'=>1]);
+        $builds = $this->Builds->find()->contain(['users']);
         if($this->request->getData("name")) $builds = $builds->where(['name LIKE'=>'%'.$this->request->getData("name").'%']);
         if($this->request->getData("company")) $builds = $builds->where(['company LIKE'=>'%'.$this->request->getData("company").'%']);
-        if(strlen($this->request->getData("build_status")) > 0) $builds = $builds->where(['build_status LIKE'=>$this->request->getData("build_status")]);
+        if(strlen($this->request->getData("search_build_status")) > 0)$builds = $builds->where(['Builds.status '=>1]);
+
         $builds = $this->paginate($builds);
 
         $this->set(compact('builds'));
@@ -102,8 +106,18 @@ class MeetingController extends AppController
         if($this->request->is('ajax')){
             //ステータスの変更
             $build = $this->Builds->find()->where(['id'=>$id])->first();
-            $build->build_status = $sel;
+            $build->status = $sel;
             $this->Builds->save($build);
+
+            //交渉中止の場合は対象のコメントを全て中止に変更する
+            $comments = $this->Comments->find()->where([
+                'build_id'=>$id
+            ]);
+            foreach($comments as $key=>$value){
+                $comment = $this->Comments->find()->where(['id'=>$value->id])->first();
+                $comment->status = $sel;
+                $this->Comments->save($comment);
+            }
             exit();
         }
 
@@ -111,7 +125,6 @@ class MeetingController extends AppController
         $buildcomment = $this->Comments->find()->where([
             'build_id'=>$builds['id'],
             'code'=>1,
-            'status'=>1
             ])->order(["id"=>"DESC"])->first();
 
         //テナント用コメント
@@ -121,7 +134,6 @@ class MeetingController extends AppController
             ->where([
             'build_id'=>$builds['id'],
             'code'=>2,
-            'status'=>1
             ])
             ->group(["tenant_id"]);
         $tenantcomment = $this->Comments->find()
@@ -194,6 +206,13 @@ class MeetingController extends AppController
 
         //登録処理
         if($this->request->getData("regist")){
+            //管理者が該当物件において、テナント登録者に１件でもメッセージを送付したシステムで交渉中に変更
+            $build = $this->Builds->get($id, [
+                'contain' => [],
+            ]);
+            $build->status = 3;
+            $this->Builds->save($build);
+
             $cnt = 0;
             foreach($this->request->getData('tenant_id') as $key=>$value){
                 $user_id = $this->request->getData("user_id")[$key];
@@ -218,11 +237,46 @@ class MeetingController extends AppController
     public function room($code = "",$id="",$tenant_id=""){
 
         if($this->request->is('ajax')){
+            $build_id = $id;
+
+
+            //交渉成立・交渉中止
+            if(
+                $this->request->getData('comment_status') == 6 ||
+                $this->request->getData('comment_status') == 5
+            ){
+                 //交渉成立の場合
+                //この物件の他の商談ルームステータスを交渉中止に変更する
+                //一度すべて交渉中止状態にする
+                if($this->request->getData('comment_status') == 6 ){
+                    $comments = $this->Comments
+                        ->find()->select(['id'])->where([
+                            'build_id'=>$build_id
+                        ])->toArray();
+                    foreach($comments as $key=>$value){
+                        $comment = $this->Comments->get($value->id);
+                        $comment->status = 5;
+                        $this->Comments->save($comment);
+                    }
+                }
+
+                //交渉成立に変更
+                //システムにより交渉成立に変更
+                $build = $this->Builds->get($build_id, [
+                    'contain' => [],
+                ]);
+                $build->status = $this->request->getData('comment_status');
+                $this->Builds->save($build);
+            }
+
+
+
             //ステータスの変更
             $id = $this->request->getData("comment_id");
             $comment = $this->Comments->get($id);
-            $comment->comment_status = $this->request->getData('comment_status');
+            $comment->status = $this->request->getData('comment_status');
             $this->Comments->save($comment);
+
 
             exit();
         }

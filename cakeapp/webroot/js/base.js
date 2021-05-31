@@ -42,20 +42,28 @@ $(function () {
     }catch(e){}
     //ステータスの変更
     $(document).on("change",'[name="build_status"]',function(){
-        var _sel = $(this).val();
-        var _url = location.href+"/"+_sel;
-        $.ajax({
-            url: _url,
-            type: "GET",
-            datatype:'JSON',
-         }).done(function (response) {
-             console.log(response);
-         });
-
-        return false;
+        if(!confirm("ステータスの変更を行います。")){
+            return false;
+        }else{
+            var _sel = $(this).val();
+            var _url = location.href+"/"+_sel;
+            $.ajax({
+                url: _url,
+                type: "GET",
+                datatype:'JSON',
+            }).done(function (response) {
+                alert("変更を行いました。");
+                console.log(response);
+            });
+        }
+        return true;
     });
     //テナントのステータス更新
     $("button[name='tenant_status']").on("click",function(){
+        if(!confirm("ステータスの変更を行います。")){
+            return false;
+        }
+
         $("#comment_status_text").hide();
         var _sel = $("#select_tenant_status").val();
         var _url = location.href;
@@ -64,12 +72,15 @@ $(function () {
             "comment_status":_sel,
             "comment_id":_comment_id
         };
+
         $.ajax({
             url: _url,
             type: "POST",
             data:_data
          }).done(function (response) {
              $("p#comment_status_text").show();
+             //console.log(response);
+             alert("ステータスの変更を行いました。");
          });
 
         return true;

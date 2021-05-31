@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-3">
                         <label>ステータス</label>
-                        <?= $this->Form->select("build_status",$array_build_status,[
+                        <?= $this->Form->select("search_build_status",$array_status,[
                             'class'=>"form-control",
                             'empty'=>'-',
                             "required"=>false
@@ -96,7 +96,7 @@
                     <?= h($pref) ?>
                 </td>
                 <td><?= h(number_format($value->shop_area)) ?>坪</td>
-                <td><?= h($array_build_status[ $value->build_status ]) ?></td>
+                <td><?= h($array_status[ $value->status ]) ?></td>
                 <td><?= date("Y/m/d",strtotime($value->created))?></td>
                 <td>
                     <?php if($value->start): ?>
