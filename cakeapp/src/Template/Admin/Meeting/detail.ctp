@@ -121,12 +121,14 @@
             </div>
             <div class="col-md-6 text-right">
                 <p>交渉中：
-                    <?php if(isset($nego[5]) ): ?>
-                    <?= $nego[5] ?>
+                    <?php if(isset($nego[1]) ): ?>
+                    <?= $nego[1] ?>
+                    <?php else:?> 0
                     <?php endif; ?>
                 件　交渉中止：
-                    <?php if(isset($nego[6]) ): ?>
-                    <?= $nego[6] ?>
+                    <?php if(isset($nego[5]) ): ?>
+                    <?= $nego[5] ?>
+                    <?php else:?> 0
                     <?php endif; ?>
                 件</p>
 
