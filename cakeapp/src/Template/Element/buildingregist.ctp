@@ -664,13 +664,21 @@
                                 "default"=>$open
                             ])?>
                             <label for="sample2check">
-                            <div id="sample2box"></div>
+                                <div id="sample2box"></div>
                             </label>
+                            <span class="ml-2 position-absolute" id="openText" style="top:4px;left:120px;"><?= h($array_open[$open]) ?></span>
                         </div>
                     <?php endif; ?>
                 </div>
             </div>
             <?php endif; ?>
+            <div class="card shadow-sm mt-3">
+                <div class="card-body">
+                    <h5>※公開設定について</h5>
+                    <p>公開設定において、非公開の場合は、別途ご依頼後に物件マッチングを行います。</p>
+                </div>
+            </div>
+
             <?php if ($admin): ?>
                 <div class="row mt-2">
                     <div class="col-4"><?= __("物件紹介メッセージ") ?></div>
@@ -701,12 +709,7 @@
                 </div>
             <?php endif; ?>
 
-            <div class="card shadow-sm mt-3">
-                <div class="card-body">
-                    <h5>※公開設定について</h5>
 
-                </div>
-            </div>
 
 
             <?php if(isset($role) && $role == "admin"): ?>
@@ -721,11 +724,15 @@
                 <?php else: ?>
                 <div class="row mt-3">
                     <div class="col-12">
+                        <?php if ($id > 0): ?>
+                            <input type="hidden" name="agree" value="on" />
+                        <?php else: ?>
                         <div class="alert-primary text-center" >
                             <label>
                             <input type="checkbox" name="agree" value="on" required/>
                             <a href="">物件登録規約</a>に同意する</label>
                         </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -753,12 +760,20 @@
                     </div>
                 <?php else: ?>
                     <div class="col-4 mx-auto">
-                        <?= $this->Form->input("一時保存して終了",[
-                            "type"=>"submit",
-                            "value"=>"on",
-                            "name"=>"onetime",
-                            "class"=>"btn btn-secondary w-100 text-white"
-                        ]) ?>
+                        <?php if (!$id): ?>
+                            <?= $this->Form->input("一時保存して終了",[
+                                "type"=>"submit",
+                                "value"=>"on",
+                                "name"=>"onetime",
+                                "class"=>"btn btn-secondary w-100 text-white"
+                            ]) ?>
+                        <?php endif; ?>
+                        <?php if ($admin): ?>
+                            <?= $this->Html->link("一覧に戻る","/admin/users/build/",[
+                                "class"=>"btn btn-secondary w-100"
+                            ]) ?>
+
+                        <?php endif; ?>
                     </div>
                     <div class="col-4 mx-auto">
                         <?= $this->Form->input("入力内容を確認する",[

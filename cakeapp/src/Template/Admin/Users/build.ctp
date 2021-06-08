@@ -38,6 +38,32 @@
                             "value"=> $this->request->getData("name")
                         ])?>
                     </div>
+                    <div class="col-md-3">
+                        <?= $this->Form->control("企業名",[
+                            "type"=>"text",
+                            "name"=>"company",
+                            "class"=>"form-control",
+                            "value"=> $this->request->getData("company")
+                        ])?>
+                    </div>
+                    <div class="col-md-3">
+                        <?= $this->Form->control("会員氏名",[
+                            "type"=>"text",
+                            "name"=>"username",
+                            "class"=>"form-control",
+                            "value"=> $this->request->getData("username")
+                        ])?>
+                    </div>
+                    <div class="col-md-3">
+                        <label>物件ステータス</label>
+                        <?= $this->Form->select(
+                            "物件ステータス",
+                            $array_build_status
+                            ,[
+                                'empty'=>true,
+                                'class'=>"form-control"
+                            ])?>
+                    </div>
                 </div>
                 <div class="mt-3">
                 <?= $this->Form->submit("検索",[
@@ -56,36 +82,56 @@
             </ul>
         </div>
 
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm" style="width:2200px;">
           <thead>
             <tr>
-              <th>機能</th>
-              <th>登録者</th>
-              <th>メールアドレス</th>
-              <th>物件名</th>
-              <th>登録日</th>
+              <th><?= __("機能") ?></th>
+              <th><?= __("物件名") ?></th>
+              <th><?= __("企業名") ?></th>
+              <th><?= __("会員氏名") ?></th>
+              <th><?= __("メールアドレス") ?></th>
+              <th><?= __("所在地") ?></th>
+              <th><?= __("店舗面積") ?></th>
+              <th><?= __("物件<br />ステータス") ?></th>
+              <th><?= __("マッチング数") ?></th>
+              <th><?= __("物件登録日") ?></th>
+              <th><?= __("マッチング開始日") ?></th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($builds as $value): ?>
             <tr>
-              <td>
-                <a href="/admin/users/builddelete/<?= $value->id ?>" class="btn-sm btn-danger confirm"  >削除</a>
-                <a href="/admin/users/buildregist/<?= $value->id ?>" class="btn-sm btn-primary">編集</a>
-              </td>
-              <td>
-                <?= h($value->Users['sei']) ?>
-                <?= h($value->Users['mei']) ?>
-              </td>
-              <td>
-                <?= h($value->Users['email']) ?>
-              </td>
-              <td>
-                <?= h($value->name) ?>
-              </td>
-              <td>
-                <?= h(date("Y/m/d H:i:s",strtotime($value->created))) ?>
-              </td>
+                <td>
+                    <a href="/admin/users/builddelete/<?= $value->id ?>" class="btn-sm btn-danger confirm"  >削除</a>
+                    <a href="/admin/users/buildregist/<?= $value->id ?>" class="btn-sm btn-primary">編集</a>
+                </td>
+                <td><?= h($value->name )?></td>
+                <td><?= h($value->Users[ 'company' ] )?></td>
+                <td><?= h($value->Users[ 'sei' ] )?><?= h($value->Users[ 'mei' ] )?></td>
+                <td><?= h($value->Users[ 'email' ] )?></td>
+                <td>
+                    <?php if(isset($array_prefecture[$value->pref])): ?>
+                    <?= h($array_prefecture[$value->pref] )?>
+                    <?php endif; ?>
+                    <?= h($value->city )?>
+                </td>
+                <td><?= h(number_format($value->shop_area)) ?>坪</td>
+                <td>
+                <?php if(isset($array_tenant_status[$value->status]) ): ?>
+                    <?= h($array_tenant_status[$value->status]) ?>
+                <?php endif; ?>
+                </td>
+                <td>
+                    <?php if(isset($commentCount[ $value->id ][ 'cnt' ])): ?>
+                    <?= h($commentCount[ $value->id ][ 'cnt' ]) ?>
+                    <?php endif; ?>
+                </td>
+                <td><?= date("Y/m/d H:i:s",strtotime($value->created)) ?></td>
+                <td>
+                    <?php if(isset($commentCount[ $value->id ][ 'stdate' ])): ?>
+                    <?= $commentCount[ $value->id ][ 'stdate' ] ?>
+                    <?php endif; ?>
+                </td>
             </tr>
             <?php endforeach; ?>
           </tbody>
@@ -94,56 +140,3 @@
     </main>
   </div>
 </div>
-
-
-<?php /*
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="users index large-9 medium-8 columns content">
-    <h3><?= __('Users') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('username') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('role') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $this->Number->format($user->id) ?></td>
-                <td><?= h($user->username) ?></td>
-                <td><?= h($user->password) ?></td>
-                <td><?= h($user->role) ?></td>
-                <td><?= h($user->created) ?></td>
-                <td><?= h($user->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
-</div>
-*/?>

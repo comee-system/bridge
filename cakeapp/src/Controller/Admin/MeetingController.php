@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AppController;
 use Cake\Core\Configure;
 use RuntimeException;
+use Cake\Datasource\ConnectionManager;
+
 /**
  * Users Controller
  *
@@ -102,7 +104,6 @@ class MeetingController extends AppController
     public function detail($id = "",$sel = "")
     {
         $builds = $this->Builds->find()->contain(['users'])->where(['Builds.id'=>$id])->first();
-
         if($this->request->is('ajax')){
             //ステータスの変更
             $build = $this->Builds->find()->where(['id'=>$id])->first();
@@ -120,7 +121,13 @@ class MeetingController extends AppController
             }
             exit();
         }
-
+        //最新のコメント登録日
+        $firstdate = $this->Comments->find()
+            ->select(['created'])
+            ->where(['build_id'=>$id])
+            ->order(['created'=>'ASC'])
+            ->limit(1)
+            ->first();
         //物件コメント取得
         $buildcomment = $this->Comments->find()->where([
             'build_id'=>$builds['id'],
@@ -165,18 +172,73 @@ class MeetingController extends AppController
                 $tenantcomment[$key][ 'username' ]= $userlist[$value['Tenants']['user_id']]['name'];
             }
         }
+
+        //交渉中/交渉中止の数
+        $sql = "
+            SELECT
+                count(a.status) as cnt,
+                a.status
+            FROM (
+            SELECT
+                *
+            FROM
+                comments
+            WHERE
+                build_id= ${id} AND
+                tenant_id <> 0
+            GROUP BY tenant_id
+            ) as a
+            GROUP BY a.status
+        ";
+        $connection = ConnectionManager::get('default');
+        $negos = $connection->execute($sql)->fetchAll('assoc');
+        $nego = [];
+        foreach($negos as $k=>$value){
+            $nego[$value[ 'status' ]] = $value[ 'cnt' ];
+        }
         $this->set(compact('builds'));
         $this->set(compact('buildcomment'));
         $this->set(compact('tenantcomment'));
         $this->set("compnent",$this->password);
         $this->set("build_id",$id);
+        $this->set("firstdate",$firstdate);
+        $this->set("nego",$nego);
     }
     public function address($id = ""){
+
+        /*
         $tenants = $this->Tenants->find();
         $tenants = $tenants
             ->contain(['users'])
             ->order(["Tenants.id"=>"DESC"]);
-        $tenants = $this->paginate($tenants);
+            */
+        $tenant = $this->ViewTenants->find()->contain(['users']);
+        $tenant = $tenant->order(["ViewTenants.roomcount"=>"DESC"]);
+        if($this->request->getData("username")){
+            $tenant = $tenant->where([
+                "OR"=>[
+                "Users.sei LIKE "=>"%".$this->request->getData('username')."%",
+                "Users.mei LIKE "=>"%".$this->request->getData('username')."%"
+                ]
+            ]);
+        }
+        if($this->request->getData("company")){
+            $tenant = $tenant->where([
+                "Users.company LIKE "=>"%".$this->request->getData('company')."%"
+            ]);
+        }
+        if($this->request->getData("job")){
+            $tenant = $tenant->where(["ViewTenants.job " => $this->request->getData( 'job' )]);
+        }
+        if($this->request->getData("tenant")){
+            $tenant = $tenant->where(["ViewTenants.name LIKE " => "%".$this->request->getData( 'tenant' )."%"]);
+        }
+
+        $tenants = $this->paginate($tenant);
+
+        $tenant = $this->__setPref($tenant);
+        $tenant = $this->__setRentJp($tenant);
+
         //コメント情報取得
         $comment = $this->Comments->find();
         $comment = $comment
@@ -191,6 +253,28 @@ class MeetingController extends AppController
         $this->set("commentCount",self::_getCommentCount($comment));
 
     }
+    public function __setPref($dat){
+        $data = $dat->toArray();
+        foreach($data as $key=>$value){
+            $list = [];
+            $ex = explode(",",$value[ 'prefs' ]);
+            foreach($ex as $k=>$val){
+                if(isset($this->array_prefecture[$val])){
+                    $list[] = $this->array_prefecture[$val];
+                }
+            }
+            if($list) $data[$key]['prefline'] = implode(",",$list);
+        }
+      return $data;
+    }
+    public function __setRentJp($data){
+        foreach($data as $key=>$value){
+            $data[$key]['rent_money_min_jp'] = ($value[ 'rent_money_min' ]/10000)." 万円";
+            $data[$key]['rent_money_max_jp'] = ($value[ 'rent_money_max' ]/10000)." 万円";
+        }
+      return $data;
+    }
+
     public static function _getCommentCount($comment=[]){
         $list = [];
         if(count($comment) > 0 ){

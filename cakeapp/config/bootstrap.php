@@ -372,8 +372,8 @@ Configure::write("array_sub", [
         5=>"サブ5",
     ]);
 Configure::write("array_open",[
-    1=>"公開",
-    0=>"下書き"
+    1=>"公開中",
+    0=>"非公開"
 ]);
 Configure::write("array_comment_status",[
     1=>"admin",

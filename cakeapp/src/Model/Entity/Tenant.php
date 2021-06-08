@@ -61,5 +61,6 @@ class Tenant extends Entity
         'user' => true,
         'tenant_hope' => true,
         'tenant_job' => true,
+        'other' => true,
     ];
 }

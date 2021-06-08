@@ -35,11 +35,15 @@
                             <th>店舗面積</th>
                             <th>ステータス</th>
                             <th>物件登録日</th>
-                            <th>募集開始日</th>
+                            <th>マッチング開始日</th>
                         </tr>
                         <tr>
                             <td><?= h($builds->Users['company']) ?></td>
-                            <td><?= h($array_prefecture[$builds->pref]) ?></td>
+                            <td>
+                                <?php if(isset($array_prefecture[$builds->pref])): ?>
+                                <?= h($array_prefecture[$builds->pref]) ?>
+                                <?php endif; ?>
+                            </td>
                             <td><?= h($builds->shop_area) ?>坪</td>
                             <td>
                                 <?= $this->Form->select('build_status',$array_status,[
@@ -49,7 +53,11 @@
 
                             </td>
                             <td><?= h(date("Y/m/d",strtotime($builds->created))) ?></td>
-                            <td><?= h(date("Y/m/d",strtotime($builds->start))) ?></td>
+                            <td>
+                                <?php if(isset($firstdate->created)): ?>
+                                <?= h(date("Y/m/d",strtotime($firstdate->created))) ?>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -57,7 +65,7 @@
             </div>
         </div>
         <div class="text-right">
-                <a href="/admin/meeting/room/build/<?=$build_id?>" class="btn btn-success text-white">担当者商談ルーム</a>
+            <a href="/admin/meeting/room/build/<?=$build_id?>" class="btn btn-success text-white">物件登録者商談ルーム</a>
         </div>
         <?php if(empty($buildcomment)):?>
             <div class="card mb-4 mt-2 shadow-sm">
@@ -77,9 +85,12 @@
             <div class="card mb-4 mt-2 shadow-sm">
                 <div class="card-body">
                     <div class="row">
+                        <h6>
+                            <?= h($builds->Users[ 'company' ]) ?>
+                        </h6>
                         <h5>
-                        <?= h($builds->Users[ 'sei' ])?>
-                        <?= h($builds->Users[ 'mei' ])?>
+                            <?= h($builds->Users[ 'sei' ])?>
+                            <?= h($builds->Users[ 'mei' ])?>
                         </h5>
                         <div class="col-md-2">
                             <?php if($buildcomment->readflag == 1):?>
@@ -106,9 +117,19 @@
         <hr size=2 />
         <div class="row mb-3">
             <div class="col-md-6">
-                <h5>宛先一覧</h5>
+                <h5>管理者⇔テナント登録者</h5>
             </div>
             <div class="col-md-6 text-right">
+                <p>交渉中：
+                    <?php if(isset($nego[5]) ): ?>
+                    <?= $nego[5] ?>
+                    <?php endif; ?>
+                件　交渉中止：
+                    <?php if(isset($nego[6]) ): ?>
+                    <?= $nego[6] ?>
+                    <?php endif; ?>
+                件</p>
+
                 <a href="/admin/meeting/address/<?= h($builds->id) ?>" class="btn btn-primary text-white">新規メッセージ</a>
             </div>
         </div>

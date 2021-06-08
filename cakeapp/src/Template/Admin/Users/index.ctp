@@ -46,6 +46,20 @@
                             "value"=>$this->request->getData("company")
                         ])?>
                     </div>
+                    <div class="col-md-3">
+                        <label>会員ステータス</label>
+                        <?= $this->Form->select("agree",$array_agreement_status,[
+                            "empty"=>true,
+                            "class"=>"form-control",
+                        ])?>
+                    </div>
+                    <div class="col-md-3">
+                        <label>業種</label>
+                        <?= $this->Form->select("job",$array_job,[
+                            "empty"=>true,
+                            "class"=>"form-control",
+                        ])?>
+                    </div>
                 </div>
                 <div class="mt-3">
                 <?= $this->Form->submit("検索",[
@@ -66,29 +80,39 @@
 
         <table class="table table-striped table-sm">
           <thead>
-            <tr>
+            <tr class="text-center">
               <th><?= __("機能") ?></th>
-              <th><?= __("名前") ?></th>
+              <th><?= __("会員氏名") ?></th>
               <th><?= __("メールアドレス") ?></th>
-              <th><?= __("企業") ?></th>
-              <th><?= __("ステータス") ?></th>
+              <th><?= __("企業名") ?></th>
+              <th nowrap><?= __("業種") ?></th>
+              <th nowrap><?= __("会員<br />ステータス") ?></th>
               <th><?= __("権限") ?></th>
               <th><?= __("登録日") ?></th>
+              <th><?= __("更新日") ?></th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($users as $user): ?>
             <tr>
               <td style="width:120px;">
+              <!--
                 <a href="/admin/users/delete/<?= $user->id ?>" class="btn-sm btn-danger confirm"  >削除</a>
+              -->
                 <a href="/admin/users/edit/<?= $user->id ?>" class="btn-sm btn-primary">編集</a>
               </td>
               <td><?= h($user->sei) ?><?= h($user->mei) ?></td>
               <td><?= h($user->email) ?></td>
               <td><?= h($user->company) ?></td>
+              <td>
+                <?php if(!empty($array_job[$user->job])):?>
+                <?= h($array_job[$user->job]) ?>
+                <?php endif; ?>
+              </td>
               <td><?= h($array_agreement_status[$user->agree]) ?></td>
               <td><?= h($array_role[$user->role]) ?></td>
               <td><?= h(date("Y/m/d H:i:s",strtotime($user->created))) ?></td>
+              <td><?= h(date("Y/m/d H:i:s",strtotime($user->modified))) ?></td>
             </tr>
             <?php endforeach; ?>
           </tbody>
@@ -98,55 +122,3 @@
   </div>
 </div>
 
-
-<?php /*
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="users index large-9 medium-8 columns content">
-    <h3><?= __('Users') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('username') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('role') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= $this->Number->format($user->id) ?></td>
-                <td><?= h($user->username) ?></td>
-                <td><?= h($user->password) ?></td>
-                <td><?= h($user->role) ?></td>
-                <td><?= h($user->created) ?></td>
-                <td><?= h($user->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
-</div>
-*/?>

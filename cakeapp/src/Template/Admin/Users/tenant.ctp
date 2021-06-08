@@ -38,6 +38,29 @@
                             "value"=>$this->request->getData("tenantname")
                         ])?>
                     </div>
+                    <div class="col-md-3">
+                        <?= $this->Form->control("企業名",[
+                            "type"=>"text",
+                            "name"=>"company",
+                            "class"=>"form-control",
+                            "value"=>$this->request->getData("company")
+                        ])?>
+                    </div>
+                    <div class="col-md-3">
+                        <label><?= __("業種") ?></label>
+                        <?= $this->Form->select("job",$array_job,[
+                            "class"=>"form-control",
+                            "empty"=>true
+                        ])?>
+                    </div>
+                    <div class="col-md-3">
+                        <?= $this->Form->control("会員氏名",[
+                            "type"=>"text",
+                            "name"=>"username",
+                            "class"=>"form-control",
+                            "value"=>$this->request->getData("username")
+                        ])?>
+                    </div>
                 </div>
                 <div class="mt-3">
                 <?= $this->Form->submit("検索",[
@@ -56,42 +79,55 @@
             </ul>
         </div>
 
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm" style="width:2000px;">
           <thead>
             <tr>
-              <th>機能</th>
-              <th>氏名</th>
-              <th>企業名</th>
-              <th>業種</th>
-              <th>テナント名</th>
-              <th>登録日</th>
+              <th><?= __("機能") ?></th>
+              <th><?= __("テナント名") ?></th>
+              <th><?= __("企業名") ?></th>
+              <th><?= __("業種") ?></th>
+              <th><?= __("会員氏名") ?></th>
+              <th><?= __("希望地") ?></th>
+              <th><?= __("商談ルーム数") ?></th>
+              <th><?= __("坪数") ?></th>
+              <th><?= __("賃料") ?></th>
+              <th><?= __("登録日") ?></th>
+              <th><?= __("更新日") ?></th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($tenant as $value): ?>
+            <?php foreach ($tenant as $value):?>
             <tr>
               <td>
                 <a href="/admin/users/tenantdelete/<?= $value->id ?>" class="btn-sm btn-danger confirm"  >削除</a>
                 <a href="/admin/users/tenantedit/<?= $value->id ?>" class="btn-sm btn-primary">編集</a>
               </td>
-              <td>
-                <?= h($value->Users['sei']) ?>
-                <?= h($value->Users['mei']) ?>
-              </td>
-              <td>
-                <?= h($value->Users['company']) ?>
-              </td>
+              <td><?= h($value->name) ?></td>
+              <td><?= h($value->Users['company']) ?></td>
               <td>
                 <?php if(!empty($array_job[$value->job])): ?>
                 <?= h($array_job[$value->job]) ?>
                 <?php endif; ?>
               </td>
               <td>
-                <?= h($value->name) ?>
+                <?= h($value->Users['sei']) ?>
+                <?= h($value->Users['mei']) ?>
+              </td>
+              <td><?= h($value->prefline)?></td>
+              <td><?= h($value->roomcount)?></td>
+              <td>
+                <?= h(number_format($value->min_floor))?><small><?= __("坪") ?>～</small>
+                <?= h(number_format($value->max_floor))?><small><?= __("坪") ?></small>
               </td>
               <td>
-                <?= h(date("Y/m/d H:i:s",strtotime($value->created))) ?>
+                <?= h(number_format($value->rent_money_min))?><small><?= __("円") ?>～</small>
+                <?= h(number_format($value->rent_money_max))?><small><?= __("円") ?></small>
               </td>
+
+
+                <td><?= h(date("Y/m/d H:i:s",strtotime($value->created))) ?></td>
+                <td><?= h(date("Y/m/d H:i:s",strtotime($value->modified))) ?></td>
+
             </tr>
             <?php endforeach; ?>
           </tbody>

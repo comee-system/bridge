@@ -53,7 +53,9 @@
                 <div class="col-8">
                     <label>第1希望</label>
                     <?php if ($type == "conf"):?>
+                        <?php if(!empty($array_prefecture[$this->request->getData('pref')[1]])):?>
                         <?= h($array_prefecture[$this->request->getData('pref')[1]]) ?>
+                        <?php endif; ?>
                         <?= $this->Form->hidden("pref[1]",[
                             "value"=>$this->request->getData("pref")[1]
                         ])?>
@@ -74,7 +76,9 @@
                     <?php endif; ?>
                     <label class="mt-3">第2希望</label>
                     <?php if ($type == "conf"):?>
+                        <?php if(!empty($array_prefecture[$this->request->getData('pref')[2]])):?>
                         <?= h($array_prefecture[$this->request->getData('pref')[2]]) ?>
+                        <?php endif; ?>
                         <?= $this->Form->hidden("pref[2]",[
                             "value"=>$this->request->getData("pref")[2]
                         ])?>
@@ -89,7 +93,9 @@
 
                     <label class="mt-3">第3希望</label>
                     <?php if ($type == "conf"):?>
+                        <?php if(!empty($array_prefecture[$this->request->getData('pref')[3]])):?>
                         <?= h($array_prefecture[$this->request->getData('pref')[3]]) ?>
+                        <?php endif; ?>
                         <?= $this->Form->hidden("pref[3]",[
                             "value"=>$this->request->getData("pref")[3]
                         ])?>
@@ -339,9 +345,37 @@
                     <?php endif; ?>
                 </div>
             </div>
-
-
+            <div class="row mt-2">
+                <div class="col-3"><?= __("その他要望事項") ?></div>
+                <div class="col-1">
+                <span class="badge badge-secondary"><?= __("任意") ?></span>
+                </div>
+                <div class="col-8 ">
+                <?php if($type == "conf"): ?>
+                    <?= nl2br(h($this->request->getData("other"))) ?>
+                    <?= $this->Form->hidden("other",[
+                        'value'=>$this->request->getData("other")
+                    ])?>
+                <?php else: ?>
+                    <?php
+                        $other = "";
+                        if($this->request->getData( 'other' )){
+                            $other = $this->request->getData("other");
+                        } else {
+                            if(isset($tenant[ 'other' ]) && $tenant[ 'other' ]) $other = $tenant["other"];
+                        }
+                    ?>
+                    <?= $this->Form->textarea("other",[
+                        "class"=>"form-control w-100",
+                        "value"=>$other
+                    ])?>
+                <?php endif;?>
+                </div>
+            </div>
             <?php if(isset($role) && $role == "admin"): ?>
+
+
+
                 <?= $this->Form->hidden("agree",[
                     "value"=>1
                 ])?>

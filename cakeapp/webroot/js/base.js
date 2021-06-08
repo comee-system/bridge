@@ -1,4 +1,13 @@
 $(function () {
+    $("#sample2check").click(function(){
+        var _chk = $("#sample2check").prop("checked");
+        if(_chk){
+            $("#openText").text("公開中");
+        }else{
+            $("#openText").text("非公開");
+        }
+        return true;
+    });
     $(".confirm").click(function(){
         if(confirm("削除しますよろしいですか？")){
             return true;

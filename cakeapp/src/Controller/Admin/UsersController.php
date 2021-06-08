@@ -17,7 +17,7 @@ class UsersController extends AppController
 {
 
     public $paginate = [
-        'limit' => 30,
+        'limit' => 16,
     ];
     public function initialize()
     {
@@ -26,6 +26,7 @@ class UsersController extends AppController
       $this->loadModel("TenantJob");
       $this->loadModel("TenantHope");
       $this->loadModel("Builds");
+      $this->loadModel("Comments");
 
       $this->mailsend = $this->loadComponent('MailSend');
 
@@ -54,6 +55,7 @@ class UsersController extends AppController
       $array_open = Configure::read('array_open');
       $array_build_status = Configure::read('array_build_status');
       $array_agreement_status = Configure::read('array_agreement_status');
+      $array_tenant_status = Configure::read('array_tenant_status');
       $array_role = Configure::read('array_role');
       $this->set("array_status",$array_status);
       $this->set("array_prefecture",$array_prefecture);
@@ -71,6 +73,7 @@ class UsersController extends AppController
       $this->set("array_build_status",$array_build_status);
       $this->set("array_agreement_status",$array_agreement_status);
       $this->set("array_role",$array_role);
+      $this->set("array_tenant_status",$array_tenant_status);
       $this->set("editflag",true);
 
       //レイアウトの指定
@@ -99,7 +102,17 @@ class UsersController extends AppController
                 'company  LIKE '=>'%'.$this->request->getData( 'company' ).'%'
             ]);
         }
-
+        if($this->request->getData('agree')){
+            $query = $query->where([
+                'agree'=>$this->request->getData( 'agree' )
+            ]);
+        }
+        if($this->request->getData('job')){
+            $query = $query->where([
+                'job'=>$this->request->getData( 'job' )
+            ]);
+        }
+        $query = $query->order(["role"=>"is null ASC","agree"=>"is null ASC","modified"=>"ASC"]);
         $users = $this->paginate($query);
 
         $this->set(compact('users'));
@@ -428,13 +441,29 @@ class UsersController extends AppController
         if($this->request->getData("tenantname")){
             $tenant = $tenant->where(["name LIKE " => "%".$this->request->getData( 'tenantname' )."%"]);
         }
+        if($this->request->getData("company")){
+            $tenant = $tenant->where(["Users.company LIKE " => "%".$this->request->getData( 'company' )."%"]);
+        }
+        if($this->request->getData("username")){
+            $tenant = $tenant->where( ["OR"=>
+                [
+                    "Users.sei LIKE " => "%".$this->request->getData( 'username' )."%",
+                    "Users.mei LIKE " => "%".$this->request->getData( 'username' )."%"
+                ]
+            ]);
+        }
+        if($this->request->getData("job")){
+            $tenant = $tenant->where(["ViewTenants.job " => $this->request->getData( 'job' )]);
+        }
 
-        $tenant = $tenant->order(['ViewTenants.id'=>'desc']);
+        $tenant = $tenant->order([
+            'ViewTenants.roomcount'=>'desc',
+            'ViewTenants.created'=>'desc'
+        ]);
         $tenant = $this->paginate($tenant);
 
         $tenant = $this->__setPref($tenant);
         $tenant = $this->__setRentJp($tenant);
-
         $this->set(compact('tenant'));
         $this->set("compnent",$this->password);
     }
@@ -509,20 +538,23 @@ class UsersController extends AppController
                             $this->TenantJob->deleteAll(['tenant_id'=>$tenant->id]);
                         }
                         foreach($this->request->getData("pref") as $key=>$value){
-                            $TenantHope = $this->TenantHope->newEntity();
-                            $TenantHope->pref = $key;
-                            $TenantHope->tenant_id = $tenant->id;
-                            $this->TenantHope->save($TenantHope);
-                        }
-                        foreach($this->request->getData("jobtype") as $key=>$value){
-                            foreach($value as $k=>$val){
-                                $TenantJob = $this->TenantJob->newEntity();
-                                $TenantJob->jobtype = $k;
-                                $TenantJob->tenant_id = $tenant->id;
-                                $this->TenantJob->save($TenantJob);
+                            if($value > 0){
+                                $TenantHope = $this->TenantHope->newEntity();
+                                $TenantHope->pref = $value;
+                                $TenantHope->tenant_id = $tenant->id;
+                                $this->TenantHope->save($TenantHope);
                             }
                         }
-
+                        if(!empty($this->request->getData("jobtype"))){
+                            foreach($this->request->getData("jobtype") as $key=>$value){
+                                foreach($value as $k=>$val){
+                                    $TenantJob = $this->TenantJob->newEntity();
+                                    $TenantJob->jobtype = $k;
+                                    $TenantJob->tenant_id = $tenant->id;
+                                    $this->TenantJob->save($TenantJob);
+                                }
+                            }
+                        }
                         //usersのimportを0にする
                         $user = $this->Users->get($this->Auth->user('id'));
                         $set = [];
@@ -576,16 +608,60 @@ class UsersController extends AppController
 
 
     public function build(){
+        $sql = "
+            SELECT
+                build_id,
+                count(build_id) as cnt,
+                max(created) as stdate
+            FROM (
+                SELECT
+                    *
+                FROM
+                    comments
+                WHERE
+                    tenant_id != 0
+                GROUP BY tenant_id,build_id
+            ) as a
+            GROUP BY build_id
+            ";
+        $connection = ConnectionManager::get('default');
+        $commentCounts = $connection->execute($sql)->fetchAll('assoc');
+        $commentCount = [];
+        foreach($commentCounts as $key=>$value){
+            $commentCount[$value['build_id']][ 'cnt' ] = $value[ 'cnt' ];
+            $commentCount[$value['build_id']][ 'stdate' ] = $value[ 'stdate' ];
+        }
         $user = $this->Auth->user();
-        $builds = $this->Builds->find()->contain(['users']);
+        $builds = $this->Builds->find("all",[
+            "order"=>[
+                "FIELD(Builds.status,1,6,5,0)",
+                "Builds.start DESC",
+                "Builds.created DESC ",
+            ]
+        ])->contain(['users']);
         if($this->request->getData("name")){
             $builds = $builds->where([
-                "name LIKE "=>"%".$this->request->getData('name')."%"
+                "Builds.name  LIKE "=>"%".$this->request->getData('name')."%"
+            ]);
+        }
+        if($this->request->getData("company")){
+            $builds = $builds->where([
+                "Users.company LIKE "=>"%".$this->request->getData('company')."%"
+            ]);
+        }
+        if($this->request->getData("username")){
+            $builds = $builds->where([
+                "OR"=>[
+                "Users.sei LIKE "=>"%".$this->request->getData('username')."%",
+                "Users.mei LIKE "=>"%".$this->request->getData('username')."%"
+                ]
             ]);
         }
         $builds = $this->paginate($builds);
 
+
         $this->set(compact('builds'));
+        $this->set("commentCount",$commentCount);
         $this->set("compnent",$this->password);
 
     }
