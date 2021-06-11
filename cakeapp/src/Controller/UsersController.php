@@ -89,7 +89,7 @@ class UsersController extends AppController
     public function add()
     {
         if (!empty($this->Auth->user())) {
-            return $this->redirect("/");
+            return $this->redirect("/mypage/");
         }
 
         $columns = $this->Users->schema()->columns ();
