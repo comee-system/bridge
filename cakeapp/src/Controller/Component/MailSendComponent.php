@@ -127,7 +127,7 @@ class MailSendComponent extends Component
             ->template('question')
             ->emailFormat('text')
             ->to($mail)
-//            ->setBcc(D_ADMIN_MAIL)
+            ->setBcc(D_ADMIN_MAIL)
             ->from(D_ADMIN_MAIL)
             ->subject("【Bridge】お問い合わせフォーム")
             ->viewVars([
