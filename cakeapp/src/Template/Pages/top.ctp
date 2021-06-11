@@ -59,7 +59,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         <section class="mb-5 mt-5">
         <div class="row">
             <div class="col-6 text-center">
-                <a href="/user/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
+                <a href="/users/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
             </div>
             <div class="col-6 text-center">
                 <a href="/questions" class="btn btn-warning text-white w-100">お問い合わせ</a>
@@ -76,7 +76,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         <section class="mb-5 mt-5">
             <div class="row">
                 <div class="col-6 text-center">
-                    <a href="/user/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
+                    <a href="/users/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
                 </div>
                 <div class="col-6 text-center">
                     <a href="/questions" class="btn btn-warning text-white w-100">お問い合わせ</a>
@@ -94,7 +94,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         <section class="mb-5 mt-5">
             <div class="row">
                 <div class="col-6 text-center mx-auto">
-                    <a href="/user/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
+                    <a href="/users/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
                 </div>
             </div>
         </section>
