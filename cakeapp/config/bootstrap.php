@@ -306,9 +306,8 @@ Configure::write("array_shop", [
 Configure::write("array_agreement", [
         1=>"事業用定期建物契約",
         2=>"普通賃貸借契約",
-        3=>"定期賃貸借契約",
-        4=>"転貸借契約",
-        5=>"その他",
+        3=>"転貸借契約",
+        4=>"その他",
     ]);
 Configure::write("array_build", [
         1=>"アパート",

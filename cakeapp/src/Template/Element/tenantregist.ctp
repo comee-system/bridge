@@ -170,7 +170,7 @@
                             </div>
                         </div>
                     </div>
-                    <small>一坪は訳3.31平米です。</small>
+                    <small>一坪は約3.31平米です。</small>
                         <?php if(!empty($error[ 'floor' ][ "_empty" ])): ?>
                             <br /><small class="text-danger"><?= h($error[ 'floor' ]["_empty"]) ?></small>
                         <?php endif; ?>
