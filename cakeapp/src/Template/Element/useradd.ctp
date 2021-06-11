@@ -211,9 +211,7 @@
                             <?= $this->Form->checkbox("agree",[
                                 'required'=>true
                             ])?>
-                            <a href="/pdf/termofuse.pdf" target=_blank class="alert-link">利用規約</a>、
-                            <a href="/pdf/person.pdf" target=_blank class="alert-link">個人情報保護方針</a>、
-                            <a href="/pdf/secret.pdf" target=_blank class="alert-link">機密保持契約</a>
+                            <a href="/pdf/termofuse.pdf" target=_blank class="alert-link">利用規約</a>
                             に同意する
                         </div>
                     <?php else: ?>

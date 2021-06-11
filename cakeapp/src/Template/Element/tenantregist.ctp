@@ -390,7 +390,7 @@
                         <div class="alert-primary text-center" >
                             <label>
                             <input type="checkbox" name="agree" value="on" />
-                            テナント<a href="#" target=_blank>登録規約</a>に同意する</label>
+                            テナント<a href="/pdf/tenantpolicy.pdf" target=_blank>登録規約</a>に同意する</label>
                         </div>
                         <?php if(!empty($error[ "agree" ][ "_required" ])): ?>
                             <small class="text-danger"><?= h($error[ "agree" ]["_required"]) ?></small>

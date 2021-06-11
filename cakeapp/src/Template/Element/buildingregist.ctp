@@ -666,7 +666,13 @@
                             <label for="sample2check">
                                 <div id="sample2box"></div>
                             </label>
-                            <span class="ml-2 position-absolute" id="openText" style="top:4px;left:120px;"><?= h($array_open[$open]) ?></span>
+                                <span class="ml-2 position-absolute" id="openText" style="top:4px;left:120px;">
+                                <?php if($open): ?>
+                                <?= h($array_open[$open]) ?>
+                                <?php else: ?>
+                                    <?= h($array_open[0]) ?>
+                                <?php endif; ?>
+                                </span>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -730,7 +736,7 @@
                         <div class="alert-primary text-center" >
                             <label>
                             <input type="checkbox" name="agree" value="on" required/>
-                            <a href="">物件登録規約</a>に同意する</label>
+                            <a href="/pdf/buildpolicy.pdf" target=_blank >物件登録規約</a>に同意する</label>
                         </div>
                         <?php endif; ?>
                     </div>
