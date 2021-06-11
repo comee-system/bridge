@@ -2,6 +2,8 @@
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
+use Cake\Core\Configure;
+
 
 /**
  * Question Controller
@@ -24,6 +26,8 @@ class QuestionController extends AppController
         parent::initialize();
         $this->loadModel("Questions");
         $this->viewBuilder()->setLayout('Admin/default');
+        $this->array_prefecture = Configure::read("array_prefecture");
+        $this->set('array_prefecture', $this->array_prefecture);
     }
     public function index()
     {
@@ -51,8 +55,8 @@ class QuestionController extends AppController
         $question = $this->Questions->get($id, [
             'contain' => [],
         ]);
-
         $this->set('question', $question);
+      //  $this->set(compact('questions'));
     }
     /**
      * Delete method

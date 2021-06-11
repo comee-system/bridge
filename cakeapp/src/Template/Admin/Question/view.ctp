@@ -29,9 +29,22 @@
                 </td>
             </tr>
             <tr>
+                <th><?= __("かな") ?></th>
+                <td>
+                    <?= h($question->sei_kana) ?>
+                    <?= h($question->mei_kana) ?>
+                </td>
+            </tr>
+            <tr>
                 <th><?= __("企業名") ?></th>
                 <td>
                     <?= h($question->campany) ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?= __("部署") ?></th>
+                <td>
+                    <?= h($question->busyo) ?>
                 </td>
             </tr>
             <tr>
@@ -44,6 +57,16 @@
                 <th><?= __("電話番号") ?></th>
                 <td>
                     <?= h($question->tel) ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?= __("住所") ?></th>
+                <td>
+                    <?= h($question->zip) ?><br />
+                    <?php if(!empty( $array_prefecture[$question->pref] )): ?>
+                    <?= h($array_prefecture[$question->pref]) ?>
+                    <?php endif; ?>
+                    <?= h($question->address) ?>
                 </td>
             </tr>
             <tr>
