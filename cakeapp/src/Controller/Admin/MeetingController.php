@@ -196,7 +196,6 @@ class MeetingController extends AppController
         foreach($negos as $k=>$value){
             $nego[$value[ 'status' ]] = $value[ 'cnt' ];
         }
-        var_dump($nego);
         $this->set(compact('builds'));
         $this->set(compact('buildcomment'));
         $this->set(compact('tenantcomment'));

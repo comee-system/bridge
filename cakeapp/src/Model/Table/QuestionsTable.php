@@ -62,13 +62,24 @@ class QuestionsTable extends Table
             ->maxLength('mei', 255)
             ->requirePresence('mei', 'create')
             ->notEmptyString('mei',__("名を入力してください。"));
+        $validator
+            ->scalar('sei_kana')
+            ->maxLength('sei', 255)
+            ->requirePresence('sei', 'create')
+            ->notEmptyString('sei',__("姓(かな)を入力してください。"));
 
+        $validator
+            ->scalar('mei_kana')
+            ->maxLength('mei', 255)
+            ->requirePresence('mei', 'create')
+            ->notEmptyString('mei',__("名(かな)を入力してください。"));
+/*
         $validator
             ->scalar('campany')
             ->maxLength('campany', 255)
             ->requirePresence('campany', 'create')
             ->notEmptyString('campany',__("企業名を入力してください。"));
-
+*/
         $validator
             ->scalar('mail')
             ->maxLength('mail', 255)

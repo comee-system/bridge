@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\Core\Configure;
+
 /**
  * Questions Controller
  *
@@ -18,12 +20,15 @@ class QuestionsController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public $components = ["Mailsend"];
+    public $components = ["MailSend"];
     public $questions = [];
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
         $this->loadModel("Users");
+        $this->array_prefecture = Configure::read("array_prefecture");
+        $this->set('array_prefecture', $this->array_prefecture);
+
         $this->mailsend = $this->loadComponent('MailSend');
         $this->Auth->allow(['index','conf','fin']);
         $this->user = $this->Auth->user();
@@ -40,7 +45,7 @@ class QuestionsController extends AppController
                 $question = $this->Questions->patchEntity($question, $this->request->getData());
                 if(!$question->hasErrors()){
                     if ($this->Questions->save($question)) {
-                        $this->mailsend->setQuestionMail($this->request->getData());
+                        $this->mailsend->setQuestionMail($this->request->getData(),$this->array_prefecture);
                         return $this->redirect(['action' => 'fin']);
                     }
                 }

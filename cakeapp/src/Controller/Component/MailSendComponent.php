@@ -121,18 +121,23 @@ class MailSendComponent extends Component
             ])
             ->send();
     }
-    public function setQuestionMail($request){
+    public function setQuestionMail($request,$array_prefecture){
         $mail = $request['mail'];
         $this->email
             ->template('question')
             ->emailFormat('text')
             ->to($mail)
+//            ->setBcc(D_ADMIN_MAIL)
             ->from(D_ADMIN_MAIL)
-            ->subject("【Bridge】会員仮登録のお知らせ")
+            ->subject("【Bridge】お問い合わせフォーム")
             ->viewVars([
                 'name' => $request[ 'sei' ].$request[ 'mei' ],
+                'kana' => $request[ 'sei_kana' ].$request[ 'mei_kana' ],
                 'campany' => $request['campany'],
+                'busyo' => $request['busyo'],
                 'mail' => $request['mail'],
+                'zip' => $request['zip'],
+                'address' => $array_prefecture[$request['pref']].$request['address'],
                 'tel' => $request['tel'],
                 'note' => $request['note'],
             ])

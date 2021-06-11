@@ -21,8 +21,38 @@
                         'url' => ['controller' => 'Questions', 'action' => 'conf'],
                     ]);?>
                         <div class="row">
+                            <div class="col-md-12">
+                                <label><?= __("会社名") ?></label>
+                                <?php
+                                    $param = [
+                                        "type"=>"text",
+                                        "label"=>false,
+                                        "class"=>"form-control",
+                                    ];
+                                    if(!empty($campany)) $param['value'] = $campany;
+                                ?>
+                                <?= $this->Form->control("campany",$param);?>
+                                <small class="text-primary"><?= __("※個人の方は入力不要です") ?></small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label><?= __("部署") ?></label>
+                                <?php
+                                    $param = [
+                                        "type"=>"text",
+                                        "label"=>false,
+                                        "class"=>"form-control",
+                                    ];
+                                    if(!empty($busyo)) $param['value'] = $busyo;
+                                ?>
+                                <?= $this->Form->control("busyo",$param);?>
+                                <small class="text-primary"><?= __("※個人の方は入力不要です") ?></small>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-5">
-                            <label>姓</label>
+                            <label><?= __("姓") ?></label>
                             <span class="badge badge-danger"><?= __("必須") ?></span>
                             <?php
                                 $param = [
@@ -35,7 +65,7 @@
                             <?= $this->Form->control("sei",$param);?>
                             </div>
                             <div class="col-md-5">
-                            <label>名</label>
+                            <label><?= __("名") ?></label>
                             <?php
                                 $param = [
                                     "type"=>"text",
@@ -54,33 +84,47 @@
                                 <span class="text-danger"><?= $question->getErrors()[ 'mei' ][ '_empty' ] ?></span>
                                 <?php endif; ?>
                             </div>
-
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12">
-                            <label>企業名</label>
+                        <div class="row">
+                            <div class="col-md-5">
+                            <label><?= __("姓(かな)") ?></label>
                             <span class="badge badge-danger"><?= __("必須") ?></span>
-
                             <?php
                                 $param = [
                                     "type"=>"text",
                                     "label"=>false,
                                     "class"=>"form-control",
                                 ];
-                                if(!empty($campany)) $param['value'] = $campany;
+                                if(!empty($sei_kana)) $param['value'] = $sei_kana;
                             ?>
-                            <?= $this->Form->control("campany",$param);?>
-
+                            <?= $this->Form->control("sei_kana",$param);?>
+                            </div>
+                            <div class="col-md-5">
+                            <label>名(かな)</label>
+                            <?php
+                                $param = [
+                                    "type"=>"text",
+                                    "label"=>false,
+                                    "class"=>"form-control",
+                                ];
+                                if(!empty($mei_kana)) $param['value'] = $mei_kana;
+                            ?>
+                            <?= $this->Form->control("mei_kana",$param);?>
                             </div>
                             <div class="col-md-12">
-                                <?php if(!empty($question->getErrors()[ 'campany' ][ '_empty' ])): ?>
-                                <span class="text-danger"><?= $question->getErrors()[ 'campany' ][ '_empty' ] ?></span>
+                                <?php if(!empty($question->getErrors()[ 'sei_kana' ][ '_empty' ])): ?>
+                                <span class="text-danger"><?= $question->getErrors()[ 'sei_kana' ][ '_empty' ] ?></span>
+                                <?php endif; ?>
+                                <?php if(!empty($question->getErrors()[ 'mei_kana' ][ '_empty' ])): ?>
+                                <span class="text-danger"><?= $question->getErrors()[ 'mei_kana' ][ '_empty' ] ?></span>
                                 <?php endif; ?>
                             </div>
                         </div>
+
+
                         <div class="row mt-2">
                             <div class="col-md-12">
-                            <label>メールアドレス</label>
+                            <label><?= __("メールアドレス") ?></label>
                             <span class="badge badge-danger"><?= __("必須") ?></span>
 
                             <?php
@@ -102,7 +146,7 @@
                         </div>
                         <div class="row mt-2">
                             <div class="col-md-12">
-                            <label>電話番号</label>
+                            <label><?= __("電話番号") ?></label>
                             <span class="badge badge-danger"><?= __("必須") ?></span>
 
                             <?php
@@ -122,6 +166,51 @@
                                 <?php endif; ?>
                             </div>
                         </div>
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                            <label><?= __("郵便番号") ?></label>
+                            <?php
+                                $param = [
+                                    "type"=>"text",
+                                    "label"=>false,
+                                    "class"=>"form-control",
+                                    "onKeyUp"=>"AjaxZip3.zip2addr(this,'','pref','address');"
+                                ];
+                                if(!empty($zip)) $param['value'] = $zip;
+                            ?>
+                            <?= $this->Form->control("zip",$param);?>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                            <label><?= __("都道府県") ?></label>
+                            <?php
+                                $param = [
+                                    "label"=>false,
+                                    "class"=>"form-control",
+                                ];
+                                if(!empty($pref)) $param['value'] = $pref;
+                            ?>
+                            <?= $this->Form->select("pref",$array_prefecture,$param);?>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                            <label><?= __("市区町村・番地") ?></label>
+                            <?php
+                                $param = [
+                                    "type"=>"text",
+                                    "label"=>false,
+                                    "class"=>"form-control",
+                                ];
+                                if(!empty($address)) $param['value'] = $address;
+                            ?>
+                            <?= $this->Form->control("address",$param);?>
+                            </div>
+                        </div>
+
+
+
                         <div class="row mt-2">
                             <div class="col-md-12">
                             <label>問合せ内容</label>
@@ -160,3 +249,4 @@
     </section>
   </div>
 </main>
+<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>

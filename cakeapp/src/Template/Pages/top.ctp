@@ -31,51 +31,77 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 ?>
 
 <main>
-<!----------------------------------------------->
-  <div class="container">
-    <div class="jumbotron_top mt-4">
-        <div class="toptext mt-md-3">
-            <h1 class="font-weight-bold text-white text-shadow">Hello World</h1>
-            <p class="text-white text-shadow font-weight-bold  title">注目のコンテンツや情報に特別な注意を喚起するためのシンプルなコンポーネント。</p>
-            <div class="text-right mt-3">
-            <a class="btn btn-warning btn-lg text-white font-weight-bold" href="/users/add" role="button">まずは無料登録</a>
+    <!----------------------------------------------->
+    <div class="container">
+        <div class="position-relative">
+            <div class="toptext mt-md-3">
+            </div>
+
+            <img src="./img/top1.png" class="w-100" />
+            <div class="topTextArea position-absolute">
+                <div class="row">
+                    <div class="col-md-8 col-12">
+                        <h4 class=" bg-danger text-white text-center">店舗開発者限定</h4>
+                    </div>
+                    <div class="col-md-4 mt-2 col-12">
+                        <a href="/users/add" class="btn-lg btn-warning text-white w-100">まずは無料登録</a>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 col-8 mx-auto">
+                        <img src="./img/openclose.png" class="w-100 " />
+                    </div>
+                </div>
             </div>
         </div>
-      <video src="img/sample.mp4" autoplay loop muted>
-            <img src="images/jewellery.jpg" alt="Placeholder">
-        </video>
-    </div>
 
-<!----------------------------------------------->
-    <section class="mb-5">
-      <div class="d-flex flex-column flex-lg-row border border-primary rounded">
-        <p class="text-center text-white bg-primary py-2 px-4 mb-0 align-self-stretch">お知らせ</p>
-        <p class="py-2 px-2 px-lg-4 mb-0"><span class="d-block d-lg-inline-block mr-lg-4">2018/12/01</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, se.</p>
-        <p class="pb-2 py-lg-2 px-2 px-lg-4 ml-auto mb-0"><a href="#" class="icon-link"><i class="fas fa-list-ul mr-2"></i>一覧を見る</a></p>
-      </div>
-    </section>
-  </div><!-- /.container -->
-<!----------------------------------------------->
-  <section class="py-5 bg-yl-color">
-    <div class="container p-3 rounded">
-      <h2 class="text-center mb-3"><i class="fas fa-graduation-cap mr-3"></i>SERVICE</h2>
-      <div class="text-center">
-        <p>テストテストテスト</p>
-        <a class="btn btn-warning btn-lg py-3 px-5 text-white font-weight-bold" href="/users/add" role="button">まずは無料登録</a>
-      </div>
-    </div>
-  </section>
-<!----------------------------------------------->
-  <section id="sec1" class="py-5">
-    <div class="container">
+        <!----------------------------------------------->
+        <section class="mb-5 mt-5">
+        <div class="row">
+            <div class="col-6 text-center">
+                <a href="/user/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
+            </div>
+            <div class="col-6 text-center">
+                <a href="/questions" class="btn btn-warning text-white w-100">お問い合わせ</a>
+            </div>
+        </div>
+        </section>
+        <!----------------------------------------------->
+        <section class="py-5 bg-yl-color">
+            <div class="container p-3 rounded">
+            <img src="./img/bridgeinfo.png" class="w-100" />
+            </div>
+        </section>
+        <!----------------------------------------------->
+        <section class="mb-5 mt-5">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <a href="/user/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
+                </div>
+                <div class="col-6 text-center">
+                    <a href="/questions" class="btn btn-warning text-white w-100">お問い合わせ</a>
+                </div>
+            </div>
+        </section>
 
-      <h2 class="display-4 text-center font-patrick py-3">Bridge</h2>
+        <section class="py-5 bg-yl-color">
+            <div class="container p-3 rounded">
+            <img src="./img/user.png" class="w-100" />
+            </div>
+        </section>
 
 
-      </div><!-- /.row -->
+        <section class="mb-5 mt-5">
+            <div class="row">
+                <div class="col-6 text-center mx-auto">
+                    <a href="/user/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
+                </div>
+            </div>
+        </section>
+
 
     </div><!-- /.container -->
-  </section>
+
 </main>
 
 

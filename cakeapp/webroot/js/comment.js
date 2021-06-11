@@ -18,7 +18,10 @@ $(function () {
 });
 
 $.fn.getCommentCount = function(){
+    if(!$('#build_comment').length){
 
+        return false;
+    }
     $.ajax({
         url: '/comment/getCommentCount/',
         type: "GET",

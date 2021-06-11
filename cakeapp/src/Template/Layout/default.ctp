@@ -123,9 +123,8 @@
         <div class="container py-4 py-md-5">
 
           <div id="footer-logo" class="mt-2 mt-sm-4">
-            <div class="text-center d-sm-flex align-items-sm-center">
+            <div class="text-center  align-items-sm-center ">
               <a class="mr-4" href="/"><img src="/img/bridge.gif" alt="Bridge" height="50"></a>
-              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
             </div>
           </div><!-- .row -->
         </div><!-- .container -->
