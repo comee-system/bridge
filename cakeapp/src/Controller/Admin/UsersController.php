@@ -161,25 +161,25 @@ class UsersController extends AppController
                     if($key > 0){
                         $user = $this->Users->newEntity();
                         $data = [];
-                        $data['sei'         ] = mb_convert_encoding($value[0], 'UTF-8', 'SJIS-win');
-                        $data['mei'         ] = mb_convert_encoding($value[1], 'UTF-8', 'SJIS-win');
-                        $data['sei_kana'    ] = mb_convert_encoding($value[2], 'UTF-8', 'SJIS-win');
-                        $data['mei_kana'    ] = mb_convert_encoding($value[3], 'UTF-8', 'SJIS-win');
-                        $data['company'     ] = mb_convert_encoding($value[4], 'UTF-8', 'SJIS-win');
-                        $data['post'        ] = mb_convert_encoding($value[5], 'UTF-8', 'SJIS-win');
-                        $data['prefecture'  ] = mb_convert_encoding(array_search($value[6],$this->array_prefecture), 'UTF-8', 'SJIS-win');
-                        $data['city'        ] = mb_convert_encoding($value[7 ], 'UTF-8', 'SJIS-win');
-                        $data['space'       ] = mb_convert_encoding($value[8 ], 'UTF-8', 'SJIS-win');
-                        $data['build'       ] = mb_convert_encoding($value[9 ], 'UTF-8', 'SJIS-win');
-                        $data['busyo'       ] = mb_convert_encoding($value[10], 'UTF-8', 'SJIS-win');
-                        $data['tel'         ] = mb_convert_encoding($value[11], 'UTF-8', 'SJIS-win');
-                        $data['email'       ] = mb_convert_encoding($value[12], 'UTF-8', 'SJIS-win');
-                        $data['password'    ] = mb_convert_encoding($value[13], 'UTF-8', 'SJIS-win');
+                        $data['sei'         ] = $value[0];
+                        $data['mei'         ] = $value[1];
+                        $data['sei_kana'    ] = $value[2];
+                        $data['mei_kana'    ] = $value[3];
+                        $data['company'     ] = $value[4];
+                        $data['post'        ] = $value[5];
+                        $data['city'        ] = $value[7 ];
+                        $data['prefecture'  ] = array_search($value[6],$this->array_prefecture);
+                        $data['space'       ] = $value[8 ];
+                        $data['build'       ] = $value[9 ];
+                        $data['busyo'       ] = $value[10];
+                        $data['tel'         ] = $value[11];
+                        $data['email'       ] = $value[12];
+                        $data['password'    ] = $value[13];
                         $data['import'      ] = 1;
                         //メール送信データ
-                        $mail[$key]['text'] = mb_convert_encoding($value[14], 'UTF-8', 'SJIS-win');
-                        $mail[$key]['email'] = mb_convert_encoding($value[12], 'UTF-8', 'SJIS-win');
-                        $mail[$key]['name'] = mb_convert_encoding($value[0].$value[1], 'UTF-8', 'SJIS-win');
+                        $mail[$key]['text' ] = $value[14];
+                        $mail[$key]['email'] = $value[12];
+                        $mail[$key]['name' ] = mb_convert_encoding($value[0].$value[1], 'UTF-8', 'SJIS-win');
                         $mail[$key]['pw'] = mb_convert_encoding($value[13], 'UTF-8', 'SJIS-win');
 
                         $user   = $this->Users->patchEntity($user, $data,["validate"=>"import"]);
@@ -194,10 +194,10 @@ class UsersController extends AppController
                             $this->Users->save($user);
                             $tenant = $this->Tenants->newEntity();
                             $tenant->user_id   = $user->id;
-                            $tenant->name      = mb_convert_encoding($value[15], 'UTF-8', 'SJIS-win');
-                            $tenant->floor     = mb_convert_encoding($value[16], 'UTF-8', 'SJIS-win');
-                            $tenant->min_floor = mb_convert_encoding($value[17], 'UTF-8', 'SJIS-win');
-                            $tenant->max_floor = mb_convert_encoding($value[18], 'UTF-8', 'SJIS-win');
+                            $tenant->name      = $value[15];
+                            $tenant->floor     = $value[16];
+                            $tenant->min_floor = $value[17];
+                            $tenant->max_floor = $value[18];
                             $tenant->rent_money_min = $value[19];
                             $tenant->rent_money_max = $value[20];
                             $this->Tenants->save($tenant);
