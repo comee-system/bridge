@@ -179,8 +179,8 @@ class UsersController extends AppController
                         //メール送信データ
                         $mail[$key]['text' ] = $value[14];
                         $mail[$key]['email'] = $value[12];
-                        $mail[$key]['name' ] = mb_convert_encoding($value[0].$value[1], 'UTF-8', 'SJIS-win');
-                        $mail[$key]['pw'] = mb_convert_encoding($value[13], 'UTF-8', 'SJIS-win');
+                        $mail[$key]['name' ] = $value[0].$value[1];
+                        $mail[$key]['pw'] = $value[13];
 
                         $user   = $this->Users->patchEntity($user, $data,["validate"=>"import"]);
                         //var_dump($user->getErrors()[ 'email' ]);
