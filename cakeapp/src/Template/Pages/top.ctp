@@ -39,12 +39,12 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 
             <img src="./img/top1.png" class="w-100" />
             <div class="topTextArea position-absolute">
-                <div class="row">
+                <div class="row mt-3">
                     <div class="col-md-8 col-12">
-                        <h4 class=" bg-danger text-white text-center">店舗開発者限定</h4>
+                        <h4 class=" bg-danger text-white text-center title">店舗開発者限定</h4>
                     </div>
                     <div class="col-md-4 mt-2 col-12">
-                        <a href="/users/add" class="btn-lg btn-warning text-white w-100">まずは無料登録</a>
+                        <a href="/users/add" class="btn-lg btn-warning text-white w-100 title">まずは無料登録</a>
                     </div>
                 </div>
                 <div class="row mt-3">
