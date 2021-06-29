@@ -63,7 +63,7 @@ class BuildsTable extends Table
             ->scalar('name')
             ->maxLength('name', 255,__("物件名称が長すぎます。"))
             ->notEmptyString('name',__("物件名称を入力してください。"));
-
+/*
         $validator
             ->integer('post1',__("郵便番号は数値となります。(前)"))
             ->notEmptyString('post1',__("郵便番号を入力してください。(前)"));
@@ -71,7 +71,7 @@ class BuildsTable extends Table
         $validator
             ->integer('post2',__("郵便番号は数値となります。(後)"))
             ->notEmptyString('post2',__("郵便番号を入力してください。(後)"));
-
+*/
         $validator
             ->scalar('city')
             ->maxLength('city', 512,__("市区町村が長すぎます。"))

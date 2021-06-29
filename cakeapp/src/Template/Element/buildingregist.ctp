@@ -66,9 +66,11 @@
                 </div>
                 <?php if($type == "conf"):?>
                     <div class="col-8 ">
+                    <?php /*
                         <?= h($this->request->getData('post1')) ?>-
                         <?= h($this->request->getData('post2')) ?>
                         <br />
+                    */ ?>
                         <?= h($array_prefecture[$this->request->getData('pref')]) ?>
                         <?= $this->request->getData('city') ?>
                         <?= $this->request->getData('space') ?>
@@ -94,6 +96,7 @@
                     </div>
                 <?php else: ?>
                     <?php
+                    /*
                         $post1 = "";
                         if ( $this->request->getData('post1')) :
                             $post1 = $this->request->getData("post1");
@@ -106,9 +109,10 @@
                         else:
                             if(isset($build[ 'post2' ]) && $build[ 'post2' ]) $post2 = $build[ 'post2' ];
                         endif;
+                    */
                     ?>
                     <div class="col-8 ">
-
+<?php /*
                         <?php if($editflag == false): ?>
                         <?= $build[ 'post1' ] ?> -
                         <?= $build[ 'post2' ] ?>
@@ -134,18 +138,18 @@
                                     "onKeyUp"=>"AjaxZip3.zip2addr('post1','post2','pref','city','space');"
                                 ]) ?>
                             </div>
-<?php /*
+
                             <div class="ml-2">
                                 <?= $this->Form->button("住所から郵便番号を検索",[
                                     "name"=>"searchAddress",
                                     "class"=>"btn-sm btn-primary w-100"
                                 ])?>
                             </div>
-*/?>
+
                             <?php  endif; ?>
 
                         </div>
-
+*/ ?>
                         <?php
                             $pref = "";
                             if ( $this->request->getData('pref')) :
