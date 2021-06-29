@@ -34,6 +34,11 @@
                             "placeholder"=>__("テナント名を入力してください。"),
                             "value"=>$name
                         ]) ?>
+                        <div class="row">
+                            <div class="col-12">
+                                <small>※店舗名（もしくは屋号）を記入してください。</small>
+                            </div>
+                        </div>
                         <?php if(!empty($error[ 'name' ][ "_empty" ])): ?>
                         <small class="text-danger"><?= h($error[ 'name' ]["_empty"]) ?></small>
                         <?php endif; ?>
@@ -63,9 +68,25 @@
                     <?php else: ?>
                         <?php
                             $prefs = (!empty($tenant['prefs']))?explode(",",$tenant['prefs']):[];
-                            $pref1 = ($this->request->getData("pref")[1])?$this->request->getData("pref")[1]:(!empty($prefs[0]))?$prefs[0]:"";
-                            $pref2 = ($this->request->getData("pref")[2])?$this->request->getData("pref")[2]:(!empty($prefs[1]))?$prefs[1]:"";
-                            $pref3 = ($this->request->getData("pref")[2])?$this->request->getData("pref")[3]:(!empty($prefs[2]))?$prefs[2]:"";
+                            $pref1 = "";
+                            $pref2 = "";
+                            $pref3 = "";
+                            if(!empty($this->request->getData("pref")[1])){
+                                $pref1 = $this->request->getData("pref")[1];
+                            }else{
+                                if(!empty($prefs[0])) $pref1 = $prefs[0];
+                            }
+                            if(!empty($this->request->getData("pref")[2])){
+                                $pref2 = $this->request->getData("pref")[2];
+                            }else{
+                                if(!empty($prefs[1])) $pref2 = $prefs[1];
+                            }
+                            if(!empty($this->request->getData("pref")[3])){
+                                $pref3 = $this->request->getData("pref")[3];
+                            }else{
+                                if(!empty($prefs[2])) $pref3 = $prefs[2];
+                            }
+
                         ?>
 
                         <?= $this->Form->select("pref[1]",$array_prefecture,[
@@ -107,10 +128,17 @@
                             "default"=>$pref3
                         ]) ?>
                     <?php endif; ?>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <small>※希望地の都道府県を第３希望まで選んで下さい。</small>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-3"><?= __("坪数") ?></div>
+                <div class="col-3"><?= __("建物") ?></div>
                 <div class="col-1">
                 <span class="badge badge-danger"><?= __("必須") ?></span>
                 </div>
@@ -118,13 +146,9 @@
                     <?php if ($type == "conf" ): ?>
                         <div class="row">
                             <div class="col-md-12">
-                                <?= $array_floor[$this->request->getData('floor')]; ?><br />
                                 <?=$this->request->getData("min_floor")?>～
                                 <?=$this->request->getData("max_floor")?> 坪
                             </div>
-                            <?= $this->Form->hidden("floor",[
-                                "value"=>$this->request->getData('floor')
-                            ])?>
                             <?= $this->Form->hidden("min_floor",[
                                 "value"=>$this->request->getData('min_floor')
                             ])?>
@@ -133,46 +157,41 @@
                             ])?>
                         </div>
                     <?php else: ?>
-
-                        <?php
-                            $floor = "";
-                            if($this->request->getData('floor') ):
-                                $floor = $this->request->getData('floor');
-                            else:
-                                if(isset($tenant[ 'floor' ])) $floor = $tenant[ 'floor' ];
-                            endif;
-                        ?>
-                        <?= $this->Form->radio("floor",$array_floor,[
-                            "class"=>"form-group",
-                            'legend' => false,
-                            'default'=>$floor
-                        ]) ?>
-                    <div class="row d-flex">
-                        <div class="col-md-5">
-                            <div class="d-flex">
-                            <?= $this->Form->number("min_floor",[
-                                "class"=>"form-control",
-                                "label"=>false,
-                                "value"=>($this->request->getData("min_floor"))?$this->request->getData("min_floor"):(!empty($tenant[ 'min_floor' ]))?$tenant[ 'min_floor' ]:""
-                            ]) ?>
-                            <span class="mt-3 ml-2">坪</span>
+                        <div class="row d-flex">
+                            <div class="col-md-5">
+                                <div class="d-flex">
+                                <?php
+                                    $param_min_floor["class"] = "form-control";
+                                    $param_min_floor["label"] = false;
+                                    if(!empty($tenant[ 'min_floor' ]) && !$this->request->is('post')){
+                                        $param_min_floor["value"] = $tenant[ 'min_floor' ];
+                                    }
+                                ?>
+                                <?= $this->Form->number("min_floor",$param_min_floor ) ?>
+                                <span class="mt-3 ml-2">坪</span>
+                                </div>
+                            </div>
+                            <div class="col-md-1 text-center mt-2">～</div>
+                            <div class="col-md-5">
+                                <div class="d-flex">
+                                    <?php
+                                        $param_max_floor["class"] = "form-control";
+                                        $param_max_floor["label"] = false;
+                                        if(!empty($tenant[ 'max_floor' ]) && !$this->request->is('post')){
+                                            $param_max_floor["value"] = $tenant[ 'max_floor' ];
+                                        }
+                                    ?>
+                                    <?= $this->Form->number("max_floor",$param_max_floor ) ?>
+                                <span class="mt-3 ml-2">坪</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-1 text-center mt-2">～</div>
-                        <div class="col-md-5">
-                            <div class="d-flex">
-                                <?= $this->Form->number("max_floor",[
-                                    "class"=>"form-control",
-                                    "label"=>false,
-                                    "value"=>($this->request->getData("max_floor"))?$this->request->getData("max_floor"):(!empty($tenant[ 'max_floor' ]))?$tenant[ 'max_floor' ]:""
-                                ]) ?>
-                            <span class="mt-3 ml-2">坪</span>
-                            </div>
-                        </div>
-                    </div>
-                    <small>一坪は約3.31平米です。</small>
-                        <?php if(!empty($error[ 'floor' ][ "_empty" ])): ?>
-                            <br /><small class="text-danger"><?= h($error[ 'floor' ]["_empty"]) ?></small>
+                        <small>一坪は約3.31平米です。</small>
+                        <?php if(!empty($error[ 'max_floor' ][ "_empty" ])): ?>
+                            <br /><small class="text-danger"><?= h($error[ 'max_floor' ]["_empty"]) ?></small>
+                        <?php endif; ?>
+                        <?php if(!empty($error[ 'min_floor' ][ "_empty" ])): ?>
+                            <br /><small class="text-danger"><?= h($error[ 'min_floor' ]["_empty"]) ?></small>
                         <?php endif; ?>
                         <?php if(!empty($error[ 'max_floor' ][ "min_floor" ])): ?>
                             <br /><small class="text-danger"><?= h($error[ 'max_floor' ]["min_floor"]) ?></small>
@@ -181,8 +200,70 @@
                     <?php endif; ?>
 
                 </div>
-
             </div>
+
+            <div class="row mt-2">
+                <div class="col-3"><?= __("土地") ?></div>
+                <div class="col-1">
+                <span class="badge badge-secondary"><?= __("任意") ?></span>
+                </div>
+                <div class="col-8 form-group radio">
+                    <?php if ($type == "conf" ): ?>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <?=$this->request->getData("min_ground")?>～
+                                <?=$this->request->getData("max_ground")?> 坪
+                            </div>
+
+                            <?= $this->Form->hidden("min_ground",[
+                                "value"=>$this->request->getData('min_ground')
+                            ])?>
+                            <?= $this->Form->hidden("max_ground",[
+                                "value"=>$this->request->getData('max_ground')
+                            ])?>
+                        </div>
+                    <?php else: ?>
+                        <div class="row d-flex">
+                            <div class="col-md-5">
+                                <div class="d-flex">
+                                <?php
+                                    $param_min_ground["class"] = "form-control";
+                                    $param_min_ground["label"] = false;
+                                    if(!empty($tenant[ 'min_ground' ]) && !$this->request->is('post')){
+                                        $param_min_ground["value"] = $tenant[ 'min_ground' ];
+                                    }
+                                ?>
+                                <?= $this->Form->number("min_ground",$param_min_ground) ?>
+                                <span class="mt-3 ml-2">坪</span>
+                                </div>
+                            </div>
+                            <div class="col-md-1 text-center mt-2">～</div>
+                            <div class="col-md-5">
+                                <div class="d-flex">
+                                    <?php
+                                        $param_max_ground["class"] = "form-control";
+                                        $param_max_ground["label"] = false;
+                                        if(!empty($tenant[ 'max_ground' ]) && !$this->request->is('post') ){
+                                            $param_max_ground["value"] = $tenant[ 'max_ground' ];
+                                        }
+                                    ?>
+                                    <?= $this->Form->number("max_ground",$param_max_ground) ?>
+                                <span class="mt-3 ml-2">坪</span>
+                                </div>
+                            </div>
+                        </div>
+                        <small>一坪は約3.31平米です。</small>
+                        <?php if(!empty($error[ 'max_ground' ][ "min_ground" ])): ?>
+                            <br /><small class="text-danger"><?= h($error[ 'max_ground' ]["min_ground"]) ?></small>
+                        <?php endif; ?>
+                    <?php endif; ?>
+
+                </div>
+            </div>
+
+
+
+
             <div class="row mt-2">
                 <div class="col-3"><?= __("賃料") ?></div>
                 <div class="col-1">
@@ -240,11 +321,18 @@
                             </div>
 
                         </div>
+
+                    </div>
+                    <div class="row">
                         <?php if(!empty($error[ 'rent_money_min' ][ "_empty" ])): ?>
-                            <br /><small class="text-danger"><?= h($error[ 'rent_money_min' ]["_empty"]) ?></small>
+                            <div class="col-12">
+                            <small class="text-danger"><?= h($error[ 'rent_money_min' ]["_empty"]) ?></small>
+                            </div>
                         <?php endif; ?>
                         <?php if(!empty($error[ 'rent_money_max' ][ "_empty" ])): ?>
-                            <br /><small class="text-danger"><?= h($error[ 'rent_money_max' ]["_empty"]) ?></small>
+                            <div class="col-12">
+                            <small class="text-danger"><?= h($error[ 'rent_money_max' ]["_empty"]) ?></small>
+                            </div>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>

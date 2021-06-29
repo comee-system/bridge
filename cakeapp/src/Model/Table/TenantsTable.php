@@ -75,13 +75,29 @@ class TenantsTable extends Table
             ->notEmptyString('name', __('テナント名称を入力してください。'));
 
         $validator
-            ->integer('floor')
-            ->notEmptyString('floor',__("坪数を選択してください。"))
+         //   ->integer('floor')
+         //   ->notEmptyString('floor',__("坪数を選択してください。"))
+            ->notEmptyString("max_floor","建物最大坪数を入力してください。")
+            ->notEmptyString("min_floor","建物最小坪数を入力してください。")
             ->add("max_floor","min_floor",[
                 "rule"=>function($value,$context){
                     $min_floor = $context["data"]["min_floor"];
                     $max_floor = $context["data"]["max_floor"];
                     if($max_floor < $min_floor){
+                        return false;
+                    }
+                    return true;
+                },
+                "message"=>"坪数の選択に謝りがあります。"
+            ]);
+        $validator
+            ->allowEmptyString("max_ground")
+            ->allowEmptyString("min_ground")
+            ->add("max_ground","min_ground",[
+                "rule"=>function($value,$context){
+                    $min_ground = $context["data"]["min_ground"];
+                    $max_ground = $context["data"]["max_ground"];
+                    if($max_ground < $min_ground){
                         return false;
                     }
                     return true;

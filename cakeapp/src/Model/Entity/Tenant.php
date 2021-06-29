@@ -46,6 +46,8 @@ class Tenant extends Entity
         'floor' => true,
         'min_floor' => true,
         'max_floor' => true,
+        'min_ground' => true,
+        'max_ground' => true,
         'rent_money_min' => true,
         'rent_money_max' => true,
         'space_money_min' => true,

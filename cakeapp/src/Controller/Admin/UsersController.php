@@ -475,6 +475,7 @@ class UsersController extends AppController
                 'id'=>$id,
             ])
             ->first();
+        //var_dump($tenant);
         $prefs = [];
         if($tenant->prefs) $prefs = explode(",",$tenant->prefs);
         $jobtypes = [];
@@ -537,12 +538,15 @@ class UsersController extends AppController
                             $this->TenantHope->deleteAll(['tenant_id'=>$tenant->id]);
                             $this->TenantJob->deleteAll(['tenant_id'=>$tenant->id]);
                         }
+                        $num = 1;
                         foreach($this->request->getData("pref") as $key=>$value){
                             if($value > 0){
                                 $TenantHope = $this->TenantHope->newEntity();
                                 $TenantHope->pref = $value;
+                                $TenantHope->Number = $num;
                                 $TenantHope->tenant_id = $tenant->id;
                                 $this->TenantHope->save($TenantHope);
+                                $num++;
                             }
                         }
                         if(!empty($this->request->getData("jobtype"))){

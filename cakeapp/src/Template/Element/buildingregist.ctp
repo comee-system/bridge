@@ -108,12 +108,13 @@
                         endif;
                     ?>
                     <div class="col-8 ">
+
+                        <?php if($editflag == false): ?>
+                        <?= $build[ 'post1' ] ?> -
+                        <?= $build[ 'post2' ] ?>
+                        <?php else: ?>
+                        <div class="text-nowrap">郵便番号</div>
                         <div class="d-flex">
-                            <?php if($editflag == false): ?>
-                            <?= $build[ 'post1' ] ?> -
-                            <?= $build[ 'post2' ] ?>
-                            <?php else: ?>
-                            <div class="text-nowrap">郵便番号</div>
                             <div class="w-25 ml-2">
                                 <?= $this->Form->input("post1",[
                                     "type"=>"text",
@@ -133,8 +134,18 @@
                                     "onKeyUp"=>"AjaxZip3.zip2addr('post1','post2','pref','city','space');"
                                 ]) ?>
                             </div>
+<?php /*
+                            <div class="ml-2">
+                                <?= $this->Form->button("住所から郵便番号を検索",[
+                                    "name"=>"searchAddress",
+                                    "class"=>"btn-sm btn-primary w-100"
+                                ])?>
+                            </div>
+*/?>
                             <?php  endif; ?>
+
                         </div>
+
                         <?php
                             $pref = "";
                             if ( $this->request->getData('pref')) :
@@ -202,6 +213,7 @@
                                         if(isset($build[ 'build' ]) && $build[ 'build' ]) $builds = $build[ 'build' ];
                                     endif;
                                 ?>
+                                <?php /*
                                 <label class="<?= $none ?>"><?= __("ビル・マンション名") ?> </label>
                                 <?= $this->Form->input("build",[
                                     "type"=>"text",
@@ -209,6 +221,7 @@
                                     "label"=>false,
                                     "default"=>$builds
                                 ]) ?>
+                                */ ?>
                             </div>
                         </div>
 
@@ -241,7 +254,7 @@
                 <?php endif; ?>
             </div>
             <div class="row mt-2">
-                <div class="col-2"><?= __("店舗面積") ?></div>
+                <div class="col-2"><?= __("契約面積") ?></div>
                 <div class="col-2">
                 <span class="badge badge-danger <?= $none ?>"><?= __("必須") ?></span>
                 </div>
@@ -269,6 +282,14 @@
                                 "default"=>$shop_area
                             ]) ?>
                             <div class="mt-2 ml-2">坪</div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <small>
+                                        ※複数階の場合は、こちらに総面積を記入し、その他要望事項の欄に記載してください。<br />
+                                        例：契約面積　１階　５０坪、２階　３０坪
+                                    </small>
+                                </div>
+                            </div>
                         <?php endif; ?>
                     </div>
                     <?php if(!empty($error[ 'shop_area' ][ "_empty" ])): ?>
@@ -308,6 +329,13 @@
                                 "default"=>$rent_money
                             ]) ?>
                             <div class="mt-2 ml-2">円</div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <small>
+                                     ※賃料以外（駐車場契約金　等）は、その他要望事項の欄に記載してください。
+                                    </small>
+                                </div>
+                            </div>
                         <?php endif; ?>
                     </div>
                     <?php if(!empty($error[ 'rent_money' ][ "_empty" ])): ?>
@@ -605,8 +633,8 @@
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="col-2"><?= __("その他要望事項") ?></div>
-                <div class="col-2">
+                <div class="col-3"><?= __("その他要望事項") ?></div>
+                <div class="col-1">
                     &nbsp;
                 </div>
                 <div class="col-8 ">
@@ -678,13 +706,14 @@
                 </div>
             </div>
             <?php endif; ?>
-            <div class="card shadow-sm mt-3">
-                <div class="card-body">
-                    <h5>※公開設定について</h5>
-                    <p>公開設定において、非公開の場合は、別途ご依頼後に物件マッチングを行います。</p>
+            <div class="row">
+                <div class="col-4">&nbsp;</div>
+                <div class="col-8 text-danger">
+                    <small>
+                    <?= __("公開設定が非公開の場合は、別途ご依頼後に物件のマッチングを行います。") ?>
+                    </small>
                 </div>
             </div>
-
             <?php if ($admin): ?>
                 <div class="row mt-2">
                     <div class="col-4"><?= __("物件紹介メッセージ") ?></div>
