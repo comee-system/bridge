@@ -103,7 +103,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                             <th><?= __("店舗面積") ?></th>
                                             <th><?= __("ステータス") ?></th>
                                             <th><?= __("物件登録日") ?></th>
-                                            <th><?= __("募集開始日") ?></th>
+                                            <th><?= __("更新日") ?></th>
                                         </tr>
                                         <tr>
                                             <?php
@@ -114,11 +114,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                             <td><?= h($array_status[$values->status]) ?></td>
                                             <td><?= date("Y/m/d",strtotime($values->created) )?></td>
                                             <td>
-                                                <?php if(!$values->start): ?>
-                                                未設定
-                                                <?php else: ?>
-                                                <?= date("Y/m/d",strtotime($values->start) )?>
-                                                <?php endif; ?>
+                                                <?= date("Y/m/d",strtotime($values->modified) )?>
                                             </td>
                                         </tr>
                                     </table>

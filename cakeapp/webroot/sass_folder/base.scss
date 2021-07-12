@@ -155,6 +155,14 @@ blockquote:after {
         padding:3px;
     }
 }
+select{
+    &.appearance-normal{
+        appearance: normal !important;
+        width:100%;
+        border:1px  solid #c0c0c0;
+        padding:5px;
+    }
+}
 
 
 @media (max-width: 980px) {

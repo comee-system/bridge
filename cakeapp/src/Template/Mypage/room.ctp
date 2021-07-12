@@ -46,19 +46,19 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                         <small>ID : <?= h($compnent->setId($builds->id)) ?></small>
                                     </div>
                                     <div class="col-md-6 text-right">
-                                        <a href="/mypage/buildregist/<?=$builds->id?>/detail" class="btn-sm btn-warning text-white" >案件詳細</a>
+                                        <a href="/mypage/buildregist/<?=$builds->id?>/detail" class="btn-sm btn-warning text-white" ><?= __("物件詳細") ?></a>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <dl class="row">
-                                    <dt class="col-2">ステータス</dt>
+                                    <dt class="col-2"> <?= __("ステータス") ?></dt>
                                     <dd class="col-10"><?= h($array_build_status[$builds->build_status]) ?></dd>
                                 </dl>
                                 <dl class="row">
-                                    <dt class="col-2">案件登録日</dt>
+                                    <dt class="col-2"><?= __("案件登録日") ?></dt>
                                     <dd class="col-4"><?= h(date("Y/m/d",strtotime($builds->created))) ?></dd>
-                                    <dt class="col-2">募集開始日</dt>
+                                    <dt class="col-2"><?= __("募集開始日") ?></dt>
                                     <dd class="col-4">
                                     <?php if(isset($builds->start) && $builds->start): ?>
                                             <?= h(date("Y/m/d",strtotime($builds->start))) ?>

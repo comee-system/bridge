@@ -345,8 +345,8 @@
                 </div>
                 <div class="col-8 input-group">
                     <?php if ($type == "conf"): ?>
-                        <?=number_format($this->request->getData("space_money_min"))?> 円～
-                        <?=number_format($this->request->getData("space_money_max"))?> 円
+                        <?= number_format((int)$this->request->getData("space_money_min")) ?> 円～
+                        <?= number_format((int)$this->request->getData("space_money_max")) ?> 円
                         <?= $this->Form->hidden("space_money_max",[
                             "value"=>$this->request->getData('space_money_max')
                         ])?>

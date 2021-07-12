@@ -195,11 +195,10 @@ class UsersController extends AppController
                             $tenant = $this->Tenants->newEntity();
                             $tenant->user_id   = $user->id;
                             $tenant->name      = $value[15];
-                            $tenant->floor     = $value[16];
-                            $tenant->min_floor = $value[17];
-                            $tenant->max_floor = $value[18];
-                            $tenant->rent_money_min = $value[19];
-                            $tenant->rent_money_max = $value[20];
+                            $tenant->min_floor = $value[16];
+                            $tenant->max_floor = $value[17];
+                            $tenant->rent_money_min = $value[18];
+                            $tenant->rent_money_max = $value[19];
                             $this->Tenants->save($tenant);
                             $err_row[] = 0;
                         }

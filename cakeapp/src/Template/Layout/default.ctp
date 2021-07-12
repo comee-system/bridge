@@ -95,8 +95,8 @@
           <li>Bridgeについて</li>
           <li>
             <ul class="list-unstyled">
-              <li><a href="http://www.area-design.co.jp/">運営会社情報</a></li>
-              <li><a href="/pdf/termofuse.pdf" target=_blank>利用規約</a></li>
+              <li><a href="http://www.area-design.co.jp/" target=_blank><?= __("運営会社情報") ?></a></li>
+              <li><a href="/pdf/termofuse.pdf" target=_blank><?= __("利用規約") ?></a></li>
             </ul>
           </li>
         </ul>

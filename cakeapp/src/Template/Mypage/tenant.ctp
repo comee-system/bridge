@@ -96,10 +96,10 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                                     </table>
                                     <table class="table-bordered w-100 mt-3 text-center">
                                         <tr class="bg-secondary text-white">
-                                            <th><?= __("希望坪数") ?></th>
+                                            <th><?= __("希望建物坪数") ?></th>
                                             <th><?= __("希望賃料") ?></th>
                                             <th><?= __("ステータス") ?></th>
-                                            <th><?= __("物件登録日") ?></th>
+                                            <th><?= __("登録日") ?></th>
                                         </tr>
                                         <tr>
                                             <td><?= h(number_format($value['min_floor'])) ?>坪～

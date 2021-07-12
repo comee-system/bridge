@@ -47,7 +47,7 @@
                             <td><?= h($builds->shop_area) ?>坪</td>
                             <td>
                                 <?= $this->Form->select('build_status',$array_status,[
-                                    'class'=>'form-control',
+                                    'class'=>'appearance-normal',
                                     'default'=>$builds->status
                                 ])?>
 
