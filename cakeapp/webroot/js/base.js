@@ -51,11 +51,11 @@ $(function () {
     }catch(e){}
     //ステータスの変更
     //下書き、非公開、公開中は変更不可
-
+/*
     if($('[name="build_status"]').length){
         $(this).changeBuildStatus();
     }
-
+*/
 
 
     $(document).on("change",'[name="build_status"]',function(){
@@ -98,7 +98,7 @@ $(function () {
              $("p#comment_status_text").show();
              //console.log(response);
              alert("ステータスの変更を行いました。");
-            $(this).changeBuildStatus();
+          //  $(this).changeBuildStatus();
 
          });
 
@@ -108,6 +108,7 @@ $(function () {
 
 
 });
+/*
 $.fn.changeBuildStatus = function(){
     var _build_status = $('[name="build_status"]').val();
     if(_build_status === "0" || _build_status === "2" || _build_status === "4") $('[name="build_status"]').prop("disabled",true);
@@ -124,6 +125,7 @@ $.fn.changeBuildStatus = function(){
     });
    // return true;
 };
+*/
 $.fn.buttonCheck = function () {
     $("#regist").attr("disabled", false);
     return true;

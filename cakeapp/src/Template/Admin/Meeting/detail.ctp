@@ -46,11 +46,27 @@
                             </td>
                             <td><?= h($builds->shop_area) ?>坪</td>
                             <td>
+                                <?php //交渉中と交渉中止、交渉成立以外の場合はリストではなくテキストで
+                                    //リストの中身は交渉中と交渉中止、交渉成立
+                                ?>
+                                <?php
+                                    if(
+                                        $builds->status == 1 ||
+                                        $builds->status == 5 ||
+                                        $builds->status == 6
+                                    ):
+                                    unset($array_status[0]);
+                                    unset($array_status[2]);
+                                    unset($array_status[3]);
+                                    unset($array_status[4]);
+                                ?>
                                 <?= $this->Form->select('build_status',$array_status,[
                                     'class'=>'appearance-normal',
                                     'default'=>$builds->status
                                 ])?>
-
+                                <?php else: ?>
+                                <?=$array_status[$builds->status]?>
+                                <?php endif; ?>
                             </td>
                             <td><?= h(date("Y/m/d",strtotime($builds->created))) ?></td>
                             <td>
