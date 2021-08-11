@@ -1,4 +1,13 @@
 $(function () {
+    $(".sp-menu-icon a").click(function(){
+        var _sts = $(".menu-style").css("display");
+        if(_sts == "none"){
+            $(".menu-style").animate({ height: 'show' }, 'fast');
+        }else{
+            $(".menu-style").animate({ height: 'hide' }, 'fast');
+        }
+        return false;
+    });
     $("#sample2check").click(function(){
         var _chk = $("#sample2check").prop("checked");
         if(_chk){

@@ -92,7 +92,7 @@ class UsersController extends AppController
             return $this->redirect("/mypage/");
         }
 
-        $columns = $this->Users->schema()->columns ();
+        $columns = $this->Users->getSchema()->columns ();
         foreach ($columns as $value) {
             $this->set($value, "");
         }

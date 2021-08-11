@@ -30,78 +30,84 @@ endif;
 $cakeDescription = 'CakePHP: the rapid development PHP framework';
 ?>
 
-<main>
-    <!----------------------------------------------->
-    <div class="container">
-        <div class="position-relative">
-            <div class="toptext mt-md-3">
+    <div class="main_imgBox">
+        <div class="mainText" >
+            <div class="mainText-h2">
+                <div>
+                    <p>店舗開発担当者の出展支援</p>
+                    <p>店舗開発担当者と<br />秘匿性が高い閉店見込物件をつなげる<br />店舗再生プラットフォーム</p>
+                    <p>
+                        ※ハンズオン型ソリューションマッチングサイト<br />
+                        (ブリッジ公認エージェントがマッチングから成約までコーディネート)
+                    </p>
+                    <p>
+                        本システムは令和3年5月度に東京都の経営革新計画に承認されました
+                    </p>
+                </div>
             </div>
-
-            <img src="./img/top1.png" class="w-100" />
-            <div class="topTextArea position-absolute">
-                <div class="row mt-3">
-                    <div class="col-md-8 col-12">
-                        <h4 class=" bg-danger text-white text-center title">店舗開発者限定</h4>
-                    </div>
-                    <div class="col-md-4 mt-2 col-12">
-                        <a href="/users/add" class="btn-lg btn-warning text-white w-100 title">まずは無料登録</a>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12 col-8 mx-auto">
-                        <img src="./img/openclose.png" class="w-100 " />
-                    </div>
-                </div>
+            <div class="mt-2 freeregist">
+                <a href="/users/add" >
+                    <i class="far fa-edit"></i>
+                    無料会員登録はこちら
+                </a>
             </div>
         </div>
 
-        <!----------------------------------------------->
-        <section class="mb-5 mt-5">
-        <div class="row">
-            <div class="col-6 text-center">
-                <a href="/users/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
-            </div>
-            <div class="col-6 text-center">
-                <a href="/questions" class="btn btn-warning text-white w-100">お問い合わせ</a>
+        <div class="main_img" style="background-image: url(/img/top/kv1.png)"></div>
+        <div class="main_img" style="background-image: url(/img/top/kv2.png)"></div>
+        <div class="main_img" style="background-image: url(/img/top/kv3.png)"></div>
+        <div class="main_img" style="background-image: url(/img/top/kv1.png)"></div>
+        <div class="main_img" style="background-image: url(/img/top/kv2.png)"></div>
+        <div class="main_img" style="background-image: url(/img/top/kv3.png)"></div>
+    </div>
+    <div class="container" id="main">
+        <div class="about"><img src="/img/top/about.png" /></div>
+        <div class="text-center mt-5">
+            <h3>「<ruby>Bridge<rt>ブリッジ</rt></ruby>」とは？</h3>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-6 col-12 "><img src="/img/top/about_bridge.png" class="w-100" /></div>
+            <div class="col-md-6 col-12 ">
+                <div class="mt-3 note">
+                    大手から中小企業まで店舗開発のサポートをしてきた<br />
+                    ノウハウを生かし、希少性・秘匿性が高い閉店見込み物件をデータベース化しました。<br />
+                    「ブリッジ」は、その豊富な情報からスピーディーに優良物件へのリーチを可能にした店舗開発担当限定の
+                    <strong  class="marker" >テナントダイレクトマッチングシステム</strong >です。<br />
+                    ブリッジが公認した「エージェント」がハンズオン型で「閉店」と「出店」を繋ぐことで、店舗再生を創造することを目指しています。
+                </div>
+                <div class="mt-5 recrult">
+                    <a href="#" >
+                        閉店見込み物件募集中!
+                    </a>
+                </div>
             </div>
         </div>
-        </section>
-        <!----------------------------------------------->
-        <section class="py-5 bg-yl-color">
-            <div class="container p-3 rounded">
-            <img src="./img/bridgeinfo.png" class="w-100" />
-            </div>
-        </section>
-        <!----------------------------------------------->
-        <section class="mb-5 mt-5">
-            <div class="row">
-                <div class="col-6 text-center">
-                    <a href="/users/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
-                </div>
-                <div class="col-6 text-center">
-                    <a href="/questions" class="btn btn-warning text-white w-100">お問い合わせ</a>
-                </div>
-            </div>
-        </section>
+        <div class="frow mt-5 guidence">
 
-        <section class="py-5 bg-yl-color">
-            <div class="container p-3 rounded">
-            <img src="./img/user.png" class="w-100" />
-            </div>
-        </section>
-
-
-        <section class="mb-5 mt-5">
-            <div class="row">
-                <div class="col-6 text-center mx-auto">
-                    <a href="/users/add" class="btn btn-warning text-white w-100">まずは無料登録</a>
+            <div class="fright">
+                <div class="guidence-area">
+                    <div class="fukidashi">まずは無料会員登録から！</div>
+                    <div class="mt-2 freeregist w100">
+                        <a href="/users/add" class="sqare" >
+                            <i class="far fa-edit"></i>
+                            無料会員登録はこちら
+                        </a>
+                    </div>
+                    <div class="mt-2 freeregist w100">
+                        <a href="/users/add" class="mail" >
+                            <i class="far fa-envelope"></i>
+                            ご相談お問い合わせ
+                        </a>
+                    </div>
                 </div>
             </div>
-        </section>
 
+            <div class="fleft">
+                <img src="/img/top/guidance.png" class="w-100 mt-3" />
+            </div>
 
-    </div><!-- /.container -->
+        </div>
+        <div class="about"><img src="/img/top/about.png" /></div>
 
-</main>
-
+    </div>
 

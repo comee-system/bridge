@@ -1,0 +1,22 @@
+<svg id="arrow1.svg" xmlns="http://www.w3.org/2000/svg" width="47" height="47.031" viewBox="0 0 47 47.031">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-2 {
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #0075e4;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <path id="楕円形_779" data-name="楕円形 779" class="cls-1" d="M1571.5,944.977a23.512,23.512,0,1,1-23.51,23.511A23.507,23.507,0,0,1,1571.5,944.977Z" transform="translate(-1548 -944.969)"/>
+  <path id="シェイプ_33" data-name="シェイプ 33" class="cls-2" d="M1570.37,963l7.64,6-7.64,6" transform="translate(-1548 -944.969)"/>
+  <path id="シェイプ_963" data-name="シェイプ 963" class="cls-2" d="M1562,968h15" transform="translate(-1548 -944.969)"/>
+</svg>

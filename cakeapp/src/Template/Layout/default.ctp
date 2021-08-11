@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/top.css">
+  <link rel="stylesheet" href="/css/sp_base.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/step.css">
   <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap" rel="stylesheet">
@@ -37,47 +38,72 @@
 
   <header>
 
-    <nav id="nav01">
-      <div class="container navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand mr-auto" href="/">
-          <img src="/img/bridge.gif" alt="サイト名" class="logo">
-        </a>
+    <nav  class="d-flex w-100">
+        <div class="w-25">
+            <div class="d-flex ml-3">
+                <div>
+                    <a class="navbar-brand mr-auto" href="/">
+                        <img src="/img/top/logo.svg" alt="bridge" class="logo">
+                    </a>
+                </div>
+                <div class="ml-4 mt-3">
+                    店舗開発担当者限定<br />
+                    店舗再生プラットフォーム
+                </div>
+            </div>
+        </div>
+        <div class="w-75" >
+            <div class="sp-menu-icon">
+                <a href="#" class="btn"><i class="fas fa-bars"></i></a>
+            </div>
+            <ul class="menu-style">
+                <li><a href="">ブリッジとは？</a></li>
+                <li><a href="">3つのポイント</a></li>
+                <li><a href="">マッチングの流れ</a></li>
+                <li>
+                <?php if ($logindata) : ?>
+                    <?= $this->Html->link(
+                        'マイページ',
+                        '/mypage/',
+                        [
+                        'class' => '',
+                        'escape' => false
+                        ]
+                    ) ?>
+                <?php else : ?>
+                    <?= $this->Html->link(
+                        '会員登録',
+                        '/users/add',
+                        [
+                        'class' => '',
+                        'escape' => false
+                        ]
+                    ) ?>
+                <?php endif; ?>
+                </li>
+                <li>
+                <?php if ($logindata) : ?>
+                    <?= $this->Html->link(
+                        'ログアウト',
+                        '/users/logout',
+                        [
+                        'class' => '',
+                        ]
+                    ) ?>
+                <?php else : ?>
+                    <?= $this->Html->link(
+                        'ログイン',
+                        '/login',
+                        [
+                        'class' => '',
+                        'escape' => false
+                        ]
+                    ) ?>
+                <?php endif; ?>
+                </li>
+            </ul>
+        </div>
 
-        <?php if ($logindata) : ?>
-          <?= $this->Html->link(
-            '<i class="fas fa-male mr-2"></i>マイページ',
-            '/mypage/',
-            [
-              'class' => 'btn btn-success mr-1  d-lg-inline-block text-white',
-              'escape' => false
-            ]
-          ) ?>
-          <?= $this->Html->link(
-            'ログアウト',
-            '/users/logout',
-            [
-              'class' => 'btn btn-danger  d-lg-inline-block',
-            ]
-          ) ?>
-        <?php else : ?>
-          <?= $this->Html->link(
-            '会員登録<br />はこちら',
-            '/users/add',
-            [
-              'class' => 'btn btn-warning mr-1  d-lg-inline-block text-white',
-              'escape' => false
-            ]
-          ) ?>
-          <?= $this->Html->link(
-            'ログイン<br />はこちら',
-            '/login',
-            [
-              'class' => 'btn btn-primary  d-lg-inline-block',
-              'escape' => false
-            ]
-          ) ?>
-        <?php endif; ?>
-      </div>
     </nav><!-- /# nav01 -->
 
   </header>

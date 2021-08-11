@@ -1,9 +1,26 @@
+$color-aqua: #2cb2ed;
+$color-blue: rgb(10, 10, 243);
+$font-g: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+
+$sm: 1080px;
+@mixin  mobile {
+    @media screen and (max-width:$sm){
+        @content;
+    }
+}
+div{
+    &.w-25{
+        @include mobile{
+            width:100% !important;
+        }
+    }
+}
 .title {
     font-size: calc(1.525rem + 0.3vw);
 }
 img{
     &.logo{
-        height:50px;
+        height:80px;
     }
 }
 a.linkblock{
@@ -169,11 +186,6 @@ select{
     .title {
         font-size: 0.85rem;
     }
-    img{
-        &.logo{
-            height:30px;
-        }
-    }
 }
 
 // 大デバイス（デスクトップ, 1200px 未満）
@@ -201,3 +213,432 @@ select{
       font-size: 1.0rem;
     }
    }
+
+
+
+
+.main_imgBox {
+    height: 680px;
+    overflow: hidden;
+    position: relative; }
+
+  .main_logo {
+    z-index:11;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:50%;
+    height:auto;
+}
+
+  .main_img {
+    z-index:10;
+    opacity: 0;
+    width: 100%;
+    height: 680px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    -webkit-animation: anime 36s 0s infinite;
+    animation: anime 36s 0s infinite; }
+
+    .main_img:nth-of-type(2) {
+      -webkit-animation-delay: 6s;
+      animation-delay: 6s; }
+
+    .main_img:nth-of-type(3) {
+      -webkit-animation-delay: 12s;
+      animation-delay: 12s; }
+
+    .main_img:nth-of-type(4) {
+      -webkit-animation-delay: 18s;
+      animation-delay: 18s; }
+
+    .main_img:nth-of-type(5) {
+      -webkit-animation-delay: 24s;
+      animation-delay: 24s; }
+
+    .main_img:nth-of-type(6) {
+      -webkit-animation-delay: 30s;
+      animation-delay: 30s; }
+
+
+      @keyframes anime {
+        0% {
+            opacity: 0;
+        }
+        8% {
+            opacity: 1;
+        }
+        17% {
+            opacity: 1;
+        }
+        25% {
+            opacity: 0;
+             transform: scale(1.2);
+                        z-index:9;
+        }
+        100% { opacity: 0 }
+    }
+
+    @-webkit-keyframes anime {
+        0% {
+            opacity: 0;
+        }
+        8% {
+            opacity: 1;
+        }
+        17% {
+            opacity: 1;
+        }
+        25% {
+            opacity: 0;
+             -webkit-transform: scale(1.2);
+                z-index:9;
+        }
+        100% { opacity: 0 }
+    }
+
+
+
+div.sp-menu-icon{
+    display:none;
+    width:90px;
+    position:absolute;
+    top:0;
+    right:0;
+    height:90px;
+    background-color:$color-aqua;
+    a{
+        display:block;
+        width:100%;
+        height:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color:#fff;
+    }
+    @include mobile{
+        display:block;
+    }
+}
+
+ul.menu-style{
+    list-style-type: none;
+    height:80px;
+    display:table;
+    width:100%;
+    margin-bottom:0px;
+    @include mobile{
+        position:absolute;
+        left:0;
+        top:90px;
+        z-index:101;
+        background-color:#fff;
+        display:none;
+        padding-left:0;
+    }
+    li{
+        font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+        width:20%;
+        display:table-cell;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 0.85rem;
+        font-weight: bold;
+        @include mobile{
+            width:100%;
+            display:block;
+            z-index:101;
+            background-color:#fff;
+            margin:0;
+            text-align:left;
+            padding-left:20px;
+            padding-bottom:20px;
+        }
+        a{
+            display:block;
+            width:100%;
+            height:100%;
+            line-height:100px;
+            text-decoration: none;
+        }
+        &:nth-child(4){
+            background: #ffa000;
+            @include mobile{
+                background: #fff;
+            }
+            a{
+                color:#fff;
+                @include mobile{
+                    width:80%;
+                    margin:0 auto;
+                    background: #ffa000;
+                    text-align:center;
+                }
+            }
+
+        }
+        &:last-child{
+            background-color:#2cb2ed;
+            @include mobile{
+                background: #fff;
+            }
+            a{
+                color:#fff;
+                @include mobile{
+                    width:80%;
+                    margin:0 auto;
+                    background: #2cb2ed;
+                    text-align:center;
+                }
+            }
+        }
+
+    }
+
+}
+
+
+
+div.mainText{
+    z-index:100;
+    position:absolute;
+    top:30%;
+    left:0%;
+    transform:translate(0%,-30%);
+    width:50%;
+    height:340px;
+    background-color: rgba(255, 255, 230,0.5);
+    @include mobile{
+        width:95%;
+    }
+
+
+    .mainText-h2{
+        background-image: url("/img/top/circle.png");
+        background-size:160px 160px;
+        background-repeat: no-repeat;
+        font-size:1.25em;
+        height:360px;
+        width:90%;
+        margin:-30px auto;
+        @include mobile{
+            font-size:0.85em;
+        }
+        div{
+            position:absolute;
+            top:30px;
+            width:90%;
+        }
+        p:first-child{
+            color:$color-aqua;
+            border-bottom:1px solid $color-aqua;
+            width:90%;
+            margin-left:5%;
+            font-weight: bold;
+        }
+        p:nth-child(2){
+            width:90%;
+            margin-left:5%;
+            font-size:1.3em;
+        }
+        p:nth-child(3){
+            width:90%;
+            margin:0 auto;
+            font-size:0.85%;
+        }
+        p:nth-child(4){
+            width:70%;
+            margin:30px 0px 0px;
+            border:1px solid #000;
+            font-size:0.95%;
+            font-weight: bold;
+            text-align: center;
+            @include mobile{
+                width:90%;
+                margin:0 auto;
+                margin-top:20px;
+                padding:2% 0px;
+            }
+        }
+
+
+    }
+
+}
+
+
+div.freeregist{
+    width:50%;
+    margin:0 auto;
+    &.w100{
+        width: 100%;
+    }
+    a{
+        margin-top:60px;
+        background-color:#1959A8;
+        color:#fff;
+        width:100%;
+        padding:20px;
+        display:block;
+        text-align:center;
+        text-decoration: none;
+        border-radius: 100px;
+        background-image:url("/img/top/arrow1.svg");
+        background-size:20px;
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+
+        &:hover{
+            opacity: 0.8;
+            -webkit-transition: 0.3s ease-in-out;
+            -moz-transition: 0.3s ease-in-out;
+            -o-transition: 0.3s ease-in-out;
+            transition: 0.3s ease-in-out;
+        }
+        &.sqare{
+            border-radius: 0px;
+            margin-top:5px;
+            background-image:none;
+            font-family: $font-g;
+        }
+        &.mail{
+            border-radius: 0px;
+            margin-top:5px;
+            background-color:#fff;
+            color:$color-blue;
+            background-image:none;
+            border:2px solid $color-blue;
+            font-family: $font-g;
+        }
+    }
+}
+
+div.about{
+    width:50%;
+    img{
+        width:100%;
+    }
+}
+div.frow{
+    width:100%;
+    &::after{
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+div.fleft{
+    float:left;
+    width:50%;
+    @include mobile{
+        float:none;
+        width:100%;
+        margin-top:30px;
+    }
+}
+div.fright{
+    float:right;
+    width:50%;
+    @include mobile{
+        float:none;
+        width:100%;
+        padding-top:20px;
+    }
+}
+
+#main{
+    font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif !important;
+
+    h3{
+        letter-spacing: 6px;
+        padding:5px 80px;
+        display: inline;
+        background-image: url("/img/top/slash.svg"),url("/img/top/slash.svg");
+        background-repeat: no-repeat,no-repeat;
+        background-position: left,right;
+        @include mobile{
+            font-size:0.9rem;
+            display:block;
+            padding:5px 0px;
+            width:90%;
+            margin:0 auto;
+        }
+    }
+
+    div{
+        &.note{
+            line-height:36px;
+        }
+
+
+        &.guidence{
+            background-image: url("/img/top/bk.png");
+            background-repeat: no-repeat;
+            background-size:cover;
+            @include mobile{
+                background-image: url("/img/top/bk_sp.png");
+            }
+        }
+        &.guidence-area{
+            width:80%;
+            margin:0 auto;
+            margin-top:30px;
+
+            .fukidashi{
+                background-image: url("/img/top/fukidashi.png");
+                background-repeat: no-repeat;
+                background-size:contain;
+                text-align: center;
+                color:#fff;
+                height:80px;
+                font-size:1.2rem;
+                padding-top:10px;
+                @include mobile{
+                    font-size:0.9rem;
+                }
+            }
+        }
+    }
+    strong {
+        &.marker{
+            background:linear-gradient(transparent 50%, #bff3ff 0%);
+        }
+    }
+
+
+    .recrult{
+        //background: #00a8bd;
+        background: linear-gradient(#00a8bd, #5ec6c3);
+        a{
+          //  background: linear-gradient(#00a8bd, #5ec6c3);
+            color:#fff;
+            width:100%;
+            padding:20px;
+            display:block;
+            text-align:center;
+            text-decoration: none;
+            font-size:1.2rem;
+            background-image:url("/img/top/shop.svg"),url("/img/top/arrow1.svg");
+            background-size:80px,30px;
+            background-repeat: no-repeat;
+            background-position: left 35px center, right 15px center;
+            font-weight: bold;
+            font-family: $font-g;
+            &:hover{
+                opacity: 0.8;
+                -webkit-transition: 0.3s ease-in-out;
+                -moz-transition: 0.3s ease-in-out;
+                -o-transition: 0.3s ease-in-out;
+                transition: 0.3s ease-in-out;
+            }
+        }
+    }
+
+}
+
