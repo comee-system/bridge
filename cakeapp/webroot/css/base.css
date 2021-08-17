@@ -1,13 +1,52 @@
 @charset "UTF-8";
+.pc {
+  display: block !important; }
+  @media screen and (max-width: 1080px) {
+    .pc {
+      display: none !important; } }
+
+.sp {
+  display: none !important; }
+  @media screen and (max-width: 1080px) {
+    .sp {
+      display: block !important; } }
+
+@media screen and (max-width: 1080px) {
+  div.mt-sp-1 {
+    margin-top: 10px !important;
+    font-size: 0.85rem; } }
+
 @media screen and (max-width: 1080px) {
   div.w-25 {
-    width: 100% !important; } }
+    width: 100% !important; }
+    div.w-25 div.d-flex.ml-3 div {
+      z-index: 111; }
+    div.w-25 div.d-flex.ml-3.topicon {
+      margin-left: auto !important;
+      position: fixed;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 260px;
+      margin-top: 60px;
+      z-index: 111; } }
+
+div.toplink {
+  position: fixed;
+  z-index: 10;
+  bottom: 10px;
+  left: auto;
+  right: 10px;
+  display: none; }
 
 .title {
   font-size: calc(1.525rem + 0.3vw); }
 
 img.logo {
   height: 80px; }
+  @media screen and (max-width: 1080px) {
+    img.logo {
+      height: 50px; } }
 
 a.linkblock {
   width: 100%;
@@ -155,6 +194,9 @@ select.appearance-normal {
   height: 680px;
   overflow: hidden;
   position: relative; }
+  @media screen and (max-width: 1080px) {
+    .main_imgBox {
+      height: 500px; } }
 
 .main_logo {
   z-index: 11;
@@ -225,22 +267,30 @@ select.appearance-normal {
     z-index: 9; }
   100% {
     opacity: 0; } }
+@media screen and (max-width: 1080px) {
+  div.sp-wauto {
+    width: auto !important; } }
+
 div.sp-menu-icon {
   display: none;
-  width: 90px;
+  width: 60px;
   position: absolute;
   top: 0;
   right: 0;
-  height: 90px;
-  background-color: #2cb2ed; }
+  height: 60px;
+  background-color: #2cb2ed;
+  outline: none;
+  z-index: 110; }
   div.sp-menu-icon a {
+    outline: none;
     display: block;
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff; }
+    color: #fff;
+    text-decoration: none; }
   @media screen and (max-width: 1080px) {
     div.sp-menu-icon {
       display: block; } }
@@ -253,16 +303,19 @@ ul.menu-style {
   margin-bottom: 0px; }
   @media screen and (max-width: 1080px) {
     ul.menu-style {
-      position: absolute;
+      position: fixed;
       left: 0;
-      top: 90px;
+      top: 0;
       z-index: 101;
       background-color: #fff;
       display: none;
-      padding-left: 0; } }
+      padding-left: 0;
+      height: 100%;
+      padding-top: 160px; } }
   ul.menu-style li {
-    font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
-    width: 20%;
+    font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif !important;
+    width: 16%;
+    margin: 0px 10px;
     display: table-cell;
     vertical-align: middle;
     text-align: center;
@@ -284,32 +337,37 @@ ul.menu-style {
       height: 100%;
       line-height: 100px;
       text-decoration: none; }
-    ul.menu-style li:nth-child(4) {
-      background: #ffa000; }
+      ul.menu-style li a:hover b {
+        opacity: 1.0;
+        border-bottom: 1px solid #0039b2; }
       @media screen and (max-width: 1080px) {
-        ul.menu-style li:nth-child(4) {
-          background: #fff; } }
-      ul.menu-style li:nth-child(4) a {
-        color: #fff; }
-        @media screen and (max-width: 1080px) {
-          ul.menu-style li:nth-child(4) a {
-            width: 80%;
-            margin: 0 auto;
-            background: #ffa000;
-            text-align: center; } }
-    ul.menu-style li:last-child {
-      background-color: #2cb2ed; }
+        ul.menu-style li a {
+          line-height: 50px;
+          height: 50%;
+          width: 50%;
+          margin: 0 auto; } }
+    ul.menu-style li:nth-child(5) a {
+      background: linear-gradient(#0075e4, #003dae);
+      font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important;
+      color: #fff; }
       @media screen and (max-width: 1080px) {
-        ul.menu-style li:last-child {
-          background: #fff; } }
-      ul.menu-style li:last-child a {
-        color: #fff; }
-        @media screen and (max-width: 1080px) {
-          ul.menu-style li:last-child a {
-            width: 80%;
-            margin: 0 auto;
-            background: #2cb2ed;
-            text-align: center; } }
+        ul.menu-style li:nth-child(5) a {
+          width: 80%;
+          margin: 0 auto;
+          text-align: center; } }
+    ul.menu-style li:nth-child(5):hover {
+      opacity: 0.8; }
+    ul.menu-style li:last-child a {
+      background: linear-gradient(#00a8bd, #5ec6c3);
+      font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important;
+      color: #fff; }
+      @media screen and (max-width: 1080px) {
+        ul.menu-style li:last-child a {
+          width: 80%;
+          margin: 0 auto;
+          text-align: center; } }
+      ul.menu-style li:last-child a:hover {
+        background: #ffa000; }
 
 div.mainText {
   z-index: 100;
@@ -319,10 +377,11 @@ div.mainText {
   transform: translate(0%, -30%);
   width: 50%;
   height: 340px;
-  background-color: rgba(255, 255, 230, 0.5); }
+  background-color: rgba(255, 255, 255, 0.8); }
   @media screen and (max-width: 1080px) {
     div.mainText {
-      width: 95%; } }
+      width: 95%;
+      height: 280px; } }
   div.mainText .mainText-h2 {
     background-image: url("/img/top/circle.png");
     background-size: 160px 160px;
@@ -331,26 +390,30 @@ div.mainText {
     height: 360px;
     width: 90%;
     margin: -30px auto; }
+    div.mainText .mainText-h2 p:not(:first-child) {
+      font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif !important; }
     @media screen and (max-width: 1080px) {
       div.mainText .mainText-h2 {
-        font-size: 0.85em; } }
+        font-size: 0.85em;
+        height: 300px; } }
     div.mainText .mainText-h2 div {
       position: absolute;
       top: 30px;
-      width: 90%; }
+      width: 90%;
+      margin-left: 5%; }
     div.mainText .mainText-h2 p:first-child {
       color: #2cb2ed;
       border-bottom: 1px solid #2cb2ed;
       width: 90%;
-      margin-left: 5%;
       font-weight: bold; }
     div.mainText .mainText-h2 p:nth-child(2) {
       width: 90%;
-      margin-left: 5%;
       font-size: 1.3em; }
+      @media screen and (max-width: 1080px) {
+        div.mainText .mainText-h2 p:nth-child(2) {
+          font-size: 1.0em; } }
     div.mainText .mainText-h2 p:nth-child(3) {
       width: 90%;
-      margin: 0 auto;
       font-size: 0.85%; }
     div.mainText .mainText-h2 p:nth-child(4) {
       width: 70%;
@@ -358,55 +421,72 @@ div.mainText {
       border: 1px solid #000;
       font-size: 0.95%;
       font-weight: bold;
-      text-align: center; }
+      text-align: center;
+      font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important;
+      padding: 5px 0px; }
       @media screen and (max-width: 1080px) {
         div.mainText .mainText-h2 p:nth-child(4) {
           width: 90%;
-          margin: 0 auto;
-          margin-top: 20px;
-          padding: 2% 0px; } }
+          text-align: left;
+          margin-top: 0px;
+          padding: 2%; } }
 
 div.freeregist {
-  width: 50%;
+  width: 60%;
   margin: 0 auto; }
   div.freeregist.w100 {
     width: 100%; }
-  div.freeregist a {
+  @media screen and (max-width: 1080px) {
+    div.freeregist {
+      width: 95%; } }
+  div.freeregist div {
+    border-radius: 100px;
+    background: linear-gradient(#0075e4, #003dae);
     margin-top: 60px;
-    background-color: #1959A8;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5); }
+    div.freeregist div:hover {
+      background: linear-gradient(#3796ee, #577ab9); }
+    div.freeregist div .mt0 {
+      margin-top: 0; }
+    div.freeregist div.sqare {
+      border-radius: 0px;
+      margin-top: 0px;
+      font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important; }
+      @media screen and (max-width: 1080px) {
+        div.freeregist div.sqare a {
+          background-image: url("/img/top/register.svg");
+          background-size: 20px;
+          background-repeat: no-repeat;
+          background-position: left 10% center; } }
+  div.freeregist a {
     color: #fff;
     width: 100%;
     padding: 20px;
     display: block;
     text-align: center;
     text-decoration: none;
-    border-radius: 100px;
-    background-image: url("/img/top/arrow1.svg");
-    background-size: 20px;
+    background-image: url("/img/top/arrow1.svg"), url("/img/top/register.svg");
+    background-size: 40px,20px;
     background-repeat: no-repeat;
-    background-position: right 15px center; }
-    div.freeregist a:hover {
-      opacity: 0.8;
-      -webkit-transition: 0.3s ease-in-out;
-      -moz-transition: 0.3s ease-in-out;
-      -o-transition: 0.3s ease-in-out;
-      transition: 0.3s ease-in-out; }
-    div.freeregist a.sqare {
-      border-radius: 0px;
-      margin-top: 5px;
-      background-image: none;
-      font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif; }
+    background-position: right 15px center ,left 20% center; }
     div.freeregist a.mail {
       border-radius: 0px;
       margin-top: 5px;
       background-color: #fff;
-      color: #0a0af3;
+      color: #0039b2;
       background-image: none;
-      border: 2px solid #0a0af3;
-      font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif; }
+      border: 2px solid #0039b2;
+      font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important;
+      background-image: url("/img/top/mail.svg");
+      background-size: 20px;
+      background-repeat: no-repeat;
+      background-position: left 20% center; }
+      @media screen and (max-width: 1080px) {
+        div.freeregist a.mail {
+          background-position: left 10% center; } }
 
 div.about {
-  width: 50%; }
+  width: 80%; }
   div.about img {
     width: 100%; }
 
@@ -425,6 +505,8 @@ div.fleft {
       float: none;
       width: 100%;
       margin-top: 30px; } }
+  div.fleft img.w-80 {
+    width: 80%; }
 
 div.fright {
   float: right;
@@ -435,8 +517,10 @@ div.fright {
       width: 100%;
       padding-top: 20px; } }
 
+#main2,
 #main {
   font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif !important; }
+  #main2 h3,
   #main h3 {
     letter-spacing: 6px;
     padding: 5px 80px;
@@ -445,25 +529,41 @@ div.fright {
     background-repeat: no-repeat,no-repeat;
     background-position: left,right; }
     @media screen and (max-width: 1080px) {
+      #main2 h3,
       #main h3 {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         display: block;
         padding: 5px 0px;
-        width: 90%;
-        margin: 0 auto; } }
+        width: 70%;
+        margin: 0 auto;
+        letter-spacing: 3px; } }
+  #main2 div.note,
   #main div.note {
     line-height: 36px; }
+    @media screen and (max-width: 1080px) {
+      #main2 div.note,
+      #main div.note {
+        line-height: 24px; } }
+  #main2 div.guidence,
   #main div.guidence {
     background-image: url("/img/top/bk.png");
     background-repeat: no-repeat;
     background-size: cover; }
     @media screen and (max-width: 1080px) {
+      #main2 div.guidence,
       #main div.guidence {
         background-image: url("/img/top/bk_sp.png"); } }
+    #main2 div.guidence div.guidence-image-area,
+    #main div.guidence div.guidence-image-area {
+      width: 90%;
+      margin: 0 auto;
+      text-align: center; }
+  #main2 div.guidence-area,
   #main div.guidence-area {
     width: 80%;
     margin: 0 auto;
     margin-top: 30px; }
+    #main2 div.guidence-area .fukidashi,
     #main div.guidence-area .fukidashi {
       background-image: url("/img/top/fukidashi.png");
       background-repeat: no-repeat;
@@ -474,26 +574,44 @@ div.fright {
       font-size: 1.2rem;
       padding-top: 10px; }
       @media screen and (max-width: 1080px) {
+        #main2 div.guidence-area .fukidashi,
         #main div.guidence-area .fukidashi {
-          font-size: 0.9rem; } }
+          font-size: 1.0rem;
+          background-size: 100%;
+          padding: 3% 0px 8% 0px;
+          height: auto; } }
+  #main2 strong.marker,
   #main strong.marker {
     background: linear-gradient(transparent 50%, #bff3ff 0%); }
+  #main2 .recrult,
   #main .recrult {
     background: linear-gradient(#00a8bd, #5ec6c3); }
+    @media screen and (max-width: 1080px) {
+      #main2 .recrult,
+      #main .recrult {
+        margin-top: 10px !important; } }
+    #main2 .recrult a,
     #main .recrult a {
       color: #fff;
       width: 100%;
-      padding: 20px;
+      padding: 25px;
       display: block;
       text-align: center;
       text-decoration: none;
       font-size: 1.2rem;
-      background-image: url("/img/top/shop.svg"), url("/img/top/arrow1.svg");
-      background-size: 80px,30px;
-      background-repeat: no-repeat;
-      background-position: left 35px center, right 15px center;
+      overflow: auto !important;
+      overflow: hidden;
+      background: url("/img/top/shop.svg") no-repeat left 35px center, url("/img/top/arrow2.svg") no-repeat right 15px center;
+      background-size: 80px,40px;
       font-weight: bold;
-      font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif; }
+      font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important; }
+      @media screen and (max-width: 1080px) {
+        #main2 .recrult a,
+        #main .recrult a {
+          font-size: 1.0rem;
+          background: url("/img/top/shop.svg") no-repeat left 15px center, url("/img/top/arrow2.svg") no-repeat right 15px center;
+          background-size: 40px,25px; } }
+      #main2 .recrult a:hover,
       #main .recrult a:hover {
         opacity: 0.8;
         -webkit-transition: 0.3s ease-in-out;

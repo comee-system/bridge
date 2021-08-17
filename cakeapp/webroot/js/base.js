@@ -1,10 +1,55 @@
 $(function () {
+    $('a[href^=#]').click(function(){
+        var adjust = 0;
+        var speed = 400;
+        var href= $(this).attr("href");
+        var target = $(href == "#" || href == "" ? 'html' : href);
+        var position = target.offset().top + adjust;
+        $('body,html').animate({scrollTop:position}, speed, 'swing');
+        return false;
+      });
+
+      $(window).on('load scroll', function(){
+        var _w = $(window).width();
+        if(_w > 1080) return false;
+        if ($(window).scrollTop() > 200) {
+          $('.toplink').fadeIn(400);
+         } else {
+          $('.toplink').fadeOut(400);
+         }
+      });
+
+    $(".menu-style li a").click(function(){
+        var _w = $(window).width();
+        if(_w > 1080) return false;
+        $(".menu-style").animate({ height: 'hide' }, 'fast');
+        $(".sp-menu-icon").css("background-color","#2cb2ed");
+        $("#micon").removeClass('fa-times');
+        $("#micon").addClass('fa-bars');
+        $("#topicon").removeClass('topicon');
+        $("#micon").css('color',"#fff");
+        $("#micon").css('position',"absolute");
+        return false;
+    });
     $(".sp-menu-icon a").click(function(){
         var _sts = $(".menu-style").css("display");
         if(_sts == "none"){
             $(".menu-style").animate({ height: 'show' }, 'fast');
+            $(".sp-menu-icon").css("background-color","#fff");
+            $("#micon").removeClass('fa-bars');
+            $("#micon").addClass('fa-times');
+            $("#topicon").addClass('topicon');
+            $("#micon").css('color',"#2cb2ed");
+            $("#micon").css('position',"fixed");
+
         }else{
             $(".menu-style").animate({ height: 'hide' }, 'fast');
+            $(".sp-menu-icon").css("background-color","#2cb2ed");
+            $("#micon").removeClass('fa-times');
+            $("#micon").addClass('fa-bars');
+            $("#topicon").removeClass('topicon');
+            $("#micon").css('color',"#fff");
+            $("#micon").css('position',"absolute");
         }
         return false;
     });

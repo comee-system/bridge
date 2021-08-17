@@ -1,0 +1,26 @@
+<svg id="top.svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="47" height="47" viewBox="0 0 47 47">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #fff;
+        stroke-width: 2px;
+      }
+
+      .cls-1 {
+        stroke: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill-rule: evenodd;
+        stroke: url(#linear-gradient-2);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="23.5" y1="46" x2="23.5" y2="1" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#003dae"/>
+      <stop offset="1" stop-color="#0075e4"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="1456.235" y1="794.219" x2="1456.235" y2="785.562" xlink:href="#linear-gradient"/>
+  </defs>
+  <circle id="楕円形_2" data-name="楕円形 2" class="cls-1" cx="23.5" cy="23.5" r="22.5"/>
+  <path id="シェイプ_33" data-name="シェイプ 33" class="cls-2" d="M1448.93,794.216l7.29-8.638,7.3,8.638" transform="translate(-1432.5 -767.031)"/>
+</svg>

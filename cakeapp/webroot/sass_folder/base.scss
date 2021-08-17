@@ -1,6 +1,7 @@
 $color-aqua: #2cb2ed;
-$color-blue: rgb(10, 10, 243);
-$font-g: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+$color-blue: #0039b2;
+$font-g: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important;
+$font-m: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif !important;
 
 $sm: 1080px;
 @mixin  mobile {
@@ -8,19 +9,74 @@ $sm: 1080px;
         @content;
     }
 }
+
+.pc{
+    display:block !important;
+    @include mobile{
+        display:none !important;
+    }
+}
+.sp{
+    display:none !important;
+    @include mobile{
+        display:block !important;
+    }
+}
+div{
+    &.mt-sp-1{
+        @include mobile{
+            margin-top:10px !important;
+            font-size:0.85rem;
+        }
+    }
+}
 div{
     &.w-25{
         @include mobile{
             width:100% !important;
+
+            div{
+                &.d-flex{
+                    &.ml-3{
+                        div{
+                            z-index:111;
+                        }
+                        &.topicon{
+                            margin-left:auto !important;
+                            position: fixed;
+                            left: 0;
+                            right: 0;
+                            margin: auto;
+                            width:260px;
+                            margin-top:60px;
+                            z-index:111;
+                        }
+                    }
+                }
+            }
         }
     }
 }
+div{
+    &.toplink{
+        position: fixed;
+        z-index:10;
+        bottom:10px;
+        left:auto;
+        right:10px;
+        display:none;
+    }
+}
+
 .title {
     font-size: calc(1.525rem + 0.3vw);
 }
 img{
     &.logo{
         height:80px;
+        @include mobile{
+            height:50px;
+        }
     }
 }
 a.linkblock{
@@ -220,7 +276,11 @@ select{
 .main_imgBox {
     height: 680px;
     overflow: hidden;
-    position: relative; }
+    position: relative;
+    @include mobile{
+        height:500px;
+    }
+}
 
   .main_logo {
     z-index:11;
@@ -303,17 +363,24 @@ select{
         100% { opacity: 0 }
     }
 
-
+div.sp-wauto{
+    @include mobile{
+        width:auto !important;
+    }
+}
 
 div.sp-menu-icon{
     display:none;
-    width:90px;
+    width:60px;
     position:absolute;
     top:0;
     right:0;
-    height:90px;
+    height:60px;
     background-color:$color-aqua;
+    outline: none;
+    z-index:110;
     a{
+        outline: none;
         display:block;
         width:100%;
         height:100%;
@@ -321,6 +388,7 @@ div.sp-menu-icon{
         justify-content: center;
         align-items: center;
         color:#fff;
+        text-decoration:none;
     }
     @include mobile{
         display:block;
@@ -334,22 +402,26 @@ ul.menu-style{
     width:100%;
     margin-bottom:0px;
     @include mobile{
-        position:absolute;
+        position:fixed;
         left:0;
-        top:90px;
+        top:0;
         z-index:101;
         background-color:#fff;
         display:none;
         padding-left:0;
+        height:100%;
+        padding-top:160px;
     }
     li{
-        font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
-        width:20%;
+        font-family: $font-m;
+        width:16%;
+        margin: 0px 10px;
         display:table-cell;
         vertical-align: middle;
         text-align: center;
         font-size: 0.85rem;
         font-weight: bold;
+
         @include mobile{
             width:100%;
             display:block;
@@ -366,35 +438,52 @@ ul.menu-style{
             height:100%;
             line-height:100px;
             text-decoration: none;
-        }
-        &:nth-child(4){
-            background: #ffa000;
-            @include mobile{
-                background: #fff;
+            &:hover b{
+                opacity: 1.0;
+                border-bottom: 1px solid $color-blue;
             }
+            @include mobile{
+                line-height:50px;
+                height:50%;
+                width:50%;
+                margin:0 auto;
+            }
+        }
+        &:nth-child(5){
+            //background: #ffa000;
+
+
             a{
+                background: linear-gradient(#0075e4, #003dae);
+                font-family: $font-g;
                 color:#fff;
                 @include mobile{
                     width:80%;
                     margin:0 auto;
-                    background: #ffa000;
+                    //background: #ffa000;
                     text-align:center;
                 }
+
+            }
+            &:hover{
+                opacity: 0.8;
             }
 
         }
         &:last-child{
-            background-color:#2cb2ed;
-            @include mobile{
-                background: #fff;
-            }
+           // background-color:#2cb2ed;
             a{
+                background: linear-gradient(#00a8bd, #5ec6c3);
+                font-family: $font-g;
                 color:#fff;
                 @include mobile{
                     width:80%;
                     margin:0 auto;
-                    background: #2cb2ed;
+           //         background: #2cb2ed;
                     text-align:center;
+                }
+                &:hover{
+                    background: #ffa000;
                 }
             }
         }
@@ -413,9 +502,10 @@ div.mainText{
     transform:translate(0%,-30%);
     width:50%;
     height:340px;
-    background-color: rgba(255, 255, 230,0.5);
+    background-color: rgba(255, 255, 255,0.8);
     @include mobile{
         width:95%;
+        height:280px;
     }
 
 
@@ -427,29 +517,35 @@ div.mainText{
         height:360px;
         width:90%;
         margin:-30px auto;
+        p:not(:first-child){
+            font-family: $font-m;
+        }
         @include mobile{
             font-size:0.85em;
+            height:300px;
         }
         div{
             position:absolute;
             top:30px;
             width:90%;
+            margin-left:5%;
         }
         p:first-child{
             color:$color-aqua;
             border-bottom:1px solid $color-aqua;
             width:90%;
-            margin-left:5%;
             font-weight: bold;
+
         }
         p:nth-child(2){
             width:90%;
-            margin-left:5%;
             font-size:1.3em;
+            @include mobile{
+                font-size:1.0em;
+            }
         }
         p:nth-child(3){
             width:90%;
-            margin:0 auto;
             font-size:0.85%;
         }
         p:nth-child(4){
@@ -459,11 +555,13 @@ div.mainText{
             font-size:0.95%;
             font-weight: bold;
             text-align: center;
+            font-family: $font-g;
+            padding:5px 0px;
             @include mobile{
                 width:90%;
-                margin:0 auto;
-                margin-top:20px;
-                padding:2% 0px;
+                text-align: left;
+                margin-top:0px;
+                padding:2%;
             }
         }
 
@@ -474,39 +572,51 @@ div.mainText{
 
 
 div.freeregist{
-    width:50%;
+    width:60%;
     margin:0 auto;
     &.w100{
         width: 100%;
     }
-    a{
+    @include mobile{
+        width:95%;
+    }
+    div{
+        border-radius: 100px;
+        background:linear-gradient(#0075e4, #003dae);
         margin-top:60px;
-        background-color:#1959A8;
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .5);
+        &:hover{
+            background: linear-gradient(#3796ee, #577ab9);
+        }
+        .mt0{margin-top:0;}
+
+        &.sqare{
+            border-radius: 0px;
+            margin-top:0px;
+            font-family: $font-g;
+            a{
+                @include mobile{
+                    background-image:url("/img/top/register.svg");
+                    background-size:20px;
+                    background-repeat: no-repeat;
+                    background-position: left 10% center;
+                }
+            }
+        }
+    }
+    a{
         color:#fff;
         width:100%;
         padding:20px;
         display:block;
         text-align:center;
         text-decoration: none;
-        border-radius: 100px;
-        background-image:url("/img/top/arrow1.svg");
-        background-size:20px;
-        background-repeat: no-repeat;
-        background-position: right 15px center;
 
-        &:hover{
-            opacity: 0.8;
-            -webkit-transition: 0.3s ease-in-out;
-            -moz-transition: 0.3s ease-in-out;
-            -o-transition: 0.3s ease-in-out;
-            transition: 0.3s ease-in-out;
-        }
-        &.sqare{
-            border-radius: 0px;
-            margin-top:5px;
-            background-image:none;
-            font-family: $font-g;
-        }
+        background-image:url("/img/top/arrow1.svg"),url("/img/top/register.svg");
+        background-size:40px,20px;
+        background-repeat: no-repeat;
+        background-position: right 15px center ,left 20% center;
+
         &.mail{
             border-radius: 0px;
             margin-top:5px;
@@ -515,12 +625,19 @@ div.freeregist{
             background-image:none;
             border:2px solid $color-blue;
             font-family: $font-g;
+            background-image:url("/img/top/mail.svg");
+            background-size:20px;
+            background-repeat: no-repeat;
+            background-position: left 20% center;
+            @include mobile{
+                background-position: left 10% center;
+            }
         }
     }
 }
 
 div.about{
-    width:50%;
+    width:80%;
     img{
         width:100%;
     }
@@ -541,6 +658,11 @@ div.fleft{
         width:100%;
         margin-top:30px;
     }
+    img{
+        &.w-80{
+            width:80%;
+        }
+    }
 }
 div.fright{
     float:right;
@@ -552,8 +674,9 @@ div.fright{
     }
 }
 
+#main2,
 #main{
-    font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif !important;
+    font-family: $font-m;
 
     h3{
         letter-spacing: 6px;
@@ -563,17 +686,21 @@ div.fright{
         background-repeat: no-repeat,no-repeat;
         background-position: left,right;
         @include mobile{
-            font-size:0.9rem;
+            font-size:0.95rem;
             display:block;
             padding:5px 0px;
-            width:90%;
+            width:70%;
             margin:0 auto;
+            letter-spacing: 3px;
         }
     }
 
     div{
         &.note{
             line-height:36px;
+            @include mobile{
+                line-height: 24px;
+            }
         }
 
 
@@ -583,6 +710,11 @@ div.fright{
             background-size:cover;
             @include mobile{
                 background-image: url("/img/top/bk_sp.png");
+            }
+            div.guidence-image-area{
+                width:90%;
+                margin:0 auto;
+                text-align: center;
             }
         }
         &.guidence-area{
@@ -600,7 +732,10 @@ div.fright{
                 font-size:1.2rem;
                 padding-top:10px;
                 @include mobile{
-                    font-size:0.9rem;
+                    font-size:1.0rem;
+                    background-size:100%;
+                    padding:3% 0px 8% 0px;
+                    height:auto;
                 }
             }
         }
@@ -615,21 +750,33 @@ div.fright{
     .recrult{
         //background: #00a8bd;
         background: linear-gradient(#00a8bd, #5ec6c3);
+        @include mobile{
+            margin-top:10px !important;
+        }
         a{
           //  background: linear-gradient(#00a8bd, #5ec6c3);
             color:#fff;
             width:100%;
-            padding:20px;
+            padding:25px;
             display:block;
             text-align:center;
             text-decoration: none;
             font-size:1.2rem;
-            background-image:url("/img/top/shop.svg"),url("/img/top/arrow1.svg");
-            background-size:80px,30px;
-            background-repeat: no-repeat;
-            background-position: left 35px center, right 15px center;
+            overflow:auto!important;
+            overflow /**/: hidden;
+            background:
+            url("/img/top/shop.svg") no-repeat left 35px center
+            ,url("/img/top/arrow2.svg") no-repeat right 15px center;
+            background-size:80px,40px;
             font-weight: bold;
             font-family: $font-g;
+            @include mobile{
+                font-size:1.0rem;
+                background:
+                url("/img/top/shop.svg") no-repeat left 15px center
+                ,url("/img/top/arrow2.svg") no-repeat right 15px center;
+                background-size:40px,25px;
+            }
             &:hover{
                 opacity: 0.8;
                 -webkit-transition: 0.3s ease-in-out;
@@ -641,4 +788,5 @@ div.fright{
     }
 
 }
+
 

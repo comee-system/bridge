@@ -46,10 +46,11 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                 </div>
             </div>
             <div class="mt-2 freeregist">
-                <a href="/users/add" >
-                    <i class="far fa-edit"></i>
-                    無料会員登録はこちら
-                </a>
+                <div>
+                    <a href="/users/add" >
+                        無料会員登録はこちら
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -62,14 +63,14 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     </div>
     <div class="container" id="main">
         <div class="about"><img src="/img/top/about.png" /></div>
-        <div class="text-center mt-5">
+        <div class="text-center mt-5" id="bridge">
             <h3>「<ruby>Bridge<rt>ブリッジ</rt></ruby>」とは？</h3>
         </div>
         <div class="row mt-5">
             <div class="col-md-6 col-12 "><img src="/img/top/about_bridge.png" class="w-100" /></div>
             <div class="col-md-6 col-12 ">
                 <div class="mt-3 note">
-                    大手から中小企業まで店舗開発のサポートをしてきた<br />
+                    大手から中小企業まで店舗開発のサポートをしてきた
                     ノウハウを生かし、希少性・秘匿性が高い閉店見込み物件をデータベース化しました。<br />
                     「ブリッジ」は、その豊富な情報からスピーディーに優良物件へのリーチを可能にした店舗開発担当限定の
                     <strong  class="marker" >テナントダイレクトマッチングシステム</strong >です。<br />
@@ -82,32 +83,36 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                 </div>
             </div>
         </div>
+    </div>
+    <div id="main2" >
         <div class="frow mt-5 guidence">
 
             <div class="fright">
                 <div class="guidence-area">
                     <div class="fukidashi">まずは無料会員登録から！</div>
                     <div class="mt-2 freeregist w100">
-                        <a href="/users/add" class="sqare" >
-                            <i class="far fa-edit"></i>
-                            無料会員登録はこちら
-                        </a>
+                        <div class="mt-0 sqare">
+                            <a href="/users/add"  >
+                                無料会員登録はこちら
+                            </a>
+                        </div>
                     </div>
-                    <div class="mt-2 freeregist w100">
+                    <div class="mt-4 freeregist w100">
                         <a href="/users/add" class="mail" >
-                            <i class="far fa-envelope"></i>
                             ご相談お問い合わせ
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div class="fleft">
-                <img src="/img/top/guidance.png" class="w-100 mt-3" />
+            <div class="fleft text-center">
+                <div class="guidence-image-area">
+                    <img src="/img/top/guidance.png" class="w-100 mt-5 pc" />
+                    <img src="/img/top/guidance_sp.png" class="w-100 mt-5  sp" />
+                </div>
             </div>
 
         </div>
-        <div class="about"><img src="/img/top/about.png" /></div>
 
     </div>
 

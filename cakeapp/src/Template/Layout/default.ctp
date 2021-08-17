@@ -26,7 +26,6 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/top.css">
-  <link rel="stylesheet" href="/css/sp_base.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/step.css">
   <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap" rel="stylesheet">
@@ -38,28 +37,31 @@
 
   <header>
 
-    <nav  class="d-flex w-100">
+    <nav  class="d-flex w-100 align-items-center">
         <div class="w-25">
-            <div class="d-flex ml-3">
+            <div class="d-flex ml-3" id="topicon">
                 <div>
                     <a class="navbar-brand mr-auto" href="/">
                         <img src="/img/top/logo.svg" alt="bridge" class="logo">
                     </a>
                 </div>
-                <div class="ml-4 mt-3">
+                <div class="ml-4 mt-3 mt-sp-1">
                     店舗開発担当者限定<br />
                     店舗再生プラットフォーム
                 </div>
             </div>
         </div>
-        <div class="w-75" >
+        <div class="w-75 sp-wauto" >
             <div class="sp-menu-icon">
-                <a href="#" class="btn"><i class="fas fa-bars"></i></a>
+                <a href="#" >
+                    <i class="fas fa-bars" id="micon"></i>
+                </a>
             </div>
             <ul class="menu-style">
-                <li><a href="">ブリッジとは？</a></li>
-                <li><a href="">3つのポイント</a></li>
-                <li><a href="">マッチングの流れ</a></li>
+                <li><a href="#bridge"><b>ブリッジとは？</b></a></li>
+                <li><a href=""><b>3つのポイント</b></a></li>
+                <li><a href=""><b>マッチングの流れ</b></a></li>
+                <li><a href=""><b>ご相談・お問い合わせ</b></a></li>
                 <li>
                 <?php if ($logindata) : ?>
                     <?= $this->Html->link(
@@ -72,7 +74,7 @@
                     ) ?>
                 <?php else : ?>
                     <?= $this->Html->link(
-                        '会員登録',
+                        '無料会員登録',
                         '/users/add',
                         [
                         'class' => '',
@@ -111,8 +113,10 @@
   <?= $this->fetch('content') ?>
 
 
-
-  <footer id="footer" class="bg-light ">
+<div class="toplink">
+    <a href="#"><img src="/img/top/top.svg" /></a>
+</div>
+  <footer id="footer" class="bg-light pc">
     <div class="container py-4 py-md-5">
 
 
@@ -145,7 +149,6 @@
 
 
 
-      <footer id="footer" class="bg-light ">
         <div class="container py-4 py-md-5">
 
           <div id="footer-logo" class="mt-2 mt-sm-4">
@@ -156,22 +159,22 @@
         </div><!-- .container -->
       </footer>
 
-      <div class="text-white bg-primary">
-        <p class="text-center mb-0 py-2"><small>Copyright (C) bridge. All Rights Reserved.</small></p>
-      </div>
+        <div class="text-white bg-primary pc">
+            <p class="text-center mb-0 py-2"><small>Copyright (C) bridge. All Rights Reserved.</small></p>
+        </div>
 
 
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 
-      <?= $this->Html->script('/js/jquery.min.js') ?>
-    <?= $this->Html->script('/js/jquery-ui.min.js') ?>
-    <?= $this->Html->script('/js/jquery.ui.datepicker-ja.min.js') ?>
-      <script src="/js/base.js"></script>
-      <script src="/js/comment.js"></script>
-      <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+        <?= $this->Html->script('/js/jquery.min.js') ?>
+        <?= $this->Html->script('/js/jquery-ui.min.js') ?>
+        <?= $this->Html->script('/js/jquery.ui.datepicker-ja.min.js') ?>
+        <script src="/js/base.js"></script>
+        <script src="/js/comment.js"></script>
+        <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
       <!----------------------------------------------->
 </body>
 
