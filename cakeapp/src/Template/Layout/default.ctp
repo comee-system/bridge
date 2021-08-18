@@ -116,7 +116,7 @@
 <div class="toplink">
     <a href="#"><img src="/img/top/top.svg" /></a>
 </div>
-  <footer id="footer" class="bg-light pc">
+  <footer id="footer" class="bg-light ">
     <div class="container py-4 py-md-5">
 
 
@@ -159,7 +159,7 @@
         </div><!-- .container -->
       </footer>
 
-        <div class="text-white bg-primary pc">
+        <div class="text-white bg-primary ">
             <p class="text-center mb-0 py-2"><small>Copyright (C) bridge. All Rights Reserved.</small></p>
         </div>
 

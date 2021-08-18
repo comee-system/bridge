@@ -115,4 +115,38 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
         </div>
 
     </div>
+    <div class="container" id="main3">
+        <div class="point"><img src="/img/top/point.png" /></div>
+        <div class="text-center mt-5" id="threepoint">
+            <h3>「<ruby>Bridge<rt>ブリッジ</rt></ruby>」の３つのポイント</h3>
+        </div>
+        <div class="mx-auto w-90 mt-5" >
+            <div class="mt-5 row">
+                <div class="col-6">
+                    <img src="/img/top/point1.png" class="w-100" />
+                </div>
+                <div class="col-6 mt-5">
+                    <div class="pl-3 point1 d-flex align-items-center">
+                        <div>
+                            <h4>POINT1</h4>
+                            <h5>希少性・秘匿性が高い閉店見込物件をデータベース化</h5>
+                        </div>
 
+                    </div>
+                    <div class="mt-5 main3-text">
+                        <p>
+                            希少性・秘匿性が高い閉店見込物件は、借主（テナント）主導で、水面下で流通が進むため、コネクションなどが無いとなかなか出会うことができません。ニーズも高くタイミングも重要になります。ブリッジではそんな閉店見込物件を中心にデータベース化し、情報を提供しています。
+                        </p>
+                    </div>
+                    <div class="mt-5 p-4 main3-text main3-detail text-white align-items-center">
+                        <p>
+                        ブリッジの会員になると、<strong  class="markerOrenge" >閉店見込物件の登録</strong>も可能になります。登録した物件と出店希望企業がマッチングし、成約になると、物件を登録した側にも<strong  class="markerOrenge" >メリット</strong>があります。
+                        </p>
+                        <div class="main3-link" >
+                            <a href="#">詳しくはこちら<i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

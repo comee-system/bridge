@@ -637,11 +637,20 @@ div.freeregist{
 }
 
 div.about{
-    width:80%;
+    width:60%;
     img{
         width:100%;
     }
 }
+div.point{
+    width:60%;
+    margin-left:auto;
+    margin-right: 0;
+    img{
+        width:100%;
+    }
+}
+
 div.frow{
     width:100%;
     &::after{
@@ -673,7 +682,11 @@ div.fright{
         padding-top:20px;
     }
 }
+div.w-90{
+    width:90%;
+}
 
+#main3,
 #main2,
 #main{
     font-family: $font-m;
@@ -696,6 +709,53 @@ div.fright{
     }
 
     div{
+        &.point1{
+            border-left: 6px solid #003dae;
+            border-image: linear-gradient(to top, #003dae 0%, #0075e4 100%);
+            border-image-slice: 1;
+            min-height: 80px;
+            h4{
+                color: #109ff9;
+                background: -webkit-linear-gradient(0deg, #109ff9, #003dae);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+        }
+        &.main3-link{
+            text-align: right;
+            width:100%;
+            position:relative;
+            a{
+                border-radius: 100px;
+                background-color:#fff;
+                color:#00a8bd;
+                text-decoration: none;
+                padding:0.6rem 2.4rem;
+                &:hover{
+                    background-color: #ffa000;
+                    color:#fff;
+                }
+                i{
+                    display:inline-block;
+                    position: absolute;
+                    top: 5px;
+                    left: auto;
+                    right: 10px;
+                    bottom: 0;
+                    margin: auto;
+                }
+            }
+        }
+        &.main3-text{
+            p{
+                font-family: $font-g;
+                font-size:0.95rem;
+            }
+        }
+        &.main3-detail{
+            background: linear-gradient(#00a8bd, #5ec6c3);
+        }
         &.note{
             line-height:36px;
             @include mobile{
@@ -725,9 +785,11 @@ div.fright{
             .fukidashi{
                 background-image: url("/img/top/fukidashi.png");
                 background-repeat: no-repeat;
+                background-position: center;
                 background-size:contain;
                 text-align: center;
                 color:#fff;
+                width:100%;
                 height:80px;
                 font-size:1.2rem;
                 padding-top:10px;
@@ -743,6 +805,9 @@ div.fright{
     strong {
         &.marker{
             background:linear-gradient(transparent 50%, #bff3ff 0%);
+        }
+        &.markerOrenge{
+            background:linear-gradient(transparent 50%, #ffa000 0%);
         }
     }
 
