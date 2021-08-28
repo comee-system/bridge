@@ -59,9 +59,9 @@
             </div>
             <ul class="menu-style">
                 <li><a href="#bridge"><b>ブリッジとは？</b></a></li>
-                <li><a href=""><b>3つのポイント</b></a></li>
-                <li><a href=""><b>マッチングの流れ</b></a></li>
-                <li><a href=""><b>ご相談・お問い合わせ</b></a></li>
+                <li><a href="#threepoint"><b>3つのポイント</b></a></li>
+                <li><a href="#flow"><b>マッチングの流れ</b></a></li>
+                <li><a href="#questionarea"><b>ご相談・お問い合わせ</b></a></li>
                 <li>
                 <?php if ($logindata) : ?>
                     <?= $this->Html->link(
@@ -116,6 +116,38 @@
 <div class="toplink">
     <a href="#"><img src="/img/top/top.svg" /></a>
 </div>
+
+
+<footer>
+    <div class="container py-4 py-md-5">
+        <div class="row">
+            <div class="col-md-1 col-3"><img src="/img/top/logo2.svg" /></div>
+            <div class="col-md-6 col-9 mt-2">
+                店舗開発担当者限定<br />
+                店舗再生プラットフォーム
+            </div>
+            <div class="col-md-5 col-12 mt-2">
+                <ul class="clearfix">
+                    <li><a href="#questionarea">ご相談・お問い合わせ</a></li>
+                    <?php if ($logindata) : ?>
+                        <li><a href="/users/logout">ログアウト</a></li>
+                    <?php else: ?>
+                        <li><a href="/users/add/">無料会員登録</a></li>
+                        <li><a href="/login">ログイン</a></li>
+                    <?php endif; ?>
+                </ul>
+                <ul class="clearfix float-right">
+                    <li><a href="http://www.area-design.co.jp/" target=_blank>運営会社情報</a></li>
+                    <li><a href="/pdf/termofuse.pdf" target=_blank>利用規約</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copy">
+            <small>Copyright (C) bridge. All Rights Reserved.</small>
+        </div>
+    </div>
+</footer>
+<!--
   <footer id="footer" class="bg-light ">
     <div class="container py-4 py-md-5">
 
@@ -145,8 +177,7 @@
           </li>
         </ul>
 
-      </div><!-- /.footer-index -->
-
+      </div>
 
 
         <div class="container py-4 py-md-5">
@@ -155,14 +186,14 @@
             <div class="text-center  align-items-sm-center ">
               <a class="mr-4" href="/"><img src="/img/bridge.gif" alt="Bridge" height="50"></a>
             </div>
-          </div><!-- .row -->
-        </div><!-- .container -->
+          </div>
+        </div>
       </footer>
 
         <div class="text-white bg-primary ">
             <p class="text-center mb-0 py-2"><small>Copyright (C) bridge. All Rights Reserved.</small></p>
         </div>
-
+-->
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

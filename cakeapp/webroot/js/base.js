@@ -11,7 +11,7 @@ $(function () {
 
       $(window).on('load scroll', function(){
         var _w = $(window).width();
-        if(_w > 1080) return false;
+       // if(_w > 1080) return false;
         if ($(window).scrollTop() > 200) {
           $('.toplink').fadeIn(400);
          } else {
@@ -21,7 +21,7 @@ $(function () {
 
     $(".menu-style li a").click(function(){
         var _w = $(window).width();
-        if(_w > 1080) return false;
+        if(_w > 1080) return true;
         $(".menu-style").animate({ height: 'hide' }, 'fast');
         $(".sp-menu-icon").css("background-color","#2cb2ed");
         $("#micon").removeClass('fa-times');
@@ -29,7 +29,7 @@ $(function () {
         $("#topicon").removeClass('topicon');
         $("#micon").css('color',"#fff");
         $("#micon").css('position',"absolute");
-        return false;
+        return true;
     });
     $(".sp-menu-icon a").click(function(){
         var _sts = $(".menu-style").css("display");
