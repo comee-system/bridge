@@ -178,6 +178,44 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 
         </div>
     </div>
+
+    <div class="container" id="main8">
+
+        <div class="mx-auto w-90 mt-5" >
+            <div class="clearfix">
+                <div class="float-md-right float-none  w-50 mt-5 w-md-100">
+                    <div class="point3  align-items-center">
+                        <div>
+                        <h4>POINT3</h4>
+                        <h5>10年間で200店舗以上の店舗開発サポート実績とノウハウを活かした店舗再生プラットフォーム</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="float-md-left float-none w-50 mt-5 w-md-100">
+                    <img src="/img/top/point3.png" class="w-95" />
+                </div>
+
+
+                <div class="float-md-right mt-5 main3-text w-50 w-md-100">
+                    <b>
+                    大手から中小企業まで、10年間で200店舗以上の店舗開発サポートを行ってきた弊社「株式会社エリアデザイン」のノウハウを活かし、マッチングのためのプラットフォームを構築しました。
+                    <br />
+                    Bridge(ブリッジ）が保有する希少性・秘匿性の高いデータとマーケティング力で店舗開発者と最適な店舗物件をマッチングすることができます。
+                    </b>
+
+                    <div class="mt-5 p-4 main3-text main8-detail  align-items-center">
+                        <p>
+                        本システムは令和３年５月度に<br />
+                        <span>東京都の経営革新計画</span>に承認されました
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="mt-5 aquaback" >
         <div class="container" id="main5">
             <div class="flow"><img src="/img/top/flow.png" /></div>

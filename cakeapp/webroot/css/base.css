@@ -633,6 +633,7 @@ footer {
 div.card.noboarder {
   border: none; }
 
+#main8,
 #main7,
 #main6,
 #main5,
@@ -641,6 +642,7 @@ div.card.noboarder {
 #main2,
 #main {
   font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif !important; }
+  #main8 h3,
   #main7 h3,
   #main6 h3,
   #main5 h3,
@@ -655,6 +657,7 @@ div.card.noboarder {
     background-repeat: no-repeat,no-repeat;
     background-position: left,right; }
     @media screen and (max-width: 1080px) {
+      #main8 h3,
       #main7 h3,
       #main6 h3,
       #main5 h3,
@@ -668,6 +671,7 @@ div.card.noboarder {
         width: 70%;
         margin: 0 auto;
         letter-spacing: 3px; } }
+  #main8 div#questionarea,
   #main7 div#questionarea,
   #main6 div#questionarea,
   #main5 div#questionarea,
@@ -676,6 +680,7 @@ div.card.noboarder {
   #main2 div#questionarea,
   #main div#questionarea {
     padding: 10% 0px; }
+  #main8 div.main6-area,
   #main7 div.main6-area,
   #main6 div.main6-area,
   #main5 div.main6-area,
@@ -687,6 +692,7 @@ div.card.noboarder {
     width: 80%;
     margin: 10% auto;
     padding: 5%; }
+    #main8 div.main6-area div.merit-question,
     #main7 div.main6-area div.merit-question,
     #main6 div.main6-area div.merit-question,
     #main5 div.main6-area div.merit-question,
@@ -696,6 +702,7 @@ div.card.noboarder {
     #main div.main6-area div.merit-question {
       width: 95%;
       margin: 0 auto; }
+      #main8 div.main6-area div.merit-question div div.slash,
       #main7 div.main6-area div.merit-question div div.slash,
       #main6 div.main6-area div.merit-question div div.slash,
       #main5 div.main6-area div.merit-question div div.slash,
@@ -709,6 +716,7 @@ div.card.noboarder {
         background-repeat: no-repeat;
         background-position: right,left;
         text-align: center; }
+        #main8 div.main6-area div.merit-question div div.slash p,
         #main7 div.main6-area div.merit-question div div.slash p,
         #main6 div.main6-area div.merit-question div div.slash p,
         #main5 div.main6-area div.merit-question div div.slash p,
@@ -718,6 +726,7 @@ div.card.noboarder {
         #main div.main6-area div.merit-question div div.slash p {
           font-size: 0.85em; }
           @media screen and (max-width: 1080px) {
+            #main8 div.main6-area div.merit-question div div.slash p,
             #main7 div.main6-area div.merit-question div div.slash p,
             #main6 div.main6-area div.merit-question div div.slash p,
             #main5 div.main6-area div.merit-question div div.slash p,
@@ -727,6 +736,7 @@ div.card.noboarder {
             #main div.main6-area div.merit-question div div.slash p {
               font-size: 0.75em; } }
         @media screen and (max-width: 1080px) {
+          #main8 div.main6-area div.merit-question div div.slash,
           #main7 div.main6-area div.merit-question div div.slash,
           #main6 div.main6-area div.merit-question div div.slash,
           #main5 div.main6-area div.merit-question div div.slash,
@@ -735,6 +745,7 @@ div.card.noboarder {
           #main2 div.main6-area div.merit-question div div.slash,
           #main div.main6-area div.merit-question div div.slash {
             width: 100%; } }
+    #main8 div.main6-area div.main6-merit,
     #main7 div.main6-area div.main6-merit,
     #main6 div.main6-area div.main6-merit,
     #main5 div.main6-area div.main6-merit,
@@ -745,6 +756,7 @@ div.card.noboarder {
       background-color: #fff;
       padding: 5% 3%;
       position: relative; }
+      #main8 div.main6-area div.main6-merit .main6-merit-title,
       #main7 div.main6-area div.main6-merit .main6-merit-title,
       #main6 div.main6-area div.main6-merit .main6-merit-title,
       #main5 div.main6-area div.main6-merit .main6-merit-title,
@@ -766,6 +778,7 @@ div.card.noboarder {
         margin: auto;
         border: 2px solid #fff; }
         @media screen and (max-width: 1080px) {
+          #main8 div.main6-area div.main6-merit .main6-merit-title,
           #main7 div.main6-area div.main6-merit .main6-merit-title,
           #main6 div.main6-area div.main6-merit .main6-merit-title,
           #main5 div.main6-area div.main6-merit .main6-merit-title,
@@ -774,6 +787,7 @@ div.card.noboarder {
           #main2 div.main6-area div.main6-merit .main6-merit-title,
           #main div.main6-area div.main6-merit .main6-merit-title {
             font-size: 0.8em; } }
+      #main8 div.main6-area div.main6-merit .main6-merit-area,
       #main7 div.main6-area div.main6-merit .main6-merit-area,
       #main6 div.main6-area div.main6-merit .main6-merit-area,
       #main5 div.main6-area div.main6-merit .main6-merit-area,
@@ -784,6 +798,7 @@ div.card.noboarder {
         width: 80%;
         margin: 0 auto;
         margin-top: 6%; }
+        #main8 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus,
         #main7 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus,
         #main6 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus,
         #main5 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus,
@@ -797,6 +812,7 @@ div.card.noboarder {
           color: #fff;
           font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important; }
           @media screen and (max-width: 1080px) {
+            #main8 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus h5,
             #main7 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus h5,
             #main6 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus h5,
             #main5 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus h5,
@@ -805,6 +821,7 @@ div.card.noboarder {
             #main2 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus h5,
             #main div.main6-area div.main6-merit .main6-merit-area div.merit-bonus h5 {
               font-size: 1.0rem; } }
+          #main8 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div,
           #main7 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div,
           #main6 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div,
           #main5 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div,
@@ -813,6 +830,7 @@ div.card.noboarder {
           #main2 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div,
           #main div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div {
             display: table-cell; }
+            #main8 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:first-child,
             #main7 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:first-child,
             #main6 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:first-child,
             #main5 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:first-child,
@@ -822,6 +840,7 @@ div.card.noboarder {
             #main div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:first-child {
               width: 35%; }
               @media screen and (max-width: 1080px) {
+                #main8 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:first-child,
                 #main7 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:first-child,
                 #main6 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:first-child,
                 #main5 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:first-child,
@@ -830,6 +849,7 @@ div.card.noboarder {
                 #main2 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:first-child,
                 #main div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:first-child {
                   width: 100%; } }
+            #main8 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:nth-child(2),
             #main7 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:nth-child(2),
             #main6 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:nth-child(2),
             #main5 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:nth-child(2),
@@ -842,6 +862,7 @@ div.card.noboarder {
               border-left: 1px solid #fff;
               padding-left: 3%; }
               @media screen and (max-width: 1080px) {
+                #main8 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:nth-child(2),
                 #main7 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:nth-child(2),
                 #main6 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:nth-child(2),
                 #main5 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div:nth-child(2),
@@ -857,6 +878,7 @@ div.card.noboarder {
                   padding-top: 10px;
                   font-size: 0.55em; } }
             @media screen and (max-width: 1080px) {
+              #main8 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div,
               #main7 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div,
               #main6 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div,
               #main5 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div,
@@ -866,6 +888,7 @@ div.card.noboarder {
               #main div.main6-area div.main6-merit .main6-merit-area div.merit-bonus div {
                 display: block; } }
         @media screen and (max-width: 1080px) {
+          #main8 div.main6-area div.main6-merit .main6-merit-area div.clearfix,
           #main7 div.main6-area div.main6-merit .main6-merit-area div.clearfix,
           #main6 div.main6-area div.main6-merit .main6-merit-area div.clearfix,
           #main5 div.main6-area div.main6-merit .main6-merit-area div.clearfix,
@@ -874,6 +897,7 @@ div.card.noboarder {
           #main2 div.main6-area div.main6-merit .main6-merit-area div.clearfix,
           #main div.main6-area div.main6-merit .main6-merit-area div.clearfix {
             margin-top: 5% !important; } }
+        #main8 div.main6-area div.main6-merit .main6-merit-area div div:first-child,
         #main7 div.main6-area div.main6-merit .main6-merit-area div div:first-child,
         #main6 div.main6-area div.main6-merit .main6-merit-area div div:first-child,
         #main5 div.main6-area div.main6-merit .main6-merit-area div div:first-child,
@@ -883,6 +907,7 @@ div.card.noboarder {
         #main div.main6-area div.main6-merit .main6-merit-area div div:first-child {
           width: 12%; }
           @media screen and (max-width: 1080px) {
+            #main8 div.main6-area div.main6-merit .main6-merit-area div div:first-child,
             #main7 div.main6-area div.main6-merit .main6-merit-area div div:first-child,
             #main6 div.main6-area div.main6-merit .main6-merit-area div div:first-child,
             #main5 div.main6-area div.main6-merit .main6-merit-area div div:first-child,
@@ -892,6 +917,7 @@ div.card.noboarder {
             #main div.main6-area div.main6-merit .main6-merit-area div div:first-child {
               font-size: 0.85%;
               margin-top: 6% !important; } }
+        #main8 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(2),
         #main7 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(2),
         #main6 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(2),
         #main5 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(2),
@@ -903,6 +929,7 @@ div.card.noboarder {
           font-weight: bold;
           margin-left: 5%; }
           @media screen and (max-width: 1080px) {
+            #main8 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(2),
             #main7 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(2),
             #main6 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(2),
             #main5 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(2),
@@ -913,6 +940,7 @@ div.card.noboarder {
               width: 70%;
               font-size: 0.65rem;
               margin-top: 6% !important; } }
+        #main8 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(3),
         #main7 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(3),
         #main6 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(3),
         #main5 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(3),
@@ -924,6 +952,7 @@ div.card.noboarder {
           width: 70%;
           margin-left: 5%; }
           @media screen and (max-width: 1080px) {
+            #main8 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(3),
             #main7 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(3),
             #main6 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(3),
             #main5 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(3),
@@ -933,6 +962,7 @@ div.card.noboarder {
             #main div.main6-area div.main6-merit .main6-merit-area div div:nth-child(3) {
               width: 100%;
               font-size: 0.65rem; } }
+      #main8 div.main6-area div.main6-merit .merit-box,
       #main7 div.main6-area div.main6-merit .merit-box,
       #main6 div.main6-area div.main6-merit .merit-box,
       #main5 div.main6-area div.main6-merit .merit-box,
@@ -946,6 +976,7 @@ div.card.noboarder {
         background: linear-gradient(90deg, #ffa989, #ffa611);
         color: #fff; }
         @media screen and (max-width: 1080px) {
+          #main8 div.main6-area div.main6-merit .merit-box,
           #main7 div.main6-area div.main6-merit .merit-box,
           #main6 div.main6-area div.main6-merit .merit-box,
           #main5 div.main6-area div.main6-merit .merit-box,
@@ -954,6 +985,7 @@ div.card.noboarder {
           #main2 div.main6-area div.main6-merit .merit-box,
           #main div.main6-area div.main6-merit .merit-box {
             padding: 5px; } }
+    #main8 div.main6-area p,
     #main7 div.main6-area p,
     #main6 div.main6-area p,
     #main5 div.main6-area p,
@@ -963,6 +995,7 @@ div.card.noboarder {
     #main div.main6-area p {
       color: #fff;
       font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important; }
+      #main8 div.main6-area p strong,
       #main7 div.main6-area p strong,
       #main6 div.main6-area p strong,
       #main5 div.main6-area p strong,
@@ -971,6 +1004,7 @@ div.card.noboarder {
       #main2 div.main6-area p strong,
       #main div.main6-area p strong {
         font-size: 1.2em; }
+    #main8 div.main6-area h2,
     #main7 div.main6-area h2,
     #main6 div.main6-area h2,
     #main5 div.main6-area h2,
@@ -982,6 +1016,7 @@ div.card.noboarder {
       text-align: center;
       margin-top: 10px; }
       @media screen and (max-width: 1080px) {
+        #main8 div.main6-area h2,
         #main7 div.main6-area h2,
         #main6 div.main6-area h2,
         #main5 div.main6-area h2,
@@ -991,6 +1026,7 @@ div.card.noboarder {
         #main div.main6-area h2 {
           font-size: 1.05em; } }
     @media screen and (max-width: 1080px) {
+      #main8 div.main6-area img.secret,
       #main7 div.main6-area img.secret,
       #main6 div.main6-area img.secret,
       #main5 div.main6-area img.secret,
@@ -1001,6 +1037,7 @@ div.card.noboarder {
         position: absolute;
         top: 50%;
         width: 60% !important; } }
+    #main8 div.main6-area .main6-title,
     #main7 div.main6-area .main6-title,
     #main6 div.main6-area .main6-title,
     #main5 div.main6-area .main6-title,
@@ -1016,6 +1053,7 @@ div.card.noboarder {
       margin: 0 auto;
       text-align: center; }
       @media screen and (max-width: 1080px) {
+        #main8 div.main6-area .main6-title,
         #main7 div.main6-area .main6-title,
         #main6 div.main6-area .main6-title,
         #main5 div.main6-area .main6-title,
@@ -1027,6 +1065,7 @@ div.card.noboarder {
           background-size: 100% 100%;
           background-position: center center;
           width: 90%; } }
+      #main8 div.main6-area .main6-title p,
       #main7 div.main6-area .main6-title p,
       #main6 div.main6-area .main6-title p,
       #main5 div.main6-area .main6-title p,
@@ -1040,6 +1079,7 @@ div.card.noboarder {
         font-size: 1.5rem;
         font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important; }
         @media screen and (max-width: 1080px) {
+          #main8 div.main6-area .main6-title p,
           #main7 div.main6-area .main6-title p,
           #main6 div.main6-area .main6-title p,
           #main5 div.main6-area .main6-title p,
@@ -1049,6 +1089,7 @@ div.card.noboarder {
           #main div.main6-area .main6-title p {
             padding: 10px;
             font-size: 0.85rem; } }
+  #main8 div#flow,
   #main7 div#flow,
   #main6 div#flow,
   #main5 div#flow,
@@ -1057,6 +1098,7 @@ div.card.noboarder {
   #main2 div#flow,
   #main div#flow {
     margin-top: 6rem; }
+  #main8 div.flow-step,
   #main7 div.flow-step,
   #main6 div.flow-step,
   #main5 div.flow-step,
@@ -1066,6 +1108,7 @@ div.card.noboarder {
   #main div.flow-step {
     margin-top: 6rem;
     text-align: center; }
+    #main8 div.flow-step h6,
     #main7 div.flow-step h6,
     #main6 div.flow-step h6,
     #main5 div.flow-step h6,
@@ -1078,6 +1121,7 @@ div.card.noboarder {
       color: #2cb2ed;
       padding: 10px 5rem;
       display: inline; }
+    #main8 div.flow-step h4,
     #main7 div.flow-step h4,
     #main6 div.flow-step h4,
     #main5 div.flow-step h4,
@@ -1087,34 +1131,52 @@ div.card.noboarder {
     #main div.flow-step h4 {
       display: block;
       margin-top: 2.0rem; }
-  #main7 div.point2, #main7 div.point1,
+  #main8 div.point3, #main8 div.point2, #main8 div.point1,
+  #main7 div.point3,
+  #main7 div.point2,
+  #main7 div.point1,
+  #main6 div.point3,
   #main6 div.point2,
   #main6 div.point1,
+  #main5 div.point3,
   #main5 div.point2,
   #main5 div.point1,
+  #main4 div.point3,
   #main4 div.point2,
   #main4 div.point1,
+  #main3 div.point3,
   #main3 div.point2,
   #main3 div.point1,
+  #main2 div.point3,
   #main2 div.point2,
   #main2 div.point1,
+  #main div.point3,
   #main div.point2,
   #main div.point1 {
     border-left: 6px solid #003dae;
     border-image: linear-gradient(to top, #003dae 0%, #0075e4 100%);
     border-image-slice: 1;
     min-height: 80px; }
-    #main7 div.point2 h4, #main7 div.point1 h4,
+    #main8 div.point3 h4, #main8 div.point2 h4, #main8 div.point1 h4,
+    #main7 div.point3 h4,
+    #main7 div.point2 h4,
+    #main7 div.point1 h4,
+    #main6 div.point3 h4,
     #main6 div.point2 h4,
     #main6 div.point1 h4,
+    #main5 div.point3 h4,
     #main5 div.point2 h4,
     #main5 div.point1 h4,
+    #main4 div.point3 h4,
     #main4 div.point2 h4,
     #main4 div.point1 h4,
+    #main3 div.point3 h4,
     #main3 div.point2 h4,
     #main3 div.point1 h4,
+    #main2 div.point3 h4,
     #main2 div.point2 h4,
     #main2 div.point1 h4,
+    #main div.point3 h4,
     #main div.point2 h4,
     #main div.point1 h4 {
       color: #109ff9;
@@ -1122,20 +1184,39 @@ div.card.noboarder {
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: block; }
-    #main7 div.point2 div, #main7 div.point1 div,
+    #main8 div.point3 div, #main8 div.point2 div, #main8 div.point1 div,
+    #main7 div.point3 div,
+    #main7 div.point2 div,
+    #main7 div.point1 div,
+    #main6 div.point3 div,
     #main6 div.point2 div,
     #main6 div.point1 div,
+    #main5 div.point3 div,
     #main5 div.point2 div,
     #main5 div.point1 div,
+    #main4 div.point3 div,
     #main4 div.point2 div,
     #main4 div.point1 div,
+    #main3 div.point3 div,
     #main3 div.point2 div,
     #main3 div.point1 div,
+    #main2 div.point3 div,
     #main2 div.point2 div,
     #main2 div.point1 div,
+    #main div.point3 div,
     #main div.point2 div,
     #main div.point1 div {
       padding: 5px 1.5rem; }
+  #main8 div.point3,
+  #main7 div.point3,
+  #main6 div.point3,
+  #main5 div.point3,
+  #main4 div.point3,
+  #main3 div.point3,
+  #main2 div.point3,
+  #main div.point3 {
+    margin-top: 4.5rem; }
+  #main8 div.point1,
   #main7 div.point1,
   #main6 div.point1,
   #main5 div.point1,
@@ -1144,6 +1225,7 @@ div.card.noboarder {
   #main2 div.point1,
   #main div.point1 {
     margin-top: 3rem; }
+  #main8 div.point2,
   #main7 div.point2,
   #main6 div.point2,
   #main5 div.point2,
@@ -1153,6 +1235,7 @@ div.card.noboarder {
   #main div.point2 {
     margin-top: 6.5rem; }
     @media screen and (max-width: 1080px) {
+      #main8 div.point2,
       #main7 div.point2,
       #main6 div.point2,
       #main5 div.point2,
@@ -1161,6 +1244,7 @@ div.card.noboarder {
       #main2 div.point2,
       #main div.point2 {
         margin-top: 0px; } }
+  #main8 div.main3-link,
   #main7 div.main3-link,
   #main6 div.main3-link,
   #main5 div.main3-link,
@@ -1171,6 +1255,7 @@ div.card.noboarder {
     text-align: right;
     width: 100%;
     position: relative; }
+    #main8 div.main3-link a,
     #main7 div.main3-link a,
     #main6 div.main3-link a,
     #main5 div.main3-link a,
@@ -1183,6 +1268,7 @@ div.card.noboarder {
       color: #00a8bd;
       text-decoration: none;
       padding: 0.6rem 2.4rem; }
+      #main8 div.main3-link a:hover,
       #main7 div.main3-link a:hover,
       #main6 div.main3-link a:hover,
       #main5 div.main3-link a:hover,
@@ -1192,6 +1278,7 @@ div.card.noboarder {
       #main div.main3-link a:hover {
         background-color: #ffa000;
         color: #fff; }
+      #main8 div.main3-link a i,
       #main7 div.main3-link a i,
       #main6 div.main3-link a i,
       #main5 div.main3-link a i,
@@ -1206,6 +1293,7 @@ div.card.noboarder {
         right: 10px;
         bottom: 0;
         margin: auto; }
+  #main8 div.main3-text p,
   #main7 div.main3-text p,
   #main6 div.main3-text p,
   #main5 div.main3-text p,
@@ -1215,6 +1303,7 @@ div.card.noboarder {
   #main div.main3-text p {
     font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important;
     font-size: 0.95rem; }
+  #main8 div.main3-detail,
   #main7 div.main3-detail,
   #main6 div.main3-detail,
   #main5 div.main3-detail,
@@ -1223,6 +1312,38 @@ div.card.noboarder {
   #main2 div.main3-detail,
   #main div.main3-detail {
     background: linear-gradient(#00a8bd, #5ec6c3); }
+  #main8 div.main8-detail,
+  #main7 div.main8-detail,
+  #main6 div.main8-detail,
+  #main5 div.main8-detail,
+  #main4 div.main8-detail,
+  #main3 div.main8-detail,
+  #main2 div.main8-detail,
+  #main div.main8-detail {
+    border: 2px solid #ffa000; }
+    #main8 div.main8-detail p,
+    #main7 div.main8-detail p,
+    #main6 div.main8-detail p,
+    #main5 div.main8-detail p,
+    #main4 div.main8-detail p,
+    #main3 div.main8-detail p,
+    #main2 div.main8-detail p,
+    #main div.main8-detail p {
+      font-weight: bold;
+      padding: 0;
+      margin: 0;
+      width: 80%;
+      margin: 0 auto; }
+      #main8 div.main8-detail p span,
+      #main7 div.main8-detail p span,
+      #main6 div.main8-detail p span,
+      #main5 div.main8-detail p span,
+      #main4 div.main8-detail p span,
+      #main3 div.main8-detail p span,
+      #main2 div.main8-detail p span,
+      #main div.main8-detail p span {
+        color: #ffa000; }
+  #main8 div.note,
   #main7 div.note,
   #main6 div.note,
   #main5 div.note,
@@ -1232,6 +1353,7 @@ div.card.noboarder {
   #main div.note {
     line-height: 36px; }
     @media screen and (max-width: 1080px) {
+      #main8 div.note,
       #main7 div.note,
       #main6 div.note,
       #main5 div.note,
@@ -1240,6 +1362,7 @@ div.card.noboarder {
       #main2 div.note,
       #main div.note {
         line-height: 24px; } }
+  #main8 div.guidence,
   #main7 div.guidence,
   #main6 div.guidence,
   #main5 div.guidence,
@@ -1251,6 +1374,7 @@ div.card.noboarder {
     background-repeat: no-repeat;
     background-size: cover; }
     @media screen and (max-width: 1080px) {
+      #main8 div.guidence,
       #main7 div.guidence,
       #main6 div.guidence,
       #main5 div.guidence,
@@ -1259,6 +1383,7 @@ div.card.noboarder {
       #main2 div.guidence,
       #main div.guidence {
         background-image: url("/img/top/bk_sp.png"); } }
+    #main8 div.guidence div.guidence-image-area,
     #main7 div.guidence div.guidence-image-area,
     #main6 div.guidence div.guidence-image-area,
     #main5 div.guidence div.guidence-image-area,
@@ -1269,6 +1394,7 @@ div.card.noboarder {
       width: 90%;
       margin: 0 auto;
       text-align: center; }
+  #main8 div.guidence-area,
   #main7 div.guidence-area,
   #main6 div.guidence-area,
   #main5 div.guidence-area,
@@ -1277,6 +1403,7 @@ div.card.noboarder {
   #main2 div.guidence-area,
   #main div.guidence-area {
     width: 100%; }
+    #main8 div.guidence-area .fukidashi,
     #main7 div.guidence-area .fukidashi,
     #main6 div.guidence-area .fukidashi,
     #main5 div.guidence-area .fukidashi,
@@ -1295,6 +1422,7 @@ div.card.noboarder {
       font-size: 1.2rem;
       padding-top: 15px; }
       @media screen and (max-width: 1080px) {
+        #main8 div.guidence-area .fukidashi,
         #main7 div.guidence-area .fukidashi,
         #main6 div.guidence-area .fukidashi,
         #main5 div.guidence-area .fukidashi,
@@ -1306,6 +1434,7 @@ div.card.noboarder {
           background-size: 100%;
           padding: 3% 0px 8% 0px;
           height: auto; } }
+  #main8 strong.marker,
   #main7 strong.marker,
   #main6 strong.marker,
   #main5 strong.marker,
@@ -1314,6 +1443,7 @@ div.card.noboarder {
   #main2 strong.marker,
   #main strong.marker {
     background: linear-gradient(transparent 50%, #bff3ff 0%); }
+  #main8 strong.markerOrenge,
   #main7 strong.markerOrenge,
   #main6 strong.markerOrenge,
   #main5 strong.markerOrenge,
@@ -1322,6 +1452,7 @@ div.card.noboarder {
   #main2 strong.markerOrenge,
   #main strong.markerOrenge {
     background: linear-gradient(transparent 50%, #ffa000 0%); }
+  #main8 .recrult,
   #main7 .recrult,
   #main6 .recrult,
   #main5 .recrult,
@@ -1331,6 +1462,7 @@ div.card.noboarder {
   #main .recrult {
     background: linear-gradient(#00a8bd, #5ec6c3); }
     @media screen and (max-width: 1080px) {
+      #main8 .recrult,
       #main7 .recrult,
       #main6 .recrult,
       #main5 .recrult,
@@ -1339,6 +1471,7 @@ div.card.noboarder {
       #main2 .recrult,
       #main .recrult {
         margin-top: 10px !important; } }
+    #main8 .recrult a,
     #main7 .recrult a,
     #main6 .recrult a,
     #main5 .recrult a,
@@ -1360,6 +1493,7 @@ div.card.noboarder {
       font-weight: bold;
       font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif !important; }
       @media screen and (max-width: 1080px) {
+        #main8 .recrult a,
         #main7 .recrult a,
         #main6 .recrult a,
         #main5 .recrult a,
@@ -1370,6 +1504,7 @@ div.card.noboarder {
           font-size: 1.0rem;
           background: url("/img/top/shop.svg") no-repeat left 15px center, url("/img/top/arrow2.svg") no-repeat right 15px center;
           background-size: 40px,25px; } }
+      #main8 .recrult a:hover,
       #main7 .recrult a:hover,
       #main6 .recrult a:hover,
       #main5 .recrult a:hover,

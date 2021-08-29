@@ -829,6 +829,7 @@ div{
 }
 
 
+#main8,
 #main7,
 #main6,
 #main5,
@@ -1077,6 +1078,7 @@ div{
                 margin-top:2.0rem;
             }
         }
+        &.point3,
         &.point2,
         &.point1{
             border-left: 6px solid #003dae;
@@ -1093,6 +1095,10 @@ div{
             div{
                 padding:5px 1.5rem;
             }
+        }
+
+        &.point3{
+            margin-top:4.5rem;
         }
         &.point1{
             margin-top:3rem;
@@ -1136,6 +1142,20 @@ div{
         }
         &.main3-detail{
             background: linear-gradient(#00a8bd, #5ec6c3);
+        }
+        &.main8-detail{
+            border:2px solid $color-orange;
+            p{
+                font-weight: bold;
+                padding:0;
+                margin:0;
+                width:80%;
+                margin:0 auto;
+                span{
+                    color:$color-orange;
+                }
+            }
+
         }
         &.note{
             line-height:36px;

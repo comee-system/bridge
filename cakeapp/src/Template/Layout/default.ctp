@@ -1,3 +1,6 @@
+<?php
+use Cake\Routing\Router;
+?>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -57,11 +60,18 @@
                     <i class="fas fa-bars" id="micon"></i>
                 </a>
             </div>
+            <?php
+                $uri = Router::url();
+                $p = "";
+                if($uri != "/"){
+                    $p = "/";
+                }
+            ?>
             <ul class="menu-style">
-                <li><a href="#bridge"><b>ブリッジとは？</b></a></li>
-                <li><a href="#threepoint"><b>3つのポイント</b></a></li>
-                <li><a href="#flow"><b>マッチングの流れ</b></a></li>
-                <li><a href="#questionarea"><b>ご相談・お問い合わせ</b></a></li>
+                <li><a href="<?=$p?>#bridge"><b>ブリッジとは？</b></a></li>
+                <li><a href="<?=$p?>#threepoint"><b>3つのポイント</b></a></li>
+                <li><a href="<?=$p?>#flow"><b>マッチングの流れ</b></a></li>
+                <li><a href="<?=$p?>#questionarea"><b>ご相談・お問い合わせ</b></a></li>
                 <li>
                 <?php if ($logindata) : ?>
                     <?= $this->Html->link(
@@ -128,7 +138,7 @@
             </div>
             <div class="col-md-5 col-12 mt-2">
                 <ul class="clearfix">
-                    <li><a href="#questionarea">ご相談・お問い合わせ</a></li>
+                    <li><a href="<?=$p?>#questionarea">ご相談・お問い合わせ</a></li>
                     <?php if ($logindata) : ?>
                         <li><a href="/users/logout">ログアウト</a></li>
                     <?php else: ?>
