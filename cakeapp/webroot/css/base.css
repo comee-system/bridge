@@ -805,6 +805,16 @@ div.card.noboarder {
         width: 80%;
         margin: 0 auto;
         margin-top: 6%; }
+        @media screen and (max-width: 1080px) {
+          #main8 div.main6-area div.main6-merit .main6-merit-area,
+          #main7 div.main6-area div.main6-merit .main6-merit-area,
+          #main6 div.main6-area div.main6-merit .main6-merit-area,
+          #main5 div.main6-area div.main6-merit .main6-merit-area,
+          #main4 div.main6-area div.main6-merit .main6-merit-area,
+          #main3 div.main6-area div.main6-merit .main6-merit-area,
+          #main2 div.main6-area div.main6-merit .main6-merit-area,
+          #main div.main6-area div.main6-merit .main6-merit-area {
+            width: 95%; } }
         #main8 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus,
         #main7 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus,
         #main6 div.main6-area div.main6-merit .main6-merit-area div.merit-bonus,
@@ -922,7 +932,7 @@ div.card.noboarder {
             #main3 div.main6-area div.main6-merit .main6-merit-area div div:first-child,
             #main2 div.main6-area div.main6-merit .main6-merit-area div div:first-child,
             #main div.main6-area div.main6-merit .main6-merit-area div div:first-child {
-              font-size: 0.85%;
+              width: 22%;
               margin-top: 6% !important; } }
         #main8 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(2),
         #main7 div.main6-area div.main6-merit .main6-merit-area div div:nth-child(2),
@@ -1350,6 +1360,16 @@ div.card.noboarder {
       #main2 div.main8-detail p span,
       #main div.main8-detail p span {
         color: #ffa000; }
+      @media screen and (max-width: 1080px) {
+        #main8 div.main8-detail p,
+        #main7 div.main8-detail p,
+        #main6 div.main8-detail p,
+        #main5 div.main8-detail p,
+        #main4 div.main8-detail p,
+        #main3 div.main8-detail p,
+        #main2 div.main8-detail p,
+        #main div.main8-detail p {
+          width: 95%; } }
   #main8 div.note,
   #main7 div.note,
   #main6 div.note,

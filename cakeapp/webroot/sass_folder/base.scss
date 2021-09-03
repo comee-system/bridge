@@ -925,6 +925,9 @@ div{
                         width:80%;
                         margin:0 auto;
                         margin-top:6%;
+                        @include mobile{
+                            width:95%;
+                        }
                         div{
                             &.merit-bonus{
                                 background-color:$color-orange;
@@ -974,7 +977,7 @@ div{
                                 &:first-child{
                                     width:12%;
                                     @include mobile{
-                                        font-size:0.85%;
+                                        width:22%;
                                         margin-top:6% !important;
                                     }
                                 }
@@ -1161,6 +1164,9 @@ div{
                 margin:0 auto;
                 span{
                     color:$color-orange;
+                }
+                @include mobile{
+                    width:95%;
                 }
             }
 
