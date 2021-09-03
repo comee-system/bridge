@@ -854,10 +854,10 @@ div{
         background-repeat: no-repeat,no-repeat;
         background-position: left,right;
         @include mobile{
-            font-size:0.95rem;
+            font-size:0.85rem;
             display:block;
             padding:5px 0px;
-            width:70%;
+            width:90%;
             margin:0 auto;
             letter-spacing: 3px;
         }
