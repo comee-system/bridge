@@ -376,7 +376,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                         <div class="col-12 col-md-6">
                             <div class="freeregist ">
                                 <a href="#questionarea" class="mail" >
-                                    ご相談お問い合わせ
+                                    　ご相談お問い合わせ
                                 </a>
                         </div>
                         </div>
@@ -384,7 +384,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                             <div class="freeregist ">
                                 <div class="mt-2 sqare">
                                     <a href="/users/add"  >
-                                        無料会員登録はこちら
+                                        　無料会員登録はこちら
                                     </a>
                                 </div>
                             </div>
