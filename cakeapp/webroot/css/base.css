@@ -699,6 +699,16 @@ div.card.noboarder {
     width: 80%;
     margin: 10% auto;
     padding: 5%; }
+    @media screen and (max-width: 1080px) {
+      #main8 div.main6-area,
+      #main7 div.main6-area,
+      #main6 div.main6-area,
+      #main5 div.main6-area,
+      #main4 div.main6-area,
+      #main3 div.main6-area,
+      #main2 div.main6-area,
+      #main div.main6-area {
+        width: 90%; } }
     #main8 div.main6-area div.merit-question,
     #main7 div.main6-area div.merit-question,
     #main6 div.main6-area div.merit-question,
@@ -709,6 +719,16 @@ div.card.noboarder {
     #main div.main6-area div.merit-question {
       width: 95%;
       margin: 0 auto; }
+      @media screen and (max-width: 1080px) {
+        #main8 div.main6-area div.merit-question,
+        #main7 div.main6-area div.merit-question,
+        #main6 div.main6-area div.merit-question,
+        #main5 div.main6-area div.merit-question,
+        #main4 div.main6-area div.merit-question,
+        #main3 div.main6-area div.merit-question,
+        #main2 div.main6-area div.merit-question,
+        #main div.main6-area div.merit-question {
+          width: 100%; } }
       #main8 div.main6-area div.merit-question div div.slash,
       #main7 div.main6-area div.merit-question div div.slash,
       #main6 div.main6-area div.merit-question div div.slash,

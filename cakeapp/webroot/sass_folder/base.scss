@@ -873,10 +873,16 @@ div{
             width:80%;
             margin:10% auto;
             padding:5%;
+            @include mobile{
+                width:90%;
+            }
             div{
                 &.merit-question{
                     width:95%;
                     margin:0 auto;
+                    @include mobile{
+                        width:100%;
+                    }
                     div{
                         div{
                             &.slash{
