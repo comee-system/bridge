@@ -73,7 +73,9 @@ div{
         background-repeat:no-repeat;
         background-position:right 20px  center;
         background-color:$color-orange;
-
+        @include mobile{
+            width:85%;
+        }
         input{
             border-radius:100px;
             width:100%;
