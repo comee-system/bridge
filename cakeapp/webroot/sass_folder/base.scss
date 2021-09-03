@@ -75,6 +75,8 @@ div{
         background-color:$color-orange;
         @include mobile{
             width:85%;
+            font-size:0.85em;
+            background-size:30px 30px;
         }
         input{
             border-radius:100px;

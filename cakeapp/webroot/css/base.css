@@ -45,7 +45,9 @@ div.conforange {
   background-color: #ffa000; }
   @media screen and (max-width: 1080px) {
     div.conforange {
-      width: 85%; } }
+      width: 85%;
+      font-size: 0.85em;
+      background-size: 30px 30px; } }
   div.conforange input {
     border-radius: 100px;
     width: 100%;
