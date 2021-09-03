@@ -546,7 +546,7 @@ div.mainText{
     background-color: rgba(255, 255, 255,0.8);
     @include mobile{
         width:95%;
-        height:280px;
+        height:300px;
     }
 
 
@@ -587,7 +587,10 @@ div.mainText{
         }
         p:nth-child(3){
             width:90%;
-            font-size:0.85%;
+            font-size:0.95%;
+            @include mobile{
+                font-size:1.0em;
+            }
         }
         p:nth-child(4){
             width:70%;
@@ -603,6 +606,8 @@ div.mainText{
                 text-align: left;
                 margin-top:0px;
                 padding:2%;
+                font-size:1.0em;
+
             }
         }
 
@@ -614,7 +619,7 @@ div.mainText{
 
 div.freeregist{
     width:80%;
-    margin:0 auto;
+    margin:10px auto;
     &.w100{
         width: 100%;
     }
@@ -628,6 +633,9 @@ div.freeregist{
         box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .5);
         &:hover{
             background: linear-gradient(#3796ee, #577ab9);
+        }
+        @include mobile{
+        margin-top:5rem;
         }
         .mt0{margin-top:0;}
 
