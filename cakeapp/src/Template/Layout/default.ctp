@@ -125,6 +125,17 @@ use Cake\Routing\Router;
 
 <div class="toplink">
     <a href="#"><img src="/img/top/top.svg" /></a>
+    <div class="sp">
+        <div class=" d-flex bottomlink ">
+        <div class="w-50 text-center"><a href="/users/add">無料会員登録</a></div>
+            <?php if ($logindata) : ?>
+                <div class="w-50 text-center"><a href="/users/logout">ログアウト</a></div>
+
+            <?php else: ?>
+            <div class="w-50 text-center"><a href="/login">ログイン</a></div>
+            <?php endif; ?>
+        </div>
+    </div>
 </div>
 
 

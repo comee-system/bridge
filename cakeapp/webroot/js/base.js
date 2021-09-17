@@ -1,4 +1,5 @@
 $(function () {
+    /*
     $('a[href^=#]').click(function(){
         var adjust = 0;
         var speed = 400;
@@ -8,6 +9,18 @@ $(function () {
         $('body,html').animate({scrollTop:position}, speed, 'swing');
         return false;
       });
+*/
+
+    var headerHight = 100; //ヘッダの高さ
+    $('a[href^=#]').click(function(){
+        var href= $(this).attr("href");
+        var target = $(href == "#" || href == "" ? 'html' : href);
+        var position = target.offset().top-headerHight; //ヘッダの高さ分位置をずらす
+        $("html, body").animate({scrollTop:position}, 550, "swing");
+        return false;
+    });
+
+
 
       $(window).on('load scroll', function(){
         var _w = $(window).width();
@@ -161,7 +174,20 @@ $(function () {
     });
 
 
+
 });
+window.onload = function () {
+    var href= location.href.split("#")[1];
+    if(href){
+        var target = $("#"+href);
+        var position = target.offset().top-100;
+        console.log(position);
+        $(window).scrollTop(position);
+    }else{
+        return false;
+    }
+};
+
 /*
 $.fn.changeBuildStatus = function(){
     var _build_status = $('[name="build_status"]').val();
